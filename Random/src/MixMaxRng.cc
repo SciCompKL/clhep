@@ -749,5 +749,5 @@ void MixMaxRng::BranchInplace(int id)
    S.sumtot = iterate_raw_vec(S.V.data(), S.sumtot);// printf("iterating!\n");
    S.counter = 1;
 }
-
+constexpr CLHEPdouble MixMaxRng::INV_M61;
 }  // namespace CLHEP

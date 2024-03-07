@@ -37,7 +37,7 @@ int main() {
     output << "long " << sizeof(long) << std::endl; 
     output << "CLHEPfloat " << sizeof(CLHEPfloat) << std::endl; 
     output << "CLHEPdouble " << sizeof(CLHEPdouble) << std::endl; 
-    output << "long CLHEPdouble " << sizeof(long CLHEPdouble) << std::endl << std::endl; 
+    //output << "long CLHEPdouble " << sizeof(long CLHEPdouble) << std::endl << std::endl; 
 
     CLHEP::RanecuEngine *eng = new CLHEP::RanecuEngine;
     CLHEP::HepRandom::setTheEngine(eng);

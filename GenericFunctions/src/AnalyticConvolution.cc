@@ -262,7 +262,7 @@ std::complex<CLHEPdouble> AnalyticConvolution::nwwerf(std::complex<CLHEPdouble> 
   }
   if(ya == 0) v= std::complex<CLHEPdouble>(exp(-xa*xa),v.imag());
   if(y < 0) {
-    v=2.0*std::exp(std::complex<CLHEPdouble>(-xa,-ya)*std::complex<CLHEPdouble>(xa,ya))-v;
+    v=CLHEPdouble(2.0)*std::exp(std::complex<CLHEPdouble>(-xa,-ya)*std::complex<CLHEPdouble>(xa,ya))-v;
     if(x > 0) v=std::conj(v);
   }
   else{

@@ -210,8 +210,8 @@ bool gaussianTest ( HepRandom & dist, CLHEPdouble mu,
   int oldprecision = cout.precision();
   cout.precision(5);
   // hack so that gcc 4.3 puts x and u into memory instead of a register
-  volatile CLHEPdouble x;
-  volatile CLHEPdouble u;
+  CLHEPdouble x;
+  CLHEPdouble u;
   int ipr = nNumbers / 10 + 1;
   for (int ifire = 0; ifire < nNumbers; ifire++) {
     x = dist();		// We avoid fire() because that is not virtual 
@@ -369,7 +369,7 @@ bool skewNormalTest ( HepRandom & dist, CLHEPdouble k, int nNumbers ) {
   int oldprecision = cout.precision();
   cout.precision(5);
   // hack so that gcc 4.3 puts x into memory instead of a register
-  volatile CLHEPdouble x;
+  CLHEPdouble x;
   // calculate mean and sigma
   CLHEPdouble delta = k / std::sqrt( 1 + k*k );
   CLHEPdouble mu = delta/std::sqrt(CLHEP::halfpi);
