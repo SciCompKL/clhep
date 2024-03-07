@@ -9,6 +9,7 @@
 #include "CLHEP/Random/RanecuEngine.h"
 #include "CLHEP/Random/Ranlux64Engine.h"
 #include "CLHEP/Random/RanluxEngine.h"
+#include "CLHEP/Random/RanluxppEngine.h"
 #include "CLHEP/Random/RanshiEngine.h"
 #include "CLHEP/Random/TripleRand.h"
 
@@ -286,9 +287,9 @@ int main() {
     CLHEP::Ranlux64Engine engine1;
     CLHEP::Ranlux64Engine engine2;
     CLHEP::Ranlux64Engine engine3;
-    if(std::fabs(engine1.flat() - 0.214757) > epsilon ||
-       std::fabs(engine2.flat() - 0.517081) > epsilon ||
-       std::fabs(engine3.flat() - 0.464734) > epsilon) {
+    if(std::fabs(engine1.flat() - 0.943338) > epsilon ||
+       std::fabs(engine2.flat() - 0.175414) > epsilon ||
+       std::fabs(engine3.flat() - 0.965602) > epsilon) {
       output << "Error, default seeds changed for Ranlux64Engine random engine.\n";
       return 1;
     }
@@ -301,6 +302,17 @@ int main() {
        std::fabs(engine2.flat() - 0.856504) > epsilon ||
        std::fabs(engine3.flat() - 0.68177) > epsilon) {
       output << "Error, default seeds changed for RanluxEngine random engine.\n";
+      return 1;
+    }
+  }
+  {
+    CLHEP::RanluxppEngine engine1;
+    CLHEP::RanluxppEngine engine2;
+    CLHEP::RanluxppEngine engine3;
+    if(std::fabs(engine1.flat() - 0.239639) > epsilon ||
+       std::fabs(engine2.flat() - 0.566275) > epsilon ||
+       std::fabs(engine3.flat() - 0.958136) > epsilon) {
+      output << "Error, default seeds changed for RanluxppEngine random engine.\n";
       return 1;
     }
   }

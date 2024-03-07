@@ -44,6 +44,7 @@
 // 19.08.15   added liter and its sub units (mma)
 // 12.01.16   added symbols for microsecond (us) and picosecond (ps) (mma)
 // 17.07.20   use PDG 2019 value of e_SI
+// 06.05.21   added minute, hour, day, year and millielectronvolt (mma)
 
 #ifndef HEP_SYSTEM_OF_UNITS_H
 #define HEP_SYSTEM_OF_UNITS_H
@@ -144,6 +145,11 @@ namespace CLHEP {
   static constexpr CLHEPdouble microsecond = 1.e-6 *second;
   static constexpr CLHEPdouble  picosecond = 1.e-12*second;
 
+  static constexpr CLHEPdouble minute = 60*second;
+  static constexpr CLHEPdouble hour   = 60*minute;
+  static constexpr CLHEPdouble day    = 24*hour;
+  static constexpr CLHEPdouble year   = 365*day;  
+
   static constexpr CLHEPdouble hertz = 1./second;
   static constexpr CLHEPdouble kilohertz = 1.e+3*hertz;
   static constexpr CLHEPdouble megahertz = 1.e+6*hertz;
@@ -171,6 +177,7 @@ namespace CLHEP {
   static constexpr CLHEPdouble gigaelectronvolt = 1.e+3*megaelectronvolt;
   static constexpr CLHEPdouble teraelectronvolt = 1.e+6*megaelectronvolt;
   static constexpr CLHEPdouble petaelectronvolt = 1.e+9*megaelectronvolt;
+  static constexpr CLHEPdouble millielectronvolt = 1.e-9*megaelectronvolt;  
 
   static constexpr CLHEPdouble joule = electronvolt/e_SI;// joule = 6.24150 e+12 * MeV
 

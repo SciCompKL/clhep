@@ -38,6 +38,7 @@
 #include "CLHEP/Random/RanecuEngine.h"
 #include "CLHEP/Random/RanluxEngine.h"
 #include "CLHEP/Random/Ranlux64Engine.h"
+#include "CLHEP/Random/RanluxppEngine.h"
 #include "CLHEP/Random/RanshiEngine.h"
 #include "CLHEP/Random/TripleRand.h"
 

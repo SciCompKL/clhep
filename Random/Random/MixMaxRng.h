@@ -146,6 +146,7 @@ private:
 #if defined __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic ignored "-Wuninitialized"
 #endif
   inline CLHEPdouble convert1CLHEPdouble(myuint_t u)
   {

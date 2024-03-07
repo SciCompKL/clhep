@@ -356,6 +356,7 @@ int main() {
   stat |= checkEngineName<RanecuEngine  >("RanecuEngine");
   stat |= checkEngineName<Ranlux64Engine>("Ranlux64Engine");
   stat |= checkEngineName<RanluxEngine  >("RanluxEngine");
+  stat |= checkEngineName<RanluxppEngine>("RanluxppEngine");
   stat |= checkEngineName<RanshiEngine  >("RanshiEngine");
   stat |= checkEngineName<TripleRand    >("TripleRand");
 #endif
@@ -377,6 +378,7 @@ int main() {
   {RanecuEngine e(234);     stat |= checkEngineInstanceSave(e);}
   {Ranlux64Engine e(234);   stat |= checkEngineInstanceSave(e);}
   {RanluxEngine e(234);     stat |= checkEngineInstanceSave(e);}
+  {RanluxppEngine e(234);   stat |= checkEngineInstanceSave(e);}
   {RanshiEngine e(234);     stat |= checkEngineInstanceSave(e);}
   {TripleRand e(234);	    stat |= checkEngineInstanceSave(e);}
 
@@ -393,6 +395,7 @@ int main() {
   stat |= checkDistributions<MTwistEngine>();
   stat |= checkDistributions<Ranlux64Engine>();
   stat |= checkDistributions<RanluxEngine>();
+  stat |= checkDistributions<RanluxppEngine>();
   stat |= checkDistributions<RanshiEngine>();
   stat |= checkDistributions<TripleRand>();
 
