@@ -132,7 +132,7 @@ bool HepBoost::isNear (const HepLorentzRotation & lt,
   lt.decompose(b1,r1);
   if (db2 > epsilon*epsilon) return false;
   CLHEPdouble dr2  = r1.norm2();
-  return (db2 + dr2);
+  return (bool)(db2 + dr2);
 }
 
 // ----------  Properties:
