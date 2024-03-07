@@ -1,2 +1,3 @@
-using CLHEPdouble  = double;
-using CLHEPfloat = float;
+#include "easyAD.hpp"
+using CLHEPdouble  = Forward;
+using CLHEPfloat = Forward;
