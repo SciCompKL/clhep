@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -108,7 +109,7 @@ uint64_t RanluxppEngine::nextRandomBits() {
   return bits;
 }
 
-double RanluxppEngine::flat() {
+CLHEPdouble RanluxppEngine::flat() {
   // RandomEngine wants a "double random values ranging between ]0,1[", so
   // exclude all zero bits.
   uint64_t random;
@@ -116,11 +117,11 @@ double RanluxppEngine::flat() {
     random = nextRandomBits();
   } while (random == 0);
 
-  static constexpr double div = 1.0 / (uint64_t(1) << kBits);
+  static constexpr CLHEPdouble div = 1.0 / (uint64_t(1) << kBits);
   return random * div;
 }
 
-void RanluxppEngine::flatArray(const int size, double *vect) {
+void RanluxppEngine::flatArray(const int size, CLHEPdouble *vect) {
   for (int i = 0; i < size; i++) {
     vect[i] = flat();
   }

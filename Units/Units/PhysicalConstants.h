@@ -110,8 +110,8 @@ static constexpr CLHEPdouble twopi_mc2_rcl2 = twopi*electron_mass_c2
                                              *classic_electr_radius
                                              *classic_electr_radius;
 
-static constexpr double Bohr_magneton = (eplus*hbarc*c_light)/(2*electron_mass_c2);
-static constexpr double nuclear_magneton = (eplus*hbarc*c_light)/(2*proton_mass_c2);
+static constexpr CLHEPdouble Bohr_magneton = (eplus*hbarc*c_light)/(2*electron_mass_c2);
+static constexpr CLHEPdouble nuclear_magneton = (eplus*hbarc*c_light)/(2*proton_mass_c2);
 
 //
 //
