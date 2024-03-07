@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: SeedTable.h,v 1.3 2003/10/23 21:29:51 garren Exp $
 // -*- C++ -*-
 //

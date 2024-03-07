@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -16,7 +17,7 @@ inline int HepDiagMatrix::num_row() const { return nrow;}
 inline int HepDiagMatrix::num_col() const  { return nrow;}
 inline int HepDiagMatrix::num_size() const  { return nrow;}
 
-inline double & HepDiagMatrix::fast(int row,int col)
+inline CLHEPdouble & HepDiagMatrix::fast(int row,int col)
 {
 #ifdef MATRIX_BOUND_CHECK
   if (row<1 || row>nrow || col<1 || col>nrow)
@@ -28,7 +29,7 @@ inline double & HepDiagMatrix::fast(int row,int col)
   return *(m.begin()+(col-1));
 }
 
-inline const double & HepDiagMatrix::fast(int row,int col) const
+inline const CLHEPdouble & HepDiagMatrix::fast(int row,int col) const
 {
 #ifdef MATRIX_BOUND_CHECK
   if (row<1 || row>nrow || col<1 || col>nrow)
@@ -47,12 +48,12 @@ inline const double & HepDiagMatrix::fast(int row,int col) const
   }
 }
 
-inline double & HepDiagMatrix::operator()(int row, int col)
+inline CLHEPdouble & HepDiagMatrix::operator()(int row, int col)
 {
    return fast(col,row);
 }
 
-inline const double & HepDiagMatrix::operator()(int row, int col) const 
+inline const CLHEPdouble & HepDiagMatrix::operator()(int row, int col) const 
 { 
    return fast(col,row);
 }
@@ -83,12 +84,12 @@ inline HepDiagMatrix::HepDiagMatrix_row_const HepDiagMatrix::operator[] (int r) 
   return b;
 }
 
-inline double &HepDiagMatrix::HepDiagMatrix_row::operator[](int c) 
+inline CLHEPdouble &HepDiagMatrix::HepDiagMatrix_row::operator[](int c) 
 {
    return _a.fast(_r+1, c+1);
 }
 
-inline const double&
+inline const CLHEPdouble&
 HepDiagMatrix::HepDiagMatrix_row_const::operator[](int c) const 
 {
    return _a.fast(_r+1,c+1);

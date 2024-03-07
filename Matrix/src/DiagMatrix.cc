@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -57,9 +58,9 @@ namespace CLHEP {
 //
 // Sun CC 4.0.1 has this bug.
 //
-double HepDiagMatrix::zero = 0;
+CLHEPdouble HepDiagMatrix::zero = 0;
 #else
-const double HepDiagMatrix::zero = 0;
+const CLHEPdouble HepDiagMatrix::zero = 0;
 #endif
 
 // Constructors. (Default constructors are inlined and in .icc file)
@@ -333,7 +334,7 @@ HepSymMatrix operator-(const HepSymMatrix &hm1,const HepDiagMatrix &hm2)
    ----------------------------------------------------------------------- */
 
 HepDiagMatrix operator/(
-const HepDiagMatrix &hm1,double t)
+const HepDiagMatrix &hm1,CLHEPdouble t)
 #ifdef HEP_GNU_OPTIMIZED_RETURN
      return mret(hm1);
 {
@@ -345,7 +346,7 @@ const HepDiagMatrix &hm1,double t)
   return mret;
 }
 
-HepDiagMatrix operator*(const HepDiagMatrix &hm1,double t)
+HepDiagMatrix operator*(const HepDiagMatrix &hm1,CLHEPdouble t)
 #ifdef HEP_GNU_OPTIMIZED_RETURN
      return mret(hm1);
 {
@@ -357,7 +358,7 @@ HepDiagMatrix operator*(const HepDiagMatrix &hm1,double t)
   return mret;
 }
 
-HepDiagMatrix operator*(double t,const HepDiagMatrix &hm1)
+HepDiagMatrix operator*(CLHEPdouble t,const HepDiagMatrix &hm1)
 #ifdef HEP_GNU_OPTIMIZED_RETURN
      return mret(hm1);
 {
@@ -512,13 +513,13 @@ HepDiagMatrix & HepDiagMatrix::operator-=(const HepDiagMatrix &hm2)
   return (*this);
 }
 
-HepDiagMatrix & HepDiagMatrix::operator/=(double t)
+HepDiagMatrix & HepDiagMatrix::operator/=(CLHEPdouble t)
 {
   SIMPLE_UOP(/=)
   return (*this);
 }
 
-HepDiagMatrix & HepDiagMatrix::operator*=(double t)
+HepDiagMatrix & HepDiagMatrix::operator*=(CLHEPdouble t)
 {
   SIMPLE_UOP(*=)
   return (*this);
@@ -579,7 +580,7 @@ std::ostream& operator<<(std::ostream &os, const HepDiagMatrix &q)
 }
 
 HepDiagMatrix HepDiagMatrix::
-apply(double (*f)(double, int, int)) const
+apply(CLHEPdouble (*f)(CLHEPdouble, int, int)) const
 #ifdef HEP_GNU_OPTIMIZED_RETURN
 return mret(num_row());
 {
@@ -643,7 +644,7 @@ HepSymMatrix HepDiagMatrix::similarity(const HepMatrix &hm1) const
     HepMatrix::mcIter mc = hm1.m.begin();
     for(int c=1;c<=r;c++) {
       HepMatrix::mcIter mi = m.begin();
-      double tmp = 0;
+      CLHEPdouble tmp = 0;
       HepMatrix::mcIter mr = mrr;
       for(int i=0;i<hm1.num_col();i++)
 	tmp+=*(mr++) * *(mc++) * *(mi++);
@@ -653,9 +654,9 @@ HepSymMatrix HepDiagMatrix::similarity(const HepMatrix &hm1) const
   return mret;
 }
 
-double HepDiagMatrix::similarity(const HepVector &hm1) const
+CLHEPdouble HepDiagMatrix::similarity(const HepVector &hm1) const
 {
-  double mret;
+  CLHEPdouble mret;
   CHK_DIM_1(num_row(),hm1.num_row(),similarity);
   HepMatrix::mcIter mi = m.begin();
   HepMatrix::mcIter mv = hm1.m.begin();
@@ -684,7 +685,7 @@ HepSymMatrix HepDiagMatrix::similarityT(const HepMatrix &hm1) const
     for(int c=1;c<=r;c++)
       {
 	HepMatrix::mcIter mi = m.begin();
-	double tmp = hm1(1,r)*hm1(1,c)* *(mi++);
+	CLHEPdouble tmp = hm1(1,r)*hm1(1,c)* *(mi++);
 	for(int i=2;i<=hm1.num_row();i++)
 	  tmp+=hm1(i,r)*hm1(i,c)* *(mi++);
 	mret.fast(r,c) = tmp;
@@ -708,16 +709,16 @@ void HepDiagMatrix::invert(int &ierr) {
   }  
 }
 
-double HepDiagMatrix::determinant() const {
-   double d = 1.0;
+CLHEPdouble HepDiagMatrix::determinant() const {
+   CLHEPdouble d = 1.0;
    HepMatrix::mcIter end = m.begin() + nrow;
    for (HepMatrix::mcIter p=m.begin(); p < end; p++)
       d *= *p;
    return d;
 }
 
-double HepDiagMatrix::trace() const {
-   double d = 0.0;
+CLHEPdouble HepDiagMatrix::trace() const {
+   CLHEPdouble d = 0.0;
    HepMatrix::mcIter end = m.begin() + nrow;
    for (HepMatrix::mcIter p=m.begin(); p < end; p++)
       d += *p;

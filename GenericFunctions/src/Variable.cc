@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Variable.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/Variable.hh"
@@ -21,12 +22,12 @@ Variable::Variable(const Variable & right):
 Variable::~Variable() {
 }
 
-double Variable::operator() (double x) const {
+CLHEPdouble Variable::operator() (CLHEPdouble x) const {
   if (_selectionIndex!=0) throw std::runtime_error("Genfun::Variable: selection index !=0") ;
   return x;
 }
 
-double Variable::operator () (const Argument & a) const {
+CLHEPdouble Variable::operator () (const Argument & a) const {
   if  (!(_selectionIndex<a.dimension())) throw std::runtime_error("Genfun::Varaible selection index out of bounds");
   return a[_selectionIndex];
 }

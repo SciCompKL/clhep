@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: MTwistEngine.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -44,10 +45,10 @@ public:
   virtual ~MTwistEngine();
   // Constructors and destructor.
 
-  double flat();
+  CLHEPdouble flat();
   // Returns a pseudo random number between 0 and 1 (excluding the end points).
 
-  void flatArray(const int size, double* vect);
+  void flatArray(const int size, CLHEPdouble* vect);
   // Fills an array "vect" of specified size with flat random values.
 
   void setSeed(long seed, int);
@@ -66,8 +67,8 @@ public:
   void showStatus() const;
   // Dumps the current engine status on the screen.
 
-  operator double();       // Returns same as flat()
-  operator float();        // returns flat, without worrying about filling bits
+  operator CLHEPdouble();       // Returns same as flat()
+  operator CLHEPfloat();        // returns flat, without worrying about filling bits
   operator unsigned int(); // 32-bit flat, quickest of all
 
   virtual std::ostream & put (std::ostream & os) const;

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -15,7 +16,7 @@
 //                  operator() with mean: 16th Feb 1998
 // M Fischler      - put and get to/from streams 12/15/04
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing CLHEPdoubles avoid problems with precision 
 //			4/14/05
 // =======================================================================
 
@@ -35,46 +36,46 @@ HepRandomEngine & RandExponential::engine() {return *localEngine;}
 RandExponential::~RandExponential() {
 }
 
-double RandExponential::operator()() {
+CLHEPdouble RandExponential::operator()() {
   return fire( defaultMean );
 }
 
-double RandExponential::operator()( double mean ) {
+CLHEPdouble RandExponential::operator()( CLHEPdouble mean ) {
   return fire( mean );
 }
 
-double RandExponential::shoot() {
+CLHEPdouble RandExponential::shoot() {
   return -std::log(HepRandom::getTheEngine()->flat());
 }
 
-double RandExponential::shoot(double mean) {
+CLHEPdouble RandExponential::shoot(CLHEPdouble mean) {
   return -std::log(HepRandom::getTheEngine()->flat())*mean;
 }
 
-void RandExponential::shootArray( const int size, double* vect,
-                                  double mean )
+void RandExponential::shootArray( const int size, CLHEPdouble* vect,
+                                  CLHEPdouble mean )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = shoot(mean);
 }
 
 void RandExponential::shootArray(HepRandomEngine* anEngine, const int size,
-                                   double* vect, double mean )
+                                   CLHEPdouble* vect, CLHEPdouble mean )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = shoot(anEngine, mean);
 }
 
-void RandExponential::fireArray( const int size, double* vect)
+void RandExponential::fireArray( const int size, CLHEPdouble* vect)
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = fire( defaultMean );
 }
 
-void RandExponential::fireArray( const int size, double* vect,
-                                 double mean )
+void RandExponential::fireArray( const int size, CLHEPdouble* vect,
+                                 CLHEPdouble mean )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = fire( mean );
 }
 
@@ -109,7 +110,7 @@ std::istream & RandExponential::get ( std::istream & is ) {
   }
   if (possibleKeywordInput(is, "Uvec", defaultMean)) {
     std::vector<unsigned long> t(2);
-    is >> defaultMean >> t[0] >> t[1]; defaultMean = DoubConv::longs2double(t); 
+    is >> defaultMean >> t[0] >> t[1]; defaultMean = DoubConv::longs2CLHEPdouble(t); 
     return is;
   }
   // is >> defaultMean encompassed by possibleKeywordInput

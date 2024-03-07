@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 //
 // testThrowFrom.cc - test the ZMthrow_from() method,

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 //
 // AxisAngle.cc
@@ -20,17 +21,17 @@
 
 namespace CLHEP  {
 
-double HepAxisAngle::tolerance = Hep3Vector::ToleranceTicks * 1.0e-08;
+CLHEPdouble HepAxisAngle::tolerance = Hep3Vector::ToleranceTicks * 1.0e-08;
 
-static void ZMpvAxisAngleRep( const HepAxisAngle & aa, double array[] ) {
+static void ZMpvAxisAngleRep( const HepAxisAngle & aa, CLHEPdouble array[] ) {
 
-  double sinDelta = std::sin( aa.delta() );
-  double cosDelta = std::cos( aa.delta() );
-  double oneMinusCosDelta = 1.0 - cosDelta;
+  CLHEPdouble sinDelta = std::sin( aa.delta() );
+  CLHEPdouble cosDelta = std::cos( aa.delta() );
+  CLHEPdouble oneMinusCosDelta = 1.0 - cosDelta;
 
-  double uX = aa.getAxis().getX();
-  double uY = aa.getAxis().getY();
-  double uZ = aa.getAxis().getZ();
+  CLHEPdouble uX = aa.getAxis().getX();
+  CLHEPdouble uY = aa.getAxis().getY();
+  CLHEPdouble uZ = aa.getAxis().getZ();
 
   array[0] = oneMinusCosDelta * uX * uX  +  cosDelta;
   array[1] = oneMinusCosDelta * uX * uY  -  sinDelta * uZ;
@@ -47,20 +48,20 @@ static void ZMpvAxisAngleRep( const HepAxisAngle & aa, double array[] ) {
 } // ZMpvAxisAngleRep
 
 
-double HepAxisAngle::distance( const AA & aa ) const  {
+CLHEPdouble HepAxisAngle::distance( const AA & aa ) const  {
 
-  double thisRep[9];
-  double aaRep[9];
+  CLHEPdouble thisRep[9];
+  CLHEPdouble aaRep[9];
 
   ZMpvAxisAngleRep( *this, thisRep );
   ZMpvAxisAngleRep( aa,    aaRep );
 
-  double sum = 0.0;
+  CLHEPdouble sum = 0.0;
   for ( int i = 0; i < 9; i++ )  {
     sum += thisRep[i] * aaRep[i];
   }
 
-  double d = 3.0 - sum;		// NaN-proofing: 
+  CLHEPdouble d = 3.0 - sum;		// NaN-proofing: 
   return  (d >= 0) ? d : 0;             // std::sqrt(distance) is used in howNear()
 
 }  // HepAxisAngle::distance()
@@ -73,7 +74,7 @@ bool HepAxisAngle::isNear( const AA & aa, Scalar epsilon ) const  {
 }  // HepAxisAngle::isNear()
 
 
-double HepAxisAngle::howNear( const AA & aa ) const  {
+CLHEPdouble HepAxisAngle::howNear( const AA & aa ) const  {
 
   return  std::sqrt( distance( aa ) );
 
@@ -94,13 +95,13 @@ std::ostream & operator<<(std::ostream & os, const HepAxisAngle & aa) {
 
 
 void ZMinputAxisAngle ( std::istream & is, 
-			double & x, double & y, double & z, 
-                       	double & delta );
+			CLHEPdouble & x, CLHEPdouble & y, CLHEPdouble & z, 
+                       	CLHEPdouble & delta );
 
 std::istream & operator>>(std::istream & is, HepAxisAngle & aa) {
   Hep3Vector axis;
-  double delta;
-  double x,y,z;
+  CLHEPdouble delta;
+  CLHEPdouble x,y,z;
   ZMinputAxisAngle ( is, x, y, z, delta );
   axis.set(x,y,z);
   aa.set ( axis, delta );

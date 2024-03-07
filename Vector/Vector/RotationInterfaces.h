@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // CLASSDOC OFF
 // ---------------------------------------------------------------------------
@@ -19,7 +20,7 @@
 // It may be desirable in the future to turn these classes into constraints
 // in the Stroustrup sense, so as to enforce this interface, still without 
 // inheritance.  However, they do contain an important static:
-// static double tolerance to set criteria for relative nearness.
+// static CLHEPdouble tolerance to set criteria for relative nearness.
 //
 // This file also defines structs 
 // HepRep3x3;
@@ -115,7 +116,7 @@ class Hep4RotationInterface  {
 
 public:
 
-  static double tolerance;        // to determine relative nearness
+  static CLHEPdouble tolerance;        // to determine relative nearness
 
   // ----------  Accessors:
 
@@ -131,22 +132,22 @@ public:
   HepLorentzVector row4() const;
 
   //  individual elements:
-  double xx() const  ;
-  double xy() const  ;
-  double xz() const  ;
-  double xt() const  ;
-  double yx() const  ;
-  double yy() const  ;
-  double yz() const  ;
-  double yt() const  ;
-  double zx() const  ;
-  double zy() const  ;
-  double zz() const  ;
-  double zt() const  ;
-  double tx() const  ;
-  double ty() const  ;
-  double tz() const  ;
-  double tt() const  ;
+  CLHEPdouble xx() const  ;
+  CLHEPdouble xy() const  ;
+  CLHEPdouble xz() const  ;
+  CLHEPdouble xt() const  ;
+  CLHEPdouble yx() const  ;
+  CLHEPdouble yy() const  ;
+  CLHEPdouble yz() const  ;
+  CLHEPdouble yt() const  ;
+  CLHEPdouble zx() const  ;
+  CLHEPdouble zy() const  ;
+  CLHEPdouble zz() const  ;
+  CLHEPdouble zt() const  ;
+  CLHEPdouble tx() const  ;
+  CLHEPdouble ty() const  ;
+  CLHEPdouble tz() const  ;
+  CLHEPdouble tt() const  ;
 
   //   4x4 representation:
 //HepRep4x4 rep4x4() const;	JMM  Declared here but not defined anywhere!
@@ -170,11 +171,11 @@ public:
 
   //   relative comparison:
 
-  double norm2() const  ;
-  double  distance2( const Hep4RotationInterface & lt ) const  ;
-  double  howNear( const Hep4RotationInterface & lt ) const  ;
+  CLHEPdouble norm2() const  ;
+  CLHEPdouble  distance2( const Hep4RotationInterface & lt ) const  ;
+  CLHEPdouble  howNear( const Hep4RotationInterface & lt ) const  ;
   bool isNear (const Hep4RotationInterface & lt, 
-				   double epsilon=tolerance) const  ;
+				   CLHEPdouble epsilon=tolerance) const  ;
 
   void rectify()  ;
   // non-const but logically const correction for accumulated roundoff errors
@@ -191,8 +192,8 @@ public:
 
 #endif /* ONLY_IN_CONCRETE_CLASSES */
 
-  static double getTolerance();
-  static double setTolerance( double tol );
+  static CLHEPdouble getTolerance();
+  static CLHEPdouble setTolerance( CLHEPdouble tol );
 
   enum { ToleranceTicks = 100 };
 
@@ -229,18 +230,18 @@ public:
 #ifdef ONLY_IN_CONCRETE_CLASSES
 
   //   Euler angles:
-  double getPhi  () const  ;
-  double getTheta() const  ;
-  double getPsi  () const  ;
-  double    phi  () const  ;
-  double    theta() const  ;
-  double    psi  () const  ;
+  CLHEPdouble getPhi  () const  ;
+  CLHEPdouble getTheta() const  ;
+  CLHEPdouble getPsi  () const  ;
+  CLHEPdouble    phi  () const  ;
+  CLHEPdouble    theta() const  ;
+  CLHEPdouble    psi  () const  ;
   HepEulerAngles eulerAngles() const  ;
 
   //   axis & angle of rotation:
-  double  getDelta() const  ;
+  CLHEPdouble  getDelta() const  ;
   Hep3Vector getAxis () const  ;
-  double     delta() const  ;
+  CLHEPdouble     delta() const  ;
   Hep3Vector    axis () const  ;
   HepAxisAngle axisAngle() const  ;
 
@@ -267,13 +268,13 @@ public:
   HepLorentzVector row4() const;
 
   //  individual elements treating this as a 4-rotation:
-  double xt() const; 
-  double yt() const; 
-  double zt() const; 
-  double tx() const; 
-  double ty() const;
-  double tz() const;
-  double tt() const;
+  CLHEPdouble xt() const; 
+  CLHEPdouble yt() const; 
+  CLHEPdouble zt() const; 
+  CLHEPdouble tx() const; 
+  CLHEPdouble ty() const;
+  CLHEPdouble tz() const;
+  CLHEPdouble tt() const;
 
   // ---------- Operations in the Rotation group
 
@@ -312,24 +313,24 @@ struct HepRep3x3 {
 
   inline HepRep3x3();
 
-  inline HepRep3x3(  double xx, double xy, double xz
-                   , double yx, double yy, double yz
-                   , double zx, double zy, double zz
+  inline HepRep3x3(  CLHEPdouble xx, CLHEPdouble xy, CLHEPdouble xz
+                   , CLHEPdouble yx, CLHEPdouble yy, CLHEPdouble yz
+                   , CLHEPdouble zx, CLHEPdouble zy, CLHEPdouble zz
                    );
 
-  inline HepRep3x3( const double * array );
-  // construct from an array of doubles, holding the rotation matrix
+  inline HepRep3x3( const CLHEPdouble * array );
+  // construct from an array of CLHEPdoubles, holding the rotation matrix
   // in ROW order (xx, xy, ...)
 
   inline void setToIdentity();
 
   // -----  The data members are public:
-  double xx_, xy_, xz_,
+  CLHEPdouble xx_, xy_, xz_,
             yx_, yy_, yz_,
             zx_, zy_, zz_;
 
-  inline void getArray ( double * array ) const;
-  // fill array with the NINE doubles xx, xy, xz ... zz
+  inline void getArray ( CLHEPdouble * array ) const;
+  // fill array with the NINE CLHEPdoubles xx, xy, xz ... zz
 
 };  // HepRep3x3
 
@@ -338,28 +339,28 @@ struct HepRep4x4 {
   // -----  Constructors:
   inline HepRep4x4();
 
-  inline HepRep4x4(  double xx, double xy, double xz, double xt
-                   , double yx, double yy, double yz, double yt
-                   , double zx, double zy, double zz, double zt
-                   , double tx, double ty, double tz, double tt
+  inline HepRep4x4(  CLHEPdouble xx, CLHEPdouble xy, CLHEPdouble xz, CLHEPdouble xt
+                   , CLHEPdouble yx, CLHEPdouble yy, CLHEPdouble yz, CLHEPdouble yt
+                   , CLHEPdouble zx, CLHEPdouble zy, CLHEPdouble zz, CLHEPdouble zt
+                   , CLHEPdouble tx, CLHEPdouble ty, CLHEPdouble tz, CLHEPdouble tt
                    );
 
   inline HepRep4x4( const HepRep4x4Symmetric & rep );
 
-  inline HepRep4x4( const double * array );
-  // construct from an array of doubles, holding the transformation matrix
+  inline HepRep4x4( const CLHEPdouble * array );
+  // construct from an array of CLHEPdoubles, holding the transformation matrix
   // in ROW order xx, xy, ...
 
   inline void setToIdentity();
 
   // -----  The data members are public:
-  double xx_, xy_, xz_, xt_,
+  CLHEPdouble xx_, xy_, xz_, xt_,
             yx_, yy_, yz_, yt_,
             zx_, zy_, zz_, zt_,
             tx_, ty_, tz_, tt_;
                          
-  inline void getArray ( double * array ) const;
-  // fill array with the SIXTEEN doubles xx, xy, xz ... tz, tt
+  inline void getArray ( CLHEPdouble * array ) const;
+  // fill array with the SIXTEEN CLHEPdoubles xx, xy, xz ... tz, tt
 
   inline bool operator==(HepRep4x4 const & r) const;
   inline bool operator!=(HepRep4x4 const & r) const;
@@ -374,25 +375,25 @@ struct HepRep4x4Symmetric {
   inline HepRep4x4Symmetric();
 
   inline HepRep4x4Symmetric
-	( double xx, double xy, double xz, double xt
-                      , double yy, double yz, double yt
-                                    , double zz, double zt
-                                                  , double tt );
+	( CLHEPdouble xx, CLHEPdouble xy, CLHEPdouble xz, CLHEPdouble xt
+                      , CLHEPdouble yy, CLHEPdouble yz, CLHEPdouble yt
+                                    , CLHEPdouble zz, CLHEPdouble zt
+                                                  , CLHEPdouble tt );
 
-  inline HepRep4x4Symmetric( const double * array );
-  // construct from an array of doubles, holding the transformation matrix
+  inline HepRep4x4Symmetric( const CLHEPdouble * array );
+  // construct from an array of CLHEPdoubles, holding the transformation matrix
   // elements in this order:  xx, xy, xz, xt, yy, yz, yt, zz, zt, tt
 
   inline void setToIdentity();
 
   // -----  The data members are public:
-  double xx_, xy_, xz_, xt_,
+  CLHEPdouble xx_, xy_, xz_, xt_,
                  yy_, yz_, yt_,
                       zz_, zt_,
                            tt_;
 
-  inline void getArray ( double * array ) const;
-  // fill array with the TEN doubles xx, xy, xz, xt, yy, yz, yt, zz, zt, tt
+  inline void getArray ( CLHEPdouble * array ) const;
+  // fill array with the TEN CLHEPdoubles xx, xy, xz, xt, yy, yz, yt, zz, zt, tt
 
 };
 

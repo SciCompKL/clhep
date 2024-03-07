@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandChiSquare.icc,v 1.3 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 // 
@@ -13,31 +14,31 @@
 
 namespace CLHEP {
 
-inline RandChiSquare::RandChiSquare(HepRandomEngine & anEngine, double a)
+inline RandChiSquare::RandChiSquare(HepRandomEngine & anEngine, CLHEPdouble a)
 : HepRandom( ), localEngine(&anEngine, do_nothing_deleter()), defaultA(a)
   {}
 
-inline RandChiSquare::RandChiSquare(HepRandomEngine * anEngine, double a)
+inline RandChiSquare::RandChiSquare(HepRandomEngine * anEngine, CLHEPdouble a)
 : HepRandom( ), localEngine(anEngine), defaultA(a)
   {}
 
-inline double RandChiSquare::fire() {
+inline CLHEPdouble RandChiSquare::fire() {
   return fire( defaultA );
 }
 
-inline double RandChiSquare::shoot() {
+inline CLHEPdouble RandChiSquare::shoot() {
   return shoot( 1.0 );
 }
 
-inline double RandChiSquare::operator()() {
+inline CLHEPdouble RandChiSquare::operator()() {
   return fire( defaultA );
 }
 
-inline double RandChiSquare::operator()( double a ) {
+inline CLHEPdouble RandChiSquare::operator()( CLHEPdouble a ) {
   return fire( a );
 }
 
-inline double RandChiSquare::shoot( HepRandomEngine* anEngine ) {
+inline CLHEPdouble RandChiSquare::shoot( HepRandomEngine* anEngine ) {
   return shoot( anEngine, 1.0 );
 }
 

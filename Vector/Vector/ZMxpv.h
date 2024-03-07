@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef HEP_ZMXPV_H
 #define HEP_ZMXPV_H
 

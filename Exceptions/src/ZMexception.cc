@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 //
 // ZMexception.cc -- implementation of the ZMexception class

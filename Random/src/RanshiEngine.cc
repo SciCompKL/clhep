@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RanshiEngine.cc,v 1.6 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -118,7 +119,7 @@ RanshiEngine::RanshiEngine(int rowIndex, int colIndex)
 
 RanshiEngine::~RanshiEngine() { }
 
-double RanshiEngine::flat() {
+CLHEPdouble RanshiEngine::flat() {
   unsigned int redAngle = (((numBuff/2) - 1) & redSpin) + halfBuff;
   unsigned int blkSpin     = buffer[redAngle] & 0xffffffff;
   unsigned int boostResult = blkSpin ^ redSpin;
@@ -133,7 +134,7 @@ double RanshiEngine::flat() {
 	   nearlyTwoToMinus_54());  		// non-zero
 }
 
-void RanshiEngine::flatArray(const int size, double* vect) {
+void RanshiEngine::flatArray(const int size, CLHEPdouble* vect) {
   for (int i = 0; i < size; ++i) {
     vect[i] = flat();
   }
@@ -244,11 +245,11 @@ void RanshiEngine::showStatus() const {
   std::cout << "-------------------------------------------" << std::endl;
 }
 
-RanshiEngine::operator double() {
+RanshiEngine::operator CLHEPdouble() {
   return flat();
 }
 
-RanshiEngine::operator float() {
+RanshiEngine::operator CLHEPfloat() {
   unsigned int redAngle = (((numBuff/2) - 1) & redSpin) + halfBuff;
   unsigned int blkSpin  = buffer[redAngle] & 0xffffffff;
   
@@ -257,7 +258,7 @@ RanshiEngine::operator float() {
   redSpin  = (blkSpin + numFlats++) & 0xffffffff;
   halfBuff = numBuff/2 - halfBuff;
   
-  return float(blkSpin * twoToMinus_32());
+  return CLHEPfloat(blkSpin * twoToMinus_32());
 }
 
 RanshiEngine::operator unsigned int() {

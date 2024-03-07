@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandEngine.h,v 1.6 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -57,7 +58,7 @@ public:
   virtual ~RandEngine();
   // Constructors and destructor
 
-  double flat();
+  CLHEPdouble flat();
   // It returns a pseudo random number between 0 and 1,
   // according to the standard stdlib random function rand()
   // but excluding the end points.
@@ -66,7 +67,7 @@ public:
   // will not pass several randomness tests, and does not give a           <
   // reproducible sequence of numbers.                                                                        <
 
-  void flatArray (const int size, double* vect);
+  void flatArray (const int size, CLHEPdouble* vect);
   // Fills the array "vect" of specified size with flat random values.
 
   void setSeed(long seed, int dum=0);
@@ -90,8 +91,8 @@ public:
   void showStatus() const;
   // Dumps the engine status on the screen.
  
-  operator double();       // Returns same as flat()
-  operator float();        // flat value, without worrying about filling bits
+  operator CLHEPdouble();       // Returns same as flat()
+  operator CLHEPfloat();        // flat value, without worrying about filling bits
   operator unsigned int(); // 32-bit flat value, quickest of all.
 
   virtual std::ostream & put (std::ostream & os) const;

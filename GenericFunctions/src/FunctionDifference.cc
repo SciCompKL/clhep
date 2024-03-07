@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionDifference.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/FunctionDifference.hh"
@@ -40,12 +41,12 @@ FunctionDifference::~FunctionDifference()
 
 
 
-double FunctionDifference::operator ()(double x) const
+CLHEPdouble FunctionDifference::operator ()(CLHEPdouble x) const
 {
   return (*_arg1)(x)-(*_arg2)(x);
 }
 
-double FunctionDifference::operator ()(const Argument & x) const
+CLHEPdouble FunctionDifference::operator ()(const Argument & x) const
 {
   return (*_arg1)(x)-(*_arg2)(x);
 }

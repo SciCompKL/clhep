@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef ZMUSECOUNT_H
 #define ZMUSECOUNT_H
 

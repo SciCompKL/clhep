@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -63,12 +64,12 @@ public:
   MixMaxRng& operator=(const MixMaxRng& rng);
   // Copy constructor and assignment operator.
 
-  double flat() { return (S.counter<=(N-1)) ? generate(S.counter):iterate(); }
+  CLHEPdouble flat() { return (S.counter<=(N-1)) ? generate(S.counter):iterate(); }
   // Returns a pseudo random number between 0 and 1
   // (excluding the zero: in (0,1] )
   // smallest number which it will give is approximately 10^-19
 
-  void flatArray (const int size, double* vect);
+  void flatArray (const int size, CLHEPdouble* vect);
   // Fills the array "vect" of specified size with flat random values.
 
   void setSeed(long seed, int dum=0);
@@ -90,9 +91,9 @@ public:
   void showStatus() const;
   // Dumps the engine status on the screen.
 
-  operator double();
+  operator CLHEPdouble();
   // Returns same as flat()
-  operator float();
+  operator CLHEPfloat();
   // less precise flat, faster if possible
   operator unsigned int();
   // 32-bit flat
@@ -116,7 +117,7 @@ private:
   // Note the potential for confusion...
   static constexpr int BITS=61;
   static constexpr myuint_t M61=2305843009213693951ULL;
-  static constexpr double INV_M61=0.43368086899420177360298E-18;
+  static constexpr CLHEPdouble INV_M61=0.43368086899420177360298E-18;
   static constexpr unsigned int VECTOR_STATE_SIZE = 2*N+4; // 2N+4 for MIXMAX
 
   #define MIXMAX_MOD_MERSENNE(k) ((((k)) & M61) + (((k)) >> BITS) )
@@ -129,8 +130,8 @@ private:
   void print_state() const;
   myuint_t precalc();
   myuint_t get_next() ;
-  inline double get_next_float() { return get_next_float_packbits(); }
-  // Returns a random double with all 52 bits random, in the range (0,1]
+  inline CLHEPdouble get_next_CLHEPfloat() { return get_next_CLHEPfloat_packbits(); }
+  // Returns a random CLHEPdouble with all 52 bits random, in the range (0,1]
   
   MixMaxRng Branch();
   void BranchInplace(int id);
@@ -138,20 +139,20 @@ private:
   MixMaxRng(myID_t clusterID, myID_t machineID, myID_t runID, myID_t  streamID );	   // Constructor with four 32-bit seeds
   inline void seed64(myuint_t seedval) { seed_uniquestream( 0, 0, (myID_t)(seedval>>32), (myID_t)seedval ); } // seed with one 64-bit seed
 
-  double generate(int i);
-  double iterate();
+  CLHEPdouble generate(int i);
+  CLHEPdouble iterate();
 
-  double get_next_float_packbits();
+  CLHEPdouble get_next_CLHEPfloat_packbits();
 #if defined __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif
-  inline double convert1double(myuint_t u)
+  inline CLHEPdouble convert1CLHEPdouble(myuint_t u)
   {
-    const double one = 1;
+    const CLHEPdouble one = 1;
     const myuint_t onemask = *(myuint_t*)&one;
     myuint_t tmp = (u>>9) | onemask; // bits between 52 and 62 dont affect the result!
-    double d = *(double*)&tmp;
+    CLHEPdouble d = *(CLHEPdouble*)&tmp;
     return d-1.0;
   }
 #if defined __GNUC__

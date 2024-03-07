@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FloatingConstant.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/FloatingConstant.hh"
@@ -24,7 +25,7 @@ AbsParameter & FloatingConstant::value() {
   return *_value;
 }
 
-double FloatingConstant::operator ()(double) const
+CLHEPdouble FloatingConstant::operator ()(CLHEPdouble) const
 {
   return _value->getValue();
 }

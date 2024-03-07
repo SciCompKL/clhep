@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include <vector>
 namespace Genfun {
 
@@ -5,7 +6,7 @@ namespace Genfun {
     
   public:
     
-    std::vector<std::complex<double> >  data;
+    std::vector<std::complex<CLHEPdouble> >  data;
     
   };
   
@@ -33,12 +34,12 @@ namespace Genfun {
   }
   
   inline
-  const std::complex<double> &LegendreCoefficientSet:: operator () (unsigned int l) const {
+  const std::complex<CLHEPdouble> &LegendreCoefficientSet:: operator () (unsigned int l) const {
     return c->data[l];
   }
   
   inline
-  std::complex<double> & LegendreCoefficientSet::operator () (unsigned int l) {
+  std::complex<CLHEPdouble> & LegendreCoefficientSet::operator () (unsigned int l) {
     return c->data[l];
   }
   

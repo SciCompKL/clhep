@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //---------------XF::Function (transformation field)--------------------//
 //                                                                      //
 //  XF::Function, class of function objects which evaluate to a         //
@@ -13,7 +14,7 @@
 //                                                                      //
 //  // Define some constants:                                           //
 //  int          N;                                                     //
-//  double       c1, c2, r, z;                                          //
+//  CLHEPdouble       c1, c2, r, z;                                          //
 //                                                                      //
 // // Construct a simple linear function of a variable i:               //
 //                                                                      //
@@ -73,7 +74,7 @@ namespace XF
     virtual unsigned int dimensionality () const;	//returns 1;
 
     // Function value
-    virtual HepGeom::Transform3D operator         () (double argument) const = 0;
+    virtual HepGeom::Transform3D operator         () (CLHEPdouble argument) const = 0;
     virtual HepGeom::Transform3D operator         () (const Genfun::
 						Argument & argument) const =
       0;
@@ -105,7 +106,7 @@ namespace XF
 
       virtual ~ Pow ();
 
-    virtual HepGeom::Transform3D operator         () (double argument) const;
+    virtual HepGeom::Transform3D operator         () (CLHEPdouble argument) const;
     virtual HepGeom::Transform3D operator         () (const Genfun::
 						Argument & argument) const;
 
@@ -148,7 +149,7 @@ namespace XF
 
     virtual unsigned int dimensionality () const;
 
-    virtual HepGeom::Transform3D operator         () (double argument) const;
+    virtual HepGeom::Transform3D operator         () (CLHEPdouble argument) const;
     virtual HepGeom::Transform3D operator         () (const Genfun::
 						Argument & argument) const;
 
@@ -179,7 +180,7 @@ namespace XF
 
     virtual unsigned int dimensionality () const;
 
-    virtual HepGeom::Transform3D operator         () (double argument) const;
+    virtual HepGeom::Transform3D operator         () (CLHEPdouble argument) const;
     virtual HepGeom::Transform3D operator         () (const Genfun::
 						Argument & argument) const;
 
@@ -210,7 +211,7 @@ namespace XF
 
     virtual unsigned int dimensionality () const;
 
-    virtual HepGeom::Transform3D operator         () (double argument) const;
+    virtual HepGeom::Transform3D operator         () (CLHEPdouble argument) const;
     virtual HepGeom::Transform3D operator         () (const Genfun::
 						Argument & argument) const;
 

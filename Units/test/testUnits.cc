@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testUnits.cc,v 1.4 2011/07/20 23:00:04 garren Exp $
 // ---------------------------------------------------------------------------
@@ -27,8 +28,8 @@ int main() {
 
   // Check that local m does not interfere with global m
 
-  double m=0;
-  for (int i=0; i<7; i++, m++) { assert(m == double(i)); } 
+  CLHEPdouble m=0;
+  for (int i=0; i<7; i++, m++) { assert(m == CLHEPdouble(i)); } 
   assert(m != CLHEP::meter);  
 
   //std::cout << "Speed of light is " << std::setw(10) << std::setprecision(8)

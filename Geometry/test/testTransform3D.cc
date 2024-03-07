@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testTransform3D.cc,v 1.3 2003/10/24 21:39:45 garren Exp $
 // ---------------------------------------------------------------------------
@@ -16,15 +17,15 @@ typedef HepGeom::Scale3D           Scale;
 typedef HepGeom::Rotate3D          Rotation;
 typedef HepGeom::Translate3D       Translation;
 typedef HepGeom::Transform3D       Transformation;
-typedef HepGeom::Point3D<double>   Point;
-typedef HepGeom::Vector3D<double>  Vector;
-typedef HepGeom::Normal3D<double>  Normal;
+typedef HepGeom::Point3D<CLHEPdouble>   Point;
+typedef HepGeom::Vector3D<CLHEPdouble>  Vector;
+typedef HepGeom::Normal3D<CLHEPdouble>  Normal;
 
 #define DEL 10.e-16
 
 int main() {
   int i,k;  
-  double E[4][4] = {
+  CLHEPdouble E[4][4] = {
     { 1, 0, 0, 0},
     { 0, 1, 0, 0},
     { 0, 0, 1, 0},
@@ -44,7 +45,7 @@ int main() {
   // Rotation + Translation
 
   HepRotation R;
-  double angA=CLHEP::pi/3, angB=CLHEP::pi/4, angC=CLHEP::pi/6; 
+  CLHEPdouble angA=CLHEP::pi/3, angB=CLHEP::pi/4, angC=CLHEP::pi/6; 
 
   R.rotateX(angA); R.rotateY(angB); R.rotateZ(angC);
   const Hep3Vector D(1, 2, 3);

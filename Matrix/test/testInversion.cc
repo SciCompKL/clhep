@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testInversion.cc,v 1.2 2003/08/13 20:00:12 garren Exp $
 //
@@ -112,7 +113,7 @@ int main()
 
 /***** check correctness and compare results of inversion algorithms
 
-  double dist1, dist2;
+  CLHEPdouble dist1, dist2;
   HepSymMatrix A(5,1), B(5), C(5), I(5,1);
   HepSymMatrix M(5);
   n = 200000;

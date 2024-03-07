@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ---------------------------------------------------------------------------
 //
 // This file is a part of the CLHEP - a Class Library for High Energy Physics.
@@ -8,14 +9,14 @@
 #include <fstream>
 #include <CLHEP/Evaluator/Evaluator.h>
 
-double eval( std::string expr, int& numbad, std::ofstream& os)
+CLHEPdouble eval( std::string expr, int& numbad, std::ofstream& os)
 {
     static HepTool::Evaluator *ev=0;
     if(ev == 0) ev = new HepTool::Evaluator();
     ev->setStdMath();                 // set standard constants and functions
     ev->setSystemOfUnits();           // set SI units
 
-    double v = ev->evaluate(expr.data());
+    CLHEPdouble v = ev->evaluate(expr.data());
 
     os << "CALC> " << expr << ": ";
     if(ev->status() != HepTool::Evaluator::OK) {
@@ -31,7 +32,7 @@ int main()
 {
 
     int numbad = 0;
-    double result;
+    CLHEPdouble result;
     // many of these expressions fail in releases prior to 2.0.4.7
     std::string exp[43] = {   " +1",     " -1",     "1 + 1",  "1 + -1","1 + (-1)",
                      "1 + +1","1 + (+1)",    "1 * -1","1 * (-1)",  "-1 * 1",
@@ -42,7 +43,7 @@ int main()
 		     "100/5^2","100/+5^2","100/-5^2",   "9*4+30", "9*4+-30",
 		     "100/(5^2)","100/(+5^2)","100/(-5^2)",   "100/(-5)^2", "100/((-5)^2)",
 		     "-9*4+30","9*-4+30","9*(-4)+30","(9*-4)+30" };
-    double res[43] = {     1.,       -1.,          2.,        0.,        0., 
+    CLHEPdouble res[43] = {     1.,       -1.,          2.,        0.,        0., 
                            2.,        2.,         -1.,       -1.,       -1.,
 			  0.1,       0.1,         36.,      -36.,      -36.,
 			  -8.,       -8.,         -8.,       -8.,       -8.,

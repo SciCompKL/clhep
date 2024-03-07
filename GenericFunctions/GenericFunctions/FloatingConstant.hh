@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FloatingConstant.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //----------------------FloatingConstant -----------------------------------//
@@ -5,7 +6,7 @@
 //  Class FloatingConstant                                                  //
 //  Joe Boudreau, Petar Maksimovic, Nov. 1999                               //
 //                                                                          //
-//  FloatingConstant allows use to treat constants as floating-constant     //
+//  FloatingConstant allows use to treat constants as CLHEPfloating-constant     //
 //  functions so that they automatically will inherit all the algebraic     //
 //  operations we have so painstakingly defined for functions.              //
 //                                                                          //
@@ -40,8 +41,8 @@ namespace Genfun {
     AbsParameter & value();
 
     // Retrieve function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
   
     // Derivative.  
     Derivative partial (unsigned int) const override;

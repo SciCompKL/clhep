@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: DefiniteIntegral.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //-------------------------------------------------------------//
@@ -30,7 +31,7 @@ namespace Genfun {
     typedef enum {CLOSED, OPEN} Type;
 
     // Constructor:
-    DefiniteIntegral(double a, double b, Type=CLOSED);
+    DefiniteIntegral(CLHEPdouble a, CLHEPdouble b, Type=CLOSED);
 
     // Copy Constructor:
     DefiniteIntegral(const DefiniteIntegral &);
@@ -42,7 +43,7 @@ namespace Genfun {
     ~DefiniteIntegral();
 
     // Take the definite integral of a function between the bounds:
-    virtual double operator [] (const AbsFunction & function) const;
+    virtual CLHEPdouble operator [] (const AbsFunction & function) const;
 
     // Retrieve the number of function calls for the last operation:
     unsigned int numFunctionCalls() const;
@@ -50,7 +51,7 @@ namespace Genfun {
     // Algorithmic parameters:
     
     // Desired precision (default 1.0E-06)
-    void setEpsilon(double eps);
+    void setEpsilon(CLHEPdouble eps);
 
     // Maximum number of iterations (default 20(closed) 14 (open))
     void setMaxIter (unsigned int maxIter);

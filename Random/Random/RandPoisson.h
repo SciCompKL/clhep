@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandPoisson.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -16,7 +17,7 @@
 // =======================================================================
 // Gabriele Cosmo - Created: 5th September 1995
 //                - Added not static Shoot() method: 17th May 1996
-//                - Algorithm now operates on doubles : 31st Oct 1996
+//                - Algorithm now operates on CLHEPdoubles : 31st Oct 1996
 //                - Added methods to shoot arrays: 28th July 1997
 // J.Marraffino   - Added default mean as attribute and
 //                  operator() with mean: 16th Feb 1998
@@ -44,8 +45,8 @@ class RandPoisson : public HepRandom {
 
 public:
 
-  inline RandPoisson ( HepRandomEngine& anEngine, double a1=1.0 );
-  inline RandPoisson ( HepRandomEngine* anEngine, double a1=1.0 );
+  inline RandPoisson ( HepRandomEngine& anEngine, CLHEPdouble a1=1.0 );
+  inline RandPoisson ( HepRandomEngine* anEngine, CLHEPdouble a1=1.0 );
   // These constructors should be used to instantiate a RandPoisson
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -65,29 +66,29 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  long shoot( double m=1.0 );
+  static  long shoot( CLHEPdouble m=1.0 );
 
-  static  void shootArray ( const int size, long* vect, double m=1.0 );
+  static  void shootArray ( const int size, long* vect, CLHEPdouble m=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  long shoot( HepRandomEngine* anEngine, double m=1.0 );
+  static  long shoot( HepRandomEngine* anEngine, CLHEPdouble m=1.0 );
 
   static  void shootArray ( HepRandomEngine* anEngine,
-                            const int size, long* vect, double m=1.0 );
+                            const int size, long* vect, CLHEPdouble m=1.0 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
   long  fire();
-  long  fire( double m );
+  long  fire( CLHEPdouble m );
 
   void fireArray ( const int size, long* vect );
-  void fireArray ( const int size, long* vect, double m);
+  void fireArray ( const int size, long* vect, CLHEPdouble m);
 
-  double operator()();
-  double operator()( double m );
+  CLHEPdouble operator()();
+  CLHEPdouble operator()( CLHEPdouble m );
   
   std::string name() const;
   HepRandomEngine & engine();
@@ -97,18 +98,18 @@ public:
 
 protected:
 
-  double meanMax;
-  double defaultMean;
+  CLHEPdouble meanMax;
+  CLHEPdouble defaultMean;
 
-  static  double getOldMean() {return oldm_st;}
+  static  CLHEPdouble getOldMean() {return oldm_st;}
 
-  static  double getMaxMean() {return meanMax_st;}
+  static  CLHEPdouble getMaxMean() {return meanMax_st;}
 
-  static  void setOldMean( double val ){oldm_st = val;}
+  static  void setOldMean( CLHEPdouble val ){oldm_st = val;}
 
-  static  double* getPStatus() {return status_st;}
+  static  CLHEPdouble* getPStatus() {return status_st;}
 
-  static void setPStatus(double sq, double alxm, double g1) {
+  static void setPStatus(CLHEPdouble sq, CLHEPdouble alxm, CLHEPdouble g1) {
     status_st[0] = sq; status_st[1] = alxm; status_st[2] = g1;
   }
 
@@ -117,12 +118,12 @@ protected:
 private:
 
   std::shared_ptr<HepRandomEngine> localEngine;
-  double status[3], oldm;
+  CLHEPdouble status[3], oldm;
 
   // static data
-  static CLHEP_THREAD_LOCAL double status_st[3];
-  static CLHEP_THREAD_LOCAL double oldm_st;
-  static const double meanMax_st;
+  static CLHEP_THREAD_LOCAL CLHEPdouble status_st[3];
+  static CLHEP_THREAD_LOCAL CLHEPdouble oldm_st;
+  static const CLHEPdouble meanMax_st;
 
 };
 

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ConstMinusParameter.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //--------------------------ConstMinusParameter-----------------------------//
@@ -24,7 +25,7 @@ namespace Genfun {
       public:
   
     // Constructor
-    ConstMinusParameter(double, const AbsParameter *);
+    ConstMinusParameter(CLHEPdouble, const AbsParameter *);
   
     // Copy constructor
     ConstMinusParameter(const ConstMinusParameter &right);
@@ -33,14 +34,14 @@ namespace Genfun {
     virtual ~ConstMinusParameter();
   
     // Retreive function value
-    virtual double getValue() const;
+    virtual CLHEPdouble getValue() const;
 
   private:
 
     // It is illegal to assign a ConstMinusParameter
     const ConstMinusParameter & operator=(const ConstMinusParameter &right);
 
-    double        _constant;
+    CLHEPdouble        _constant;
     AbsParameter *_parameter;
   };
 } // namespace Genfun

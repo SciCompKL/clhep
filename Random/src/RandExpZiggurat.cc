@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -21,7 +22,7 @@
 namespace CLHEP {
 
 CLHEP_THREAD_LOCAL unsigned long RandExpZiggurat::kn[128], RandExpZiggurat::ke[256];
-CLHEP_THREAD_LOCAL float RandExpZiggurat::wn[128],RandExpZiggurat::fn[128],RandExpZiggurat::we[256],RandExpZiggurat::fe[256];
+CLHEP_THREAD_LOCAL CLHEPfloat RandExpZiggurat::wn[128],RandExpZiggurat::fn[128],RandExpZiggurat::we[256],RandExpZiggurat::fe[256];
 CLHEP_THREAD_LOCAL bool RandExpZiggurat::ziggurat_is_init = false;
 
 std::string RandExpZiggurat::name() const {return "RandExpZiggurat";}
@@ -35,47 +36,47 @@ RandExpZiggurat::RandExpZiggurat(const RandExpZiggurat& right) : HepRandom(right
 {
 }
 
-double RandExpZiggurat::operator()()
+CLHEPdouble RandExpZiggurat::operator()()
 {
   return fire( defaultMean );
 }
 
-void RandExpZiggurat::shootArray( const int size, float* vect, float mean )
+void RandExpZiggurat::shootArray( const int size, CLHEPfloat* vect, CLHEPfloat mean )
 {
    for (int i=0; i<size; ++i) vect[i] = shoot(mean);
 }
 
-void RandExpZiggurat::shootArray( const int size, double* vect, double mean )
+void RandExpZiggurat::shootArray( const int size, CLHEPdouble* vect, CLHEPdouble mean )
 {
    for (int i=0; i<size; ++i) vect[i] = shoot(mean);
 }
 
-void RandExpZiggurat::shootArray(HepRandomEngine* anEngine, const int size, float* vect, float mean )
+void RandExpZiggurat::shootArray(HepRandomEngine* anEngine, const int size, CLHEPfloat* vect, CLHEPfloat mean )
 {
    for (int i=0; i<size; ++i) vect[i] = shoot(anEngine, mean);
 }
 
-void RandExpZiggurat::shootArray(HepRandomEngine* anEngine, const int size, double* vect, double mean )
+void RandExpZiggurat::shootArray(HepRandomEngine* anEngine, const int size, CLHEPdouble* vect, CLHEPdouble mean )
 {
    for (int i=0; i<size; ++i) vect[i] = shoot(anEngine, mean);
 }
 
-void RandExpZiggurat::fireArray( const int size, float* vect)
+void RandExpZiggurat::fireArray( const int size, CLHEPfloat* vect)
 {
    for (int i=0; i<size; ++i) vect[i] = fire( defaultMean );
 }
 
-void RandExpZiggurat::fireArray( const int size, double* vect)
+void RandExpZiggurat::fireArray( const int size, CLHEPdouble* vect)
 {
    for (int i=0; i<size; ++i) vect[i] = fire( defaultMean );
 }
 
-void RandExpZiggurat::fireArray( const int size, float* vect, float mean )
+void RandExpZiggurat::fireArray( const int size, CLHEPfloat* vect, CLHEPfloat mean )
 {
    for (int i=0; i<size; ++i) vect[i] = fire( mean );
 }
 
-void RandExpZiggurat::fireArray( const int size, double* vect, double mean )
+void RandExpZiggurat::fireArray( const int size, CLHEPdouble* vect, CLHEPdouble mean )
 {
    for (int i=0; i<size; ++i) vect[i] = fire( mean );
 }
@@ -111,7 +112,7 @@ std::istream & RandExpZiggurat::get ( std::istream & is ) {
   }
   if (possibleKeywordInput(is, "Uvec", defaultMean)) {
     std::vector<unsigned long> t(2);
-    is >> defaultMean >> t[0] >> t[1]; defaultMean = DoubConv::longs2double(t); 
+    is >> defaultMean >> t[0] >> t[1]; defaultMean = DoubConv::longs2CLHEPdouble(t); 
     return is;
   }
   // is >> defaultMean encompassed by possibleKeywordInput
@@ -119,13 +120,13 @@ std::istream & RandExpZiggurat::get ( std::istream & is ) {
 }
 
 
-float RandExpZiggurat::ziggurat_efix(unsigned long jz,HepRandomEngine* anEngine)
+CLHEPfloat RandExpZiggurat::ziggurat_efix(unsigned long jz,HepRandomEngine* anEngine)
 { 
   if(!ziggurat_is_init) ziggurat_init();
 
   unsigned long iz=jz&255;
   
-  float x;
+  CLHEPfloat x;
   for(;;)
   {  
     if(iz==0) return (7.69711-std::log(ziggurat_UNI(anEngine)));          /* iz==0 */
@@ -141,9 +142,9 @@ float RandExpZiggurat::ziggurat_efix(unsigned long jz,HepRandomEngine* anEngine)
 
 bool RandExpZiggurat::ziggurat_init()
 {  
-  const double rzm1 = 2147483648.0, rzm2 = 4294967296.;
-  double dn=3.442619855899,tn=dn,vn=9.91256303526217e-3, q;
-  double de=7.697117470131487, te=de, ve=3.949659822581572e-3;
+  const CLHEPdouble rzm1 = 2147483648.0, rzm2 = 4294967296.;
+  CLHEPdouble dn=3.442619855899,tn=dn,vn=9.91256303526217e-3, q;
+  CLHEPdouble de=7.697117470131487, te=de, ve=3.949659822581572e-3;
   int i;
 
 /* Set up tables for RNOR */

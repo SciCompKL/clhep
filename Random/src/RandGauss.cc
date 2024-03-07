@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -24,7 +25,7 @@
 // M Fischler     - put and get to/from streams 12/8/04
 // M Fischler     - save and restore dist to streams 12/20/04
 // M Fischler	  - put/get to/from streams uses pairs of ulongs when
-//		    storing doubles avoid problems with precision.
+//		    storing CLHEPdoubles avoid problems with precision.
 //		    Similarly for saveEngineStatus and RestoreEngineStatus
 //		    and for save/restore distState
 //		    Care was taken that old-form output can still be read back.
@@ -48,16 +49,16 @@ HepRandomEngine & RandGauss::engine() {return *localEngine;}
 
 // Initialisation of static data
 CLHEP_THREAD_LOCAL bool RandGauss::set_st = false;
-CLHEP_THREAD_LOCAL double RandGauss::nextGauss_st = 0.0;
+CLHEP_THREAD_LOCAL CLHEPdouble RandGauss::nextGauss_st = 0.0;
 
 RandGauss::~RandGauss() {
 }
 
-double RandGauss::operator()() {
+CLHEPdouble RandGauss::operator()() {
   return fire( defaultMean, defaultStdDev );
 }
 
-double RandGauss::operator()( double mean, double stdDev ) {
+CLHEPdouble RandGauss::operator()( CLHEPdouble mean, CLHEPdouble stdDev ) {
   return fire( mean, stdDev );
 }
 
@@ -66,24 +67,24 @@ bool RandGauss::getFlag() {return set_st;}
 
 void RandGauss::setFlag( bool val ) {set_st = val;}
 
-double RandGauss::getVal() {return nextGauss_st;}
+CLHEPdouble RandGauss::getVal() {return nextGauss_st;}
 
-void RandGauss::setVal( double nextVal ) {nextGauss_st = nextVal;}
+void RandGauss::setVal( CLHEPdouble nextVal ) {nextGauss_st = nextVal;}
 
-double RandGauss::shoot()
+CLHEPdouble RandGauss::shoot()
 {
   // Gaussian random numbers are generated two at the time, so every other
   // time this is called we just return a number generated the time before.
 
   if ( getFlag() ) {
     setFlag(false);
-    double x = getVal();
+    CLHEPdouble x = getVal();
     return x; 
     // return getVal();
   } 
 
-  double r;
-  double v1,v2,fac,val;
+  CLHEPdouble r;
+  CLHEPdouble v1,v2,fac,val;
   HepRandomEngine* anEngine = HepRandom::getTheEngine();
 
   do {
@@ -99,14 +100,14 @@ double RandGauss::shoot()
   return v2*fac;
 }
 
-void RandGauss::shootArray( const int size, double* vect,
-                            double mean, double stdDev )
+void RandGauss::shootArray( const int size, CLHEPdouble* vect,
+                            CLHEPdouble mean, CLHEPdouble stdDev )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = shoot(mean,stdDev);
 }
 
-double RandGauss::shoot( HepRandomEngine* anEngine )
+CLHEPdouble RandGauss::shoot( HepRandomEngine* anEngine )
 {
   // Gaussian random numbers are generated two at the time, so every other
   // time this is called we just return a number generated the time before.
@@ -116,8 +117,8 @@ double RandGauss::shoot( HepRandomEngine* anEngine )
     return getVal();
   }
 
-  double r;
-  double v1,v2,fac,val;
+  CLHEPdouble r;
+  CLHEPdouble v1,v2,fac,val;
 
   do {
     v1 = 2.0 * anEngine->flat() - 1.0;
@@ -133,14 +134,14 @@ double RandGauss::shoot( HepRandomEngine* anEngine )
 }
 
 void RandGauss::shootArray( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double mean, double stdDev )
+                            const int size, CLHEPdouble* vect,
+                            CLHEPdouble mean, CLHEPdouble stdDev )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = shoot(anEngine,mean,stdDev);
 }
 
-double RandGauss::normal()
+CLHEPdouble RandGauss::normal()
 {
   // Gaussian random numbers are generated two at the time, so every other
   // time this is called we just return a number generated the time before.
@@ -150,8 +151,8 @@ double RandGauss::normal()
     return nextGauss;
   }
 
-  double r;
-  double v1,v2,fac,val;
+  CLHEPdouble r;
+  CLHEPdouble v1,v2,fac,val;
 
   do {
     v1 = 2.0 * localEngine->flat() - 1.0;
@@ -166,16 +167,16 @@ double RandGauss::normal()
   return v2*fac;
 }
 
-void RandGauss::fireArray( const int size, double* vect)
+void RandGauss::fireArray( const int size, CLHEPdouble* vect)
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = fire( defaultMean, defaultStdDev );
 }
 
-void RandGauss::fireArray( const int size, double* vect,
-                           double mean, double stdDev )
+void RandGauss::fireArray( const int size, CLHEPdouble* vect,
+                           CLHEPdouble mean, CLHEPdouble stdDev )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = fire( mean, stdDev );
 }
 
@@ -230,7 +231,7 @@ void RandGauss::restoreEngineStatus( const char filename[] ) {
       if (possibleKeywordInput(infile, "Uvec", nextGauss_st)) {
         std::vector<unsigned long> t(2);
         infile >> nextGauss_st >> t[0] >> t[1]; 
-        nextGauss_st = DoubConv::longs2double(t); 
+        nextGauss_st = DoubConv::longs2CLHEPdouble(t); 
       }
       // is >> nextGauss_st encompassed by possibleKeywordInput
       setFlag(true);
@@ -286,8 +287,8 @@ std::istream & RandGauss::get ( std::istream & is ) {
   std::string c2;
   if (possibleKeywordInput(is, "Uvec", c1)) {
     std::vector<unsigned long> t(2);
-    is >> defaultMean >> t[0] >> t[1]; defaultMean = DoubConv::longs2double(t); 
-    is >> defaultStdDev>>t[0]>>t[1]; defaultStdDev = DoubConv::longs2double(t); 
+    is >> defaultMean >> t[0] >> t[1]; defaultMean = DoubConv::longs2CLHEPdouble(t); 
+    is >> defaultStdDev>>t[0]>>t[1]; defaultStdDev = DoubConv::longs2CLHEPdouble(t); 
     std::string ng;
     is >> ng;
     set = false;
@@ -296,7 +297,7 @@ std::istream & RandGauss::get ( std::istream & is ) {
 	std::cout << "get(): ng = " << ng << "\n";
 	#endif	
     if (ng == "nextGauss") {
-      is >> nextGauss >> t[0] >> t[1]; nextGauss = DoubConv::longs2double(t);
+      is >> nextGauss >> t[0] >> t[1]; nextGauss = DoubConv::longs2CLHEPdouble(t);
 	#ifdef TRACE_IO
 	std::cout << "get(): nextGauss read back as " << nextGauss << "\n";
 	#endif	
@@ -367,7 +368,7 @@ std::istream & RandGauss::restoreDistState ( std::istream & is ) {
     setFlag (false);
     if (ng == "nextGauss_st") {
       is >> nextGauss_st >> t[0] >> t[1]; 
-      nextGauss_st = DoubConv::longs2double(t);
+      nextGauss_st = DoubConv::longs2CLHEPdouble(t);
       setFlag (true);
     }
     return is;

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include <ostream> // for std::endl
 namespace Genfun {
   ExtendedButcherTableau::ExtendedButcherTableau(const std::string &mname, 
@@ -49,7 +50,7 @@ namespace Genfun {
   #pragma clang diagnostic ignored "-Wshadow"
 #endif
   
-  double & ExtendedButcherTableau::A(unsigned int i, unsigned int j) {
+  CLHEPdouble & ExtendedButcherTableau::A(unsigned int i, unsigned int j) {
     
     if (i>=_A.size()) {
       unsigned int newSize=i+1; // (shadowed)
@@ -57,7 +58,7 @@ namespace Genfun {
 	_A[ii].resize(newSize,0.0);
       }
       for (unsigned int ii=_A.size();ii<newSize;ii++) {
-	_A.push_back(std::vector<double>(newSize,0));
+	_A.push_back(std::vector<CLHEPdouble>(newSize,0));
       }
       
       if (j>=_A[i].size()) {
@@ -85,34 +86,34 @@ namespace Genfun {
   #pragma clang diagnostic pop
 #endif
 
-  double & ExtendedButcherTableau::b(unsigned int i){
+  CLHEPdouble & ExtendedButcherTableau::b(unsigned int i){
     if (i>=_b.size()) _b.resize(i+1);
     return _b[i];
   }
 
-  double & ExtendedButcherTableau::bHat(unsigned int i){
+  CLHEPdouble & ExtendedButcherTableau::bHat(unsigned int i){
     if (i>=_bHat.size()) _bHat.resize(i+1);
     return _bHat[i];
   }
 
-  double & ExtendedButcherTableau::c(unsigned int i){
+  CLHEPdouble & ExtendedButcherTableau::c(unsigned int i){
     if (i>=_c.size()) _c.resize(i+1);
     return _c[i];
   }
   
-  const double & ExtendedButcherTableau::A(unsigned int i, unsigned int j) const{
+  const CLHEPdouble & ExtendedButcherTableau::A(unsigned int i, unsigned int j) const{
     return _A[i][j];
   }
   
-  const double & ExtendedButcherTableau::b(unsigned int i) const{
+  const CLHEPdouble & ExtendedButcherTableau::b(unsigned int i) const{
     return _b[i];
   }
   
-  const double & ExtendedButcherTableau::bHat(unsigned int i) const{
+  const CLHEPdouble & ExtendedButcherTableau::bHat(unsigned int i) const{
     return _bHat[i];
   }
   
-  const double & ExtendedButcherTableau::c(unsigned int i) const{
+  const CLHEPdouble & ExtendedButcherTableau::c(unsigned int i) const{
     return _c[i];
   }
 }

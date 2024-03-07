@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: RandomFunc.h,v 1.6 2010/06/16 17:24:53 garren Exp $
 // -----------------------------------------------------------------------
@@ -22,7 +23,7 @@
   
 #if !defined(__GNUC__)
 extern "C" {
-  extern double	drand48(void);
+  extern CLHEPdouble	drand48(void);
   extern void	srand48(long);
   extern unsigned short * seed48(unsigned short int [3]);
 }
@@ -32,7 +33,7 @@ extern "C" {
 #include <stdlib.h>
 #else
 extern "C" {
-  extern double	drand48(void);
+  extern CLHEPdouble	drand48(void);
   extern void	srand48(long);
   extern unsigned short * seed48(unsigned short int [3]);
 }

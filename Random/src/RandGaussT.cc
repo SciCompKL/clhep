@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandGaussT.cc,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -25,40 +26,40 @@ HepRandomEngine & RandGaussT::engine() {return RandGauss::engine();}
 RandGaussT::~RandGaussT() {
 }
 
-double RandGaussT::operator()() {
+CLHEPdouble RandGaussT::operator()() {
   return HepStat::flatToGaussian(localEngine->flat()) * defaultStdDev 
 								+ defaultMean;
 }
 
-double RandGaussT::operator()( double mean, double stdDev ) {
+CLHEPdouble RandGaussT::operator()( CLHEPdouble mean, CLHEPdouble stdDev ) {
   return HepStat::flatToGaussian(localEngine->flat()) * stdDev + mean;
 }
 
-void RandGaussT::shootArray( const int size, double* vect,
-                            double mean, double stdDev )
+void RandGaussT::shootArray( const int size, CLHEPdouble* vect,
+                            CLHEPdouble mean, CLHEPdouble stdDev )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = shoot(mean,stdDev);
 }
 
 void RandGaussT::shootArray( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double mean, double stdDev )
+                            const int size, CLHEPdouble* vect,
+                            CLHEPdouble mean, CLHEPdouble stdDev )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = shoot(anEngine,mean,stdDev);
 }
 
-void RandGaussT::fireArray( const int size, double* vect)
+void RandGaussT::fireArray( const int size, CLHEPdouble* vect)
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = fire( defaultMean, defaultStdDev );
 }
 
-void RandGaussT::fireArray( const int size, double* vect,
-                           double mean, double stdDev )
+void RandGaussT::fireArray( const int size, CLHEPdouble* vect,
+                           CLHEPdouble mean, CLHEPdouble stdDev )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = fire( mean, stdDev );
 }
 

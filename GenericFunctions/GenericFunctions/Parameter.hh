@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Parameter.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //-----------------------Class Parameter------------------------------------//
@@ -6,7 +7,7 @@
 //  Petar Maksimovic                                                        //
 //  November 1999                                                           //
 //                                                                          //
-//  This class is a simple low-level double precision number, together with //
+//  This class is a simple low-level CLHEPdouble precision number, together with //
 //  some limiting values. It is designed essentially as an ingredient for   //
 //  building function objects.                                              //
 //                                                                          //
@@ -40,9 +41,9 @@ namespace Genfun {
   
     // Constructor.
     Parameter(std::string name,
-	      double value, 
-	      double lowerLimit=-1e100,
-	      double upperLimit= 1e100);
+	      CLHEPdouble value, 
+	      CLHEPdouble lowerLimit=-1e100,
+	      CLHEPdouble upperLimit= 1e100);
   
     // Copy constructor
     Parameter(const Parameter & right);
@@ -57,22 +58,22 @@ namespace Genfun {
     const std::string & getName() const;
 
     // Accessor for value
-    virtual double getValue() const;
+    virtual CLHEPdouble getValue() const;
   
     // Accessor for Lower Limit
-    double getLowerLimit() const;
+    CLHEPdouble getLowerLimit() const;
   
     // Accessor for Upper Limit
-    double getUpperLimit() const;
+    CLHEPdouble getUpperLimit() const;
   
     // Set Value
-    void setValue(double value);
+    void setValue(CLHEPdouble value);
   
     // Set Lower Limit
-    void setLowerLimit(double lowerLimit);
+    void setLowerLimit(CLHEPdouble lowerLimit);
   
     // Set Upper Limit
-    void setUpperLimit(double upperLimit);
+    void setUpperLimit(CLHEPdouble upperLimit);
   
     // Take values + limits from some other parameter.
     void connectFrom(const AbsParameter *  source);
@@ -84,9 +85,9 @@ namespace Genfun {
   private:
 
     std::string        _name ;                // name
-    double                _value;                // value
-    double                _lowerLimit;           // lower limit
-    double                _upperLimit;           // upper limit
+    CLHEPdouble                _value;                // value
+    CLHEPdouble                _lowerLimit;           // lower limit
+    CLHEPdouble                _upperLimit;           // upper limit
     const AbsParameter   *_sourceParameter;      // connection
   
   };

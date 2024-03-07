@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 //
 //  ZMuseCount.icc - utility class for use in reference-counting

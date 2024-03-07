@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testRandDists.cc,v 1.11 2011/07/11 15:55:45 garren Exp $
 // ----------------------------------------------------------------------
@@ -46,7 +47,7 @@
 #include "CLHEP/Random/defs.h"
 #include <iostream>
 #include <iomanip>
-#include <cmath>		// double abs()
+#include <cmath>		// CLHEPdouble abs()
 #include <stdlib.h>		// int abs()
 #include <cstdlib>		// for exit()
 
@@ -61,7 +62,7 @@ using namespace CLHEP;
 //#endif
 
 // Tolerance of deviation from expected results
-static const double REJECT = 4.0;
+static const CLHEPdouble REJECT = 4.0;
 
 // Mask bits to form a word indicating which if any dists were "bad"
 static const int GaussBAD    = 1 << 0;
@@ -81,7 +82,7 @@ static const int SkewNormalBAD = 1 << 7;
 // **********************
 
 static
-double gammln(double x) {
+CLHEPdouble gammln(CLHEPdouble x) {
 	// Note:  This uses the gammln algorith in Numerical Recipes.
 	// In the "old" RandPoisson there is a slightly different algorithm, 
 	// which mathematically is identical to this one.  The advantage of
@@ -94,8 +95,8 @@ double gammln(double x) {
 	// that the user can never get inaccurate results, even for x very 
 	// small.  The test for x < 1 is as costly as a divide, but so be it.
 
-  double y, tmp, ser;
-  static const double c[6] = {
+  CLHEPdouble y, tmp, ser;
+  static const CLHEPdouble c[6] = {
 	 76.18009172947146,
 	-86.50532032941677,
 	 24.01409824083091,
@@ -109,17 +110,17 @@ double gammln(double x) {
   for (int i = 0; i < 6; i++) {
     ser += c[i]/(++y);
   }
-  double ans = (-tmp + std::log (std::sqrt(CLHEP::twopi)*ser/x));
+  CLHEPdouble ans = (-tmp + std::log (std::sqrt(CLHEP::twopi)*ser/x));
   return ans;
 }
 
 static
-double gser(double a, double x) {
+CLHEPdouble gser(CLHEPdouble a, CLHEPdouble x) {
   const int ITMAX = 100;
-  const double EPS = 1.0E-8;
-  double ap = a;
-  double sum = 1/a;
-  double del = sum;
+  const CLHEPdouble EPS = 1.0E-8;
+  CLHEPdouble ap = a;
+  CLHEPdouble sum = 1/a;
+  CLHEPdouble del = sum;
   for (int n=0; n < ITMAX; n++) {
     ap++;
     del *= x/ap;
@@ -133,23 +134,23 @@ double gser(double a, double x) {
 }
 
 static
-double gcf(double a, double x) {
+CLHEPdouble gcf(CLHEPdouble a, CLHEPdouble x) {
   const int ITMAX = 100;
-  const double EPS = 1.0E-8;
-  const double VERYSMALL = 1.0E-100;
-  double b = x+1-a;
-  double c = 1/VERYSMALL;
-  double d = 1/b;
-  double h = d;
+  const CLHEPdouble EPS = 1.0E-8;
+  const CLHEPdouble VERYSMALL = 1.0E-100;
+  CLHEPdouble b = x+1-a;
+  CLHEPdouble c = 1/VERYSMALL;
+  CLHEPdouble d = 1/b;
+  CLHEPdouble h = d;
   for (int i = 1; i <= ITMAX; i++) {
-    double an = -i*(i-a);
+    CLHEPdouble an = -i*(i-a);
     b += 2;
     d = an*d + b;
     if (std::fabs(d) < VERYSMALL) d = VERYSMALL;
     c = b + an/c;
     if (std::fabs(c) < VERYSMALL) c = VERYSMALL;
     d = 1/d;
-    double del = d*c;
+    CLHEPdouble del = d*c;
     h *= del;
     if (std::fabs(del-1.0) < EPS) {
       return std::exp(-x+a*std::log(x)-gammln(a))*h;
@@ -160,7 +161,7 @@ double gcf(double a, double x) {
 }
 
 static
-double gammp (double a, double x) {
+CLHEPdouble gammp (CLHEPdouble a, CLHEPdouble x) {
   if (x < a+1) {
     return gser(a,x);
   } else {
@@ -179,11 +180,11 @@ double gammp (double a, double x) {
 // gaussianTest
 // ------------
 
-bool gaussianTest ( HepRandom & dist, double mu, 
-		    double sigma, int nNumbers ) {
+bool gaussianTest ( HepRandom & dist, CLHEPdouble mu, 
+		    CLHEPdouble sigma, int nNumbers ) {
 
   bool good = true;
-  double worstSigma = 0;
+  CLHEPdouble worstSigma = 0;
 
 // We will accumulate mean and moments up to the sixth,
 // The second moment should be sigma**2, the fourth 3 sigma**4,
@@ -192,12 +193,12 @@ bool gaussianTest ( HepRandom & dist, double mu,
 // (for the m-th moment with m odd)  (2m-1)!!  m!!**2    / n
 // We also do a histogram with bins every half sigma.
 
-  double sumx = 0;
-  double sumx2 = 0;
-  double sumx3 = 0;
-  double sumx4 = 0;
-  double sumx5 = 0;
-  double sumx6 = 0;
+  CLHEPdouble sumx = 0;
+  CLHEPdouble sumx2 = 0;
+  CLHEPdouble sumx3 = 0;
+  CLHEPdouble sumx4 = 0;
+  CLHEPdouble sumx5 = 0;
+  CLHEPdouble sumx6 = 0;
   int counts[11];
   int ncounts[11];
   int ciu;
@@ -209,8 +210,8 @@ bool gaussianTest ( HepRandom & dist, double mu,
   int oldprecision = cout.precision();
   cout.precision(5);
   // hack so that gcc 4.3 puts x and u into memory instead of a register
-  volatile double x;
-  volatile double u;
+  volatile CLHEPdouble x;
+  volatile CLHEPdouble u;
   int ipr = nNumbers / 10 + 1;
   for (int ifire = 0; ifire < nNumbers; ifire++) {
     x = dist();		// We avoid fire() because that is not virtual 
@@ -239,16 +240,16 @@ bool gaussianTest ( HepRandom & dist, double mu,
     }
   }
 
-  double mean = sumx / nNumbers;
-  double u2 = sumx2/nNumbers - mean*mean;
-  double u3 = sumx3/nNumbers - 3*sumx2*mean/nNumbers + 2*mean*mean*mean;
-  double u4 = sumx4/nNumbers - 4*sumx3*mean/nNumbers 
+  CLHEPdouble mean = sumx / nNumbers;
+  CLHEPdouble u2 = sumx2/nNumbers - mean*mean;
+  CLHEPdouble u3 = sumx3/nNumbers - 3*sumx2*mean/nNumbers + 2*mean*mean*mean;
+  CLHEPdouble u4 = sumx4/nNumbers - 4*sumx3*mean/nNumbers 
 		+ 6*sumx2*mean*mean/nNumbers - 3*mean*mean*mean*mean;
-  double u5 = sumx5/nNumbers - 5*sumx4*mean/nNumbers 
+  CLHEPdouble u5 = sumx5/nNumbers - 5*sumx4*mean/nNumbers 
 		+ 10*sumx3*mean*mean/nNumbers 
 		- 10*sumx2*mean*mean*mean/nNumbers
 		+ 4*mean*mean*mean*mean*mean;
-  double u6 = sumx6/nNumbers - 6*sumx5*mean/nNumbers 
+  CLHEPdouble u6 = sumx6/nNumbers - 6*sumx5*mean/nNumbers 
 		+ 15*sumx4*mean*mean/nNumbers 
 		- 20*sumx3*mean*mean*mean/nNumbers
 		+ 15*sumx2*mean*mean*mean*mean/nNumbers
@@ -269,13 +270,13 @@ bool gaussianTest ( HepRandom & dist, double mu,
   // 6th moments are roughly 2/N, 6/N, 96/N, 720/N and 10170/N respectively.  
   // Based on this, we can judge how many sigma a result represents:
   
-  double del1 = std::sqrt ( (double) nNumbers ) * std::abs(mean - mu) / sigma;
-  double del2 = std::sqrt ( nNumbers/2.0 ) * std::abs(u2 - sigma*sigma) / (sigma*sigma);
-  double del3 = std::sqrt ( nNumbers/6.0 ) * std::abs(u3) / (sigma*sigma*sigma);
-  double sigma4 = sigma*sigma*sigma*sigma;
-  double del4 = std::sqrt ( nNumbers/96.0 ) * std::abs(u4 - 3 * sigma4) / sigma4;
-  double del5 = std::sqrt ( nNumbers/720.0 ) * std::abs(u5) / (sigma*sigma4);
-  double del6 = std::sqrt ( nNumbers/10170.0 ) * std::abs(u6 - 15*sigma4*sigma*sigma) 
+  CLHEPdouble del1 = std::sqrt ( (CLHEPdouble) nNumbers ) * std::abs(mean - mu) / sigma;
+  CLHEPdouble del2 = std::sqrt ( nNumbers/2.0 ) * std::abs(u2 - sigma*sigma) / (sigma*sigma);
+  CLHEPdouble del3 = std::sqrt ( nNumbers/6.0 ) * std::abs(u3) / (sigma*sigma*sigma);
+  CLHEPdouble sigma4 = sigma*sigma*sigma*sigma;
+  CLHEPdouble del4 = std::sqrt ( nNumbers/96.0 ) * std::abs(u4 - 3 * sigma4) / sigma4;
+  CLHEPdouble del5 = std::sqrt ( nNumbers/720.0 ) * std::abs(u5) / (sigma*sigma4);
+  CLHEPdouble del6 = std::sqrt ( nNumbers/10170.0 ) * std::abs(u6 - 15*sigma4*sigma*sigma) 
 				/ (sigma4*sigma*sigma);
 
   cout << "        These represent " << 
@@ -297,7 +298,7 @@ bool gaussianTest ( HepRandom & dist, double mu,
 
   // The variance of the bin counts is given by a Poisson estimate (std::sqrt(npq)).
 
-  double table[11] = {  // Table of integrated density in each range:
+  CLHEPdouble table[11] = {  // Table of integrated density in each range:
 	.191462, // 0.0 - 0.5 sigma
 	.149882, // 0.5 - 1.0 sigma
 	.091848, // 1.0 - 1.5 sigma
@@ -312,16 +313,16 @@ bool gaussianTest ( HepRandom & dist, double mu,
 	};
 
   for (int m1 = 0; m1 < 11; m1++) {
-    double expect = table[m1]*nNumbers;
-    double sig = std::sqrt ( table[m1] * (1.0-table[m1]) * nNumbers );
+    CLHEPdouble expect = table[m1]*nNumbers;
+    CLHEPdouble sig = std::sqrt ( table[m1] * (1.0-table[m1]) * nNumbers );
     cout.precision(oldprecision);
     cout << "Between " << m1/2.0 << " sigma and " 
 	<< m1/2.0+.5 << " sigma (should be about " << expect << "):\n " 
         << "         "
 	<< ncounts[m1] << " negative and " << counts[m1] << " positive " << "\n";
     cout.precision(5);
-    double negSigs = std::abs ( ncounts[m1] - expect ) / sig;
-    double posSigs = std::abs (  counts[m1] - expect ) / sig;
+    CLHEPdouble negSigs = std::abs ( ncounts[m1] - expect ) / sig;
+    CLHEPdouble posSigs = std::abs (  counts[m1] - expect ) / sig;
     cout << "        These represent " << 
 	negSigs << " and " << posSigs << " sigma from expectations\n";
     if ( negSigs > REJECT || posSigs > REJECT ) {
@@ -347,10 +348,10 @@ bool gaussianTest ( HepRandom & dist, double mu,
 // skewNormalTest
 // ------------
 
-bool skewNormalTest ( HepRandom & dist, double k, int nNumbers ) {
+bool skewNormalTest ( HepRandom & dist, CLHEPdouble k, int nNumbers ) {
 
   bool good = true;
-  double worstSigma = 0;
+  CLHEPdouble worstSigma = 0;
 
 // We will accumulate mean and moments up to the sixth,
 // The second moment should be sigma**2, the fourth 3 sigma**4.
@@ -358,25 +359,25 @@ bool skewNormalTest ( HepRandom & dist, double k, int nNumbers ) {
 // (for the m-th moment with m even) (2m-1)!! (m-1)!!**2 / n
 // (for the m-th moment with m odd)  (2m-1)!!  m!!**2    / n
 
-  double sumx = 0;
-  double sumx2 = 0;
-  double sumx3 = 0;
-  double sumx4 = 0;
-  double sumx5 = 0;
-  double sumx6 = 0;
+  CLHEPdouble sumx = 0;
+  CLHEPdouble sumx2 = 0;
+  CLHEPdouble sumx3 = 0;
+  CLHEPdouble sumx4 = 0;
+  CLHEPdouble sumx5 = 0;
+  CLHEPdouble sumx6 = 0;
 
   int oldprecision = cout.precision();
   cout.precision(5);
   // hack so that gcc 4.3 puts x into memory instead of a register
-  volatile double x;
+  volatile CLHEPdouble x;
   // calculate mean and sigma
-  double delta = k / std::sqrt( 1 + k*k );
-  double mu = delta/std::sqrt(CLHEP::halfpi);
-  double mom2 = 1.;
-  double mom3 = 3*delta*(1-(delta*delta)/3.)/std::sqrt(CLHEP::halfpi);
-  double mom4 = 3.;
-  double mom5 = 15*delta*(1-2.*(delta*delta)/3.+(delta*delta*delta*delta)/5.)/std::sqrt(CLHEP::halfpi);
-  double mom6 = 15.;
+  CLHEPdouble delta = k / std::sqrt( 1 + k*k );
+  CLHEPdouble mu = delta/std::sqrt(CLHEP::halfpi);
+  CLHEPdouble mom2 = 1.;
+  CLHEPdouble mom3 = 3*delta*(1-(delta*delta)/3.)/std::sqrt(CLHEP::halfpi);
+  CLHEPdouble mom4 = 3.;
+  CLHEPdouble mom5 = 15*delta*(1-2.*(delta*delta)/3.+(delta*delta*delta*delta)/5.)/std::sqrt(CLHEP::halfpi);
+  CLHEPdouble mom6 = 15.;
 
   int ipr = nNumbers / 10 + 1;
   for (int ifire = 0; ifire < nNumbers; ifire++) {
@@ -396,12 +397,12 @@ bool skewNormalTest ( HepRandom & dist, double k, int nNumbers ) {
     sumx6 += x*x*x*x*x*x;
   }
 
-  double mean = sumx / nNumbers;
-  double u2 = sumx2/nNumbers;
-  double u3 = sumx3/nNumbers;
-  double u4 = sumx4/nNumbers;
-  double u5 = sumx5/nNumbers;
-  double u6 = sumx6/nNumbers;
+  CLHEPdouble mean = sumx / nNumbers;
+  CLHEPdouble u2 = sumx2/nNumbers;
+  CLHEPdouble u3 = sumx3/nNumbers;
+  CLHEPdouble u4 = sumx4/nNumbers;
+  CLHEPdouble u5 = sumx5/nNumbers;
+  CLHEPdouble u6 = sumx6/nNumbers;
 
   cout << "Mean (should be close to " << mu << "): " << mean << endl;
   cout << "Second moment (should be close to " << mom2 << "): " << u2 << endl;
@@ -410,12 +411,12 @@ bool skewNormalTest ( HepRandom & dist, double k, int nNumbers ) {
   cout << "Fifth moment (should be close to " << mom5 << "): " << u5 << endl;
   cout << "Sixth moment (should be close to " << mom6 << "): " << u6 << endl;
 
-  double del1 = std::sqrt ( (double) nNumbers ) * std::abs(mean - mu);
-  double del2 = std::sqrt ( nNumbers/2.0 ) * std::abs(u2 - mom2);
-  double del3 = std::sqrt ( nNumbers/(15.-mom3*mom3) ) * std::abs(u3 - mom3 );
-  double del4 = std::sqrt ( nNumbers/96.0 ) * std::abs(u4 - mom4);
-  double del5 = std::sqrt ( nNumbers/(945.-mom5*mom5) ) * std::abs(u5 - mom5 );
-  double del6 = std::sqrt ( nNumbers/10170.0 ) * std::abs(u6 - mom6);
+  CLHEPdouble del1 = std::sqrt ( (CLHEPdouble) nNumbers ) * std::abs(mean - mu);
+  CLHEPdouble del2 = std::sqrt ( nNumbers/2.0 ) * std::abs(u2 - mom2);
+  CLHEPdouble del3 = std::sqrt ( nNumbers/(15.-mom3*mom3) ) * std::abs(u3 - mom3 );
+  CLHEPdouble del4 = std::sqrt ( nNumbers/96.0 ) * std::abs(u4 - mom4);
+  CLHEPdouble del5 = std::sqrt ( nNumbers/(945.-mom5*mom5) ) * std::abs(u5 - mom5 );
+  CLHEPdouble del6 = std::sqrt ( nNumbers/10170.0 ) * std::abs(u6 - mom6);
 
   cout << "        These represent " << 
 	del1 << ", " << del2 << ", " << del3 << ", \n" 
@@ -449,16 +450,16 @@ bool skewNormalTest ( HepRandom & dist, double k, int nNumbers ) {
 // ------------
 
 class poisson {
-  double mu_;
+  CLHEPdouble mu_;
   public:
-  poisson(double mu) : mu_(mu) {}
-  double operator()(int r) { 
-    double logAnswer = -mu_ + r*std::log(mu_) - gammln(r+1);
+  poisson(CLHEPdouble mu) : mu_(mu) {}
+  CLHEPdouble operator()(int r) { 
+    CLHEPdouble logAnswer = -mu_ + r*std::log(mu_) - gammln(r+1);
     return std::exp(logAnswer);
   }
 };
 
-double* createRefDist ( poisson pdist, int N1,
+CLHEPdouble* createRefDist ( poisson pdist, int N1,
 				int MINBIN, int MAXBINS, int clumping, 
 				int& firstBin, int& lastBin ) {
 
@@ -467,7 +468,7 @@ double* createRefDist ( poisson pdist, int N1,
   // value (at each end).  We shall end up with some range of bins starting
   // at 0 or more, and ending at MAXBINS-1 or less.
 
-  double * refdist = new double [MAXBINS];
+  CLHEPdouble * refdist = new CLHEPdouble [MAXBINS];
 
   int c  = 0; // c is the number of the clump, that is, the member number 
 	      // of the refdist array.
@@ -478,8 +479,8 @@ double* createRefDist ( poisson pdist, int N1,
   // of that bin (so that we won't immediately dip belpw 20) but the number
   // to enter is cumulative up to that bin.
 
-  double start = 0;
-  double binc;
+  CLHEPdouble start = 0;
+  CLHEPdouble binc;
   while ( c < MAXBINS ) {
     for ( ic=0, binc=0; ic < clumping; ic++, r++ ) {
       binc += pdist(r) * N1;
@@ -498,7 +499,7 @@ double* createRefDist ( poisson pdist, int N1,
   c++;
 
   // Fill all the other bins until one has less than 20 items.
-  double next = 0;
+  CLHEPdouble next = 0;
   while ( c < MAXBINS ) {
     for ( ic=0, binc=0; ic < clumping; ic++, r++ ) {
       binc += pdist(r) * N1;
@@ -526,7 +527,7 @@ double* createRefDist ( poisson pdist, int N1,
 } // createRefDist()
 
 
-bool poissonTest ( RandPoisson & dist, double mu, int N2 ) {
+bool poissonTest ( RandPoisson & dist, CLHEPdouble mu, int N2 ) {
 
 // Three tests will be done:
 //
@@ -552,18 +553,18 @@ bool poissonTest ( RandPoisson & dist, double mu, int N2 ) {
 
   poisson pdist(mu);
 
-  double* refdist  = createRefDist( pdist, N2,
+  CLHEPdouble* refdist  = createRefDist( pdist, N2,
 			MINBIN, MAXBINS, 1, firstBin, lastBin);
-  double* refdist2 = createRefDist( pdist, N2,
+  CLHEPdouble* refdist2 = createRefDist( pdist, N2,
 			MINBIN, MAXBINS, clumping, firstBin2, lastBin2);
 
   // Now roll the random dists, treating the tails in the same way as we go.
   
-  double sum = 0;
-  double moment = 0;
+  CLHEPdouble sum = 0;
+  CLHEPdouble moment = 0;
 
-  double* samples  = new double [MAXBINS];
-  double* samples2 = new double [MAXBINS];
+  CLHEPdouble* samples  = new CLHEPdouble [MAXBINS];
+  CLHEPdouble* samples2 = new CLHEPdouble [MAXBINS];
   int r;
   for (r = 0; r < MAXBINS; r++) {
     samples[r] = 0;
@@ -600,9 +601,9 @@ bool poissonTest ( RandPoisson & dist, double mu, int N2 ) {
 
   // Now find chi^2 for samples[] to apply the first test
 
-  double chi2 = 0;
+  CLHEPdouble chi2 = 0;
   for ( r = firstBin; r <= lastBin; r++ ) {
-    double delta = (samples[r] - refdist[r]);
+    CLHEPdouble delta = (samples[r] - refdist[r]);
     chi2 += delta*delta/refdist[r];
   }
   int degFreedom = (lastBin - firstBin + 1) - 1;
@@ -613,7 +614,7 @@ bool poissonTest ( RandPoisson & dist, double mu, int N2 ) {
   // y = std::sqrt(2*chi2) - std::sqrt(2*n-1) 
   // errIntC (y) = std::exp((-y^2)/2)/(y*std::sqrt(CLHEP::twopi))
 
-  double pval;
+  CLHEPdouble pval;
   pval = 1.0 - gammp ( .5*degFreedom , .5*chi2 );
 
   cout << "Chi^2 is " << chi2 << " on " << degFreedom << " degrees of freedom."
@@ -626,11 +627,11 @@ bool poissonTest ( RandPoisson & dist, double mu, int N2 ) {
 
   chi2 = 0;
   for ( r = firstBin2; r <= lastBin2; r++ ) {
-    double delta = (samples2[r] - refdist2[r]);
+    CLHEPdouble delta = (samples2[r] - refdist2[r]);
     chi2 += delta*delta/refdist2[r];
   }
   degFreedom = (lastBin2 - firstBin2 + 1) - 1;
-  double pval2;
+  CLHEPdouble pval2;
   pval2 = 1.0 - gammp ( .5*degFreedom , .5*chi2 );
 
   cout << "Clumps: Chi^2 is " << chi2 << " on " << degFreedom << 
@@ -641,12 +642,12 @@ bool poissonTest ( RandPoisson & dist, double mu, int N2 ) {
 
   // Check out the mean and sigma to apply the third test
 
-  double mean = sum / N2;
-  double sigma = std::sqrt( moment / (N2-1) );
+  CLHEPdouble mean = sum / N2;
+  CLHEPdouble sigma = std::sqrt( moment / (N2-1) );
 
-  double deviationMean  = std::fabs(mean - mu)/(std::sqrt(mu/N2));
-  double expectedSigma2Variance = (2*N2*mu*mu/(N2-1) + mu) / N2;
-  double deviationSigma = std::fabs(sigma*sigma-mu)/std::sqrt(expectedSigma2Variance);
+  CLHEPdouble deviationMean  = std::fabs(mean - mu)/(std::sqrt(mu/N2));
+  CLHEPdouble expectedSigma2Variance = (2*N2*mu*mu/(N2-1) + mu) / N2;
+  CLHEPdouble deviationSigma = std::fabs(sigma*sigma-mu)/std::sqrt(expectedSigma2Variance);
 
   cout << "Mean  (should be " << mu << ") is " << mean << "\n";
   cout << "Sigma (should be " << std::sqrt(mu) << ") is " << sigma << "\n";
@@ -698,8 +699,8 @@ int testRandGauss() {
   cout << "How many numbers should we generate: ";
   cin >> nNumbers; cout << nNumbers << "\n";
 
-  double mu;
-  double sigma;
+  CLHEPdouble mu;
+  CLHEPdouble sigma;
   cout << "Enter mu: ";
   cin >> mu; cout << mu << "\n";
 
@@ -711,7 +712,7 @@ int testRandGauss() {
   RandGauss dist (eng, mu, sigma);
  
   cout << "\n Sample  fire(): \n";
-  double x;
+  CLHEPdouble x;
   
   x = dist.fire();
   cout << x;
@@ -751,7 +752,7 @@ int testSkewNormal() {
   cout << "How many numbers should we generate: ";
   cin >> nNumbers; cout << nNumbers << "\n";
 
-  double k;
+  CLHEPdouble k;
   cout << "Enter k: ";
   cin >> k; cout << k << "\n";
 
@@ -760,7 +761,7 @@ int testSkewNormal() {
   RandSkewNormal dist (eng, k);
  
   cout << "\n Sample  fire(): \n";
-  double x;
+  CLHEPdouble x;
   
   x = dist.fire();
   cout << x;
@@ -800,8 +801,8 @@ int testRandGaussT() {
   cout << "How many numbers should we generate: ";
   cin >> nNumbers; cout << nNumbers << "\n";
 
-  double mu;
-  double sigma;
+  CLHEPdouble mu;
+  CLHEPdouble sigma;
   cout << "Enter mu: ";
   cin >> mu; cout << mu << "\n";
 
@@ -813,7 +814,7 @@ int testRandGaussT() {
   RandGaussT dist (eng, mu, sigma);
  
   cout << "\n Sample  fire(): \n";
-  double x;
+  CLHEPdouble x;
   
   x = dist.fire();
   cout << x;
@@ -857,8 +858,8 @@ int testRandGaussQ() {
     cout << "With that many samples RandGaussQ need not pass validation...\n";
   }
 
-  double mu;
-  double sigma;
+  CLHEPdouble mu;
+  CLHEPdouble sigma;
   cout << "Enter mu: ";
   cin >> mu; cout << mu << "\n";
 
@@ -870,7 +871,7 @@ int testRandGaussQ() {
   RandGaussQ dist (eng, mu, sigma);
  
   cout << "\n Sample  fire(): \n";
-  double x;
+  CLHEPdouble x;
   
   x = dist.fire();
   cout << x;
@@ -915,7 +916,7 @@ int testRandPoisson() {
   bool good = true;
 
   while (true) {
-   double mu;
+   CLHEPdouble mu;
    cout << "Enter a value for mu: ";
    cin >> mu; cout << mu << "\n";
    if (mu == 0) break;
@@ -923,7 +924,7 @@ int testRandPoisson() {
    RandPoisson dist (eng, mu);
  
    cout << "\n Sample  fire(): \n";
-   double x;
+   CLHEPdouble x;
   
    x = dist.fire();
    cout << x;
@@ -973,7 +974,7 @@ int testRandPoissonQ() {
   bool good = true;
 
   while (true) {
-   double mu;
+   CLHEPdouble mu;
    cout << "Enter a value for mu: ";
    cin >> mu; cout << mu << "\n";
    if (mu == 0) break;
@@ -981,7 +982,7 @@ int testRandPoissonQ() {
    RandPoissonQ dist (eng, mu);
  
    cout << "\n Sample  fire(): \n";
-   double x;
+   CLHEPdouble x;
   
    x = dist.fire();
    cout << x;
@@ -1031,7 +1032,7 @@ int testRandPoissonT() {
   bool good = true;
 
   while (true) {
-   double mu;
+   CLHEPdouble mu;
    cout << "Enter a value for mu: ";
    cin >> mu; cout << mu << "\n";
    if (mu == 0) break;
@@ -1039,7 +1040,7 @@ int testRandPoissonT() {
    RandPoissonT dist (eng, mu);
  
    cout << "\n Sample  fire(): \n";
-   double x;
+   CLHEPdouble x;
   
    x = dist.fire();
    cout << x;
@@ -1085,8 +1086,8 @@ int testRandGeneral() {
   cout << "How many numbers should we generate: ";
   cin >> nNumbers; cout << nNumbers << "\n";
 
-  double mu;
-  double sigma;
+  CLHEPdouble mu;
+  CLHEPdouble sigma;
   mu = .5; 	// Since randGeneral always ranges from 0 to 1
   sigma = .06;	
 
@@ -1109,9 +1110,9 @@ int testRandGeneral() {
 		// to tell the boxy pdf from the true Gaussian.  At 5000
 		// bins, it does.
 
-  double xBins = nBins;
-  double* aProbFunc = new double [nBins];
-  double x;
+  CLHEPdouble xBins = nBins;
+  CLHEPdouble* aProbFunc = new CLHEPdouble [nBins];
+  CLHEPdouble x;
   for ( int iBin = 0; iBin < nBins; iBin++ )  {
     x = iBin / (xBins-1);
     aProbFunc [iBin] = std::exp ( - (x-mu)*(x-mu) / (2*sigma*sigma) );
@@ -1126,7 +1127,7 @@ int testRandGeneral() {
   RandGeneral dist (eng, aProbFunc, nBins, 1);
   delete[] aProbFunc;
 
-  double* garbage = new double[nBins]; 
+  CLHEPdouble* garbage = new CLHEPdouble[nBins]; 
 				// We wish to verify that deleting the pdf
 			    	// after instantiating the engine is fine.
   for ( int gBin = 0; gBin < nBins; gBin++ )  {
@@ -1157,7 +1158,7 @@ int testRandGeneral() {
 		// at 300 bins it does.
 
   xBins = nBins;
-  aProbFunc = new double [nBins];
+  aProbFunc = new CLHEPdouble [nBins];
   for ( int jBin = 0; jBin < nBins; jBin++ )  {
     x = jBin / (xBins-1);
     aProbFunc [jBin] = std::exp ( - (x-mu)*(x-mu) / (2*sigma*sigma) );

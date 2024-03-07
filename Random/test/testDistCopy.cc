@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testDistCopy.cc,v 1.3 2011/05/31 20:57:01 garren Exp $
 // ----------------------------------------------------------------------
@@ -280,12 +281,12 @@ uint  testRandGaussT()
 uint  testRandGeneral()
 {
   MTwistEngine  r1( 97531L );
-  double        pdf1[] = { 1.5, 2.5, 3.0, 4.25, 5.65 };
+  CLHEPdouble        pdf1[] = { 1.5, 2.5, 3.0, 4.25, 5.65 };
   RandGeneral   d1( r1, pdf1, sizeof(pdf1)/sizeof(pdf1[0]) );
   if( ! copy_constructor_is_okay(d1) )  return General_failure;
 
   DualRand      r2( 13579L );
-  double        pdf2[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 0.60 };
+  CLHEPdouble        pdf2[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 0.60 };
   RandGeneral   d2( r2, pdf2, sizeof(pdf2)/sizeof(pdf2[0]) );
   if( ! copy_assignment_is_okay(d1,d2) )  return General_failure;
 

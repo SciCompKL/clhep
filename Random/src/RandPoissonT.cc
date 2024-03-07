@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -18,7 +19,7 @@
 // M Fischler     - put and get to/from streams 12/15/04
 // M Fischler     - fireArray using defaultMean 2/10/05
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing CLHEPdoubles avoid problems with precision 
 //			-- appears not to need modification, relying on
 //			RandPoisson::put() instead  4/14/05
 //
@@ -42,11 +43,11 @@ namespace CLHEP {
 std::string RandPoissonT::name() const {return "RandPoissonT";}
 HepRandomEngine & RandPoissonT::engine() {return RandPoisson::engine();}
 
-RandPoissonT::RandPoissonT(HepRandomEngine & anEngine, double m )
+RandPoissonT::RandPoissonT(HepRandomEngine & anEngine, CLHEPdouble m )
 : RandPoisson(anEngine, m)
 {}
 
-RandPoissonT::RandPoissonT(HepRandomEngine * anEngine, double m )
+RandPoissonT::RandPoissonT(HepRandomEngine * anEngine, CLHEPdouble m )
 : RandPoisson(anEngine, m)
 {}
 
@@ -57,20 +58,20 @@ RandPoissonT::~RandPoissonT() {
 // fire, operator(), and shoot methods:
 //
 
-long RandPoissonT::shoot(double xm) {
+long RandPoissonT::shoot(CLHEPdouble xm) {
   HepRandomEngine* e = HepRandom::getTheEngine();
   return shoot ( e, xm );
 } // shoot()
 
-double RandPoissonT::operator()() {
-  return double( fire() );
+CLHEPdouble RandPoissonT::operator()() {
+  return CLHEPdouble( fire() );
 }
 
-double RandPoissonT::operator()( double mean ) {
-  return double( fire( mean ) );
+CLHEPdouble RandPoissonT::operator()( CLHEPdouble mean ) {
+  return CLHEPdouble( fire( mean ) );
 }
 
-long RandPoissonT::fire(double mean) {
+long RandPoissonT::fire(CLHEPdouble mean) {
   return shoot (getLocalEngine(), mean);
 }
 
@@ -84,7 +85,7 @@ long RandPoissonT::fire() {
 
 } // fire()
 
-long RandPoissonT::shoot(HepRandomEngine* anEngine, double mean) {
+long RandPoissonT::shoot(HepRandomEngine* anEngine, CLHEPdouble mean) {
 
   if ( mean < RandPoissonQ::tableBoundary() ) {
     return RandPoissonQ::shoot ( anEngine, mean );
@@ -94,13 +95,13 @@ long RandPoissonT::shoot(HepRandomEngine* anEngine, double mean) {
 
 } // shoot (anEngine, mean)
 
-void RandPoissonT::shootArray(const int size, long* vect, double m) {
+void RandPoissonT::shootArray(const int size, long* vect, CLHEPdouble m) {
    int i;
    for (i=0; i<size; ++i)
      vect[i] = shoot(m);
 }
 
-void RandPoissonT::fireArray(const int size, long* vect, double m) {
+void RandPoissonT::fireArray(const int size, long* vect, CLHEPdouble m) {
    int i;
    for (i=0; i<size; ++i) {
      vect[i] = fire( m );

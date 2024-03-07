@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // CLASSDOC OFF
 // ---------------------------------------------------------------------------
@@ -12,7 +13,7 @@
 //    the stack beyond its maximum size, the oldest element is deleted from 
 //    the stack.  A subroutine can be used on that oldest element first.
 
-//    The orginal use of this stack was to store old double arrays.  When
+//    The orginal use of this stack was to store old CLHEPdouble arrays.  When
 //    a new array is needed, we can simply pull one off the pile.  However,
 //    we don't want to keep too many old array's around, after a while we just
 //    want to start getting rid of them.  When the pile gets too large, or

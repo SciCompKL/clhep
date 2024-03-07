@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionNegation.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/FunctionNegation.hh"
@@ -27,12 +28,12 @@ unsigned int FunctionNegation::dimensionality() const {
 }
 
 
-double FunctionNegation::operator ()(double x) const
+CLHEPdouble FunctionNegation::operator ()(CLHEPdouble x) const
 {
   return -((*_arg1)(x));
 }
 
-double FunctionNegation::operator ()(const Argument & x) const
+CLHEPdouble FunctionNegation::operator ()(const Argument & x) const
 {
   return -((*_arg1)(x));
 }

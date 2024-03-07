@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandBit.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -8,9 +9,9 @@
 // -----------------------------------------------------------------------
 // 
 
-// Class defining methods for shooting Flat or Bit random numbers, double or
+// Class defining methods for shooting Flat or Bit random numbers, CLHEPdouble or
 // integers.
-// It provides methods to fill with double flat values arrays of
+// It provides methods to fill with CLHEPdouble flat values arrays of
 // specified size, as well as methods for shooting sequences of 0,1 (bits).
 // Default boundaries ]0.1[ for operator()().
 
@@ -42,11 +43,11 @@ class RandBit : public RandFlat {
 public:
 
   inline RandBit ( HepRandomEngine& anEngine );
-  inline RandBit ( HepRandomEngine& anEngine, double width );
-  inline RandBit ( HepRandomEngine& anEngine, double a, double b );
+  inline RandBit ( HepRandomEngine& anEngine, CLHEPdouble width );
+  inline RandBit ( HepRandomEngine& anEngine, CLHEPdouble a, CLHEPdouble b );
   inline RandBit ( HepRandomEngine* anEngine );
-  inline RandBit ( HepRandomEngine* anEngine, double width );
-  inline RandBit ( HepRandomEngine* anEngine, double a, double b );
+  inline RandBit ( HepRandomEngine* anEngine, CLHEPdouble width );
+  inline RandBit ( HepRandomEngine* anEngine, CLHEPdouble a, CLHEPdouble b );
   // These constructors should be used to instantiate a RandBit
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods

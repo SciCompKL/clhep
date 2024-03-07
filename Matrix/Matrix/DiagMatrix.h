@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // CLASSDOC OFF
 // ---------------------------------------------------------------------------
@@ -56,13 +57,13 @@ public:
    inline int num_col() const;
    // Returns the number of rows/columns. (Should be equal.)
 
-   double &operator()(int row, int col);
-   const double &operator()(int row, int col) const; 
+   CLHEPdouble &operator()(int row, int col);
+   const CLHEPdouble &operator()(int row, int col) const; 
    // Read or write a matrix element. row must be equal to col.
    // ** Note that indexing starts from (1,1). **
    
-   double &fast(int row, int col);
-   const double &fast(int row, int col) const;
+   CLHEPdouble &fast(int row, int col);
+   const CLHEPdouble &fast(int row, int col) const;
    // fast element access.
    // Must be row>=col;
    // ** Note that indexing starts from (1,1). **
@@ -76,11 +77,11 @@ public:
    void assign(const HepDiagMatrix &hm2);
    // Another form of assignment. For consistency.
 
-   HepDiagMatrix & operator*=(double t);
-   // Multiply a DiagMatrix by a floating number
+   HepDiagMatrix & operator*=(CLHEPdouble t);
+   // Multiply a DiagMatrix by a CLHEPfloating number
 
-   HepDiagMatrix & operator/=(double t); 
-   // Divide a DiagMatrix by a floating number
+   HepDiagMatrix & operator/=(CLHEPdouble t); 
+   // Divide a DiagMatrix by a CLHEPfloating number
 
    HepDiagMatrix & operator+=( const HepDiagMatrix &hm2);
    HepDiagMatrix & operator-=( const HepDiagMatrix &hm2);
@@ -95,7 +96,7 @@ public:
    HepDiagMatrix T() const;
    // Returns the transpose of a DiagMatrix (which is itself).
 
-   HepDiagMatrix apply(double (*f)(double,
+   HepDiagMatrix apply(CLHEPdouble (*f)(CLHEPdouble,
 					       int, int)) const;
    // Apply a function to all elements of the matrix.
 
@@ -104,7 +105,7 @@ public:
    HepSymMatrix similarityT(const HepMatrix &hm1) const;
    // Returns hm1.T()*s*hm1.
 
-   double similarity(const HepVector &) const;
+   CLHEPdouble similarity(const HepVector &) const;
    // Returns v.T()*s*v (This is a scaler).
 
    HepDiagMatrix sub(int min_row, int max_row) const;
@@ -132,16 +133,16 @@ public:
    inline HepDiagMatrix inverse() const;
    // Invert a matrix. Throw std::runtime_error on failure. 
 
-   double determinant() const;
+   CLHEPdouble determinant() const;
    // calculate the determinant of the matrix.
 
-   double trace() const;
+   CLHEPdouble trace() const;
    // calculate the trace of the matrix (sum of diagonal elements).
 
    class HepDiagMatrix_row {
    public:
       inline HepDiagMatrix_row(HepDiagMatrix&,int);
-      inline double & operator[](int);
+      inline CLHEPdouble & operator[](int);
    private:
       HepDiagMatrix& _a;
       int _r;
@@ -149,7 +150,7 @@ public:
    class HepDiagMatrix_row_const {
    public:
       inline HepDiagMatrix_row_const(const HepDiagMatrix&,int);
-      inline const double & operator[](int) const;
+      inline const CLHEPdouble & operator[](int) const;
    private:
       const HepDiagMatrix& _a;
       int _r;
@@ -183,18 +184,18 @@ private:
    friend HepVector operator*(const HepDiagMatrix &hm1, const HepVector &hm2);
 
 #ifdef DISABLE_ALLOC
-   std::vector<double > m;
+   std::vector<CLHEPdouble > m;
 #else
-   std::vector<double,Alloc<double,25> > m;
+   std::vector<CLHEPdouble,Alloc<CLHEPdouble,25> > m;
 #endif
    int nrow;
 #if defined(__sun) || !defined(__GNUG__)
 //
 // Sun CC 4.0.1 has this bug.
 //
-   static double zero;
+   static CLHEPdouble zero;
 #else
-   static const double zero;
+   static const CLHEPdouble zero;
 #endif
 };
 
@@ -203,12 +204,12 @@ std::ostream& operator<<(std::ostream &s, const HepDiagMatrix &q);
 
 HepMatrix operator*(const HepMatrix &hm1, const HepDiagMatrix &hm2);
 HepMatrix operator*(const HepDiagMatrix &hm1, const HepMatrix &hm2);
-HepDiagMatrix operator*(double t, const HepDiagMatrix &d1);
-HepDiagMatrix operator*(const HepDiagMatrix &d1, double t);
+HepDiagMatrix operator*(CLHEPdouble t, const HepDiagMatrix &d1);
+HepDiagMatrix operator*(const HepDiagMatrix &d1, CLHEPdouble t);
 // Multiplication operators
 // Note that m *= hm1 is always faster than m = m * hm1
 
-HepDiagMatrix operator/(const HepDiagMatrix &hm1, double t);
+HepDiagMatrix operator/(const HepDiagMatrix &hm1, CLHEPdouble t);
 // d = d1 / t. (d /= t is faster if you can use it.)
 
 HepMatrix operator+(const HepMatrix &hm1, const HepDiagMatrix &d2);

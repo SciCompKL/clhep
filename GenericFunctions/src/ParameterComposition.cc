@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "CLHEP/GenericFunctions/ParameterComposition.hh"
@@ -29,7 +30,7 @@ ParameterComposition::~ParameterComposition()
 }
 
 
-double ParameterComposition::getValue() const {
+CLHEPdouble ParameterComposition::getValue() const {
   return _arg1->operator() (_arg2->getValue());
 }
 

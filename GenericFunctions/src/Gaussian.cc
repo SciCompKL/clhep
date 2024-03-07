@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Gaussian.cc,v 1.8 2010/06/16 18:22:01 garren Exp $
 #include "CLHEP/GenericFunctions/defs.h"
@@ -31,9 +32,9 @@ _sigma(right._sigma)
 {
 }
 
-double Gaussian::operator() (double x) const {
-  double s   = _sigma.getValue();
-  double x0  = _mean.getValue();
+CLHEPdouble Gaussian::operator() (CLHEPdouble x) const {
+  CLHEPdouble s   = _sigma.getValue();
+  CLHEPdouble x0  = _mean.getValue();
   return (1.0/(sqrt(2*M_PI)*s))*
 	  exp(-(x-x0)*(x-x0)/(2.0*s*s));
 }

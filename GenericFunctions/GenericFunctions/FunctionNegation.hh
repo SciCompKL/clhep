@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionNegation.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //--------------------------FunctionNegation--------------------------------//
@@ -32,8 +33,8 @@ namespace Genfun {
     virtual ~FunctionNegation();
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & argument) const override;
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & argument) const override;
   
     // Dimensionality 
     virtual unsigned int dimensionality() const override;

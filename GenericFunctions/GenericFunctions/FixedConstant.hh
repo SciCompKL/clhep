@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FixedConstant.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //----------------------FixedConstant --------------------------------------//
@@ -27,7 +28,7 @@ namespace Genfun {
       public:
 
     // Constructor
-    FixedConstant(double value);
+    FixedConstant(CLHEPdouble value);
   
     // Copy constructor
     FixedConstant(const FixedConstant &right);
@@ -36,8 +37,8 @@ namespace Genfun {
     virtual ~FixedConstant();
   
     // Retrieve function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
   
     // Derivative.  
     Derivative partial (unsigned int) const override;
@@ -51,7 +52,7 @@ namespace Genfun {
     const FixedConstant & operator=(const FixedConstant &right);
 
     // The value of the constant:
-    double _value;
+    CLHEPdouble _value;
   };
 } // namespace Genfun
 #endif

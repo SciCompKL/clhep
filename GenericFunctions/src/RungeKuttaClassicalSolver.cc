@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/GenericFunctions/RungeKuttaClassicalSolver.hh"
 #include "CLHEP/GenericFunctions/RKIntegrator.hh"
 #include "CLHEP/GenericFunctions/AdaptiveRKStepper.hh"
@@ -66,9 +67,9 @@ namespace Classical {
   }
 
   Genfun::Parameter *RungeKuttaSolver::createControlParameter(const std::string & variableName,
-								      double defStartingValue,
-								      double startingValueMin,
-								      double startingValueMax) const {
+								      CLHEPdouble defStartingValue,
+								      CLHEPdouble startingValueMin,
+								      CLHEPdouble startingValueMax) const {
     return c->integrator->createControlParameter(variableName, defStartingValue, startingValueMin, startingValueMax) ;
   }
       

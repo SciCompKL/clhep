@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionTimesParameter.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //--------------------------FunctionTimesParameter--------------------------//
@@ -34,8 +35,8 @@ namespace Genfun {
     virtual ~FunctionTimesParameter();
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override;
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override;
 
     // Dimensionality 
     virtual unsigned int dimensionality() const override;

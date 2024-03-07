@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: SystemOfUnits.h,v 1.4 2010/06/16 17:12:28 garren Exp $
 // ----------------------------------------------------------------------
@@ -54,267 +55,267 @@ namespace CLHEP {
   //
   //
   //
-  static constexpr double     pi  = 3.14159265358979323846;
-  static constexpr double  twopi  = 2*pi;
-  static constexpr double halfpi  = pi/2;
-  static constexpr double     pi2 = pi*pi;
+  static constexpr CLHEPdouble     pi  = 3.14159265358979323846;
+  static constexpr CLHEPdouble  twopi  = 2*pi;
+  static constexpr CLHEPdouble halfpi  = pi/2;
+  static constexpr CLHEPdouble     pi2 = pi*pi;
 
   // 
   // Length [L]
   //
-  static constexpr double millimeter  = 1.;                        
-  static constexpr double millimeter2 = millimeter*millimeter;
-  static constexpr double millimeter3 = millimeter*millimeter*millimeter;
+  static constexpr CLHEPdouble millimeter  = 1.;                        
+  static constexpr CLHEPdouble millimeter2 = millimeter*millimeter;
+  static constexpr CLHEPdouble millimeter3 = millimeter*millimeter*millimeter;
 
-  static constexpr double centimeter  = 10.*millimeter;   
-  static constexpr double centimeter2 = centimeter*centimeter;
-  static constexpr double centimeter3 = centimeter*centimeter*centimeter;
+  static constexpr CLHEPdouble centimeter  = 10.*millimeter;   
+  static constexpr CLHEPdouble centimeter2 = centimeter*centimeter;
+  static constexpr CLHEPdouble centimeter3 = centimeter*centimeter*centimeter;
 
-  static constexpr double meter  = 1000.*millimeter;                  
-  static constexpr double meter2 = meter*meter;
-  static constexpr double meter3 = meter*meter*meter;
+  static constexpr CLHEPdouble meter  = 1000.*millimeter;                  
+  static constexpr CLHEPdouble meter2 = meter*meter;
+  static constexpr CLHEPdouble meter3 = meter*meter*meter;
 
-  static constexpr double kilometer = 1000.*meter;                   
-  static constexpr double kilometer2 = kilometer*kilometer;
-  static constexpr double kilometer3 = kilometer*kilometer*kilometer;
+  static constexpr CLHEPdouble kilometer = 1000.*meter;                   
+  static constexpr CLHEPdouble kilometer2 = kilometer*kilometer;
+  static constexpr CLHEPdouble kilometer3 = kilometer*kilometer*kilometer;
 
-  static constexpr double parsec = 3.0856775807e+16*meter;
+  static constexpr CLHEPdouble parsec = 3.0856775807e+16*meter;
 
-  static constexpr double micrometer = 1.e-6 *meter;             
-  static constexpr double  nanometer = 1.e-9 *meter;
-  static constexpr double  angstrom  = 1.e-10*meter;
-  static constexpr double  fermi     = 1.e-15*meter;
+  static constexpr CLHEPdouble micrometer = 1.e-6 *meter;             
+  static constexpr CLHEPdouble  nanometer = 1.e-9 *meter;
+  static constexpr CLHEPdouble  angstrom  = 1.e-10*meter;
+  static constexpr CLHEPdouble  fermi     = 1.e-15*meter;
 
-  static constexpr double      barn = 1.e-28*meter2;
-  static constexpr double millibarn = 1.e-3 *barn;
-  static constexpr double microbarn = 1.e-6 *barn;
-  static constexpr double  nanobarn = 1.e-9 *barn;
-  static constexpr double  picobarn = 1.e-12*barn;
+  static constexpr CLHEPdouble      barn = 1.e-28*meter2;
+  static constexpr CLHEPdouble millibarn = 1.e-3 *barn;
+  static constexpr CLHEPdouble microbarn = 1.e-6 *barn;
+  static constexpr CLHEPdouble  nanobarn = 1.e-9 *barn;
+  static constexpr CLHEPdouble  picobarn = 1.e-12*barn;
 
   // symbols
-  static constexpr double nm  = nanometer;                        
-  static constexpr double um  = micrometer;                        
+  static constexpr CLHEPdouble nm  = nanometer;                        
+  static constexpr CLHEPdouble um  = micrometer;                        
 
-  static constexpr double mm  = millimeter;                        
-  static constexpr double mm2 = millimeter2;
-  static constexpr double mm3 = millimeter3;
+  static constexpr CLHEPdouble mm  = millimeter;                        
+  static constexpr CLHEPdouble mm2 = millimeter2;
+  static constexpr CLHEPdouble mm3 = millimeter3;
 
-  static constexpr double cm  = centimeter;   
-  static constexpr double cm2 = centimeter2;
-  static constexpr double cm3 = centimeter3;
+  static constexpr CLHEPdouble cm  = centimeter;   
+  static constexpr CLHEPdouble cm2 = centimeter2;
+  static constexpr CLHEPdouble cm3 = centimeter3;
 
-  static constexpr double liter = 1.e+3*cm3;
-  static constexpr double  L = liter;
-  static constexpr double dL = 1.e-1*liter;
-  static constexpr double cL = 1.e-2*liter;
-  static constexpr double mL = 1.e-3*liter;       
+  static constexpr CLHEPdouble liter = 1.e+3*cm3;
+  static constexpr CLHEPdouble  L = liter;
+  static constexpr CLHEPdouble dL = 1.e-1*liter;
+  static constexpr CLHEPdouble cL = 1.e-2*liter;
+  static constexpr CLHEPdouble mL = 1.e-3*liter;       
 
-  static constexpr double m  = meter;                  
-  static constexpr double m2 = meter2;
-  static constexpr double m3 = meter3;
+  static constexpr CLHEPdouble m  = meter;                  
+  static constexpr CLHEPdouble m2 = meter2;
+  static constexpr CLHEPdouble m3 = meter3;
 
-  static constexpr double km  = kilometer;                   
-  static constexpr double km2 = kilometer2;
-  static constexpr double km3 = kilometer3;
+  static constexpr CLHEPdouble km  = kilometer;                   
+  static constexpr CLHEPdouble km2 = kilometer2;
+  static constexpr CLHEPdouble km3 = kilometer3;
 
-  static constexpr double pc = parsec;
+  static constexpr CLHEPdouble pc = parsec;
 
   //
   // Angle
   //
-  static constexpr double radian      = 1.;                  
-  static constexpr double milliradian = 1.e-3*radian;
-  static constexpr double degree = (pi/180.0)*radian;
+  static constexpr CLHEPdouble radian      = 1.;                  
+  static constexpr CLHEPdouble milliradian = 1.e-3*radian;
+  static constexpr CLHEPdouble degree = (pi/180.0)*radian;
 
-  static constexpr double   steradian = 1.;
+  static constexpr CLHEPdouble   steradian = 1.;
   
   // symbols
-  static constexpr double rad  = radian;
-  static constexpr double mrad = milliradian;
-  static constexpr double sr   = steradian;
-  static constexpr double deg  = degree;
+  static constexpr CLHEPdouble rad  = radian;
+  static constexpr CLHEPdouble mrad = milliradian;
+  static constexpr CLHEPdouble sr   = steradian;
+  static constexpr CLHEPdouble deg  = degree;
 
   //
   // Time [T]
   //
-  static constexpr double nanosecond  = 1.;
-  static constexpr double second      = 1.e+9 *nanosecond;
-  static constexpr double millisecond = 1.e-3 *second;
-  static constexpr double microsecond = 1.e-6 *second;
-  static constexpr double  picosecond = 1.e-12*second;
+  static constexpr CLHEPdouble nanosecond  = 1.;
+  static constexpr CLHEPdouble second      = 1.e+9 *nanosecond;
+  static constexpr CLHEPdouble millisecond = 1.e-3 *second;
+  static constexpr CLHEPdouble microsecond = 1.e-6 *second;
+  static constexpr CLHEPdouble  picosecond = 1.e-12*second;
 
-  static constexpr double hertz = 1./second;
-  static constexpr double kilohertz = 1.e+3*hertz;
-  static constexpr double megahertz = 1.e+6*hertz;
+  static constexpr CLHEPdouble hertz = 1./second;
+  static constexpr CLHEPdouble kilohertz = 1.e+3*hertz;
+  static constexpr CLHEPdouble megahertz = 1.e+6*hertz;
 
   // symbols
-  static constexpr double ns = nanosecond;
-  static constexpr double  s = second;
-  static constexpr double ms = millisecond;
-  static constexpr double us = microsecond;
-  static constexpr double ps = picosecond;
+  static constexpr CLHEPdouble ns = nanosecond;
+  static constexpr CLHEPdouble  s = second;
+  static constexpr CLHEPdouble ms = millisecond;
+  static constexpr CLHEPdouble us = microsecond;
+  static constexpr CLHEPdouble ps = picosecond;
 
   //
   // Electric charge [Q]
   //
-  static constexpr double eplus = 1. ;// positron charge
-  static constexpr double e_SI  = 1.602176634e-19;// positron charge in coulomb
-  static constexpr double coulomb = eplus/e_SI;// coulomb = 6.24150 e+18 * eplus
+  static constexpr CLHEPdouble eplus = 1. ;// positron charge
+  static constexpr CLHEPdouble e_SI  = 1.602176634e-19;// positron charge in coulomb
+  static constexpr CLHEPdouble coulomb = eplus/e_SI;// coulomb = 6.24150 e+18 * eplus
 
   //
   // Energy [E]
   //
-  static constexpr double megaelectronvolt = 1. ;
-  static constexpr double     electronvolt = 1.e-6*megaelectronvolt;
-  static constexpr double kiloelectronvolt = 1.e-3*megaelectronvolt;
-  static constexpr double gigaelectronvolt = 1.e+3*megaelectronvolt;
-  static constexpr double teraelectronvolt = 1.e+6*megaelectronvolt;
-  static constexpr double petaelectronvolt = 1.e+9*megaelectronvolt;
+  static constexpr CLHEPdouble megaelectronvolt = 1. ;
+  static constexpr CLHEPdouble     electronvolt = 1.e-6*megaelectronvolt;
+  static constexpr CLHEPdouble kiloelectronvolt = 1.e-3*megaelectronvolt;
+  static constexpr CLHEPdouble gigaelectronvolt = 1.e+3*megaelectronvolt;
+  static constexpr CLHEPdouble teraelectronvolt = 1.e+6*megaelectronvolt;
+  static constexpr CLHEPdouble petaelectronvolt = 1.e+9*megaelectronvolt;
 
-  static constexpr double joule = electronvolt/e_SI;// joule = 6.24150 e+12 * MeV
+  static constexpr CLHEPdouble joule = electronvolt/e_SI;// joule = 6.24150 e+12 * MeV
 
   // symbols
-  static constexpr double MeV = megaelectronvolt;
-  static constexpr double  eV = electronvolt;
-  static constexpr double keV = kiloelectronvolt;
-  static constexpr double GeV = gigaelectronvolt;
-  static constexpr double TeV = teraelectronvolt;
-  static constexpr double PeV = petaelectronvolt;
+  static constexpr CLHEPdouble MeV = megaelectronvolt;
+  static constexpr CLHEPdouble  eV = electronvolt;
+  static constexpr CLHEPdouble keV = kiloelectronvolt;
+  static constexpr CLHEPdouble GeV = gigaelectronvolt;
+  static constexpr CLHEPdouble TeV = teraelectronvolt;
+  static constexpr CLHEPdouble PeV = petaelectronvolt;
 
   //
   // Mass [E][T^2][L^-2]
   //
-  static constexpr double  kilogram = joule*second*second/(meter*meter);   
-  static constexpr double      gram = 1.e-3*kilogram;
-  static constexpr double milligram = 1.e-3*gram;
+  static constexpr CLHEPdouble  kilogram = joule*second*second/(meter*meter);   
+  static constexpr CLHEPdouble      gram = 1.e-3*kilogram;
+  static constexpr CLHEPdouble milligram = 1.e-3*gram;
 
   // symbols
-  static constexpr double  kg = kilogram;
-  static constexpr double   g = gram;
-  static constexpr double  mg = milligram;
+  static constexpr CLHEPdouble  kg = kilogram;
+  static constexpr CLHEPdouble   g = gram;
+  static constexpr CLHEPdouble  mg = milligram;
 
   //
   // Power [E][T^-1]
   //
-  static constexpr double watt = joule/second;// watt = 6.24150 e+3 * MeV/ns
+  static constexpr CLHEPdouble watt = joule/second;// watt = 6.24150 e+3 * MeV/ns
 
   //
   // Force [E][L^-1]
   //
-  static constexpr double newton = joule/meter;// newton = 6.24150 e+9 * MeV/mm
+  static constexpr CLHEPdouble newton = joule/meter;// newton = 6.24150 e+9 * MeV/mm
 
   //
   // Pressure [E][L^-3]
   //
 #define pascal hep_pascal                          // a trick to avoid warnings 
-  static constexpr double hep_pascal = newton/m2;   // pascal = 6.24150 e+3 * MeV/mm3
-  static constexpr double bar        = 100000*pascal; // bar    = 6.24150 e+8 * MeV/mm3
-  static constexpr double atmosphere = 101325*pascal; // atm    = 6.32420 e+8 * MeV/mm3
+  static constexpr CLHEPdouble hep_pascal = newton/m2;   // pascal = 6.24150 e+3 * MeV/mm3
+  static constexpr CLHEPdouble bar        = 100000*pascal; // bar    = 6.24150 e+8 * MeV/mm3
+  static constexpr CLHEPdouble atmosphere = 101325*pascal; // atm    = 6.32420 e+8 * MeV/mm3
 
   //
   // Electric current [Q][T^-1]
   //
-  static constexpr double      ampere = coulomb/second; // ampere = 6.24150 e+9 * eplus/ns
-  static constexpr double milliampere = 1.e-3*ampere;
-  static constexpr double microampere = 1.e-6*ampere;
-  static constexpr double  nanoampere = 1.e-9*ampere;
+  static constexpr CLHEPdouble      ampere = coulomb/second; // ampere = 6.24150 e+9 * eplus/ns
+  static constexpr CLHEPdouble milliampere = 1.e-3*ampere;
+  static constexpr CLHEPdouble microampere = 1.e-6*ampere;
+  static constexpr CLHEPdouble  nanoampere = 1.e-9*ampere;
 
   //
   // Electric potential [E][Q^-1]
   //
-  static constexpr double megavolt = megaelectronvolt/eplus;
-  static constexpr double kilovolt = 1.e-3*megavolt;
-  static constexpr double     volt = 1.e-6*megavolt;
+  static constexpr CLHEPdouble megavolt = megaelectronvolt/eplus;
+  static constexpr CLHEPdouble kilovolt = 1.e-3*megavolt;
+  static constexpr CLHEPdouble     volt = 1.e-6*megavolt;
 
   //
   // Electric resistance [E][T][Q^-2]
   //
-  static constexpr double ohm = volt/ampere;// ohm = 1.60217e-16*(MeV/eplus)/(eplus/ns)
+  static constexpr CLHEPdouble ohm = volt/ampere;// ohm = 1.60217e-16*(MeV/eplus)/(eplus/ns)
 
   //
   // Electric capacitance [Q^2][E^-1]
   //
-  static constexpr double farad = coulomb/volt;// farad = 6.24150e+24 * eplus/Megavolt
-  static constexpr double millifarad = 1.e-3*farad;
-  static constexpr double microfarad = 1.e-6*farad;
-  static constexpr double  nanofarad = 1.e-9*farad;
-  static constexpr double  picofarad = 1.e-12*farad;
+  static constexpr CLHEPdouble farad = coulomb/volt;// farad = 6.24150e+24 * eplus/Megavolt
+  static constexpr CLHEPdouble millifarad = 1.e-3*farad;
+  static constexpr CLHEPdouble microfarad = 1.e-6*farad;
+  static constexpr CLHEPdouble  nanofarad = 1.e-9*farad;
+  static constexpr CLHEPdouble  picofarad = 1.e-12*farad;
 
   //
   // Magnetic Flux [T][E][Q^-1]
   //
-  static constexpr double weber = volt*second;// weber = 1000*megavolt*ns
+  static constexpr CLHEPdouble weber = volt*second;// weber = 1000*megavolt*ns
 
   //
   // Magnetic Field [T][E][Q^-1][L^-2]
   //
-  static constexpr double tesla     = volt*second/meter2;// tesla =0.001*megavolt*ns/mm2
+  static constexpr CLHEPdouble tesla     = volt*second/meter2;// tesla =0.001*megavolt*ns/mm2
 
-  static constexpr double gauss     = 1.e-4*tesla;
-  static constexpr double kilogauss = 1.e-1*tesla;
+  static constexpr CLHEPdouble gauss     = 1.e-4*tesla;
+  static constexpr CLHEPdouble kilogauss = 1.e-1*tesla;
 
   //
   // Inductance [T^2][E][Q^-2]
   //
-  static constexpr double henry = weber/ampere;// henry = 1.60217e-7*MeV*(ns/eplus)**2
+  static constexpr CLHEPdouble henry = weber/ampere;// henry = 1.60217e-7*MeV*(ns/eplus)**2
 
   //
   // Temperature
   //
-  static constexpr double kelvin = 1.;
+  static constexpr CLHEPdouble kelvin = 1.;
 
   //
   // Amount of substance
   //
-  static constexpr double mole = 1.;
+  static constexpr CLHEPdouble mole = 1.;
 
   //
   // Activity [T^-1]
   //
-  static constexpr double becquerel = 1./second ;
-  static constexpr double curie = 3.7e+10 * becquerel;
-  static constexpr double kilobecquerel = 1.e+3*becquerel;
-  static constexpr double megabecquerel = 1.e+6*becquerel;
-  static constexpr double gigabecquerel = 1.e+9*becquerel;
-  static constexpr double millicurie = 1.e-3*curie;
-  static constexpr double microcurie = 1.e-6*curie;
-  static constexpr double Bq = becquerel;
-  static constexpr double kBq = kilobecquerel;
-  static constexpr double MBq = megabecquerel;
-  static constexpr double GBq = gigabecquerel;
-  static constexpr double Ci = curie;
-  static constexpr double mCi = millicurie;
-  static constexpr double uCi = microcurie;
+  static constexpr CLHEPdouble becquerel = 1./second ;
+  static constexpr CLHEPdouble curie = 3.7e+10 * becquerel;
+  static constexpr CLHEPdouble kilobecquerel = 1.e+3*becquerel;
+  static constexpr CLHEPdouble megabecquerel = 1.e+6*becquerel;
+  static constexpr CLHEPdouble gigabecquerel = 1.e+9*becquerel;
+  static constexpr CLHEPdouble millicurie = 1.e-3*curie;
+  static constexpr CLHEPdouble microcurie = 1.e-6*curie;
+  static constexpr CLHEPdouble Bq = becquerel;
+  static constexpr CLHEPdouble kBq = kilobecquerel;
+  static constexpr CLHEPdouble MBq = megabecquerel;
+  static constexpr CLHEPdouble GBq = gigabecquerel;
+  static constexpr CLHEPdouble Ci = curie;
+  static constexpr CLHEPdouble mCi = millicurie;
+  static constexpr CLHEPdouble uCi = microcurie;
 
   //
   // Absorbed dose [L^2][T^-2]
   //
-  static constexpr double      gray = joule/kilogram ;
-  static constexpr double  kilogray = 1.e+3*gray;
-  static constexpr double milligray = 1.e-3*gray;
-  static constexpr double microgray = 1.e-6*gray;
+  static constexpr CLHEPdouble      gray = joule/kilogram ;
+  static constexpr CLHEPdouble  kilogray = 1.e+3*gray;
+  static constexpr CLHEPdouble milligray = 1.e-3*gray;
+  static constexpr CLHEPdouble microgray = 1.e-6*gray;
 
   //
   // Luminous intensity [I]
   //
-  static constexpr double candela = 1.;
+  static constexpr CLHEPdouble candela = 1.;
 
   //
   // Luminous flux [I]
   //
-  static constexpr double lumen = candela*steradian;
+  static constexpr CLHEPdouble lumen = candela*steradian;
 
   //
   // Illuminance [I][L^-2]
   //
-  static constexpr double lux = lumen/meter2;
+  static constexpr CLHEPdouble lux = lumen/meter2;
 
   //
   // Miscellaneous
   //
-  static constexpr double perCent     = 0.01 ;
-  static constexpr double perThousand = 0.001;
-  static constexpr double perMillion  = 0.000001;
+  static constexpr CLHEPdouble perCent     = 0.01 ;
+  static constexpr CLHEPdouble perThousand = 0.001;
+  static constexpr CLHEPdouble perMillion  = 0.000001;
 
 }  // namespace CLHEP
 

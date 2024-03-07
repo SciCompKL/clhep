@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 
@@ -27,7 +28,7 @@ _beta (right._beta)
 GammaDistribution::~GammaDistribution() {
 }
 
-double GammaDistribution::operator() (double x) const {
+CLHEPdouble GammaDistribution::operator() (CLHEPdouble x) const {
   return std::pow(x,_alpha.getValue()-1)*
     exp(-x/_beta.getValue())/std::pow(_beta.getValue(),(_alpha.getValue()))/
     exp(_logGamma(_alpha.getValue()));

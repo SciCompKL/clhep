@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id:
 //-------------------------------------------------------------//
@@ -28,7 +29,7 @@ namespace Genfun {
     ~EfficiencyFunctional();
 
     // Evaluate ChiSquared of a function w.r.t the data.
-    virtual double operator [] (const AbsFunction & function) const;
+    virtual CLHEPdouble operator [] (const AbsFunction & function) const;
 
   private:
 

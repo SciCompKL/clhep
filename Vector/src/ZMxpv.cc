@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 //
 //  ZMxpv.cc   	Support for Vector package in the ZOOM context, where

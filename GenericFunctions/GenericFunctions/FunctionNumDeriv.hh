@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionNumDeriv.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //--------------------------FunctionNumDeriv--------------------------------//
@@ -32,8 +33,8 @@ namespace Genfun {
     virtual ~FunctionNumDeriv();
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override;
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override;
   
     // Dimensionality 
     virtual unsigned int dimensionality() const override;
@@ -47,11 +48,11 @@ namespace Genfun {
     const AbsFunction        *_arg1;
     const unsigned int       _wrtIndex;
 
-    // helper data and methods to let us code Argument and double similarly
-    double numericalDerivative 
-	( double (FunctionNumDeriv::*f)(double)const, double x ) const;
-    double f_x   (double x) const;
-    double f_Arg (double x) const;
+    // helper data and methods to let us code Argument and CLHEPdouble similarly
+    CLHEPdouble numericalDerivative 
+	( CLHEPdouble (FunctionNumDeriv::*f)(CLHEPdouble)const, CLHEPdouble x ) const;
+    CLHEPdouble f_x   (CLHEPdouble x) const;
+    CLHEPdouble f_Arg (CLHEPdouble x) const;
     mutable Argument 	    _xArg;
 
   };

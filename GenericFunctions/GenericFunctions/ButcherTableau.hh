@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef _ButcherTableau_h_
 #define _ButcherTableau_h_
 // This class defines a Butcher Tableau, which completely specifies
@@ -37,21 +38,21 @@ namespace Genfun {
     inline unsigned int nSteps() const;
     
     // Write access to elements:
-    inline double & A(unsigned int i, unsigned int j);
-    inline double & b(unsigned int i);
-    inline double & c(unsigned int i);
+    inline CLHEPdouble & A(unsigned int i, unsigned int j);
+    inline CLHEPdouble & b(unsigned int i);
+    inline CLHEPdouble & c(unsigned int i);
     
     // Read access to elements (inline for speed)
-    inline const double & A(unsigned int i, unsigned int j) const;
-    inline const double & b(unsigned int i) const;
-    inline const double & c(unsigned int i) const;
+    inline const CLHEPdouble & A(unsigned int i, unsigned int j) const;
+    inline const CLHEPdouble & b(unsigned int i) const;
+    inline const CLHEPdouble & c(unsigned int i) const;
     
     
   private:
     
-    std::vector< std::vector<double> > _A;
-    std::vector<double>                _b;
-    std::vector<double>                _c;
+    std::vector< std::vector<CLHEPdouble> > _A;
+    std::vector<CLHEPdouble>                _b;
+    std::vector<CLHEPdouble>                _c;
     std::string                        _name;
     unsigned int                       _order;
   };

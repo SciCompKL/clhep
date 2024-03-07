@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: Stat.h,v 1.3 2003/10/23 21:29:51 garren Exp $
 // -*- C++ -*-
 //
@@ -12,7 +13,7 @@
 // One would never instantiate a HepStat object;
 // usage of any of these methods looks like --
 // 
-// double x = HepStat::erf ( .1 );
+// CLHEPdouble x = HepStat::erf ( .1 );
 //
 // A user may wish to improve the readability of algortihm code which uses 
 // one method many times by lines like using HepStat::erf
@@ -58,23 +59,23 @@ private:
 
 public:
 
-  static double flatToGaussian (double r);
+  static CLHEPdouble flatToGaussian (CLHEPdouble r);
    // This is defined by the satement that if e() provides a uniform random
    // on (0,1) then flatToGaussian(e()) is distributed as a unit normal
    // Gaussian.  That is, flatToGaussian is the inverse of the c.d.f. of
    // a Gaussian.
   	// Footprint:  30 K  		// Time:  150 cycles
 
-  static double inverseErf (double t);
-  static double erf (double x);
+  static CLHEPdouble inverseErf (CLHEPdouble t);
+  static CLHEPdouble erf (CLHEPdouble x);
         // defined in flatToGaussian.cc
 
-  static double erfQ (double x);
+  static CLHEPdouble erfQ (CLHEPdouble x);
   // Quicker, and with less footprint, than erf and gaussianCDF
   // but only accurate to 7 digits.
 	  // Footprint:  0		// Time:  
 
-  static double gammln (double x);
+  static CLHEPdouble gammln (CLHEPdouble x);
   // ln (gamma(x))
 
 };

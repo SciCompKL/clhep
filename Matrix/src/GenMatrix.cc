@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -22,14 +23,14 @@
 namespace CLHEP {
 
 #ifdef HEP_THIS_FUNCTION_IS_NOT_NEEDED
-static void delete_array(double *hm)
+static void delete_array(CLHEPdouble *hm)
 {
    delete [] hm;
 }
 #endif
 
-double norm_infinity(const HepGenMatrix &hm) {
-  double max=0,sum;
+CLHEPdouble norm_infinity(const HepGenMatrix &hm) {
+  CLHEPdouble max=0,sum;
   for(int r=1;r<=hm.num_row();r++) {
     sum=0;
     for(int c=1;c<=hm.num_col();c++) {
@@ -40,8 +41,8 @@ double norm_infinity(const HepGenMatrix &hm) {
   return max;
 }
 
-double norm1(const HepGenMatrix &hm) {
-  double max=0,sum;
+CLHEPdouble norm1(const HepGenMatrix &hm) {
+  CLHEPdouble max=0,sum;
   for(int c=1;c<=hm.num_col();c++) {
     sum=0;
     for(int r=1;r<=hm.num_row();r++)
@@ -51,7 +52,7 @@ double norm1(const HepGenMatrix &hm) {
   return max;
 }
 
-double norm(const HepGenMatrix &hm) {
+CLHEPdouble norm(const HepGenMatrix &hm) {
   HepSymMatrix A(hm.num_col(),0);
 	
 // Calculate hm.T*hm
@@ -61,7 +62,7 @@ double norm(const HepGenMatrix &hm) {
       for(int i=1;i<=hm.num_row();i++)
 	A.fast(r,c)=hm(i,r)*hm(i,c);
   diagonalize(&A);
-  double max=fabs(A(1,1));
+  CLHEPdouble max=fabs(A(1,1));
   for(r=2;r<=A.num_row();r++)
     if(max<fabs(A(r,r))) max=fabs(A(r,r));
   return (sqrt(max));
@@ -85,7 +86,7 @@ bool HepGenMatrix::operator== ( const HepGenMatrix& o) const {
 // implementation using pre-allocated data array
 // -----------------------------------------------------------------
 
-void HepGenMatrix::delete_m(int size, double* hm)
+void HepGenMatrix::delete_m(int size, CLHEPdouble* hm)
 {
    if (hm)
    {
@@ -94,19 +95,19 @@ void HepGenMatrix::delete_m(int size, double* hm)
    }
 }
 
-double* HepGenMatrix::new_m(int )
+CLHEPdouble* HepGenMatrix::new_m(int )
 {
-  /*-ap: data_array is replaced by the std::vector<double>,
+  /*-ap: data_array is replaced by the std::vector<CLHEPdouble>,
    *     so we simply return 0 here
    * 
    *   if (size == 0) return 0;
    *   else {
    *     if ( size <= size_max ) {
-   *       memset(data_array, 0, size * sizeof(double));
+   *       memset(data_array, 0, size * sizeof(CLHEPdouble));
    *       return data_array;
    *     } else {
-   *       double * nnn = new double[size];
-   *       memset(nnn, 0, size * sizeof(double));
+   *       CLHEPdouble * nnn = new CLHEPdouble[size];
+   *       memset(nnn, 0, size * sizeof(CLHEPdouble));
    *       return nnn;
    *     }
    *   }

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "CLHEP/GenericFunctions/Sigma.hh"
@@ -33,17 +34,17 @@ Sigma::~Sigma()
   }
 }
 
-double Sigma::operator ()(double x) const
+CLHEPdouble Sigma::operator ()(CLHEPdouble x) const
 {
-  double retVal=0.0;
+  CLHEPdouble retVal=0.0;
   for (size_t i=0;i<_fcn.size();i++) retVal += (*_fcn[i])(x);
   return retVal;
 }
 
 
-double Sigma::operator ()(const Argument & x) const
+CLHEPdouble Sigma::operator ()(const Argument & x) const
 {
-  double retVal=0.0;
+  CLHEPdouble retVal=0.0;
   for (size_t i=0;i<_fcn.size();i++) retVal += (*_fcn[i])(x);
   return retVal;
 }

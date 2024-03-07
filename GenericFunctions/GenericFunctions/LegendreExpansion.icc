@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include <sstream>
@@ -43,14 +44,14 @@ namespace Genfun {
   }
   
   inline
-  double LegendreExpansion::operator() (double x) const {
+  CLHEPdouble LegendreExpansion::operator() (CLHEPdouble x) const {
 
     int N=c->coefficients.getLMax();
-    std::vector<double> Pk(N+1);
+    std::vector<CLHEPdouble> Pk(N+1);
     gsl_sf_legendre_Pl_array(N, x, &Pk[0]);
     unsigned int n=N;
-    std::complex<double> P=0.0;
-    std::complex<double> I(0,1.0);
+    std::complex<CLHEPdouble> P=0.0;
+    std::complex<CLHEPdouble> I(0,1.0);
     while (1) {
       if (n==0) {
 	P+=c->coefficients(n)*Pk[n];
@@ -62,7 +63,7 @@ namespace Genfun {
       }
     }
 
-    double retVal=0;
+    CLHEPdouble retVal=0;
     if (c->type==MAGSQ) return norm(P);
     if (c->type==MAG)   return abs(P);
     if (c->type==REAL)  return real(P);

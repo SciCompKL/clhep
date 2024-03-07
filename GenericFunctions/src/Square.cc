@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Square.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/Square.hh"
@@ -17,7 +18,7 @@ Square::Square(const Square & right) : AbsFunction(right)
 Square::~Square() {
 }
 
-double Square::operator() (double x) const {
+CLHEPdouble Square::operator() (CLHEPdouble x) const {
   return x*x;
 }
 

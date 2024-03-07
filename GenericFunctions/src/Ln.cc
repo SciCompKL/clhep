@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Ln.cc,v 1.4 2003/10/10 17:40:39 garren Exp $
 // ---------------------------------------------------------------------------
@@ -20,7 +21,7 @@ Ln::Ln(const Ln & right) : AbsFunction(right)
 {  }
 
 
-double Ln::operator() (double x) const {
+CLHEPdouble Ln::operator() (CLHEPdouble x) const {
   return log(x);
 }
 

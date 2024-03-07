@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 //-----------------------Class ParaToArgAdaptor-----------------------------//
@@ -53,8 +54,8 @@ namespace Genfun {
     virtual ~SymToArgAdaptor();
 
     // Retreive function value
-    virtual double operator ()(double argument) const override;    // Gives an error.
-    virtual double operator ()(const Argument & a) const override; // Must use this one
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;    // Gives an error.
+    virtual CLHEPdouble operator ()(const Argument & a) const override; // Must use this one
 
     // Dimensionality
     virtual unsigned int dimensionality() const override;

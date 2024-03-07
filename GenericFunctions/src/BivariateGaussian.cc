@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: BivariateGaussian.cc,v 1.8 2010/06/16 18:22:01 garren Exp $
 #include "CLHEP/GenericFunctions/defs.h"
@@ -36,23 +37,23 @@ BivariateGaussian::BivariateGaussian(const BivariateGaussian & right):
 {
 }
 
-double BivariateGaussian::operator() (const Argument & a) const {
+CLHEPdouble BivariateGaussian::operator() (const Argument & a) const {
   assert (a.dimension()==2);
-  double x = a[0];
-  double y = a[1];
+  CLHEPdouble x = a[0];
+  CLHEPdouble y = a[1];
 
-  double x0   = _mean0.getValue();
-  double y0   = _mean1.getValue();
-  double dx   = x-x0;
-  double dy   = y-y0;
+  CLHEPdouble x0   = _mean0.getValue();
+  CLHEPdouble y0   = _mean1.getValue();
+  CLHEPdouble dx   = x-x0;
+  CLHEPdouble dy   = y-y0;
   
-  double sx     = _sigma0.getValue();
-  double sy     = _sigma1.getValue();
+  CLHEPdouble sx     = _sigma0.getValue();
+  CLHEPdouble sy     = _sigma1.getValue();
 
-  double sxs    = sx*sx;
-  double sys    = sy*sy;
-  double rho    = _corr01.getValue();
-  double dt     = (1.0+rho)*(1.0-rho);
+  CLHEPdouble sxs    = sx*sx;
+  CLHEPdouble sys    = sy*sy;
+  CLHEPdouble rho    = _corr01.getValue();
+  CLHEPdouble dt     = (1.0+rho)*(1.0-rho);
 
   return (1.0/(2*M_PI*sx*sy*sqrt(dt))) * 
 	       exp(-1.0/(2.0*dt)*(dx*dx/sxs+dy*dy/sys-2.0*rho*dx*dy/sx/sy));
@@ -105,7 +106,7 @@ unsigned int BivariateGaussian::dimensionality() const {
   return 2;
 }
 
-double BivariateGaussian::operator ()(double) const
+CLHEPdouble BivariateGaussian::operator ()(CLHEPdouble) const
 {
   std::cerr
     << "Warning.  bivariate Gaussian called with scalar argument"

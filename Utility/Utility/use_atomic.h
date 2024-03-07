@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef CLHEP_USE_ATOMIC_GUARD_H
 #define CLHEP_USE_ATOMIC_GUARD_H
 

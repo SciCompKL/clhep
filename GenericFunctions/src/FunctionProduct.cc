@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionProduct.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/FunctionProduct.hh"
@@ -37,12 +38,12 @@ unsigned int FunctionProduct::dimensionality() const {
   return _arg1->dimensionality();
 }
 
-double FunctionProduct::operator ()(double x) const
+CLHEPdouble FunctionProduct::operator ()(CLHEPdouble x) const
 {
   return (*_arg1)(x)*(*_arg2)(x);
 }
 
-double FunctionProduct::operator ()(const Argument & x) const
+CLHEPdouble FunctionProduct::operator ()(const Argument & x) const
 {
   return (*_arg1)(x)*(*_arg2)(x);
 }

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandMultiGauss.cc,v 1.3 2003/08/13 20:00:13 garren Exp $
 // -*- C++ -*-
 //
@@ -140,7 +141,7 @@ void RandMultiGauss::prepareUsigmas( const HepSymMatrix & S,
   U = diagonalize ( &tempS );  			// S = U Sdiag U.T()
   HepSymMatrix D = S.similarityT(U);		// D = U.T() S U = Sdiag
   for (int i = 1; i <= S.num_row(); i++) {
-    double s2 = D(i,i);
+    CLHEPdouble s2 = D(i,i);
     if ( s2 > 0 ) {
 	sigmas(i) = sqrt ( s2 );
     } else {
@@ -163,7 +164,7 @@ HepVector RandMultiGauss::deviates ( 	const HepMatrix & U,
 					const HepVector & sigmas,
 					HepRandomEngine * engine,
 		                        bool& available,
-					double& next)
+					CLHEPdouble& next)
 {
   // Returns vector of gaussian randoms based on sigmas, rotated by U,
   // with means of 0.
@@ -171,7 +172,7 @@ HepVector RandMultiGauss::deviates ( 	const HepMatrix & U,
   int n = sigmas.num_row(); 
   HepVector v(n);  // The vector to be returned
 
-  double r,v1,v2,fac;
+  CLHEPdouble r,v1,v2,fac;
   
   int i = 1;
   if (available) {

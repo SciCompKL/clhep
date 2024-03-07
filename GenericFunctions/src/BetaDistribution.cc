@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 
@@ -26,8 +27,8 @@ _beta (right._beta)
 BetaDistribution::~BetaDistribution() {
 }
 
-double BetaDistribution::operator() (double x) const {
-  double a = _alpha.getValue(),b=_beta.getValue();
+CLHEPdouble BetaDistribution::operator() (CLHEPdouble x) const {
+  CLHEPdouble a = _alpha.getValue(),b=_beta.getValue();
   return pow(x,a-1)*pow((1-x),b-1)*
     exp(_logGamma(a+b)-_logGamma(a)-_logGamma(b));
   

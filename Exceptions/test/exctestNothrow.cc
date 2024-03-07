@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // This program tests the DEFECT_NO_EXCEPTIONS version of the Exceptions package:
 //   12-Dec-2001  WEB  Avoid signed/unsigned comparison warnings
 

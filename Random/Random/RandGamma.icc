@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandGamma.icc,v 1.3 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 // 
@@ -13,33 +14,33 @@
 
 namespace CLHEP {
 
-inline RandGamma::RandGamma(HepRandomEngine & anEngine, double k,
-                                                        double lambda )
+inline RandGamma::RandGamma(HepRandomEngine & anEngine, CLHEPdouble k,
+                                                        CLHEPdouble lambda )
 : HepRandom(), localEngine(&anEngine, do_nothing_deleter()),
   defaultK(k), defaultLambda(lambda) {}
 
-inline RandGamma::RandGamma(HepRandomEngine * anEngine, double k,
-                                                        double lambda )
+inline RandGamma::RandGamma(HepRandomEngine * anEngine, CLHEPdouble k,
+                                                        CLHEPdouble lambda )
 : HepRandom(), localEngine(anEngine),
   defaultK(k), defaultLambda(lambda) {}
 
-inline double RandGamma::shoot() {
+inline CLHEPdouble RandGamma::shoot() {
   return shoot( 1.0, 1.0 );
 }
 
-inline double RandGamma::shoot( HepRandomEngine* anEngine ) {
+inline CLHEPdouble RandGamma::shoot( HepRandomEngine* anEngine ) {
   return shoot( anEngine, 1.0, 1.0 );
 }
 
-inline double RandGamma::operator()() {
+inline CLHEPdouble RandGamma::operator()() {
   return fire( defaultK, defaultLambda );
 }
 
-inline double RandGamma::operator()( double k, double lambda ) {
+inline CLHEPdouble RandGamma::operator()( CLHEPdouble k, CLHEPdouble lambda ) {
   return fire( k, lambda );
 }
 
-inline double RandGamma::fire() {
+inline CLHEPdouble RandGamma::fire() {
   return fire( defaultK, defaultLambda );
 }
 

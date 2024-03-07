@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "gsl/gsl_sf_bessel.h"
@@ -32,7 +33,7 @@ Bessel::Bessel(const Bessel & right):
 }
 
 inline
-double Bessel::operator() (double x) const {
+CLHEPdouble Bessel::operator() (CLHEPdouble x) const {
   gsl_sf_result result;
   if (_type==J) {
     int status = gsl_sf_bessel_Jn_e(_order, x,  &result);
@@ -94,7 +95,7 @@ const Parameter & Bessel::order() const {
 
 
 inline
-double Bessel::operator() (double x) const {
+CLHEPdouble Bessel::operator() (CLHEPdouble x) const {
   gsl_sf_result result;
   if (_type==J) {
     int status = gsl_sf_bessel_Jnu_e(_order.getValue(), x,  &result);

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // This is a class the creates an N-Dimensional Phase Space     //
 
 // It is for use in computing the time development of classical //
@@ -51,9 +52,9 @@ namespace Classical {
     virtual Genfun::Parameter *takeQ0(unsigned int index);
     virtual Genfun::Parameter *takeP0(unsigned int index);
     virtual Genfun::Parameter *createControlParameter(const std::string & variableName="anon",
-						      double defStartingValue=0.0,
-						      double startingValueMin=0.0,
-						      double startingValueMax=0.0) const;
+						      CLHEPdouble defStartingValue=0.0,
+						      CLHEPdouble startingValueMin=0.0,
+						      CLHEPdouble startingValueMax=0.0) const;
     
 
 

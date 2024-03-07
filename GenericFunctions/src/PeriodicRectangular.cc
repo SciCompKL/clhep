@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: PeriodicRectangular.cc,v 1.4 2003/10/10 17:40:39 garren Exp $
 #include "CLHEP/GenericFunctions/PeriodicRectangular.hh"
@@ -26,8 +27,8 @@ _height(right._height)
 PeriodicRectangular::~PeriodicRectangular() {
 }
 
-double PeriodicRectangular::operator() (double x) const {
-  double xx = x/(_a.getValue()+_b.getValue());
+CLHEPdouble PeriodicRectangular::operator() (CLHEPdouble x) const {
+  CLHEPdouble xx = x/(_a.getValue()+_b.getValue());
   xx = xx - floor(xx);
   if (xx < _a.getValue()/(_a.getValue()+_b.getValue())) {
     return 0;

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ranRestoreTest.cc,v 1.6 2011/05/31 20:57:01 garren Exp $
 // ----------------------------------------------------------------------
@@ -44,17 +45,17 @@
 
 using namespace CLHEP;
 
-double remembered_r2;
-double remembered_r1005;
-double remembered_r1006;
-double remembered_r1007;
+CLHEPdouble remembered_r2;
+CLHEPdouble remembered_r1005;
+CLHEPdouble remembered_r1006;
+CLHEPdouble remembered_r1007;
 
 // Absolutely Safe Equals Without Registers Screwing Us Up
-bool equals01(const std::vector<double> &ab) {
+bool equals01(const std::vector<CLHEPdouble> &ab) {
   return ab[1]==ab[0];
 }  
-bool equals(double a, double b) {
-  std::vector<double> ab(2);
+bool equals(CLHEPdouble a, CLHEPdouble b) {
+  std::vector<CLHEPdouble> ab(2);
   ab[0]=a;  ab[1]=b;
   return (equals01(ab));
 }
@@ -62,7 +63,7 @@ bool equals(double a, double b) {
 // ------------------- The following should all FAIL ------------
 
 int saveStepX() {
-  double r = RandGauss::shoot();
+  CLHEPdouble r = RandGauss::shoot();
   output << "r(1) = " << r << std::endl;
   HepRandom::saveEngineStatus();
   r = RandGauss::shoot();
@@ -82,7 +83,7 @@ int saveStepX() {
 
 int restoreStepX() {
   HepRandom::restoreEngineStatus();
-  double r = RandGauss::shoot();
+  CLHEPdouble r = RandGauss::shoot();
   output << "restored r(2) = " << r << std::endl;
   if ( ! equals(r,remembered_r2) ) {
     output << "THIS DOES NOT MATCH REMEMBERED VALUE BUT THAT IS EXPECTED\n";
@@ -109,7 +110,7 @@ int BsaveStepX() {
   remembered_r2 = r;
   r = RandFlat::shootBit();
   output << "r(3) = " << r << std::endl;
-  double d;
+  CLHEPdouble d;
   for (int i=0; i < 1001; i++) {
     d = RandFlat::shoot();
     if (d > 1) output << 
@@ -146,7 +147,7 @@ int BrestoreStepX() {
 
 int saveStep() {
   int stat=0;
-  double r = RandGauss::shoot();
+  CLHEPdouble r = RandGauss::shoot();
   output << "r(1) = " << r << std::endl;
   RandGauss::saveEngineStatus();
   r = RandGauss::shoot();
@@ -167,7 +168,7 @@ int saveStep() {
 int restoreStep() {
   int stat=0;
   RandGauss::restoreEngineStatus();
-  double r = RandGauss::shoot();
+  CLHEPdouble r = RandGauss::shoot();
   output << "restored r(2) = " << r << std::endl;
   if ( !equals(r,remembered_r2) ) {
     std::cout << "restored r(2) = " << r << std::endl;
@@ -318,7 +319,7 @@ int saveEngine(const char* filename) {
   HepRandomEngine * old = D::getTheEngine();
   E e(123);
   D::setTheEngine(&e);
-  double r=0; 
+  CLHEPdouble r=0; 
   for (int i=0; i<3; i++) r += D::shoot();
   D::saveEngineStatus(filename);
   if (r == -99999999.1) stat = 999; // This prevents clever compilers from
@@ -339,12 +340,12 @@ int checkSaveEngine(const char* filename) {
   // Generate save with current format (default file name is fine)
   E e(123);
   D::setTheEngine(&e);
-  double r=0; 
+  CLHEPdouble r=0; 
   for (int i=0; i<3; i++) r += D::shoot();
   D::saveEngineStatus();
 
   // Figure out what the key variate value should be
-  double keyValue = D::shoot();
+  CLHEPdouble keyValue = D::shoot();
 
   // Restore state based on old file, and check for proper value
   D::restoreEngineStatus(filename);
@@ -402,20 +403,20 @@ int checkEngineInstanceSave(E & e) {
   int stat = 0;
   output << "checkEngineInstanceSave for " << e.name() << "\n";
   int pr=output.precision(20);
-  double r=0; 
+  CLHEPdouble r=0; 
   for (int i=0; i<100; i++) r += e.flat();
   {std::ofstream os ("engine.save"); os << e;}
   for (int i=0; i<100; i++) r += e.flat();
-  double keyValue1 = e.flat();
-  double keyValue2 = e.flat();
+  CLHEPdouble keyValue1 = e.flat();
+  CLHEPdouble keyValue2 = e.flat();
 #ifdef VERBOSER
   output << keyValue1 << " " << keyValue2 << "\n";
 #endif
   E e2;
   {std::ifstream is ("engine.save"); is >> e2;}
   for (int i=0; i<100; i++) r += e2.flat();
-  double k1 = e2.flat();
-  double k2 = e2.flat();
+  CLHEPdouble k1 = e2.flat();
+  CLHEPdouble k2 = e2.flat();
 #ifdef VERBOSER
   output << k1 << " " << k2 << "\n";
 #endif
@@ -433,9 +434,9 @@ int checkSaveDistribution(D & d, int nth) {
   int stat = 0;
   output << "checkSaveDistribution with " << d.engine().name() 
   	    << ", " << d.name() << "\n";
-  double r=0; 
+  CLHEPdouble r=0; 
   r = d();
-  double keyValue1, keyValue2, keyValue3, keyValue4;
+  CLHEPdouble keyValue1, keyValue2, keyValue3, keyValue4;
   for (int i=0; i<nth; i++) r += d();
   {std::ofstream os ("distribution.save1"); os << d.engine() << d;}
   keyValue1 = d();
@@ -456,11 +457,11 @@ int checkSaveDistribution(D & d, int nth) {
   E e;
   D d2(e);   
   { std::ifstream is ("distribution.save1"); is >> e >> d2;}
-  double k1 = d2();
-  double k2 = d2();
+  CLHEPdouble k1 = d2();
+  CLHEPdouble k2 = d2();
   { std::ifstream is ("distribution.save2"); is >> e >> d2;}
-  double k3 = d2();
-  double k4 = d2();
+  CLHEPdouble k3 = d2();
+  CLHEPdouble k4 = d2();
 #ifdef VERBOSER
   pr = output.precision(20);
   output << "k1 =        " << k1 <<
@@ -485,9 +486,9 @@ int checkRandGeneralDistribution(RandGeneral & d, int nth) {
   int stat = 0;
   output << "checkSaveDistribution with " << d.engine().name() 
   	    << ", " << d.name() << "\n";
-  double r=0; 
+  CLHEPdouble r=0; 
   r = d();
-  double keyValue1, keyValue2, keyValue3, keyValue4;
+  CLHEPdouble keyValue1, keyValue2, keyValue3, keyValue4;
   for (int i=0; i<nth; i++) r += d();
   {std::ofstream os ("distribution.save1"); os << d.engine() << d;}
   keyValue1 = d();
@@ -506,14 +507,14 @@ int checkRandGeneralDistribution(RandGeneral & d, int nth) {
 #endif
   output.precision(pr);
   E e;
-  double temp = 1; 
+  CLHEPdouble temp = 1; 
   RandGeneral d2(e, &temp, 1);   
   { std::ifstream is ("distribution.save1"); is >> e >> d2;}
-  double k1 = d2();
-  double k2 = d2();
+  CLHEPdouble k1 = d2();
+  CLHEPdouble k2 = d2();
   { std::ifstream is ("distribution.save2"); is >> e >> d2;}
-  double k3 = d2();
-  double k4 = d2();
+  CLHEPdouble k3 = d2();
+  CLHEPdouble k4 = d2();
 #ifdef VERBOSER
   pr = output.precision(20);
   output << "k1 =        " << k1 <<
@@ -615,7 +616,7 @@ int checkDistributions() {
   {RandPoissonT d(new E(125716),2.5);
    stat |= checkSaveDistribution<E,RandPoissonT> (d,12); 		}
 
-  {std::vector<double> pdf;
+  {std::vector<CLHEPdouble> pdf;
    int nbins = 20;
    for (int i = 0; i < nbins; ++i) 
    		pdf.push_back( 5*i + (10.5-i) * (10.5-i) );
@@ -631,11 +632,11 @@ int checkSharingDistributions(D1 & d1, D2 & d2, int n1, int n2) {
   output << "checkSharingDistribution with: \n" 
   	    << d1.name() << " using " << d1.engine().name() << " and\n"
   	    << d2.name() << " using " << d2.engine().name() << "\n";
-  double r=0; 
+  CLHEPdouble r=0; 
   r = d1();
   r += d2();
-  double kv11,kv12,kv13,kv14;
-  double kv21,kv22,kv23,kv24;
+  CLHEPdouble kv11,kv12,kv13,kv14;
+  CLHEPdouble kv21,kv22,kv23,kv24;
   for (int i=0; i<n1; i++) r += d1();
   for (int j=0; j<n2; j++) r += d2();
   {std::ofstream os ("shared.save1"); os << d1.engine() << d1 << d2;}
@@ -666,15 +667,15 @@ int checkSharingDistributions(D1 & d1, D2 & d2, int n1, int n2) {
   D1 d1r(e);   
   D2 d2r(e);   
   { std::ifstream is ("shared.save1"); is >> e >> d1r >> d2r;}
-  double k11 = d1r();
-  double k21 = d2r();
-  double k12 = d1r();
-  double k22 = d2r();
+  CLHEPdouble k11 = d1r();
+  CLHEPdouble k21 = d2r();
+  CLHEPdouble k12 = d1r();
+  CLHEPdouble k22 = d2r();
   { std::ifstream is ("shared.save2"); is >> e >> d1r >> d2r;}
-  double k13 = d1r();
-  double k23 = d2r();
-  double k14 = d1r();
-  double k24 = d2r();
+  CLHEPdouble k13 = d1r();
+  CLHEPdouble k23 = d2r();
+  CLHEPdouble k14 = d1r();
+  CLHEPdouble k24 = d2r();
 #ifdef VERBOSER2
   pr = output.precision(20);
   output << "k11 = " << k11 <<
@@ -720,8 +721,8 @@ int checkSharing() {
   return stat;
 }
 
-std::vector<double> aSequence(int n) {
-  std::vector<double> v;
+std::vector<CLHEPdouble> aSequence(int n) {
+  std::vector<CLHEPdouble> v;
   DualRand e(13542);
   RandFlat f(e);
   for (int i=0; i<n; i++) {
@@ -737,8 +738,8 @@ int staticSave(int n) {
   int stat = 0;
   int i;
   output << "staticSave for distribution " << D::distributionName() << "\n";
-  double r = 0;
-  double v1, v2, k1, k2;
+  CLHEPdouble r = 0;
+  CLHEPdouble v1, v2, k1, k2;
   for (i=0; i < n; i++) r += D::shoot();
   {
     std::ofstream file ("distribution.save1"); 
@@ -811,7 +812,7 @@ int staticSaveShootBit(int n) {
   int stat = 0;
   int i;
   output << "staticSaveShootBit for " << D::distributionName() << "\n";
-  double r = 0;
+  CLHEPdouble r = 0;
   int bit = 0;
   int v1, v2, k1, k2;
   for (i=0; i < n; i++) r += D::shoot();
@@ -943,8 +944,8 @@ void randomizeStatics(int n) {
   }
 }
 
-std::vector<double> captureStatics() {
-  std::vector<double> c;
+std::vector<CLHEPdouble> captureStatics() {
+  std::vector<CLHEPdouble> c;
   c.push_back( RandGauss::shoot() );
   c.push_back( RandGaussQ::shoot() );
   c.push_back( RandGaussT::shoot() );
@@ -984,10 +985,10 @@ void restoreStatics(std::string filename) {
 // ----------- Anonymous restore of engines -----------
 
 template <class E>
-void anonymousRestore1(int n, std::vector<double> & v) {
+void anonymousRestore1(int n, std::vector<CLHEPdouble> & v) {
   output << "Anonymous restore for " << E::engineName() << "\n";
   E e(12349876);				    
-  double r=0;					    
+  CLHEPdouble r=0;					    
   for (int i=0; i<n; i++) r += e.flat();	    
   std::ofstream os("anonymous.save");		    
   os << e;					    
@@ -1000,14 +1001,14 @@ void anonymousRestore1(int n, std::vector<double> & v) {
 }
 
 template <>
-void anonymousRestore1<NonRandomEngine> (int n, std::vector<double> & v) {
+void anonymousRestore1<NonRandomEngine> (int n, std::vector<CLHEPdouble> & v) {
 #ifdef VERBOSER
   output << "Anonymous restore for " << NonRandomEngine::engineName() << "\n";
 #endif
-  std::vector<double> nonRand = aSequence(500);
+  std::vector<CLHEPdouble> nonRand = aSequence(500);
   NonRandomEngine e; 
   e.setRandomSequence(&nonRand[0], nonRand.size());
-  double r=0;
+  CLHEPdouble r=0;
   for (int i=0; i<n; i++) r += e.flat();
   std::ofstream os("anonymous.save");
   os << e;
@@ -1020,9 +1021,9 @@ void anonymousRestore1<NonRandomEngine> (int n, std::vector<double> & v) {
 }
 
 template <class E>
-int anonymousRestore2(const std::vector<double> & v) {
+int anonymousRestore2(const std::vector<CLHEPdouble> & v) {
   int stat = 0;
-  std::vector<double> k;
+  std::vector<CLHEPdouble> k;
   std::ifstream is("anonymous.save");
   HepRandomEngine * a;
   a = HepRandomEngine::newEngine(is);
@@ -1046,7 +1047,7 @@ int anonymousRestore2(const std::vector<double> & v) {
 
 template <class E>
 int anonymousRestore(int n) {
-  std::vector<double> v;
+  std::vector<CLHEPdouble> v;
   anonymousRestore1<E>(n,v);
   return anonymousRestore2<E>(v);  
 }
@@ -1062,13 +1063,13 @@ int anonymousRestoreStatics1() {
   output << "\nRandomized, with theEngine = " << e->name() << "\n";
   saveStatics("distribution.save");
   output << "Saved all static distributions\n";
-  std::vector<double> c = captureStatics();
+  std::vector<CLHEPdouble> c = captureStatics();
   output << "Captured output of all static distributions\n";
   randomizeStatics(11);
   output << "Randomized all static distributions\n";
   restoreStatics("distribution.save");
   output << "Restored all static distributions to saved state\n";
-  std::vector<double> d = captureStatics();
+  std::vector<CLHEPdouble> d = captureStatics();
   output << "Captured output of all static distributions\n";
   for (unsigned int iv=0; iv<c.size(); iv++) {
     if (c[iv] != d[iv]) {
@@ -1099,7 +1100,7 @@ int anonymousRestoreStatics() {
 #ifdef VERBOSER2
   output << "Saved all static distributions\n";
 #endif
-  std::vector<double> c = captureStatics();
+  std::vector<CLHEPdouble> c = captureStatics();
 #ifdef VERBOSER2
   output << "Captured output of all static distributions\n";
 #endif
@@ -1109,8 +1110,8 @@ int anonymousRestoreStatics() {
   output << "Switched to theEngine = " << e2->name() << "\n";
   randomizeStatics(19);
   { std::ofstream os("engine.save"); os << *e2; }
-  double v1 = e2->flat();
-  double v2 = e2->flat();
+  CLHEPdouble v1 = e2->flat();
+  CLHEPdouble v2 = e2->flat();
   { std::ifstream is("engine.save"); is >> *e2; }
 #ifdef VERBOSER2
   output << "Saved the "  << e2->name() << " engine: \n"
@@ -1122,7 +1123,7 @@ int anonymousRestoreStatics() {
   output << "Restored all static distributions to saved state\n"
          << "This changes the engine type back to " << E1::engineName() << "\n";
 #endif
-  std::vector<double> d = captureStatics();
+  std::vector<CLHEPdouble> d = captureStatics();
 #ifdef VERBOSER2
   output << "Captured output of all static distributions\n";
 #endif
@@ -1136,8 +1137,8 @@ int anonymousRestoreStatics() {
   if (stat & 524288 == 0) {
     output << "All captured output agrees with earlier values\n";
   }
-  double k1 = e2->flat();
-  double k2 = e2->flat();
+  CLHEPdouble k1 = e2->flat();
+  CLHEPdouble k2 = e2->flat();
 #ifdef VERBOSER2
   output << "The "  << e2->name() << " engine should not have been affected: \n"
          << "Next randoms  are  " << k1 << " " << k2 << "\n";
@@ -1153,10 +1154,10 @@ int anonymousRestoreStatics() {
 // ----------- Vector restore of engines -----------
 
 template <class E>
-std::vector<unsigned long> vectorRestore1(int n, std::vector<double> & v) {
+std::vector<unsigned long> vectorRestore1(int n, std::vector<CLHEPdouble> & v) {
   output << "Vector restore for " << E::engineName() << "\n";
   E e(97538466);				    
-  double r=0;					    
+  CLHEPdouble r=0;					    
   for (int i=0; i<n; i++) r += e.flat();	    
   std::vector<unsigned long> state = e.put();	    
   for (int j=0; j<25; j++) v.push_back(e.flat());   
@@ -1169,14 +1170,14 @@ std::vector<unsigned long> vectorRestore1(int n, std::vector<double> & v) {
 
 template <>
 std::vector<unsigned long>
-vectorRestore1<NonRandomEngine> (int n, std::vector<double> & v) {
+vectorRestore1<NonRandomEngine> (int n, std::vector<CLHEPdouble> & v) {
 #ifdef VERBOSER2
   output << "Vector restore for " << NonRandomEngine::engineName() << "\n";
 #endif
-  std::vector<double> nonRand = aSequence(500);
+  std::vector<CLHEPdouble> nonRand = aSequence(500);
   NonRandomEngine e; 
   e.setRandomSequence(&nonRand[0], nonRand.size());
-  double r=0;
+  CLHEPdouble r=0;
   for (int i=0; i<n; i++) r += e.flat();
   std::vector<unsigned long> state = e.put();	    
   for (int j=0; j<25; j++) v.push_back(e.flat()); 
@@ -1189,9 +1190,9 @@ vectorRestore1<NonRandomEngine> (int n, std::vector<double> & v) {
 
 template <class E>
 int vectorRestore2(const std::vector<unsigned long> state,
-		   const std::vector<double> & v) {
+		   const std::vector<CLHEPdouble> & v) {
   int stat = 0;
-  std::vector<double> k;
+  std::vector<CLHEPdouble> k;
   HepRandomEngine * a;
   a = HepRandomEngine::newEngine(state);
   if (!a) {
@@ -1228,7 +1229,7 @@ int vectorRestore2(const std::vector<unsigned long> state,
 
 template <class E>
 int vectorRestore(int n) {
-  std::vector<double> v;
+  std::vector<CLHEPdouble> v;
   std::vector<unsigned long> state = vectorRestore1<E>(n,v);
   return vectorRestore2<E>(state, v);  
 }
@@ -1357,7 +1358,7 @@ int main() {
   {RanshiEngine e(234);		stat |= checkEngineInstanceSave(e);}
   {TripleRand e(234);		stat |= checkEngineInstanceSave(e);}
   
-  {std::vector<double> nonRand = aSequence(500);
+  {std::vector<CLHEPdouble> nonRand = aSequence(500);
    NonRandomEngine e; 
    e.setRandomSequence(&nonRand[0], nonRand.size());
    stat |= checkEngineInstanceSave(e);}
@@ -1430,13 +1431,13 @@ int main() {
   randomizeStatics(15);
   saveStatics("distribution.save");
   output << "Saved all static distributions\n";
-  std::vector<double> c = captureStatics();
+  std::vector<CLHEPdouble> c = captureStatics();
   output << "Captured output of all static distributions\n";
   randomizeStatics(11);
   output << "Randomized all static distributions\n";
   restoreStatics("distribution.save");
   output << "Restored all static distributions to saved state\n";
-  std::vector<double> d = captureStatics();
+  std::vector<CLHEPdouble> d = captureStatics();
   output << "Captured output of all static distributions\n";
   for (unsigned int iv=0; iv<c.size(); iv++) {
     if (c[iv] != d[iv]) {

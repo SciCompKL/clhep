@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandFlat.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -8,9 +9,9 @@
 // -----------------------------------------------------------------------
 // This file is part of Geant4 (simulation toolkit for HEP).
 
-// Class defining methods for shooting flat random numbers, double or
+// Class defining methods for shooting flat random numbers, CLHEPdouble or
 // integers.
-// It provides methods to fill with double flat values arrays of
+// It provides methods to fill with CLHEPdouble flat values arrays of
 // specified size, as well as methods for shooting sequences of 0,1 (bits).
 // Default boundaries ]0.1[ for operator()().
 
@@ -45,11 +46,11 @@ class RandFlat : public HepRandom {
 public:
 
   inline RandFlat ( HepRandomEngine& anEngine );
-  inline RandFlat ( HepRandomEngine& anEngine, double width );
-  inline RandFlat ( HepRandomEngine& anEngine, double a, double b );
+  inline RandFlat ( HepRandomEngine& anEngine, CLHEPdouble width );
+  inline RandFlat ( HepRandomEngine& anEngine, CLHEPdouble a, CLHEPdouble b );
   inline RandFlat ( HepRandomEngine* anEngine );
-  inline RandFlat ( HepRandomEngine* anEngine, double width );
-  inline RandFlat ( HepRandomEngine* anEngine, double a, double b );
+  inline RandFlat ( HepRandomEngine* anEngine, CLHEPdouble width );
+  inline RandFlat ( HepRandomEngine* anEngine, CLHEPdouble a, CLHEPdouble b );
   // These constructors should be used to instantiate a RandFlat
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -64,11 +65,11 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  double shoot();
+  static  CLHEPdouble shoot();
 
-  static  inline double shoot( double width );
+  static  inline CLHEPdouble shoot( CLHEPdouble width );
 
-  static  inline double shoot( double a, double b );
+  static  inline CLHEPdouble shoot( CLHEPdouble a, CLHEPdouble b );
 
   static  inline long shootInt( long n );
 
@@ -76,20 +77,20 @@ public:
 
   static  inline int shootBit();
 
-  static  void shootArray ( const int size, double* vect );
+  static  void shootArray ( const int size, CLHEPdouble* vect );
 
-  static  void shootArray ( const int size, double* vect,
-                            double lx, double dx );
+  static  void shootArray ( const int size, CLHEPdouble* vect,
+                            CLHEPdouble lx, CLHEPdouble dx );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  inline double shoot ( HepRandomEngine* anEngine );
+  static  inline CLHEPdouble shoot ( HepRandomEngine* anEngine );
 
-  static  inline double shoot( HepRandomEngine* anEngine, double width );
+  static  inline CLHEPdouble shoot( HepRandomEngine* anEngine, CLHEPdouble width );
 
-  static  inline double shoot( HepRandomEngine* anEngine,
-                                  double a, double b );
+  static  inline CLHEPdouble shoot( HepRandomEngine* anEngine,
+                                  CLHEPdouble a, CLHEPdouble b );
   static  inline long shootInt( HepRandomEngine* anEngine, long n );
   
   static  inline long shootInt( HepRandomEngine* anEngine, long a1, long n );
@@ -97,20 +98,20 @@ public:
   static  inline int shootBit( HepRandomEngine* );
 
   static  inline void shootArray ( HepRandomEngine* anEngine,
-                                   const int size, double* vect );
+                                   const int size, CLHEPdouble* vect );
 
   static  void shootArray ( HepRandomEngine* anEngine, 
-                            const int size, double* vect,
-                            double lx, double dx );
+                            const int size, CLHEPdouble* vect,
+                            CLHEPdouble lx, CLHEPdouble dx );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  inline double fire();
+  inline CLHEPdouble fire();
 
-  inline double fire( double width );
+  inline CLHEPdouble fire( CLHEPdouble width );
 
-  inline double fire( double a, double b );
+  inline CLHEPdouble fire( CLHEPdouble a, CLHEPdouble b );
 
   inline long fireInt( long n );
 
@@ -118,14 +119,14 @@ public:
 
   inline int fireBit();
 
-  void fireArray (const int size, double* vect);
+  void fireArray (const int size, CLHEPdouble* vect);
 
-  void fireArray (const int size, double* vect,
-                  double lx, double dx);
+  void fireArray (const int size, CLHEPdouble* vect,
+                  CLHEPdouble lx, CLHEPdouble dx);
 
-  double operator()();
-  double operator()( double width );
-  double operator()( double a, double b );
+  CLHEPdouble operator()();
+  CLHEPdouble operator()( CLHEPdouble width );
+  CLHEPdouble operator()( CLHEPdouble a, CLHEPdouble b );
 
   // Save and restore to/from streams
   
@@ -199,9 +200,9 @@ private:
   static CLHEP_THREAD_LOCAL unsigned long staticFirstUnusedBit;
   
   std::shared_ptr<HepRandomEngine> localEngine;
-  double defaultWidth;
-  double defaultA;
-  double defaultB;
+  CLHEPdouble defaultWidth;
+  CLHEPdouble defaultA;
+  CLHEPdouble defaultB;
 
 };
 

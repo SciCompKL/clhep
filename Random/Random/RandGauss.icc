@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandGauss.icc,v 1.3 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 // 
@@ -14,30 +15,30 @@
 
 namespace CLHEP {
 
-inline RandGauss::RandGauss(HepRandomEngine & anEngine, double mean,
-                                                        double stdDev )
+inline RandGauss::RandGauss(HepRandomEngine & anEngine, CLHEPdouble mean,
+                                                        CLHEPdouble stdDev )
 : HepRandom(), defaultMean(mean), defaultStdDev(stdDev),
   localEngine(&anEngine, do_nothing_deleter()), set(false), nextGauss(0.0){}
 
-inline RandGauss::RandGauss(HepRandomEngine * anEngine, double mean,
-                                                        double stdDev )
+inline RandGauss::RandGauss(HepRandomEngine * anEngine, CLHEPdouble mean,
+                                                        CLHEPdouble stdDev )
 : HepRandom(), defaultMean(mean), defaultStdDev(stdDev),
   localEngine(anEngine), set(false), nextGauss(0.0) {}
 
-inline double RandGauss::shoot(double mean, double stdDev) {
+inline CLHEPdouble RandGauss::shoot(CLHEPdouble mean, CLHEPdouble stdDev) {
   return shoot()*stdDev + mean;
 }
 
-inline double RandGauss::shoot(HepRandomEngine* anEngine,
-                                  double mean, double stdDev) {
+inline CLHEPdouble RandGauss::shoot(HepRandomEngine* anEngine,
+                                  CLHEPdouble mean, CLHEPdouble stdDev) {
   return shoot(anEngine)*stdDev + mean;
 }
 
-inline double RandGauss::fire() {
+inline CLHEPdouble RandGauss::fire() {
   return normal()*defaultStdDev + defaultMean;
 }
 
-inline double RandGauss::fire(double mean, double stdDev) {
+inline CLHEPdouble RandGauss::fire(CLHEPdouble mean, CLHEPdouble stdDev) {
   return normal()*stdDev + mean;
 }
 

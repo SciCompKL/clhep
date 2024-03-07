@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "CLHEP/GenericFunctions/InterpolatingPolynomial.hh"
@@ -21,12 +22,12 @@ namespace Genfun {
   InterpolatingPolynomial::~InterpolatingPolynomial() {
   }
   
-  double InterpolatingPolynomial::operator() (double x) const {
-    double y=0.0;
-    double deltay=0;  // also gives error;
-    double dif = fabs(x-xPoints[0].first),dift;
+  CLHEPdouble InterpolatingPolynomial::operator() (CLHEPdouble x) const {
+    CLHEPdouble y=0.0;
+    CLHEPdouble deltay=0;  // also gives error;
+    CLHEPdouble dif = fabs(x-xPoints[0].first),dift;
     const unsigned int _K=xPoints.size(),_KP=_K+1;
-    std::vector<double>c(_KP),d(_KP);
+    std::vector<CLHEPdouble>c(_KP),d(_KP);
     int ns=0;
     for (unsigned int i=0;i<_K;i++) {
       dift=fabs(x-xPoints[i].first);
@@ -39,10 +40,10 @@ namespace Genfun {
     y = xPoints[ns--].second;
     for (unsigned int m=0;m<_K-1;m++) {
       for (unsigned int i=0;i<_K-m-1;i++) {
-	double ho = xPoints[i].first-x;
-	double hp=  xPoints[i+m+1].first-x;
-	double w=c[i+1]-d[i];
-	double den=ho-hp;
+	CLHEPdouble ho = xPoints[i].first-x;
+	CLHEPdouble hp=  xPoints[i+m+1].first-x;
+	CLHEPdouble w=c[i+1]-d[i];
+	CLHEPdouble den=ho-hp;
 	if (den==0)
 	  std::cerr
 	    << "Error in polynomial extrapolation"
@@ -57,11 +58,11 @@ namespace Genfun {
     return y;
   }
   
-  void InterpolatingPolynomial::addPoint( double x, double y) {
+  void InterpolatingPolynomial::addPoint( CLHEPdouble x, CLHEPdouble y) {
     xPoints.push_back(std::make_pair(x,y));
   }
 
-  void InterpolatingPolynomial::getRange( double & min, double & max) const {
+  void InterpolatingPolynomial::getRange( CLHEPdouble & min, CLHEPdouble & max) const {
     min=DBL_MAX, max=-DBL_MAX;
     for (unsigned int i=0;i<xPoints.size();i++) {
       min = std::min(min,xPoints[i].first);

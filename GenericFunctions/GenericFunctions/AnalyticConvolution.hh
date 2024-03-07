@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: AnalyticConvolution.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 // ---------------------------------------------------------------------------//
@@ -47,8 +48,8 @@ namespace Genfun {
     virtual ~AnalyticConvolution();
 
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
   
     // Frequency of oscillation
     Parameter & frequency();
@@ -69,9 +70,9 @@ namespace Genfun {
   private:
   
     // These are for calculating mixing terms.
-    double pow(double x, int n) const ;
-    double erfc(double x) const ;
-    std::complex<double> nwwerf(std::complex<double> z) const;
+    CLHEPdouble pow(CLHEPdouble x, int n) const ;
+    CLHEPdouble erfc(CLHEPdouble x) const ;
+    std::complex<CLHEPdouble> nwwerf(std::complex<CLHEPdouble> z) const;
 
     // It is illegal to assign an adjustable constant
     const AnalyticConvolution & operator=(const AnalyticConvolution &right);

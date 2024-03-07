@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -17,7 +18,7 @@ inline int HepSymMatrix::num_row() const { return nrow;}
 inline int HepSymMatrix::num_col() const  { return nrow;}
 inline int HepSymMatrix::num_size() const  { return size_;}
 
-inline double & HepSymMatrix::fast(int row,int col)
+inline CLHEPdouble & HepSymMatrix::fast(int row,int col)
 {
 #ifdef MATRIX_BOUND_CHECK
   if(row<1||row>num_row() || col<1||col>num_col())
@@ -25,7 +26,7 @@ inline double & HepSymMatrix::fast(int row,int col)
 #endif
   return *(m.begin()+(row*(row-1))/2+(col-1));
 }
-inline const double & HepSymMatrix::fast(int row,int col) const
+inline const CLHEPdouble & HepSymMatrix::fast(int row,int col) const
 {
 #ifdef MATRIX_BOUND_CHECK
   if(row<1||row>num_row() || col<1||col>num_col())
@@ -34,9 +35,9 @@ inline const double & HepSymMatrix::fast(int row,int col) const
   return *(m.begin()+(row*(row-1))/2+(col-1));
 }
 
-inline double & HepSymMatrix::operator()(int row, int col)
+inline CLHEPdouble & HepSymMatrix::operator()(int row, int col)
     {return (row>=col? fast(row,col) : fast(col,row));}
-inline const double & HepSymMatrix::operator()(int row, int col) const 
+inline const CLHEPdouble & HepSymMatrix::operator()(int row, int col) const 
     {return (row>=col? fast(row,col) : fast(col,row));}
 
 inline void HepSymMatrix::assign(const HepSymMatrix &hm2) 
@@ -66,7 +67,7 @@ inline HepSymMatrix::HepSymMatrix_row_const HepSymMatrix::operator[] (int r) con
   return b;
 }
 
-inline double &HepSymMatrix::HepSymMatrix_row::operator[](int c)
+inline CLHEPdouble &HepSymMatrix::HepSymMatrix_row::operator[](int c)
 {
 #ifdef MATRIX_BOUND_CHECK
    if(_r<0||_r>=_a.nrow || c<0||c>=_a.nrow)
@@ -79,7 +80,7 @@ inline double &HepSymMatrix::HepSymMatrix_row::operator[](int c)
    }
 }
 
-inline const double &
+inline const CLHEPdouble &
 HepSymMatrix::HepSymMatrix_row_const::operator[](int c) const 
 {
 #ifdef MATRIX_BOUND_CHECK

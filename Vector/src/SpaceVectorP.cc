@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -25,8 +26,8 @@ namespace CLHEP  {
 //
 //-********************************
 
-double Hep3Vector::beta() const {
-  double b = std::sqrt(mag2());
+CLHEPdouble Hep3Vector::beta() const {
+  CLHEPdouble b = std::sqrt(mag2());
   if (b >= 1) {
     ZMthrowA (ZMxpvTachyonic(
       "Beta taken for Hep3Vector of at least unit length"));
@@ -34,8 +35,8 @@ double Hep3Vector::beta() const {
   return b;
 }
 
-double Hep3Vector::gamma() const {
-  double bbeta = std::sqrt(mag2());
+CLHEPdouble Hep3Vector::gamma() const {
+  CLHEPdouble bbeta = std::sqrt(mag2());
   if (bbeta == 1) {
     ZMthrowA (ZMxpvTachyonic(
       "Gamma taken for Hep3Vector of unit magnitude -- infinite result"));
@@ -48,7 +49,7 @@ double Hep3Vector::gamma() const {
   return 1/std::sqrt(1-bbeta*bbeta);
 }
 
-double Hep3Vector::rapidity() const {
+CLHEPdouble Hep3Vector::rapidity() const {
   if (std::fabs(z()) == 1) {
     ZMthrowC (ZMxpvTachyonic(
       "Rapidity in Z direction taken for Hep3Vector with |Z| = 1 -- \n"
@@ -63,8 +64,8 @@ double Hep3Vector::rapidity() const {
   return (.5 * std::log((1+z())/(1-z())) );
 }
 
-double Hep3Vector::coLinearRapidity() const {
-  double b = beta();
+CLHEPdouble Hep3Vector::coLinearRapidity() const {
+  CLHEPdouble b = beta();
   if (b == 1) {
     ZMthrowA (ZMxpvTachyonic(
       "Co-linear Rapidity taken for Hep3Vector of unit length -- "
@@ -84,7 +85,7 @@ double Hep3Vector::coLinearRapidity() const {
 //-***********************************************
 
 Hep3Vector Hep3Vector::project (const Hep3Vector & v2) const {
-  double mag2v2 = v2.mag2();
+  CLHEPdouble mag2v2 = v2.mag2();
   if (mag2v2 == 0) {
     ZMthrowA (ZMxpvZeroVector(
       "Attempt to take projection of vector against zero reference vector "));
@@ -93,14 +94,14 @@ Hep3Vector Hep3Vector::project (const Hep3Vector & v2) const {
   return ( v2 * (dot(v2)/mag2v2) );
 }
 
-double Hep3Vector::rapidity(const Hep3Vector & v2) const {
-  double vmag = v2.mag();
+CLHEPdouble Hep3Vector::rapidity(const Hep3Vector & v2) const {
+  CLHEPdouble vmag = v2.mag();
   if ( vmag == 0 ) {
     ZMthrowA (ZMxpvZeroVector(
       "Rapidity taken with respect to zero vector" ));
     return 0;    
   }
-  double z1 = dot(v2)/vmag;
+  CLHEPdouble z1 = dot(v2)/vmag;
   if (std::fabs(z1) >= 1) {
     ZMthrowA (ZMxpvTachyonic(
       "Rapidity taken for too large a Hep3Vector "
@@ -110,20 +111,20 @@ double Hep3Vector::rapidity(const Hep3Vector & v2) const {
   return (.5 * std::log((1+z1)/(1-z1)) );
 }
 
-double Hep3Vector::eta(const Hep3Vector & v2) const {
+CLHEPdouble Hep3Vector::eta(const Hep3Vector & v2) const {
   // Defined as    -std::log ( std::tan ( .5* theta(u) ) );
   //
   // Quicker is to use cosTheta:
   // std::tan (theta/2) = std::sin(theta)/(1 + std::cos(theta))
 
-  double r1   = getR();
-  double v2r = v2.mag();
+  CLHEPdouble r1   = getR();
+  CLHEPdouble v2r = v2.mag();
   if ( (r1 == 0) || (v2r == 0) ) {
     ZMthrowA (ZMxpvAmbiguousAngle(
       "Cannot find pseudorapidity of a zero vector relative to a vector"));
     return 0.;
   }
-  double c  = dot(v2)/(r1*v2r);
+  CLHEPdouble c  = dot(v2)/(r1*v2r);
   if ( c >= 1 ) {
     c = 1; 	//-| We don't want to return NAN because of roundoff
     ZMthrowC (ZMxpvInfinity(
@@ -145,7 +146,7 @@ double Hep3Vector::eta(const Hep3Vector & v2) const {
 			    // -INFINITY.
   }
 
-  double tangent = std::sqrt (1-c*c) / ( 1 + c );
+  CLHEPdouble tangent = std::sqrt (1-c*c) / ( 1 + c );
   return (- std::log (tangent));
 
 } /* eta (u) */

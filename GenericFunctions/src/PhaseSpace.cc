@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/GenericFunctions/PhaseSpace.hh"
 #include <vector>
 
@@ -72,7 +73,7 @@ namespace Classical {
   }
 
 
-  void PhaseSpace::start (const Genfun::Variable & v, double value){
+  void PhaseSpace::start (const Genfun::Variable & v, CLHEPdouble value){
     unsigned int index =v.index();
     if (index<DIM) {
       _q0[index] = value;
@@ -84,7 +85,7 @@ namespace Classical {
   }
 
 
-  double PhaseSpace::startValue(const Genfun::Variable & v) const {
+  CLHEPdouble PhaseSpace::startValue(const Genfun::Variable & v) const {
     unsigned int index =v.index();
     if (index<DIM) {
       return _q0[index];

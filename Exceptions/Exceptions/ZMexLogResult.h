@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef ZMEXLOGRESULT_H
 #define ZMEXLOGRESULT_H
 

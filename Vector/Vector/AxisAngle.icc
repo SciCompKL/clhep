@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef AXISANGLE_ICC
 #error "AxisAngle.icc included without AxisAngle.h"
 #endif
@@ -42,11 +43,11 @@ inline HepAxisAngle & HepAxisAngle::setAxis( const Hep3Vector aaxis ) {
 }  // HepAxisAngle::setAxis()
 
 
-inline double HepAxisAngle::getDelta() const {
+inline CLHEPdouble HepAxisAngle::getDelta() const {
   return  delta_;
 }  // HepAxisAngle::getDelta()
 
-inline double HepAxisAngle::delta() const {
+inline CLHEPdouble HepAxisAngle::delta() const {
   return  delta_;
 }  // HepAxisAngle::delta()
 
@@ -105,12 +106,12 @@ inline bool HepAxisAngle::operator>=( const AA & aa ) const {
 }  // HepAxisAngle::operator>=()
 
 
-inline double HepAxisAngle::getTolerance() {
+inline CLHEPdouble HepAxisAngle::getTolerance() {
   return tolerance;
 }  // HepAxisAngle::getTolerance()
 
 
-inline double HepAxisAngle::setTolerance( Scalar tol ) {
+inline CLHEPdouble HepAxisAngle::setTolerance( Scalar tol ) {
   Scalar oldTolerance( tolerance );
   tolerance = tol;
   return oldTolerance;

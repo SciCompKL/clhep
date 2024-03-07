@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: DualRand.cc,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -115,7 +116,7 @@ DualRand::DualRand(int rowIndex, int colIndex)
 
 DualRand::~DualRand() { }
 
-double DualRand::flat() {
+CLHEPdouble DualRand::flat() {
   unsigned int ic ( integerCong );
   unsigned int t  ( tausworthe  );
   return ( (t  ^ ic) * twoToMinus_32() +              // most significant part
@@ -124,7 +125,7 @@ double DualRand::flat() {
          );
 }
 
-void DualRand::flatArray(const int size, double* vect) {
+void DualRand::flatArray(const int size, CLHEPdouble* vect) {
   for (int i = 0; i < size; ++i) {
     vect[i] = flat();
   }
@@ -220,12 +221,12 @@ void DualRand::showStatus() const {
   std::cout.precision(pr);
 }
 
-DualRand::operator double() {
+DualRand::operator CLHEPdouble() {
    return flat();
 }
 
-DualRand::operator float() {
-  return (float) ( (integerCong ^ tausworthe) * twoToMinus_32() 
+DualRand::operator CLHEPfloat() {
+  return (CLHEPfloat) ( (integerCong ^ tausworthe) * twoToMinus_32() 
 		      			+ nearlyTwoToMinus_54()    ); 
 					// add this so that zero never happens
 }
@@ -371,7 +372,7 @@ DualRand::Tausworthe::operator unsigned int() {
 // form bit 0 for up to 96 iterations never depend on the results of the
 // previous ones.  So you can actually compute many bits at once.  In fact
 // you can compute 32 at once -- despite 127 - 97 < 32 -- but 24 was used in
-// the method used in Canopy, where they wanted only single-precision float
+// the method used in Canopy, where they wanted only single-precision CLHEPfloat
 // randoms.  I will do 32 here.
 
 // When you do it this way, this looks disturbingly like the dread lagged XOR

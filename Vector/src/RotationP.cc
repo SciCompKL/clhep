@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -28,25 +29,25 @@ void HepRotation::decompose(Hep3Vector & boost, HepAxisAngle & rotation)const {
   rotation = axisAngle();
 }
 
-double HepRotation::distance2( const HepRotation & r  ) const {
-  double sum = rxx * r.rxx + rxy * r.rxy + rxz * r.rxz
+CLHEPdouble HepRotation::distance2( const HepRotation & r  ) const {
+  CLHEPdouble sum = rxx * r.rxx + rxy * r.rxy + rxz * r.rxz
                 + ryx * r.ryx + ryy * r.ryy + ryz * r.ryz
                 + rzx * r.rzx + rzy * r.rzy + rzz * r.rzz;
-  double answer = 3.0 - sum;
+  CLHEPdouble answer = 3.0 - sum;
   return (answer >= 0 ) ? answer : 0;
 }
 
-double HepRotation::howNear(   const HepRotation & r  ) const {
+CLHEPdouble HepRotation::howNear(   const HepRotation & r  ) const {
   return  std::sqrt( distance2( r ) );
 }
 
 bool HepRotation::isNear(   const HepRotation & r,
-                                     double epsilon) const {
+                                     CLHEPdouble epsilon) const {
  return  distance2( r ) <= epsilon*epsilon;
 }
 
-double HepRotation::norm2() const {
-  double answer = 3.0 - rxx - ryy - rzz;
+CLHEPdouble HepRotation::norm2() const {
+  CLHEPdouble answer = 3.0 - rxx - ryy - rzz;
   return (answer >= 0 ) ? answer : 0;
 }
 

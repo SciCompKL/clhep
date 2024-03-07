@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: PuncturedSmearedExp.hh,v 1.3 2010/06/16 18:22:01 garren Exp $
 // ------------------------------------------------------------------------------//
@@ -35,8 +36,8 @@ namespace Genfun {
     virtual ~PuncturedSmearedExp();
 
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
   
     // Lifetime of exponential:
     Parameter & lifetime();
@@ -47,7 +48,7 @@ namespace Genfun {
     const Parameter & sigma() const;
 
     // Puncture this thing:
-    void puncture(double min, double max);
+    void puncture(CLHEPdouble min, CLHEPdouble max);
 
     // Get the puncture parameters:
     Parameter & min(unsigned int i);
@@ -59,8 +60,8 @@ namespace Genfun {
   private:
   
     // These are for calculating mixing terms.
-    double pow(double x, int n) const ;
-    double erfc(double x) const ;
+    CLHEPdouble pow(CLHEPdouble x, int n) const ;
+    CLHEPdouble erfc(CLHEPdouble x) const ;
 
     // It is illegal to assign an adjustable constant
     const PuncturedSmearedExp & operator=(const PuncturedSmearedExp &right);

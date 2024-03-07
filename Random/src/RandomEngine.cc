@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandomEngine.cc,v 1.7 2010/10/25 18:18:47 garren Exp $
 // -*- C++ -*-
 //
@@ -33,12 +34,12 @@ HepRandomEngine::HepRandomEngine()
 
 HepRandomEngine::~HepRandomEngine() {}
 
-HepRandomEngine::operator double() {
+HepRandomEngine::operator CLHEPdouble() {
   return flat();
 }
 
-HepRandomEngine::operator float() {
-  return float( flat() );
+HepRandomEngine::operator CLHEPfloat() {
+  return CLHEPfloat( flat() );
 }
 
 HepRandomEngine::operator unsigned int() {

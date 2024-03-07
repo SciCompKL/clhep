@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 #include "CLHEP/Units/GlobalPhysicalConstants.h"  // used to provoke shadowing warnings
 #include "CLHEP/Random/Randomize.h"
@@ -30,17 +31,17 @@
 using namespace CLHEP;
 
 // Absolutely Safe Equals Without Registers Screwing Us Up
-bool equals01(const std::vector<double> &ab) {
+bool equals01(const std::vector<CLHEPdouble> &ab) {
   return ab[1]==ab[0];
 }  
-bool equals(double a, double b) {
-  std::vector<double> ab(2);
+bool equals(CLHEPdouble a, CLHEPdouble b) {
+  std::vector<CLHEPdouble> ab(2);
   ab[0]=a;  ab[1]=b;
   return (equals01(ab));
 }
 
-std::vector<double> aSequence(int n) {
-  std::vector<double> v;
+std::vector<CLHEPdouble> aSequence(int n) {
+  std::vector<CLHEPdouble> v;
   DualRand e(13542);
   RandFlat f(e);
   for (int i=0; i<n; i++) {
@@ -97,20 +98,20 @@ int checkEngineInstanceSave(E & e) {
   int stat = 0;
   output << "checkEngineInstanceSave for " << e.name() << "\n";
   int pr=output.precision(20);
-  double r=0; 
+  CLHEPdouble r=0; 
   for (int i=0; i<100; i++) r += e.flat();
   {std::ofstream os ("instance_engine.save"); os << e;}
   for (int i=0; i<100; i++) r += e.flat();
-  double keyValue1 = e.flat();
-  double keyValue2 = e.flat();
+  CLHEPdouble keyValue1 = e.flat();
+  CLHEPdouble keyValue2 = e.flat();
 #ifdef VERBOSER
   output << keyValue1 << " " << keyValue2 << "\n";
 #endif
   E e2;
   {std::ifstream is ("instance_engine.save"); is >> e2;}
   for (int i=0; i<100; i++) r += e2.flat();
-  double k1 = e2.flat();
-  double k2 = e2.flat();
+  CLHEPdouble k1 = e2.flat();
+  CLHEPdouble k2 = e2.flat();
 #ifdef VERBOSER
   output << k1 << " " << k2 << "\n";
 #endif
@@ -132,9 +133,9 @@ int checkSaveDistribution(D & d, int nth) {
   int stat = 0;
   output << "checkSaveDistribution with " << d.engine().name() 
   	    << ", " << d.name() << "\n";
-  double r=0; 
+  CLHEPdouble r=0; 
   r = d();
-  double keyValue1, keyValue2, keyValue3, keyValue4;
+  CLHEPdouble keyValue1, keyValue2, keyValue3, keyValue4;
   for (int i=0; i<nth; i++) r += d();
   {std::ofstream os ("instance_distribution.save"); os << d.engine() << d;}
   keyValue1 = d();
@@ -155,11 +156,11 @@ int checkSaveDistribution(D & d, int nth) {
   E e;
   D d2(e);   
   { std::ifstream is ("instance_distribution.save"); is >> e >> d2;}
-  double k1 = d2();
-  double k2 = d2();
+  CLHEPdouble k1 = d2();
+  CLHEPdouble k2 = d2();
   { std::ifstream is ("instance2_distribution.save"); is >> e >> d2;}
-  double k3 = d2();
-  double k4 = d2();
+  CLHEPdouble k3 = d2();
+  CLHEPdouble k4 = d2();
 #ifdef VERBOSER
   pr = output.precision(20);
   output << "k1 =        " << k1 <<
@@ -188,9 +189,9 @@ int checkRandGeneralDistribution(RandGeneral & d, int nth) {
   int stat = 0;
   output << "checkSaveDistribution with " << d.engine().name() 
   	    << ", " << d.name() << "\n";
-  double r=0; 
+  CLHEPdouble r=0; 
   r = d();
-  double keyValue1, keyValue2, keyValue3, keyValue4;
+  CLHEPdouble keyValue1, keyValue2, keyValue3, keyValue4;
   for (int i=0; i<nth; i++) r += d();
   {std::ofstream os ("instance_distribution.save"); os << d.engine() << d;}
   keyValue1 = d();
@@ -209,14 +210,14 @@ int checkRandGeneralDistribution(RandGeneral & d, int nth) {
 #endif
   output.precision(pr);
   E e;
-  double temp = 1; 
+  CLHEPdouble temp = 1; 
   RandGeneral d2(e, &temp, 1);   
   { std::ifstream is ("instance_distribution.save"); is >> e >> d2;}
-  double k1 = d2();
-  double k2 = d2();
+  CLHEPdouble k1 = d2();
+  CLHEPdouble k2 = d2();
   { std::ifstream is ("instance2_distribution.save"); is >> e >> d2;}
-  double k3 = d2();
-  double k4 = d2();
+  CLHEPdouble k3 = d2();
+  CLHEPdouble k4 = d2();
 #ifdef VERBOSER
   pr = output.precision(20);
   output << "k1 =        " << k1 <<
@@ -320,7 +321,7 @@ int checkDistributions() {
   {RandPoissonT d(new E(125716),2.5);
    stat |= checkSaveDistribution<E,RandPoissonT> (d,12); 		}
 
-  {std::vector<double> pdf;
+  {std::vector<CLHEPdouble> pdf;
    int nbins = 20;
    for (int i = 0; i < nbins; ++i) 
    		pdf.push_back( 5*i + (10.5-i) * (10.5-i) );
@@ -379,7 +380,7 @@ int main() {
   {RanshiEngine e(234);     stat |= checkEngineInstanceSave(e);}
   {TripleRand e(234);	    stat |= checkEngineInstanceSave(e);}
 
-  {std::vector<double> nonRand = aSequence(500);
+  {std::vector<CLHEPdouble> nonRand = aSequence(500);
    NonRandomEngine e; 
    e.setRandomSequence(&nonRand[0], nonRand.size());
    stat |= checkEngineInstanceSave(e);}

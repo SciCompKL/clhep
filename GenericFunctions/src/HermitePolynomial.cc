@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "CLHEP/GenericFunctions/HermitePolynomial.hh"
@@ -20,12 +21,12 @@ HermitePolynomial::HermitePolynomial(const HermitePolynomial & right)
 {  }
 
 
-double HermitePolynomial::operator() (double x) const {
-  const static double h00=0.0;
-  const static double h0=sqrt(M_PI/4.0);
-  double p0=h00;
-  double p1=h00;
-  double pn=h0;
+CLHEPdouble HermitePolynomial::operator() (CLHEPdouble x) const {
+  const static CLHEPdouble h00=0.0;
+  const static CLHEPdouble h0=sqrt(M_PI/4.0);
+  CLHEPdouble p0=h00;
+  CLHEPdouble p1=h00;
+  CLHEPdouble pn=h0;
   for (unsigned int i=1;i<=_N;i++) {
     p0=p1;
     p1=pn;

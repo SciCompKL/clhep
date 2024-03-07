@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -313,7 +314,7 @@ HepSymMatrix operator-(const HepSymMatrix &hm1,const HepSymMatrix &hm2)
    ----------------------------------------------------------------------- */
 
 HepSymMatrix operator/(
-const HepSymMatrix &hm1,double t)
+const HepSymMatrix &hm1,CLHEPdouble t)
 #ifdef HEP_GNU_OPTIMIZED_RETURN
      return mret(hm1);
 {
@@ -325,7 +326,7 @@ const HepSymMatrix &hm1,double t)
   return mret;
 }
 
-HepSymMatrix operator*(const HepSymMatrix &hm1,double t)
+HepSymMatrix operator*(const HepSymMatrix &hm1,CLHEPdouble t)
 #ifdef HEP_GNU_OPTIMIZED_RETURN
      return mret(hm1);
 {
@@ -337,7 +338,7 @@ HepSymMatrix operator*(const HepSymMatrix &hm1,double t)
   return mret;
 }
 
-HepSymMatrix operator*(double t,const HepSymMatrix &hm1)
+HepSymMatrix operator*(CLHEPdouble t,const HepSymMatrix &hm1)
 #ifdef HEP_GNU_OPTIMIZED_RETURN
      return mret(hm1);
 {
@@ -360,7 +361,7 @@ HepMatrix operator*(const HepMatrix &hm1,const HepSymMatrix &hm2)
 #endif
     CHK_DIM_1(hm1.num_col(),hm2.num_row(),*);
     HepMatrix::mcIter mit1, mit2, sp,snp; //mit2=0
-    double temp;
+    CLHEPdouble temp;
     HepMatrix::mIter mir=mret.m.begin();
     for(mit1=hm1.m.begin();
         mit1<hm1.m.begin()+hm1.num_row()*hm1.num_col();
@@ -400,7 +401,7 @@ HepMatrix operator*(const HepSymMatrix &hm1,const HepMatrix &hm2)
   CHK_DIM_1(hm1.num_col(),hm2.num_row(),*);
   int step,stept;
   HepMatrix::mcIter mit1,mit2,sp,snp;
-  double temp;
+  CLHEPdouble temp;
   HepMatrix::mIter mir=mret.m.begin();
   for(step=1,snp=hm1.m.begin();step<=hm1.num_row();snp+=step++)
     for(mit1=hm2.m.begin();mit1<hm2.m.begin()+hm2.num_col();mit1++)
@@ -442,7 +443,7 @@ HepMatrix operator*(const HepSymMatrix &hm1,const HepSymMatrix &hm2)
   CHK_DIM_1(hm1.num_col(),hm2.num_row(),*);
   int step1,stept1,step2,stept2;
   HepMatrix::mcIter snp1,sp1,snp2,sp2;
-  double temp;
+  CLHEPdouble temp;
   HepMatrix::mIter mr = mret.m.begin();
   snp1=hm1.m.begin();
   for(step1=1;step1<=hm1.num_row();++step1) {
@@ -514,7 +515,7 @@ HepVector operator*(const HepSymMatrix &hm1,const HepVector &hm2)
 #endif
   CHK_DIM_1(hm1.num_col(),hm2.num_row(),*);
   HepMatrix::mcIter sp,snp,vpt;
-  double temp;
+  CLHEPdouble temp;
   int step,stept;
   HepMatrix::mIter vrp=mret.m.begin();
   for(step=1,snp=hm1.m.begin();step<=hm1.num_row();++step)
@@ -602,13 +603,13 @@ HepSymMatrix & HepSymMatrix::operator-=(const HepSymMatrix &hm2)
   return (*this);
 }
 
-HepSymMatrix & HepSymMatrix::operator/=(double t)
+HepSymMatrix & HepSymMatrix::operator/=(CLHEPdouble t)
 {
   SIMPLE_UOP(/=)
   return (*this);
 }
 
-HepSymMatrix & HepSymMatrix::operator*=(double t)
+HepSymMatrix & HepSymMatrix::operator*=(CLHEPdouble t)
 {
   SIMPLE_UOP(*=)
   return (*this);
@@ -694,7 +695,7 @@ std::ostream& operator<<(std::ostream &os, const HepSymMatrix &q)
 }
 
 HepSymMatrix HepSymMatrix::
-apply(double (*f)(double, int, int)) const
+apply(CLHEPdouble (*f)(CLHEPdouble, int, int)) const
 #ifdef HEP_GNU_OPTIMIZED_RETURN
 return mret(num_row());
 {
@@ -748,7 +749,7 @@ HepSymMatrix HepSymMatrix::similarity(const HepMatrix &hm1) const
   for(int r=1;r<=mret.num_row();r++) {
     HepMatrix::mcIter hm1c1 = hm1.m.begin();
     for(int c=1;c<=r;c++) {
-      double tmp = 0.0;
+      CLHEPdouble tmp = 0.0;
       HepMatrix::mIter tempri = tempr1;
       HepMatrix::mcIter hm1ci = hm1c1;
       for(int i=1;i<=hm1.num_col();i++) {
@@ -778,7 +779,7 @@ HepSymMatrix HepSymMatrix::similarity(const HepSymMatrix &hm1) const
     HepMatrix::mcIter hm1c1 = hm1.m.begin();
     int c;
     for(c=1;c<=r;c++) {
-      double tmp = 0.0;
+      CLHEPdouble tmp = 0.0;
       HepMatrix::mIter tempri = tempr1;
       HepMatrix::mcIter hm1ci = hm1c1;
       int i;
@@ -797,9 +798,9 @@ HepSymMatrix HepSymMatrix::similarity(const HepSymMatrix &hm1) const
   return mret;
 }
 
-double HepSymMatrix::similarity(const HepVector &hm1)
+CLHEPdouble HepSymMatrix::similarity(const HepVector &hm1)
 const {
-  double mret = 0.0;
+  CLHEPdouble mret = 0.0;
   HepVector temp = (*this) *hm1;
 // If hm1*(*this) has correct dimensions, then so will the hm1.T multiplication.
 // So there is no need to check dimensions again.
@@ -825,7 +826,7 @@ HepSymMatrix HepSymMatrix::similarityT(const HepMatrix &hm1) const
   for(int r=1;r<=mret.num_row();r++) {
     HepMatrix::mcIter m11c = hm1.m.begin();
     for(int c=1;c<=r;c++) {
-      double tmp = 0.0;
+      CLHEPdouble tmp = 0.0;
       for(int i=1;i<=hm1.num_row();i++) {
 	HepMatrix::mIter tempir = temp1r + n*(i-1);
 	HepMatrix::mcIter hm1ic = m11c + n*(i-1);
@@ -846,9 +847,9 @@ void HepSymMatrix::invert(int &ifail) {
   switch(nrow) {
   case 3:
     {
-      double det, temp;
-      double t1, t2, t3;
-      double c11,c12,c13,c22,c23,c33;
+      CLHEPdouble det, temp;
+      CLHEPdouble t1, t2, t3;
+      CLHEPdouble c11,c12,c13,c22,c23,c33;
       c11 = (*(m.begin()+2)) * (*(m.begin()+5)) - (*(m.begin()+4)) * (*(m.begin()+4));
       c12 = (*(m.begin()+4)) * (*(m.begin()+3)) - (*(m.begin()+1)) * (*(m.begin()+5));
       c13 = (*(m.begin()+1)) * (*(m.begin()+4)) - (*(m.begin()+2)) * (*(m.begin()+3));
@@ -878,7 +879,7 @@ void HepSymMatrix::invert(int &ifail) {
 	return;
       }
       {
-	double ds = temp/det;
+	CLHEPdouble ds = temp/det;
 	HepMatrix::mIter hmm = m.begin();
 	*(hmm++) = ds*c11;
 	*(hmm++) = ds*c12;
@@ -891,7 +892,7 @@ void HepSymMatrix::invert(int &ifail) {
     break;
  case 2:
     {
-      double det, temp, ds;
+      CLHEPdouble det, temp, ds;
       det = (*m.begin())*(*(m.begin()+2)) - (*(m.begin()+1))*(*(m.begin()+1));
       if (det==0) {
 	ifail = 1;
@@ -937,22 +938,22 @@ void HepSymMatrix::invert(int &ifail) {
   return; // inversion successful
 }
 
-double HepSymMatrix::determinant() const {
+CLHEPdouble HepSymMatrix::determinant() const {
   static const int max_array = 20;
   // ir must point to an array which is ***1 longer than*** nrow
   static std::vector<int> ir_vec (max_array+1); 
   if (ir_vec.size() <= static_cast<unsigned int>(nrow)) ir_vec.resize(nrow+1);
   int * ir = &ir_vec[0];   
 
-  double det;
+  CLHEPdouble det;
   HepMatrix mt(*this);
   int i = mt.dfact_matrix(det, ir);
   if(i==0) return det;
   return 0.0;
 }
 
-double HepSymMatrix::trace() const {
-   double t = 0.0;
+CLHEPdouble HepSymMatrix::trace() const {
+   CLHEPdouble t = 0.0;
    for (int i=0; i<nrow; i++) 
      t += *(m.begin() + (i+3)*i/2);
    return t;
@@ -971,18 +972,18 @@ void HepSymMatrix::invertBunchKaufman(int &ifail) {
   int pivrow;
 
   // Establish the two working-space arrays needed:  x and piv are
-  // used as pointers to arrays of doubles and ints respectively, each
+  // used as pointers to arrays of CLHEPdoubles and ints respectively, each
   // of length nrow.  We do not want to reallocate each time through
   // unless the size needs to grow.  We do not want to leak memory, even
   // by having a new without a delete that is only done once.
   
   static const int max_array = 25;
 #ifdef DISABLE_ALLOC
-  static std::vector<double> xvec (max_array);
+  static std::vector<CLHEPdouble> xvec (max_array);
   static std::vector<int>    pivv (max_array);
   typedef std::vector<int>::iterator pivIter; 
 #else
-  static std::vector<double,Alloc<double,25> > xvec (max_array);
+  static std::vector<CLHEPdouble,Alloc<CLHEPdouble,25> > xvec (max_array);
   static std::vector<int,   Alloc<int,   25> > pivv (max_array);
   typedef std::vector<int,Alloc<int,25> >::iterator pivIter; 
 #endif	
@@ -997,12 +998,12 @@ void HepSymMatrix::invertBunchKaufman(int &ifail) {
   pivIter piv = pivv.begin();
   // piv[i] is used to store details of exchanges
       
-  double temp1, temp2;
+  CLHEPdouble temp1, temp2;
   HepMatrix::mIter ip, mjj, iq;
-  double lambda, sigma;
-  const double alpha = .6404; // = (1+sqrt(17))/8
-  const double epsilon = 32*DBL_EPSILON;
-  // whenever a sum of two doubles is below or equal to epsilon
+  CLHEPdouble lambda, sigma;
+  const CLHEPdouble alpha = .6404; // = (1+sqrt(17))/8
+  const CLHEPdouble epsilon = 32*DBL_EPSILON;
+  // whenever a sum of two CLHEPdoubles is below or equal to epsilon
   // it is set to zero.
   // this constant could be set to zero but then the algorithm
   // doesn't neccessarily detect that a matrix is singular

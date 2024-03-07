@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // Test program to check out environment's exception-handling
 
 #include <iostream>

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandChiSquare.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -39,8 +40,8 @@ class RandChiSquare : public HepRandom {
 
 public:
 
-  inline RandChiSquare ( HepRandomEngine& anEngine, double a=1 );
-  inline RandChiSquare ( HepRandomEngine* anEngine, double a=1 );
+  inline RandChiSquare ( HepRandomEngine& anEngine, CLHEPdouble a=1 );
+  inline RandChiSquare ( HepRandomEngine* anEngine, CLHEPdouble a=1 );
   // These constructors should be used to instantiate a RandChiSquare
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -55,36 +56,36 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static inline double shoot();
+  static inline CLHEPdouble shoot();
 
-  static double shoot( double a );
+  static CLHEPdouble shoot( CLHEPdouble a );
 
-  static void shootArray ( const int size, double* vect,
-                            double a=1.0 );
+  static void shootArray ( const int size, CLHEPdouble* vect,
+                            CLHEPdouble a=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static inline double shoot( HepRandomEngine* anEngine );
+  static inline CLHEPdouble shoot( HepRandomEngine* anEngine );
 
-  static double shoot( HepRandomEngine* anEngine, 
-                                  double a );
+  static CLHEPdouble shoot( HepRandomEngine* anEngine, 
+                                  CLHEPdouble a );
 
   static void shootArray ( HepRandomEngine* anEngine, const int size,
-                            double* vect, double a=1.0 );
+                            CLHEPdouble* vect, CLHEPdouble a=1.0 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  inline double fire();
+  inline CLHEPdouble fire();
 
-  double fire( double a );
+  CLHEPdouble fire( CLHEPdouble a );
   
-  void fireArray ( const int size, double* vect);
-  void fireArray ( const int size, double* vect,
-                   double a );
-  inline double operator()();
-  inline double operator()( double a );
+  void fireArray ( const int size, CLHEPdouble* vect);
+  void fireArray ( const int size, CLHEPdouble* vect,
+                   CLHEPdouble a );
+  inline CLHEPdouble operator()();
+  inline CLHEPdouble operator()( CLHEPdouble a );
 
   // Save and restore to/from streams
   
@@ -99,10 +100,10 @@ public:
 
 private:
 
-  static double genChiSquare( HepRandomEngine *anEngine, double a );
+  static CLHEPdouble genChiSquare( HepRandomEngine *anEngine, CLHEPdouble a );
 
   std::shared_ptr<HepRandomEngine> localEngine;
-  double defaultA;
+  CLHEPdouble defaultA;
 
 };
 

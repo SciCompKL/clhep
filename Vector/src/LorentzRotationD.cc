@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -86,25 +87,25 @@ void HepLorentzRotation::decompose
   return;
 }
 
-double HepLorentzRotation::distance2( const HepBoost & b ) const {
+CLHEPdouble HepLorentzRotation::distance2( const HepBoost & b ) const {
   HepBoost    b1;
   HepRotation r1; 
   decompose( b1, r1 );
-  double db2 = b1.distance2( b );
-  double dr2 = r1.norm2(); 
+  CLHEPdouble db2 = b1.distance2( b );
+  CLHEPdouble dr2 = r1.norm2(); 
   return ( db2 + dr2 );
 }
 
-double HepLorentzRotation::distance2( const HepRotation & r ) const {
+CLHEPdouble HepLorentzRotation::distance2( const HepRotation & r ) const {
   HepBoost    b1;
   HepRotation r1; 
   decompose( b1, r1 );
-  double db2 = b1.norm2( );
-  double dr2 = r1.distance2( r ); 
+  CLHEPdouble db2 = b1.norm2( );
+  CLHEPdouble dr2 = r1.distance2( r ); 
   return ( db2 + dr2 );
 }
 
-double HepLorentzRotation::distance2( 
+CLHEPdouble HepLorentzRotation::distance2( 
 				   const HepLorentzRotation & lt  ) const {
   HepBoost    b1;
   HepRotation r1; 
@@ -112,64 +113,64 @@ double HepLorentzRotation::distance2(
   HepBoost    b2;
   HepRotation r2; 
   lt.decompose (b2, r2);
-  double db2 = b1.distance2( b2 );
-  double dr2 = r1.distance2( r2 ); 
+  CLHEPdouble db2 = b1.distance2( b2 );
+  CLHEPdouble dr2 = r1.distance2( r2 ); 
   return ( db2 + dr2 );
 }
 
-double HepLorentzRotation::howNear( const HepBoost & b ) const {
+CLHEPdouble HepLorentzRotation::howNear( const HepBoost & b ) const {
   return std::sqrt( distance2( b ) );
 }
-double HepLorentzRotation::howNear( const HepRotation & r ) const {
+CLHEPdouble HepLorentzRotation::howNear( const HepRotation & r ) const {
   return std::sqrt( distance2( r ) );
 }
-double HepLorentzRotation::howNear( const HepLorentzRotation & lt )const {
+CLHEPdouble HepLorentzRotation::howNear( const HepLorentzRotation & lt )const {
   return std::sqrt( distance2( lt ) );
 }
 
 bool HepLorentzRotation::isNear(
-		const HepBoost & b, double epsilon ) const {
+		const HepBoost & b, CLHEPdouble epsilon ) const {
   HepBoost    b1;
   HepRotation r1; 
   decompose( b1, r1 );
-  double db2 = b1.distance2(b);
+  CLHEPdouble db2 = b1.distance2(b);
   if ( db2 > epsilon*epsilon ) {
      return false;       // Saves the time-consuming Rotation::norm2
   }
-  double dr2 = r1.norm2();
+  CLHEPdouble dr2 = r1.norm2();
   return ( (db2 + dr2) <= epsilon*epsilon );
 }
 
 bool HepLorentzRotation::isNear(
-		const HepRotation & r, double epsilon ) const {
+		const HepRotation & r, CLHEPdouble epsilon ) const {
   HepBoost    b1;
   HepRotation r1; 
   decompose( b1, r1 );
-  double db2 = b1.norm2();
+  CLHEPdouble db2 = b1.norm2();
   if ( db2 > epsilon*epsilon ) {
      return false;       // Saves the time-consuming Rotation::distance2
   }
-  double dr2 = r1.distance2(r);
+  CLHEPdouble dr2 = r1.distance2(r);
   return ( (db2 + dr2) <= epsilon*epsilon );
 }
 
 bool HepLorentzRotation::isNear(
-		const HepLorentzRotation & lt, double epsilon ) const {
+		const HepLorentzRotation & lt, CLHEPdouble epsilon ) const {
   HepBoost    b1;
   HepRotation r1; 
   decompose( b1, r1 );
   HepBoost    b2;
   HepRotation r2; 
   lt.decompose (b2, r2);
-  double db2 = b1.distance2(b2);
+  CLHEPdouble db2 = b1.distance2(b2);
   if ( db2 > epsilon*epsilon ) {
      return false;       // Saves the time-consuming Rotation::distance2
   }
-  double dr2 = r1.distance2(r2);
+  CLHEPdouble dr2 = r1.distance2(r2);
   return ( (db2 + dr2) <= epsilon*epsilon );
 }
 
-double HepLorentzRotation::norm2() const {
+CLHEPdouble HepLorentzRotation::norm2() const {
   HepBoost    b;
   HepRotation r;
   decompose( b, r );
@@ -189,7 +190,7 @@ void HepLorentzRotation::rectify() {
   // components of that, rectify that rotation and multiply back by the boost.
                     
   Hep3Vector beta (tx(), ty(), tz());
-  double gam = tt();			// NaN-proofing
+  CLHEPdouble gam = tt();			// NaN-proofing
   if ( gam <= 0 ) {
     ZMthrowA ( ZMxpvImproperTransformation (
 	"rectify() on a transformation with tt() <= 0 - will not help!" ));

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 //
 // This file is a part of the CLHEP - a Class Library for High Energy Physics.
@@ -53,16 +54,16 @@ public:
   inline HepBoost & operator = (HepBoost && m) = default;
   // Copy and move assignment operators.
 
-         HepBoost & set (double betaX, double betaY, double betaZ);
-  inline HepBoost       (double betaX, double betaY, double betaZ);
+         HepBoost & set (CLHEPdouble betaX, CLHEPdouble betaY, CLHEPdouble betaZ);
+  inline HepBoost       (CLHEPdouble betaX, CLHEPdouble betaY, CLHEPdouble betaZ);
   // Constructor from three components of beta vector
 
          HepBoost & set (const HepRep4x4Symmetric & m);
   inline HepBoost       (const HepRep4x4Symmetric & m);
   // Constructor from symmetric HepRep4x4
 
-         HepBoost & set (Hep3Vector direction, double beta);
-  inline HepBoost       (Hep3Vector direction, double beta);
+         HepBoost & set (Hep3Vector direction, CLHEPdouble beta);
+  inline HepBoost       (Hep3Vector direction, CLHEPdouble beta);
   // Constructor from a three vector direction and the magnitude of beta
 
          HepBoost & set (const Hep3Vector & boost);
@@ -78,28 +79,28 @@ public:
 
   // ----------  Accessors:
 
-  inline double  beta()  const;
-  inline double  gamma() const;
+  inline CLHEPdouble  beta()  const;
+  inline CLHEPdouble  gamma() const;
   inline Hep3Vector boostVector() const;
   inline Hep3Vector getDirection() const;
   inline Hep3Vector direction() const;
 
-  inline double xx() const;
-  inline double xy() const;
-  inline double xz() const;
-  inline double xt() const;
-  inline double yx() const;
-  inline double yy() const;
-  inline double yz() const;
-  inline double yt() const;
-  inline double zx() const;
-  inline double zy() const;
-  inline double zz() const;
-  inline double zt() const;
-  inline double tx() const;
-  inline double ty() const;
-  inline double tz() const;
-  inline double tt() const;
+  inline CLHEPdouble xx() const;
+  inline CLHEPdouble xy() const;
+  inline CLHEPdouble xz() const;
+  inline CLHEPdouble xt() const;
+  inline CLHEPdouble yx() const;
+  inline CLHEPdouble yy() const;
+  inline CLHEPdouble yz() const;
+  inline CLHEPdouble yt() const;
+  inline CLHEPdouble zx() const;
+  inline CLHEPdouble zy() const;
+  inline CLHEPdouble zz() const;
+  inline CLHEPdouble zt() const;
+  inline CLHEPdouble tx() const;
+  inline CLHEPdouble ty() const;
+  inline CLHEPdouble tz() const;
+  inline CLHEPdouble tt() const;
   // Elements of the matrix.
 
   inline HepLorentzVector col1() const;
@@ -147,31 +148,31 @@ public:
   inline bool isIdentity() const;
   // Returns true if a null boost.
 
-  inline  double distance2( const HepBoost  & b  ) const;
-  inline  double distance2( const HepBoostX & bx ) const;
-  inline  double distance2( const HepBoostY & by ) const;
-  inline  double distance2( const HepBoostZ & bz ) const;
+  inline  CLHEPdouble distance2( const HepBoost  & b  ) const;
+  inline  CLHEPdouble distance2( const HepBoostX & bx ) const;
+  inline  CLHEPdouble distance2( const HepBoostY & by ) const;
+  inline  CLHEPdouble distance2( const HepBoostZ & bz ) const;
   // Defined as the distance2 between the vectors (gamma*betaVector)
 
-  double distance2( const HepRotation & r  ) const;
-  double distance2( const HepLorentzRotation & lt  ) const;
+  CLHEPdouble distance2( const HepRotation & r  ) const;
+  CLHEPdouble distance2( const HepLorentzRotation & lt  ) const;
   // Distance between this and other sorts of transformations
 
-  inline double howNear(   const HepBoost & b ) const;
+  inline CLHEPdouble howNear(   const HepBoost & b ) const;
   inline bool isNear(   const HepBoost & b,
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             CLHEPdouble epsilon=Hep4RotationInterface::tolerance) const;
 
-  double howNear( const HepRotation & r  ) const;
-  double howNear( const HepLorentzRotation & lt  ) const;
+  CLHEPdouble howNear( const HepRotation & r  ) const;
+  CLHEPdouble howNear( const HepLorentzRotation & lt  ) const;
 
   bool isNear( const HepRotation & r, 
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             CLHEPdouble epsilon=Hep4RotationInterface::tolerance) const;
   bool isNear( const HepLorentzRotation & lt, 
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             CLHEPdouble epsilon=Hep4RotationInterface::tolerance) const;
 
   // ----------  Properties:
 
-  double norm2() const;
+  CLHEPdouble norm2() const;
   // (beta*gamma)^2
 
   void rectify();
@@ -209,8 +210,8 @@ public:
 
   // ---------- Tolerance              
 
-  static inline double getTolerance();
-  static inline double setTolerance(double tol);
+  static inline CLHEPdouble getTolerance();
+  static inline CLHEPdouble setTolerance(CLHEPdouble tol);
 
 protected:
 
@@ -222,14 +223,14 @@ protected:
   HepLorentzRotation matrixMultiplication (const HepRep4x4Symmetric & m) const;
 
   inline HepBoost
-       (double xx, double xy, double xz, double xt,
-		   double yy, double yz, double yt,
-			      double zz, double zt,
-					 double tt);
+       (CLHEPdouble xx, CLHEPdouble xy, CLHEPdouble xz, CLHEPdouble xt,
+		   CLHEPdouble yy, CLHEPdouble yz, CLHEPdouble yt,
+			      CLHEPdouble zz, CLHEPdouble zt,
+					 CLHEPdouble tt);
   // Protected constructor.
   // DOES NOT CHECK FOR VALIDITY AS A LORENTZ BOOST.
 
-  inline void setBoost(double bx, double by, double bz);
+  inline void setBoost(CLHEPdouble bx, CLHEPdouble by, CLHEPdouble bz);
 
   HepRep4x4Symmetric rep_;
 

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/Random/Randomize.h"
 #include "CLHEP/Random/NonRandomEngine.h"
 #include "CLHEP/Random/defs.h"
@@ -27,12 +28,12 @@ int main() {
   NonRandomEngine eng;
   RandGauss dist (eng);
 
-  double r;
+  CLHEPdouble r;
   while (true) {
     cout << "r -- ";
     cin  >> r;
     eng.setNextRandom(r);
-    double x = dist.fire();
+    CLHEPdouble x = dist.fire();
     cout << "                " << std::setprecision(16) << x << "\n";
     if ( x > 1.0e15 ) break;
   }

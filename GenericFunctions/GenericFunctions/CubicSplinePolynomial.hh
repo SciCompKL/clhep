@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 // ------------------------------------------------------------------------------//
@@ -34,14 +35,14 @@ namespace Genfun {
     virtual ~CubicSplinePolynomial();
 
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
   
     // Puncture this thing:
-    void addPoint(double x, double y);
+    void addPoint(CLHEPdouble x, CLHEPdouble y);
 
     // Get the range:
-    void getRange(double & min, double & max) const;
+    void getRange(CLHEPdouble & min, CLHEPdouble & max) const;
 
   private:
   

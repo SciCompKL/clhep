@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 //---------------------SphericalHarmonicFit------------------------------------------//
@@ -38,8 +39,8 @@ namespace Genfun {
     virtual unsigned int dimensionality() const override {return 2;}
 
     // Retreive function value
-    virtual double operator ()(double argument) const override;    // Gives an error.
-    virtual double operator ()(const Argument & a) const override; // Must use this one
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;    // Gives an error.
+    virtual CLHEPdouble operator ()(const Argument & a) const override; // Must use this one
 
     // Total number of parameters
     unsigned int numComponents() const;

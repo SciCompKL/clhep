@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 //--------------------------ParameterComposition----------------------------//
@@ -34,7 +35,7 @@ namespace Genfun {
     virtual ~ParameterComposition();
 
     // Retreive parameter value
-    virtual double getValue() const;
+    virtual CLHEPdouble getValue() const;
 
 
   private:

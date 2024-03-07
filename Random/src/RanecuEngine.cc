@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RanecuEngine.cc,v 1.7 2010/07/20 18:06:02 garren Exp $
 // -*- C++ -*-
 //
@@ -61,7 +62,7 @@ namespace {
 
 static const int MarkerLen = 64; // Enough room to hold a begin or end marker. 
 
-static const double prec = 4.6566128E-10;
+static const CLHEPdouble prec = 4.6566128E-10;
 
 std::string RanecuEngine::name() const {return "RanecuEngine";}
 
@@ -221,7 +222,7 @@ void RanecuEngine::showStatus() const
    std::cout << "----------------------------------------" << std::endl;
 }
 
-double RanecuEngine::flat()
+CLHEPdouble RanecuEngine::flat()
 {
    const int index = seq;
    long seed1 = table[index][0];
@@ -241,10 +242,10 @@ double RanecuEngine::flat()
    long diff = seed1-seed2;
 
    if (diff <= 0) diff += (shift1-1);
-   return (double)(diff*prec);
+   return (CLHEPdouble)(diff*prec);
 }
 
-void RanecuEngine::flatArray(const int size, double* vect)
+void RanecuEngine::flatArray(const int size, CLHEPdouble* vect)
 {
    const int index = seq;
    long seed1 = table[index][0];
@@ -265,18 +266,18 @@ void RanecuEngine::flatArray(const int size, double* vect)
      long diff = seed1-seed2;
      if (diff <= 0) diff += (shift1-1);
 
-     vect[i] = (double)(diff*prec);
+     vect[i] = (CLHEPdouble)(diff*prec);
    }
    table[index][0] = seed1;
    table[index][1] = seed2;
 }
 
-RanecuEngine::operator double() {
+RanecuEngine::operator CLHEPdouble() {
   return flat();
 }
 
-RanecuEngine::operator float() {
-  return float( flat() );
+RanecuEngine::operator CLHEPfloat() {
+  return CLHEPfloat( flat() );
 }
 
 RanecuEngine::operator unsigned int() {

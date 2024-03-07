@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -35,64 +36,64 @@ HepLorentzRotation & HepLorentzRotation::set (const HepLorentzVector & ccol1,
     return *this;
   }
 
-  double u1u1 = ccol1.dot(ccol1);
-  double f11  = std::fabs(u1u1 + 1.0);
+  CLHEPdouble u1u1 = ccol1.dot(ccol1);
+  CLHEPdouble f11  = std::fabs(u1u1 + 1.0);
   if ( f11 > Hep4RotationInterface::tolerance ) {
     ZMthrowC (ZMxpvNotSymplectic(
       "column 1 supplied for HepLorentzRotation has w*w != -1"));
   }
-  double u2u2 = ccol2.dot(ccol2);
-  double f22  = std::fabs(u2u2 + 1.0);
+  CLHEPdouble u2u2 = ccol2.dot(ccol2);
+  CLHEPdouble f22  = std::fabs(u2u2 + 1.0);
   if ( f22 > Hep4RotationInterface::tolerance ) {
     ZMthrowC (ZMxpvNotSymplectic(
       "column 2 supplied for HepLorentzRotation has w*w != -1"));
   }
-  double u3u3 = ccol3.dot(ccol3);
-  double f33  = std::fabs(u3u3 + 1.0);
+  CLHEPdouble u3u3 = ccol3.dot(ccol3);
+  CLHEPdouble f33  = std::fabs(u3u3 + 1.0);
   if ( f33 > Hep4RotationInterface::tolerance ) {
     ZMthrowC (ZMxpvNotSymplectic(
       "column 3 supplied for HepLorentzRotation has w*w != -1"));
   }
-  double u4u4 = ccol4.dot(ccol4);
-  double f44  = std::fabs(u4u4 - 1.0);
+  CLHEPdouble u4u4 = ccol4.dot(ccol4);
+  CLHEPdouble f44  = std::fabs(u4u4 - 1.0);
   if ( f44 > Hep4RotationInterface::tolerance ) {
     ZMthrowC (ZMxpvNotSymplectic(
       "column 4 supplied for HepLorentzRotation has w*w != +1"));
   }
 
-  double u1u2 = ccol1.dot(ccol2);
-  double f12  = std::fabs(u1u2);
+  CLHEPdouble u1u2 = ccol1.dot(ccol2);
+  CLHEPdouble f12  = std::fabs(u1u2);
   if ( f12 > Hep4RotationInterface::tolerance ) {
     ZMthrowC (ZMxpvNotOrthogonal(
    "columns 1 and 2 supplied for HepLorentzRotation have non-zero dot"));
   }
-  double u1u3 = ccol1.dot(ccol3);
-  double f13  = std::fabs(u1u3);
+  CLHEPdouble u1u3 = ccol1.dot(ccol3);
+  CLHEPdouble f13  = std::fabs(u1u3);
 
   if ( f13 > Hep4RotationInterface::tolerance ) {
     ZMthrowC (ZMxpvNotOrthogonal(
    "columns 1 and 3 supplied for HepLorentzRotation have non-zero dot"));
   }
-  double u1u4 = ccol1.dot(ccol4);
-  double f14  = std::fabs(u1u4);
+  CLHEPdouble u1u4 = ccol1.dot(ccol4);
+  CLHEPdouble f14  = std::fabs(u1u4);
   if ( f14 > Hep4RotationInterface::tolerance ) {
     ZMthrowC (ZMxpvNotOrthogonal(
    "columns 1 and 4 supplied for HepLorentzRotation have non-zero dot"));
   }
-  double u2u3 = ccol2.dot(ccol3);
-  double f23  = std::fabs(u2u3);
+  CLHEPdouble u2u3 = ccol2.dot(ccol3);
+  CLHEPdouble f23  = std::fabs(u2u3);
   if ( f23 > Hep4RotationInterface::tolerance ) {
     ZMthrowC (ZMxpvNotOrthogonal(
    "columns 2 and 3 supplied for HepLorentzRotation have non-zero dot"));
   }
-  double u2u4 = ccol2.dot(ccol4);
-  double f24  = std::fabs(u2u4);
+  CLHEPdouble u2u4 = ccol2.dot(ccol4);
+  CLHEPdouble f24  = std::fabs(u2u4);
   if ( f24 > Hep4RotationInterface::tolerance ) {
     ZMthrowC (ZMxpvNotOrthogonal(
    "columns 2 and 4 supplied for HepLorentzRotation have non-zero dot"));
   }
-  double u3u4 = ccol3.dot(ccol4);
-  double f34  = std::fabs(u3u4);
+  CLHEPdouble u3u4 = ccol3.dot(ccol4);
+  CLHEPdouble f34  = std::fabs(u3u4);
   if ( f34 > Hep4RotationInterface::tolerance ) {
     ZMthrowC (ZMxpvNotOrthogonal(
    "columns 3 and 4 supplied for HepLorentzRotation have non-zero dot"));
@@ -108,7 +109,7 @@ HepLorentzRotation & HepLorentzRotation::set (const HepLorentzVector & ccol1,
 
   HepLorentzVector a, b, c, d;
   bool isLorentzTransformation = true;
-  double norm;
+  CLHEPdouble norm;
 
   d = ccol4;
   norm = d.dot(d);
@@ -185,7 +186,7 @@ HepLorentzRotation & HepLorentzRotation::setRows
   // Set based on using those rows as columns:
   set (rrow1, rrow2, rrow3, rrow4);
   // Now transpose in place:
-  double q1, q2, q3;
+  CLHEPdouble q1, q2, q3;
   q1  = mxy;  q2  = mxz;  q3  = mxt;
   mxy = myx;  mxz = mzx;  mxt = mtx;
   myx = q1;   mzx = q2;   mtx = q3;

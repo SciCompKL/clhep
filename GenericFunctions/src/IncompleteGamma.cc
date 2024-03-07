@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: IncompleteGamma.cc,v 1.4 2003/10/10 17:40:39 garren Exp $
 
@@ -12,8 +13,8 @@ namespace Genfun {
 FUNCTION_OBJECT_IMP(IncompleteGamma)
 
 const int          IncompleteGamma::ITMAX =100;
-const double       IncompleteGamma::EPS   =3.0E-7;
-const double       IncompleteGamma::FPMIN =1.0e-30;    
+const CLHEPdouble       IncompleteGamma::EPS   =3.0E-7;
+const CLHEPdouble       IncompleteGamma::FPMIN =1.0e-30;    
 
 
 IncompleteGamma::IncompleteGamma():
@@ -27,7 +28,7 @@ AbsFunction(right), _a(right._a) {
 IncompleteGamma::~IncompleteGamma() {
 }
 
-double IncompleteGamma::operator() (double x) const {
+CLHEPdouble IncompleteGamma::operator() (CLHEPdouble x) const {
 
   assert(x>=0.0 && _a.getValue() > 0.0);
 
@@ -43,9 +44,9 @@ Parameter & IncompleteGamma::a() {
 
 /* ------------------Incomplete gamma function-----------------*/
 /* ------------------via its series representation-------------*/
-double  IncompleteGamma::_gamser(double xa, double x, double logGamma) const {
-    double n;
-    double ap,del,sum;
+CLHEPdouble  IncompleteGamma::_gamser(CLHEPdouble xa, CLHEPdouble x, CLHEPdouble logGamma) const {
+    CLHEPdouble n;
+    CLHEPdouble ap,del,sum;
 
     ap=xa;
     del=sum=1.0/xa;
@@ -62,9 +63,9 @@ double  IncompleteGamma::_gamser(double xa, double x, double logGamma) const {
 /* ------------------Incomplete gamma function complement------*/
 /* ------------------via its continued fraction representation-*/
 
-double  IncompleteGamma::_gammcf(double xa, double x, double logGamma) const {
+CLHEPdouble  IncompleteGamma::_gammcf(CLHEPdouble xa, CLHEPdouble x, CLHEPdouble logGamma) const {
 
-    double an,b,c,d,del,h;
+    CLHEPdouble an,b,c,d,del,h;
     int i;
 
     b = x + 1.0 -xa;

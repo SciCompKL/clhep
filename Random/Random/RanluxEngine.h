@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RanluxEngine.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -65,11 +66,11 @@ public:
 //           correlations have very small chance of being observed.
 //  level 4  (p=389): highest possible luxury, all 24 bits chaotic.
 
-  double flat();
+  CLHEPdouble flat();
   // It returns a pseudo random number between 0 and 1,
   // excluding the end points.
 
-  void flatArray (const int size, double* vect);
+  void flatArray (const int size, CLHEPdouble* vect);
   // Fills the array "vect" of specified size with flat random values.
 
   void setSeed(long seed, int lux=3);
@@ -92,9 +93,9 @@ public:
   int getLuxury() const { return luxury; }
   // Gets the luxury level.
 
-  operator double();       // Returns same as flat()
-  operator float();        // less precise flat, faster if possible
-  operator unsigned int(); // 32-bit flat, but slower than double or float
+  operator CLHEPdouble();       // Returns same as flat()
+  operator CLHEPfloat();        // less precise flat, faster if possible
+  operator unsigned int(); // 32-bit flat, but slower than CLHEPdouble or CLHEPfloat
 
   virtual std::ostream & put (std::ostream & os) const;
   virtual std::istream & get (std::istream & is);
@@ -113,9 +114,9 @@ public:
 private:
 
   int nskip, luxury;
-  float float_seed_table[24];
+  CLHEPfloat CLHEPfloat_seed_table[24];
   int i_lag,j_lag;  
-  float carry;
+  CLHEPfloat carry;
   int count24;
   static const int int_modulus = 0x1000000;
 };

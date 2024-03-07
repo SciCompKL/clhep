@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ParameterDifference.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //--------------------------ParameterDifference-----------------------------//
@@ -33,7 +34,7 @@ namespace Genfun {
     virtual ~ParameterDifference();
   
     // Retreive parameter value
-    virtual double getValue() const;
+    virtual CLHEPdouble getValue() const;
 
   private:
 

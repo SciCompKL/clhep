@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionNoop.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 // ---------------------------------------------------------------------------
@@ -28,12 +29,12 @@ unsigned int FunctionNoop::dimensionality() const {
 }
 
 
-double FunctionNoop::operator ()(double x) const
+CLHEPdouble FunctionNoop::operator ()(CLHEPdouble x) const
 {
   return +((*_arg1)(x));
 }
 
-double FunctionNoop::operator ()(const Argument & x) const
+CLHEPdouble FunctionNoop::operator ()(const Argument & x) const
 {
   return +((*_arg1)(x));
 }

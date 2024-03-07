@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "CLHEP/GenericFunctions/ClassicalSolver.hh"
@@ -20,7 +21,7 @@ namespace Genfun {
   {  }
   
   
-  double EnergyFunction::operator() (double t) const {
+  CLHEPdouble EnergyFunction::operator() (CLHEPdouble t) const {
     const Classical::PhaseSpace & phaseSpace=solver.phaseSpace();
     const unsigned int DIM=phaseSpace.dim();
     Genfun::Argument arg(2*DIM);

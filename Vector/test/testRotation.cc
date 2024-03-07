@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testRotation.cc,v 1.3 2003/08/13 20:00:14 garren Exp $
 // ---------------------------------------------------------------------------
@@ -24,10 +25,10 @@ typedef Hep3Vector  Vector;
 // don't generate warnings about unused variables inside assert
 int main() {
   int i,k;  
-  double angA=CLHEP::pi/3, angB=CLHEP::pi/4, angC=CLHEP::pi/6; 
-  double cosA =std::cos(angA), sinA =std::sin(angA);
-  double cosB =std::cos(angB), sinB =std::sin(angB);
-  double cosC =std::cos(angC), sinC =std::sin(angC);
+  CLHEPdouble angA=CLHEP::pi/3, angB=CLHEP::pi/4, angC=CLHEP::pi/6; 
+  CLHEPdouble cosA =std::cos(angA), sinA =std::sin(angA);
+  CLHEPdouble cosB =std::cos(angB), sinB =std::sin(angB);
+  CLHEPdouble cosC =std::cos(angC), sinC =std::sin(angC);
 
   Rotation R;                   // default constructor
   assert ( R.xx() == 1 );
@@ -167,7 +168,7 @@ int main() {
 		Vector(RR.xz(), RR.yz(), RR.zz()) );
   assert ( RR == R );
 
-  double ang=CLHEP::twopi/9.;                           // rotate()
+  CLHEPdouble ang=CLHEP::twopi/9.;                           // rotate()
   R = Rotation();
   R.rotate(ang, V);
 

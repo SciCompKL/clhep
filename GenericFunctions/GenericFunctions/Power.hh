@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Power.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //----------------------Power-----------------------------------------------//
@@ -23,7 +24,7 @@ namespace Genfun {
       public:
 
     // Constructor
-    Power(double n);
+    Power(CLHEPdouble n);
     Power(int n);
     Power(unsigned int n);
   
@@ -35,8 +36,8 @@ namespace Genfun {
   
     // Retrieve function value
 
-    virtual double operator ()(double argument) const override; 
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override; 
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
   
     // Derivative.  
     Derivative partial (unsigned int) const override;
@@ -49,7 +50,7 @@ namespace Genfun {
     // It is illegal to assign a fixed constant
     const Power & operator=(const Power &right);
 
-    double _doublePower; // power (as a double)
+    CLHEPdouble _CLHEPdoublePower; // power (as a CLHEPdouble)
     int    _intPower;    // power (as an integer)
     bool   _asInteger;   // flag:  object constructed with integer argument
 

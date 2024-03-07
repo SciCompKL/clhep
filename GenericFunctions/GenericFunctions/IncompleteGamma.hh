@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: IncompleteGamma.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //---------------------IncompleteGamma--------------------------------------//
@@ -33,8 +34,8 @@ namespace Genfun {
     virtual ~IncompleteGamma();
     
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & arg) const override {return operator() (arg[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & arg) const override {return operator() (arg[0]);}
     
     // Get the paramter a
     Parameter & a(); 
@@ -48,17 +49,17 @@ namespace Genfun {
     Parameter _a;
 
     // Compute via series representation:
-    double  _gamser(double a, double x, double logGamma) const;
+    CLHEPdouble  _gamser(CLHEPdouble a, CLHEPdouble x, CLHEPdouble logGamma) const;
     
     // Compute via continued fraction representation:
-    double  _gammcf(double a, double x, double logGamma) const;
+    CLHEPdouble  _gammcf(CLHEPdouble a, CLHEPdouble x, CLHEPdouble logGamma) const;
 
     // This function has a LogGamma Function;
     LogGamma _logGamma;
 
     static const int          ITMAX;
-    static const double       EPS;
-    static const double       FPMIN;
+    static const CLHEPdouble       EPS;
+    static const CLHEPdouble       FPMIN;
     
   };
 } // namespace Genfun

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id:$
 // -*- C++ -*-
 //
@@ -52,8 +53,8 @@ class RandExpZiggurat : public HepRandom {
 
 public:
 
-  inline RandExpZiggurat ( HepRandomEngine& anEngine, double mean=1.0 );
-  inline RandExpZiggurat ( HepRandomEngine* anEngine, double mean=1.0 );
+  inline RandExpZiggurat ( HepRandomEngine& anEngine, CLHEPdouble mean=1.0 );
+  inline RandExpZiggurat ( HepRandomEngine* anEngine, CLHEPdouble mean=1.0 );
   // These constructors should be used to instantiate a RandExpZiggurat
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -68,50 +69,50 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static float shoot() {return shoot(HepRandom::getTheEngine());};
-  static float shoot( float mean ) {return shoot(HepRandom::getTheEngine(),mean);};
+  static CLHEPfloat shoot() {return shoot(HepRandom::getTheEngine());};
+  static CLHEPfloat shoot( CLHEPfloat mean ) {return shoot(HepRandom::getTheEngine(),mean);};
 
   /* ENGINE IS INTRINSIC FLOAT
-  static double shoot() {return shoot(HepRandom::getTheEngine());};
-  static double shoot( double mean ) {return shoot(HepRandom::getTheEngine(),mean);};
+  static CLHEPdouble shoot() {return shoot(HepRandom::getTheEngine());};
+  static CLHEPdouble shoot( CLHEPdouble mean ) {return shoot(HepRandom::getTheEngine(),mean);};
   */
 
-  static void shootArray ( const int size, float* vect, float mean=1.0 );
-  static void shootArray ( const int size, double* vect, double mean=1.0 );
+  static void shootArray ( const int size, CLHEPfloat* vect, CLHEPfloat mean=1.0 );
+  static void shootArray ( const int size, CLHEPdouble* vect, CLHEPdouble mean=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static inline float shoot( HepRandomEngine* anEngine ) {return ziggurat_REXP(anEngine);};
-  static inline float shoot( HepRandomEngine* anEngine, float mean ) {return shoot(anEngine)*mean;};
+  static inline CLHEPfloat shoot( HepRandomEngine* anEngine ) {return ziggurat_REXP(anEngine);};
+  static inline CLHEPfloat shoot( HepRandomEngine* anEngine, CLHEPfloat mean ) {return shoot(anEngine)*mean;};
   
   /* ENGINE IS INTRINSIC FLOAT
-  static inline double shoot( HepRandomEngine* anEngine ) {return ziggurat_REXP(anEngine);};
+  static inline CLHEPdouble shoot( HepRandomEngine* anEngine ) {return ziggurat_REXP(anEngine);};
 
-  static inline double shoot( HepRandomEngine* anEngine, double mean ) {return shoot(anEngine)*mean;};
+  static inline CLHEPdouble shoot( HepRandomEngine* anEngine, CLHEPdouble mean ) {return shoot(anEngine)*mean;};
   */
   
-  static void shootArray ( HepRandomEngine* anEngine, const int size, float* vect, float mean=1.0 );
-  static void shootArray ( HepRandomEngine* anEngine, const int size, double* vect, double mean=1.0 );
+  static void shootArray ( HepRandomEngine* anEngine, const int size, CLHEPfloat* vect, CLHEPfloat mean=1.0 );
+  static void shootArray ( HepRandomEngine* anEngine, const int size, CLHEPdouble* vect, CLHEPdouble mean=1.0 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  inline float fire() {return fire(defaultMean);};
-  inline float fire( float mean ) {return ziggurat_REXP(localEngine.get())*mean;};
+  inline CLHEPfloat fire() {return fire(defaultMean);};
+  inline CLHEPfloat fire( CLHEPfloat mean ) {return ziggurat_REXP(localEngine.get())*mean;};
   
   /* ENGINE IS INTRINSIC FLOAT
-  inline double fire() {return fire(defaultMean);};
-  inline double fire( double mean ) {return ziggurat_REXP(localEngine.get())*mean;};
+  inline CLHEPdouble fire() {return fire(defaultMean);};
+  inline CLHEPdouble fire( CLHEPdouble mean ) {return ziggurat_REXP(localEngine.get())*mean;};
   */
   
-  void fireArray ( const int size, float* vect );
-  void fireArray ( const int size, double* vect );
-  void fireArray ( const int size, float* vect, float mean );
-  void fireArray ( const int size, double* vect, double mean );
+  void fireArray ( const int size, CLHEPfloat* vect );
+  void fireArray ( const int size, CLHEPdouble* vect );
+  void fireArray ( const int size, CLHEPfloat* vect, CLHEPfloat mean );
+  void fireArray ( const int size, CLHEPdouble* vect, CLHEPdouble mean );
   
-  virtual double operator()();
-  inline float operator()( float mean ) {return fire( mean );};
+  virtual CLHEPdouble operator()();
+  inline CLHEPfloat operator()( CLHEPfloat mean ) {return fire( mean );};
 
   // Save and restore to/from streams
   
@@ -137,25 +138,25 @@ protected:
   //
   //static long hz;
   //static unsigned long iz, kn[128], ke[256];
-  //static float wn[128],fn[128], we[256],fe[256];
+  //static CLHEPfloat wn[128],fn[128], we[256],fe[256];
   //
   //#define RNOR (hz=SHR3, iz=hz&127, (fabs(hz)<kn[iz])? hz*wn[iz] : nfix())
   //#define REXP (jz=SHR3, iz=jz&255, (    jz <ke[iz])? jz*we[iz] : efix())
 
   static CLHEP_THREAD_LOCAL unsigned long kn[128], ke[256];
-  static CLHEP_THREAD_LOCAL float wn[128],fn[128], we[256],fe[256];
+  static CLHEP_THREAD_LOCAL CLHEPfloat wn[128],fn[128], we[256],fe[256];
 
   static CLHEP_THREAD_LOCAL bool ziggurat_is_init;
 
   static inline unsigned long ziggurat_SHR3(HepRandomEngine* anEngine) {return (unsigned int)(*anEngine);};
-  static inline float ziggurat_UNI(HepRandomEngine* anEngine) {return anEngine->flat();};
-  static inline float ziggurat_REXP(HepRandomEngine* anEngine) {
+  static inline CLHEPfloat ziggurat_UNI(HepRandomEngine* anEngine) {return anEngine->flat();};
+  static inline CLHEPfloat ziggurat_REXP(HepRandomEngine* anEngine) {
     if(!ziggurat_is_init) ziggurat_init();
     unsigned long jz=ziggurat_SHR3(anEngine);
     unsigned long iz=jz&255;
     return (jz<ke[iz]) ? jz*we[iz] : ziggurat_efix(jz,anEngine);
   };
-  static float ziggurat_efix(unsigned long jz,HepRandomEngine* anEngine);
+  static CLHEPfloat ziggurat_efix(unsigned long jz,HepRandomEngine* anEngine);
 
 private:
 
@@ -163,7 +164,7 @@ private:
   RandExpZiggurat(const RandExpZiggurat& d);
 
   std::shared_ptr<HepRandomEngine> localEngine;
-  double defaultMean;
+  CLHEPdouble defaultMean;
 };
 
 }  // namespace CLHEP
@@ -175,11 +176,11 @@ using namespace CLHEP;
 
 namespace CLHEP {
 
-inline RandExpZiggurat::RandExpZiggurat(HepRandomEngine & anEngine, double mean ) : localEngine(&anEngine, do_nothing_deleter()), defaultMean(mean) 
+inline RandExpZiggurat::RandExpZiggurat(HepRandomEngine & anEngine, CLHEPdouble mean ) : localEngine(&anEngine, do_nothing_deleter()), defaultMean(mean) 
 {
 }
 
-inline RandExpZiggurat::RandExpZiggurat(HepRandomEngine * anEngine, double mean ) : localEngine(anEngine), defaultMean(mean) 
+inline RandExpZiggurat::RandExpZiggurat(HepRandomEngine * anEngine, CLHEPdouble mean ) : localEngine(anEngine), defaultMean(mean) 
 {
 }
 

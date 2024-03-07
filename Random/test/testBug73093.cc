@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 //
 // testBug73093 -- Test of CLHEP::Ranlux64Engine with 64 bit seeds
@@ -41,9 +42,9 @@ int valid_range( )
 	output << "Generating " << N << " random numbers with seed " << seed << std::endl;
 	output << "Using seed " << seed <<  std::endl;
 
-	double sum(0);
+	CLHEPdouble sum(0);
 	for (long i=0; i<N; ++i) {
-	  double r = rng.flat();
+	  CLHEPdouble r = rng.flat();
 	  if( std::abs(r) > 1.0 ) ++bad;
 	  output << r << std::endl;
 	  sum += r;
@@ -74,9 +75,9 @@ int check_sequence()
 
 	rng.setSeed(seed, /*lux*/ 1);
 
-	double sum(0);
+	CLHEPdouble sum(0);
 	for (long i=0; i<N; ++i) {
-	  double r = rng.flat();
+	  CLHEPdouble r = rng.flat();
 	  if( std::abs(r) > 1.0 ) ++bad;
 	  output << "[" << il << "][" << i << "] = " << r << ";" << std::endl;
 	  sum += r;

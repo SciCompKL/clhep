@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/Fields/XF.h"
 #include <assert.h>
 #include <iostream>
@@ -82,7 +83,7 @@ namespace XF
     return _arg1->dimensionality ();
   }
 
-  HepGeom::Transform3D Product::operator        () (double x) const
+  HepGeom::Transform3D Product::operator        () (CLHEPdouble x) const
   {
     return (*_arg1) (x) * (*_arg2) (x);
   }
@@ -130,7 +131,7 @@ namespace XF
     return _arg2->dimensionality ();
   }
 
-  HepGeom::Transform3D PreMult::operator        () (double x) const
+  HepGeom::Transform3D PreMult::operator        () (CLHEPdouble x) const
   {
     return _arg1 * (*_arg2) (x);
   }
@@ -177,7 +178,7 @@ namespace XF
     return _arg1->dimensionality ();
   }
 
-  HepGeom::Transform3D PostMult::operator        () (double x) const
+  HepGeom::Transform3D PostMult::operator        () (CLHEPdouble x) const
   {
     return (*_arg1) (x) * _arg2;
   }
@@ -198,7 +199,7 @@ namespace XF
     delete function;
   }
 
-  HepGeom::Transform3D Pow::operator        () (double x) const
+  HepGeom::Transform3D Pow::operator        () (CLHEPdouble x) const
   {
     //
     // Get the translation part and the rotation part:
@@ -209,7 +210,7 @@ namespace XF
     //
     // Evaluate the function
     //
-    double nTimes = (*function) (x);
+    CLHEPdouble nTimes = (*function) (x);
     //
     // Modify:
     //

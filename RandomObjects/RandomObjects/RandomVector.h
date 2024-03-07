@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 //
 // -----------------------------------------------------------------------
@@ -8,14 +9,14 @@
 // This file is part of CLHEP, extended to match the distributions in RPP.
 //
 // It's exactly analogous to HepRandom except that the return types for
-// the fire() and related methods are std::vector<double> instead of 
-// double.  
+// the fire() and related methods are std::vector<CLHEPdouble> instead of 
+// CLHEPdouble.  
 //
 // Distribution classes returning HepVectors of results inherit from 
 // HepRandomVector instead of HepRandom.
 //
 //	HepVector is used instead of the more modern looking 
-//	std::vector<double> because the motivating sub-class
+//	std::vector<CLHEPdouble> because the motivating sub-class
 //	RandMultiGauss uses HepMatrix to supply the correlation 
 //	matrix S anyway.  Given that, we might as well stick to 
 //	HepVector when a vector of numbers is needed, as well.

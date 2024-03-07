@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandEngine.cc,v 1.8 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -228,7 +229,7 @@ void RandEngine::showStatus() const
 // ====================================================
 
 // Here we set up such that **at compile time**, the compiler decides based on  
-// RAND_MAX how to form a random double with 32 leading random bits, using      
+// RAND_MAX how to form a random CLHEPdouble with 32 leading random bits, using      
 // one or two calls to rand().  Some of the lowest order bits of 32 are allowed 
 // to be as weak as mere XORs of some higher bits, but not to be always fixed.  
 //                                                                              
@@ -250,8 +251,8 @@ void RandEngine::showStatus() const
   static unsigned int iK;
   static unsigned int iS;
   static int iN;
-  static double fS;
-  static double fT;
+  static CLHEPdouble fS;
+  static CLHEPdouble fT;
                                                             
   if ( (RAND_MAX >> 31) > 0 )                               
   {                                                         
@@ -289,13 +290,13 @@ void RandEngine::showStatus() const
                                              
   else if ( (RAND_MAX >> 26) == 0 )                                       
   {                                                                       
-    // Here, we know it is safe to work in terms of doubles without loss  
+    // Here, we know it is safe to work in terms of CLHEPdoubles without loss  
     // of precision, but we have no idea how many randoms we will need to 
     // generate 32 bits.                                                  
     if ( !prepared ) {                                                    
       fS = (unsigned long)RAND_MAX + 1;                                                  
-      double twoTo32 = std::ldexp(1.0,32);                                     
-      double StoK = fS;                                                   
+      CLHEPdouble twoTo32 = std::ldexp(1.0,32);                                     
+      CLHEPdouble StoK = fS;                                                   
       for ( iK = 1; StoK < twoTo32; StoK *= fS, iK++ ) { }                
       int m;                                                              
       fT = 1.0;                                                           
@@ -306,7 +307,7 @@ void RandEngine::showStatus() const
       }                                                                   
       prepared = true;                                                    
     }                                                                     
-    double v = 0;                                                         
+    CLHEPdouble v = 0;                                                         
     do {                                                                  
       for ( int i = 0; i < iK; ++i ) {                                    
         v = fS*v+rand(); ++seq;                                                 
@@ -353,15 +354,15 @@ template <> struct RandEngineBuilder<32767> { // RAND_MAX = 2**15 - 1
     }                                                                      
 };                                                                         
                                                                            
-double RandEngine::flat()                                      
+CLHEPdouble RandEngine::flat()                                      
 {                                                              
-  double r;                                                    
+  CLHEPdouble r;                                                    
   do { r = RandEngineBuilder<RAND_MAX>::thirtyTwoRandomBits(seq);
      } while ( r == 0 ); 
   return r/4294967296.0; 
 }  
 
-void RandEngine::flatArray(const int size, double* vect)
+void RandEngine::flatArray(const int size, CLHEPdouble* vect)
 {
    int i;
 
@@ -369,12 +370,12 @@ void RandEngine::flatArray(const int size, double* vect)
      vect[i]=flat();
 }
 
-RandEngine::operator double() {
+RandEngine::operator CLHEPdouble() {
   return flat();
 }
 
-RandEngine::operator float() {
-  return float( flat() );
+RandEngine::operator CLHEPfloat() {
+  return CLHEPfloat( flat() );
 }
 
 RandEngine::operator unsigned int() {

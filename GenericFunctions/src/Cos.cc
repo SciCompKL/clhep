@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Cos.cc,v 1.5 2003/10/10 17:40:39 garren Exp $
 #include "CLHEP/GenericFunctions/Cos.hh"
@@ -17,7 +18,7 @@ Cos::Cos(const Cos & right) : AbsFunction(right)
 {  }
 
 
-double Cos::operator() (double x) const {
+CLHEPdouble Cos::operator() (CLHEPdouble x) const {
   return cos(x);
 }
 

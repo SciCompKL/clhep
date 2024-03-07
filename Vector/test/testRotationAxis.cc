@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/Units/SystemOfUnits.h"
 #include "CLHEP/Vector/ThreeVector.h"
 #include "CLHEP/Vector/Rotation.h"
@@ -5,13 +6,13 @@
 #include <cmath>
 #include <iostream>
 
-bool equal(double a, double b) {
-  const double eps = 1e-9;
+bool equal(CLHEPdouble a, CLHEPdouble b) {
+  const CLHEPdouble eps = 1e-9;
   return (std::abs(a - b) < eps);
 }
 
 bool equal(const CLHEP::Hep3Vector& a, const CLHEP::Hep3Vector& b) {
-  const double eps = 1e-10;
+  const CLHEPdouble eps = 1e-10;
   return (std::abs(a.x() - b.x()) < eps &&
           std::abs(a.y() - b.y()) < eps &&
           std::abs(a.z() - b.z()) < eps);
@@ -93,10 +94,10 @@ int main()
   for (    int the =  0; the <= 180; the += step) {
     for (  int phi =  0; phi <  360; phi += step) {
       for (int a   =  0; a   <  360; a   += step) {
-        double z = std::cos(the*deg);
-        double y = std::sin(the*deg)*sin(phi*deg);
-        double x = std::sin(the*deg)*cos(phi*deg);
-        double ang = a*deg;
+        CLHEPdouble z = std::cos(the*deg);
+        CLHEPdouble y = std::sin(the*deg)*sin(phi*deg);
+        CLHEPdouble x = std::sin(the*deg)*cos(phi*deg);
+        CLHEPdouble ang = a*deg;
 
         // Set rotation matrix
         vinput.set(x, y, z);
@@ -104,7 +105,7 @@ int main()
 
         // Get axis/angle
         voutput = matrix.axis();
-	double del = matrix.delta();
+	CLHEPdouble del = matrix.delta();
         if (a > 180) {
           del = CLHEP::twopi - del; 
           voutput = -voutput;
@@ -133,10 +134,10 @@ int main()
   for (    int the =      0; the <=   180; the += 5) {
     for (  int phi =      0; phi <    360; phi += 5) {
       for (int a   = -istep; a   <= istep; a   += 1) {
-        double z = std::cos(the*deg);
-        double y = std::sin(the*deg)*sin(phi*deg);
-        double x = std::sin(the*deg)*cos(phi*deg);
-        double ang = 0. + a * (deg/istep);
+        CLHEPdouble z = std::cos(the*deg);
+        CLHEPdouble y = std::sin(the*deg)*sin(phi*deg);
+        CLHEPdouble x = std::sin(the*deg)*cos(phi*deg);
+        CLHEPdouble ang = 0. + a * (deg/istep);
 
         // Set rotation matrix
         vinput.set(x, y, z);
@@ -144,7 +145,7 @@ int main()
 
         // Get axis/angle
         voutput = matrix.axis();
-	double del = matrix.delta();
+	CLHEPdouble del = matrix.delta();
         if (a < 0) {
           del = -del; 
           voutput = -voutput;
@@ -169,10 +170,10 @@ int main()
   for (    int the =      0; the <=   180; the += 5) {
     for (  int phi =      0; phi <    360; phi += 5) {
       for (int a   = -istep; a   <= istep; a   += 1) {
-        double z = std::cos(the*deg);
-        double y = std::sin(the*deg)*sin(phi*deg);
-        double x = std::sin(the*deg)*cos(phi*deg);
-        double ang = pi + a * (deg/istep);
+        CLHEPdouble z = std::cos(the*deg);
+        CLHEPdouble y = std::sin(the*deg)*sin(phi*deg);
+        CLHEPdouble x = std::sin(the*deg)*cos(phi*deg);
+        CLHEPdouble ang = pi + a * (deg/istep);
 
         // Set rotation matrix
         vinput.set(x, y, z);
@@ -180,7 +181,7 @@ int main()
 
         // Get axis/angle
         voutput = matrix.axis();
-	double del = matrix.delta();
+	CLHEPdouble del = matrix.delta();
         if (a > 0) {
           del = CLHEP::twopi - del; 
           voutput = -voutput;

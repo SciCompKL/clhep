@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ConstPlusParameter.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/ConstPlusParameter.hh"
@@ -6,7 +7,7 @@
 namespace Genfun {
 PARAMETER_OBJECT_IMP(ConstPlusParameter)
 
-ConstPlusParameter::ConstPlusParameter(double xconstant, const AbsParameter *aparm):
+ConstPlusParameter::ConstPlusParameter(CLHEPdouble xconstant, const AbsParameter *aparm):
   _constant(xconstant),
   _parameter(aparm->clone())
 {
@@ -26,7 +27,7 @@ ConstPlusParameter::~ConstPlusParameter()
 }
 
 
-double ConstPlusParameter::getValue() const {
+CLHEPdouble ConstPlusParameter::getValue() const {
   return _constant + _parameter->getValue();
 }
 

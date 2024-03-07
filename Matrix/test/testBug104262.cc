@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // test for bug https://savannah.cern.ch/bugs/?104262
 // problem reported when using g++ -D_GLIBCXX_DEBUG flag
 

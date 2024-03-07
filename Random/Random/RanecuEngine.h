@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RanecuEngine.h,v 1.6 2010/07/20 18:06:02 garren Exp $
 // -*- C++ -*-
 //
@@ -55,11 +56,11 @@ public:
   virtual ~RanecuEngine();
   // Constructors and destructor.
 
-  double flat();
+  CLHEPdouble flat();
   // Returns a pseudo random number between 0 and 1 
   // (excluding the end points)
 
-  void flatArray (const int size, double* vect);
+  void flatArray (const int size, CLHEPdouble* vect);
   // Fills an array "vect" of specified size with flat random values.
 
   void setIndex (long index);
@@ -85,9 +86,9 @@ public:
   void showStatus() const;
   // Dumps the engine status on the screen.
 
-  operator double();
+  operator CLHEPdouble();
   // Returns same as flat()
-  operator float();
+  operator CLHEPfloat();
   // less precise flat, faster if possible
   operator unsigned int();
   // 32-bit int flat, faster in this case

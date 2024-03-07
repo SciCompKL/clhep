@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandLandau.cc,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -31,23 +32,23 @@ HepRandomEngine & RandLandau::engine() {return *localEngine;}
 RandLandau::~RandLandau() {
 }
 
-void RandLandau::shootArray( const int size, double* vect )
+void RandLandau::shootArray( const int size, CLHEPdouble* vect )
                             
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = shoot();
 }
 
 void RandLandau::shootArray( HepRandomEngine* anEngine,
-                            const int size, double* vect )
+                            const int size, CLHEPdouble* vect )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = shoot(anEngine);
 }
 
-void RandLandau::fireArray( const int size, double* vect)
+void RandLandau::fireArray( const int size, CLHEPdouble* vect)
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = fire();
 }
 
@@ -59,9 +60,9 @@ void RandLandau::fireArray( const int size, double* vect)
 // Since all these are this is static to this compilation unit only, the 
 // info is establised a priori and not at each invocation.
 
-static const float TABLE_INTERVAL   = .001f;
+static const CLHEPfloat TABLE_INTERVAL   = .001f;
 static const int   TABLE_END        =  982;
-static const float TABLE_MULTIPLIER = 1.0f/TABLE_INTERVAL;
+static const CLHEPfloat TABLE_MULTIPLIER = 1.0f/TABLE_INTERVAL;
 
 // Here comes the big (4K bytes) table ---
 //
@@ -69,11 +70,11 @@ static const float TABLE_MULTIPLIER = 1.0f/TABLE_INTERVAL;
 //
 // Credit CERNLIB for these computations.
 //
-// This data is float because the algortihm does not benefit from further
+// This data is CLHEPfloat because the algortihm does not benefit from further
 // data accuracy.  The numbers below .006 or above .982 are moot since
 // non-table-based methods are used below r=.007 and above .980.
 
-static const float inverseLandau [TABLE_END+1] = {
+static const CLHEPfloat inverseLandau [TABLE_END+1] = {
 
 0.0f,							     // .000
 0.0f, 	    0.0f, 	0.0f, 	    0.0f, 	0.0f, 	     // .001 - .005
@@ -286,11 +287,11 @@ static const float inverseLandau [TABLE_END+1] = {
 };  // End of the inverseLandau table
 
 
-double RandLandau::transform (double r) {
+CLHEPdouble RandLandau::transform (CLHEPdouble r) {
 
-  double  u = r * TABLE_MULTIPLIER; 
+  CLHEPdouble  u = r * TABLE_MULTIPLIER; 
   int index = int(u);
-  double du = u - index;
+  CLHEPdouble du = u - index;
 
   // du is scaled such that the we dont have to multiply by TABLE_INTERVAL
   // when interpolating.
@@ -311,52 +312,52 @@ double RandLandau::transform (double r) {
 
   if ( index >= 70 && index <= 800 ) {		// (A)
 
-    double f0 = inverseLandau [index];
-    double f1 = inverseLandau [index+1];
+    CLHEPdouble f0 = inverseLandau [index];
+    CLHEPdouble f1 = inverseLandau [index+1];
     return f0 + du * (f1 - f0);
 
   } else if ( index >= 7 && index <= 980 ) {	// (B)
 
-    double f_1 = inverseLandau [index-1];
-    double f0  = inverseLandau [index];
-    double f1  = inverseLandau [index+1];
-    double f2  = inverseLandau [index+2];
+    CLHEPdouble f_1 = inverseLandau [index-1];
+    CLHEPdouble f0  = inverseLandau [index];
+    CLHEPdouble f1  = inverseLandau [index+1];
+    CLHEPdouble f2  = inverseLandau [index+2];
 
     return f0 + du * (f1 - f0 - .25*(1-du)* (f2 -f1 - f0 + f_1) );
 
   } else if ( index < 7 ) {			// (C)
 
-    const double n0 =  0.99858950;
-    const double n1 = 34.5213058;	const double d1 = 34.1760202;
-    const double n2 = 17.0854528;	const double d2 =  4.01244582;
+    const CLHEPdouble n0 =  0.99858950;
+    const CLHEPdouble n1 = 34.5213058;	const CLHEPdouble d1 = 34.1760202;
+    const CLHEPdouble n2 = 17.0854528;	const CLHEPdouble d2 =  4.01244582;
 
-    double logr = std::log(r);
-    double x    = 1/logr;
-    double x2   = x*x;
+    CLHEPdouble logr = std::log(r);
+    CLHEPdouble x    = 1/logr;
+    CLHEPdouble x2   = x*x;
 
-    double pade = (n0 + n1*x + n2*x2) / (1.0 + d1*x + d2*x2);
+    CLHEPdouble pade = (n0 + n1*x + n2*x2) / (1.0 + d1*x + d2*x2);
 
     return ( - std::log ( -.91893853 - logr ) -1 ) * pade;
 
   } else if ( index <= 999 ) {			// (D)
 
-    const double n0 =    1.00060006;
-    const double n1 =  263.991156;	const double d1 =  257.368075;
-    const double n2 = 4373.20068;	const double d2 = 3414.48018;
+    const CLHEPdouble n0 =    1.00060006;
+    const CLHEPdouble n1 =  263.991156;	const CLHEPdouble d1 =  257.368075;
+    const CLHEPdouble n2 = 4373.20068;	const CLHEPdouble d2 = 3414.48018;
 
-    double x = 1-r;
-    double x2   = x*x;
+    CLHEPdouble x = 1-r;
+    CLHEPdouble x2   = x*x;
 
     return (n0 + n1*x + n2*x2) / (x * (1.0 + d1*x + d2*x2));
 
   } else { 					// (E)
 
-    const double n0 =      1.00001538;
-    const double n1 =   6075.14119;	const double d1 =   6065.11919;
-    const double n2 = 734266.409;	const double d2 = 694021.044;
+    const CLHEPdouble n0 =      1.00001538;
+    const CLHEPdouble n1 =   6075.14119;	const CLHEPdouble d1 =   6065.11919;
+    const CLHEPdouble n2 = 734266.409;	const CLHEPdouble d2 = 694021.044;
 
-    double x = 1-r;
-    double x2   = x*x;
+    CLHEPdouble x = 1-r;
+    CLHEPdouble x2   = x*x;
 
     return (n0 + n1*x + n2*x2) / (x * (1.0 + d1*x + d2*x2));
 

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -24,37 +25,37 @@ namespace CLHEP  {
 //-************************
 
 Hep3Vector & Hep3Vector::rotate (const Hep3Vector & axis,
-				   double ddelta) {
-  double r1 = axis.mag();
+				   CLHEPdouble ddelta) {
+  CLHEPdouble r1 = axis.mag();
   if ( r1 == 0 ) {
     ZMthrowA (ZMxpvZeroVector(
       "Attempt to rotate around a zero vector axis! "));
     return *this;
   }
-  double scale=1.0/r1;
-  double ux = scale*axis.getX();
-  double uy = scale*axis.getY();
-  double uz = scale*axis.getZ();
-  double cd = std::cos(ddelta);
-  double sd = std::sin(ddelta);
-  double ocd = 1 - cd;
-  double rx;
-  double ry;
-  double rz;
+  CLHEPdouble scale=1.0/r1;
+  CLHEPdouble ux = scale*axis.getX();
+  CLHEPdouble uy = scale*axis.getY();
+  CLHEPdouble uz = scale*axis.getZ();
+  CLHEPdouble cd = std::cos(ddelta);
+  CLHEPdouble sd = std::sin(ddelta);
+  CLHEPdouble ocd = 1 - cd;
+  CLHEPdouble rx;
+  CLHEPdouble ry;
+  CLHEPdouble rz;
 
-  { double  ocdux = ocd * ux;
+  { CLHEPdouble  ocdux = ocd * ux;
     rx = x() * ( cd + ocdux * ux           ) +
          y() * (      ocdux * uy - sd * uz ) +
          z() * (      ocdux * uz + sd * uy ) ;
   }
 
-  { double  ocduy = ocd * uy;
+  { CLHEPdouble  ocduy = ocd * uy;
     ry = y() * ( cd + ocduy * uy           ) +
          z() * (      ocduy * uz - sd * ux ) +
          x() * (      ocduy * ux + sd * uz ) ;
   }
 
-  { double  ocduz = ocd * uz;
+  { CLHEPdouble  ocduz = ocd * uz;
     rz = z() * ( cd + ocduz * uz           ) +
          x() * (      ocduz * ux - sd * uy ) +
          y() * (      ocduz * uy + sd * ux ) ;
@@ -70,17 +71,17 @@ Hep3Vector & Hep3Vector::rotate (const Hep3Vector & axis,
 //-****************************
 
 
-Hep3Vector & Hep3Vector::rotate (double phi1, 
-				 double theta1, 
-				 double psi1)  {
+Hep3Vector & Hep3Vector::rotate (CLHEPdouble phi1, 
+				 CLHEPdouble theta1, 
+				 CLHEPdouble psi1)  {
 
-  double rx;
-  double ry;
-  double rz;
+  CLHEPdouble rx;
+  CLHEPdouble ry;
+  CLHEPdouble rz;
 
-  double sinPhi   = std::sin( phi1   ), cosPhi   = std::cos( phi1   );
-  double sinTheta = std::sin( theta1 ), cosTheta1 = std::cos( theta1 );
-  double sinPsi   = std::sin( psi1   ), cosPsi   = std::cos( psi1   );
+  CLHEPdouble sinPhi   = std::sin( phi1   ), cosPhi   = std::cos( phi1   );
+  CLHEPdouble sinTheta = std::sin( theta1 ), cosTheta1 = std::cos( theta1 );
+  CLHEPdouble sinPsi   = std::sin( psi1   ), cosPsi   = std::cos( psi1   );
 
   rx = 	(cosPsi * cosPhi   - cosTheta1 * sinPsi * sinPhi)   * x()  +
 	(cosPsi * sinPhi   + cosTheta1 * sinPsi * cosPhi)   * y()  +
@@ -127,7 +128,7 @@ Hep3Vector rotationOf (const Hep3Vector & vec, const HepAxisAngle & ax) {
 }
 
 Hep3Vector rotationOf (const Hep3Vector & vec,
-                       const Hep3Vector & axis, double ddelta) {
+                       const Hep3Vector & axis, CLHEPdouble ddelta) {
   Hep3Vector vv(vec);
   return vv.rotate(axis, ddelta);
 }
@@ -138,22 +139,22 @@ Hep3Vector rotationOf (const Hep3Vector & vec, const HepEulerAngles & ex) {
 }
 
 Hep3Vector rotationOf (const Hep3Vector & vec,
-                       double phi, double theta, double psi) {
+                       CLHEPdouble phi, CLHEPdouble theta, CLHEPdouble psi) {
   Hep3Vector vv(vec);
   return vv.rotate(phi, theta, psi);
 }
 
-Hep3Vector rotationXOf (const Hep3Vector & vec, double ddelta) {
+Hep3Vector rotationXOf (const Hep3Vector & vec, CLHEPdouble ddelta) {
   Hep3Vector vv(vec);
   return vv.rotateX (ddelta);
 }
 
-Hep3Vector rotationYOf (const Hep3Vector & vec, double ddelta) {
+Hep3Vector rotationYOf (const Hep3Vector & vec, CLHEPdouble ddelta) {
   Hep3Vector vv(vec);
   return vv.rotateY (ddelta);
 }
 
-Hep3Vector rotationZOf (const Hep3Vector & vec, double ddelta) {
+Hep3Vector rotationZOf (const Hep3Vector & vec, CLHEPdouble ddelta) {
   Hep3Vector vv(vec);
   return vv.rotateZ (ddelta);
 }

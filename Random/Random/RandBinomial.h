@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandBinomial.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -39,9 +40,9 @@ class RandBinomial : public HepRandom {
 public:
 
   inline RandBinomial ( HepRandomEngine& anEngine, long n=1,
-                                                     double p=0.5 );
+                                                     CLHEPdouble p=0.5 );
   inline RandBinomial ( HepRandomEngine* anEngine, long n=1,
-                                                     double p=0.5 );
+                                                     CLHEPdouble p=0.5 );
   // These constructors should be used to instantiate a RandBinomial
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -56,37 +57,37 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static inline double shoot();
+  static inline CLHEPdouble shoot();
 
-  static double shoot( long n, double p );
+  static CLHEPdouble shoot( long n, CLHEPdouble p );
 
-  static void shootArray ( const int size, double* vect,
-                            long n=1, double p=0.5 );
+  static void shootArray ( const int size, CLHEPdouble* vect,
+                            long n=1, CLHEPdouble p=0.5 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static inline double shoot( HepRandomEngine* anEngine );
+  static inline CLHEPdouble shoot( HepRandomEngine* anEngine );
 
-  static double shoot( HepRandomEngine* anEngine, 
-                                  long n, double p );
+  static CLHEPdouble shoot( HepRandomEngine* anEngine, 
+                                  long n, CLHEPdouble p );
 
   static void shootArray ( HepRandomEngine* anEngine, const int size,
-                            double* vect, long n=1,
-                            double p=0.5 );
+                            CLHEPdouble* vect, long n=1,
+                            CLHEPdouble p=0.5 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  inline double fire();
+  inline CLHEPdouble fire();
 
-  double fire( long n, double p );
+  CLHEPdouble fire( long n, CLHEPdouble p );
   
-  void fireArray ( const int size, double* vect);
-  void fireArray ( const int size, double* vect,
-                   long n, double p );
-  inline double operator()();
-  inline double operator()( long n, double p );
+  void fireArray ( const int size, CLHEPdouble* vect);
+  void fireArray ( const int size, CLHEPdouble* vect,
+                   long n, CLHEPdouble p );
+  inline CLHEPdouble operator()();
+  inline CLHEPdouble operator()( long n, CLHEPdouble p );
 
   // Save and restore to/from streams
   
@@ -101,11 +102,11 @@ public:
 
 private:
 
-  static double genBinomial( HepRandomEngine *anEngine, long n, double p );
+  static CLHEPdouble genBinomial( HepRandomEngine *anEngine, long n, CLHEPdouble p );
 
   std::shared_ptr<HepRandomEngine> localEngine;
   long defaultN;
-  double defaultP;
+  CLHEPdouble defaultP;
  
 };
 

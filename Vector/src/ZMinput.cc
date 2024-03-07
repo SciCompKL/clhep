@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/Vector/defs.h"
 
 #include <cctype>
@@ -34,8 +35,8 @@ void fouledup() {
 
 namespace CLHEP  {
 
-void ZMinput3doubles ( std::istream & is, const char * type,
-			double & x, double & y, double & z ) {
+void ZMinput3CLHEPdoubles ( std::istream & is, const char * type,
+			CLHEPdouble & x, CLHEPdouble & y, CLHEPdouble & z ) {
 
 // Accepted formats are 
 // x y z
@@ -150,8 +151,8 @@ void ZMinput3doubles ( std::istream & is, const char * type,
 
 
 void ZMinputAxisAngle ( std::istream & is, 
-			double & x, double & y, double & z, 
-			double & delta ) {
+			CLHEPdouble & x, CLHEPdouble & y, CLHEPdouble & z, 
+			CLHEPdouble & delta ) {
 // Accepted formats are 
 // parenthesis optional, then
 // any acceptable format for a Hep3Vector, then
@@ -185,7 +186,7 @@ void ZMinputAxisAngle ( std::istream & is,
   // At this point, parenthesis or not, the next item read is supposed to
   // be a valid Hep3Vector axis.
 
-  ZMinput3doubles ( is, "axis of AxisAngle", x, y, z );
+  ZMinput3CLHEPdoubles ( is, "axis of AxisAngle", x, y, z );
   if (!is) return;
 
   if ( !eatwhitespace(is) ) {
@@ -237,8 +238,8 @@ void ZMinputAxisAngle ( std::istream & is,
 }
 
 
-void ZMinput2doubles ( std::istream & is, const char * type,
-			double & x, double & y ) {
+void ZMinput2CLHEPdoubles ( std::istream & is, const char * type,
+			CLHEPdouble & x, CLHEPdouble & y ) {
 
 // Accepted formats are 
 // x y 

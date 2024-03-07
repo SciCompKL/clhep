@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 #include "CLHEP/Random/Randomize.h"
 #include "CLHEP/Random/NonRandomEngine.h"
@@ -28,11 +29,11 @@
 using namespace CLHEP;
 
 // Absolutely Safe Equals Without Registers Screwing Us Up
-bool equals01(const std::vector<double> &ab) {
+bool equals01(const std::vector<CLHEPdouble> &ab) {
   return ab[1]==ab[0];
 }  
-bool equals(double a, double b) {
-  std::vector<double> ab(2);
+bool equals(CLHEPdouble a, CLHEPdouble b) {
+  std::vector<CLHEPdouble> ab(2);
   ab[0]=a;  ab[1]=b;
   return (equals01(ab));
 }
@@ -44,8 +45,8 @@ int staticSave(int n) {
   int stat = 0;
   int i;
   output << "staticSave for distribution " << D::distributionName() << "\n";
-  double r = 0;
-  double v1, v2, k1, k2;
+  CLHEPdouble r = 0;
+  CLHEPdouble v1, v2, k1, k2;
   for (i=0; i < n; i++) r += D::shoot();
   {
     std::ofstream file ("ss1_distribution.save"); 
@@ -124,7 +125,7 @@ int staticSaveShootBit(int n) {
   int stat = 0;
   int i;
   output << "staticSaveShootBit for " << D::distributionName() << "\n";
-  double r = 0;
+  CLHEPdouble r = 0;
   int bit = 0;
   int v1, v2, k1, k2;
   for (i=0; i < n; i++) r += D::shoot();
@@ -262,8 +263,8 @@ void randomizeStatics(int n) {
   }
 }
 
-std::vector<double> captureStatics() {
-  std::vector<double> c;
+std::vector<CLHEPdouble> captureStatics() {
+  std::vector<CLHEPdouble> c;
   c.push_back( RandGauss::shoot() );
   c.push_back( RandGaussQ::shoot() );
   c.push_back( RandGaussT::shoot() );
@@ -344,13 +345,13 @@ int main() {
   randomizeStatics(15);
   saveStatics("ss_distribution.save");
   output << "Saved all static distributions\n";
-  std::vector<double> c = captureStatics();
+  std::vector<CLHEPdouble> c = captureStatics();
   output << "Captured output of all static distributions\n";
   randomizeStatics(11);
   output << "Randomized all static distributions\n";
   restoreStatics("ss_distribution.save");
   output << "Restored all static distributions to saved state\n";
-  std::vector<double> d = captureStatics();
+  std::vector<CLHEPdouble> d = captureStatics();
   output << "Captured output of all static distributions\n";
   for (unsigned int iv=0; iv<c.size(); iv++) {
     if (c[iv] != d[iv]) {

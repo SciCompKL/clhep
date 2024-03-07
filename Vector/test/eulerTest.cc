@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // eulerTest.cc
 
 // Test extreme cases for Euler angles --
@@ -19,16 +20,16 @@ using namespace CLHEP;
 
 const int Nperturbs = 24;
 
-void perturb ( int i, const HepRotation & r, HepRotation & rp, double & del );
-bool compareR ( const HepRotation & r1, const HepRotation & r2, double tol );
+void perturb ( int i, const HepRotation & r, HepRotation & rp, CLHEPdouble & del );
+bool compareR ( const HepRotation & r1, const HepRotation & r2, CLHEPdouble tol );
 
-bool test (double phi, double theta, double psi) {
+bool test (CLHEPdouble phi, CLHEPdouble theta, CLHEPdouble psi) {
   HepRotation r (phi, theta, psi);
   HepRotation rp;
   HepRotation rpe;
   HepEulerAngles e;
   bool retval = true;
-  double del;
+  CLHEPdouble del;
   cout << "\n\n -------------------------------- \n\n";
   for ( int i = 0; i < Nperturbs; ++i ) {
     perturb ( i, r, rp, del );
@@ -73,7 +74,7 @@ bool test (double phi, double theta, double psi) {
 int main () {
 
   bool res = true;
-  double PI = CLHEP::pi;
+  CLHEPdouble PI = CLHEP::pi;
 
   // Some cases not in the potentially unstable region:
   res &= test (  .05,	       PI/5,   .1	);    
@@ -116,7 +117,7 @@ int main () {
   res &= test (  1.4,	.0000000000028, 1.5	 );    
 
   // Cases near PI
-  double nearPI = PI - .00000002; 
+  CLHEPdouble nearPI = PI - .00000002; 
   res &= test (  .1,	nearPI, 	 .5    );    
   res &= test (  -1.2,  nearPI, 	 .5    );    
   res &= test (  .7,	nearPI, 	-.6    );    
@@ -141,10 +142,10 @@ int main () {
   return 0;
 }
 
-bool compareR ( const HepRotation & r1, const HepRotation & r2, double tol ) {
+bool compareR ( const HepRotation & r1, const HepRotation & r2, CLHEPdouble tol ) {
   HepRep3x3 m1 = r1.rep3x3();
   HepRep3x3 m2 = r2.rep3x3();
-  double flaw = 0;
+  CLHEPdouble flaw = 0;
   flaw = max (flaw, (m1.xx_ - m2.xx_));
   flaw = max (flaw, (m1.xy_ - m2.xy_));
   flaw = max (flaw, (m1.xz_ - m2.xz_));
@@ -162,7 +163,7 @@ bool compareR ( const HepRotation & r1, const HepRotation & r2, double tol ) {
   return (flaw <= tol);
 }
 
-void perturb ( int i, const HepRotation & r, HepRotation & rp, double & del ) {
+void perturb ( int i, const HepRotation & r, HepRotation & rp, CLHEPdouble & del ) {
   
   HepRep3x3 p0 (  1,  3, -2,
         	 -1, -2,  4, 
@@ -187,7 +188,7 @@ void perturb ( int i, const HepRotation & r, HepRotation & rp, double & del ) {
   p[3] = p3;
 
   int cycle = i/4;
-  double q;
+  CLHEPdouble q;
   switch (cycle){
     case 0: q = 1.0e-14; break;
     case 1: q = 1.0e-12; break;

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testMatrix.cc,v 1.3 2003/08/13 20:00:12 garren Exp $
 //
@@ -36,15 +37,15 @@ int matrix_test1(const HepGenMatrix&m) {
 //
 // test function
 //
-double neg(double f, int, int) {
+CLHEPdouble neg(CLHEPdouble f, int, int) {
   return -f;
 }
 
-double absf(double f, int, int) {
+CLHEPdouble absf(CLHEPdouble f, int, int) {
   return fabs(f);
 }
 
-double negv(double f, int) {
+CLHEPdouble negv(CLHEPdouble f, int) {
   return -f;
 }
 
@@ -157,8 +158,8 @@ void symmatrix_test() {
     //
     // Access to elements
     //
-    double f = 3.8;
-    double g = 22.5;
+    CLHEPdouble f = 3.8;
+    CLHEPdouble g = 22.5;
     cout << c(1,1) << " " << c[0][0] << endl;
     c(1,2) = f;
     c[2][1] = g;
@@ -233,7 +234,7 @@ void symmatrix_test() {
     r.setTheSeed(31);
     HepVector a(3,r);
     HepSymMatrix b(3,r);
-    double c = b.similarity(a);
+    CLHEPdouble c = b.similarity(a);
     HepSymMatrix cc = b.similarity(HepMatrix(a.T()));
     cout << "a" << a;
     cout << "b" << b;
@@ -811,7 +812,7 @@ int main() {
   }
   HepSymMatrix sp(3,0);
   for(i=0;i<10;i++) {
-    double psq = p[i].normsq();
+    CLHEPdouble psq = p[i].normsq();
     sp(1,1) += psq - p[i](1)*p[i](1);
     sp(2,2) += psq - p[i](2)*p[i](2);
     sp(3,3) += psq - p[i](3)*p[i](3);

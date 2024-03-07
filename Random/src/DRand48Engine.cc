@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: DRand48Engine.cc,v 1.7 2010/07/29 16:50:34 garren Exp $
 // -----------------------------------------------------------------------
@@ -206,16 +207,16 @@ void DRand48Engine::showStatus() const
    seed48(dummy);
 }
 
-double DRand48Engine::flat()
+CLHEPdouble DRand48Engine::flat()
 {
-   double num = 0.;
+   CLHEPdouble num = 0.;
 
    while (num == 0.)
      num = drand48();
    return num;
 }
 
-void DRand48Engine::flatArray(const int size, double* vect)
+void DRand48Engine::flatArray(const int size, CLHEPdouble* vect)
 {
    int i;
 

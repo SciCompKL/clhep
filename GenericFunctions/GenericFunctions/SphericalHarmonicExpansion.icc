@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include <sstream>
@@ -44,35 +45,35 @@ namespace Genfun {
   }
   
   inline
-  double SphericalHarmonicExpansion::operator() (double ) const {
+  CLHEPdouble SphericalHarmonicExpansion::operator() (CLHEPdouble ) const {
     throw std::runtime_error("Dimensionality error in SphericalHarmonicExpansion");
     return 0;
   }
   
   inline
-  double SphericalHarmonicExpansion::operator() (const Argument & a ) const {
+  CLHEPdouble SphericalHarmonicExpansion::operator() (const Argument & a ) const {
     const unsigned int LMAX=c->coefficients.getLMax();
-    double x = a[0];
-    double phi=a[1];
+    CLHEPdouble x = a[0];
+    CLHEPdouble phi=a[1];
 
     // Note, the calling sequence of the GSL Special Function forces us to 
     // transpose Plm from its "natural" order.. It is addressed as P[m][l].
 
-    //double Plm[LMAX+1][LMAX+1];
-    std::vector< std::vector<double> > Plm(LMAX+1);
+    //CLHEPdouble Plm[LMAX+1][LMAX+1];
+    std::vector< std::vector<CLHEPdouble> > Plm(LMAX+1);
     for (int m=0;m<=int(LMAX);m++) {
       Plm[m].resize(LMAX+1);
       gsl_sf_legendre_sphPlm_array (LMAX, m, x, &*Plm[m].begin());
       //gsl_sf_legendre_sphPlm_array (LMAX, m, x, Plm[m]);
     }
 
-    std::complex<double> P=0.0;
-    std::complex<double> I(0,1.0);
+    std::complex<CLHEPdouble> P=0.0;
+    std::complex<CLHEPdouble> I(0,1.0);
     for (unsigned int l=0;l<=LMAX;l++) {
       for (int m=0;m<=int(l);m++) {
 	{
 	  int LP=l-abs(m);
-	  double Pn= Plm[abs(m)][LP];
+	  CLHEPdouble Pn= Plm[abs(m)][LP];
 	
 	  if (!finite(Pn)) {
 	    std::ostringstream stream;
@@ -86,7 +87,7 @@ namespace Genfun {
 	}
       }
     }
-    double retVal=0;
+    CLHEPdouble retVal=0;
     if (c->type==MAGSQ) return norm(P);
     if (c->type==MAG)   return abs(P);
     if (c->type==REAL)  return real(P);

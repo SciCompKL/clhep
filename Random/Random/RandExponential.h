@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandExponential.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -37,8 +38,8 @@ class RandExponential : public HepRandom {
 
 public:
 
-  inline RandExponential ( HepRandomEngine& anEngine, double mean=1.0 );
-  inline RandExponential ( HepRandomEngine* anEngine, double mean=1.0 );
+  inline RandExponential ( HepRandomEngine& anEngine, CLHEPdouble mean=1.0 );
+  inline RandExponential ( HepRandomEngine* anEngine, CLHEPdouble mean=1.0 );
   // These constructors should be used to instantiate a RandExponential
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -53,35 +54,35 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  double shoot();
+  static  CLHEPdouble shoot();
 
-  static  double shoot( double mean );
+  static  CLHEPdouble shoot( CLHEPdouble mean );
 
-  static  void shootArray ( const int size, double* vect,
-                            double mean=1.0 );
+  static  void shootArray ( const int size, CLHEPdouble* vect,
+                            CLHEPdouble mean=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  inline double shoot( HepRandomEngine* anEngine );
+  static  inline CLHEPdouble shoot( HepRandomEngine* anEngine );
 
-  static  inline double shoot( HepRandomEngine* anEngine, double mean );
+  static  inline CLHEPdouble shoot( HepRandomEngine* anEngine, CLHEPdouble mean );
 
   static  void shootArray ( HepRandomEngine* anEngine, const int size,
-                            double* vect, double mean=1.0 );
+                            CLHEPdouble* vect, CLHEPdouble mean=1.0 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  inline double fire();
+  inline CLHEPdouble fire();
 
-  inline double fire( double mean );
+  inline CLHEPdouble fire( CLHEPdouble mean );
 
-  void fireArray ( const int size, double* vect );
-  void fireArray ( const int size, double* vect, double mean );
+  void fireArray ( const int size, CLHEPdouble* vect );
+  void fireArray ( const int size, CLHEPdouble* vect, CLHEPdouble mean );
   
-  double operator()();
-  double operator()( double mean );
+  CLHEPdouble operator()();
+  CLHEPdouble operator()( CLHEPdouble mean );
 
   // Save and restore to/from streams
   
@@ -97,7 +98,7 @@ public:
 private:
 
   std::shared_ptr<HepRandomEngine> localEngine;
-  double defaultMean;
+  CLHEPdouble defaultMean;
 
 };
 

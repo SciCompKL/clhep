@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef ZMERRNO_ICC
 #error "Exceptions/ZMerrno.icc included without Exceptions/ZMerrno.h"
 #endif

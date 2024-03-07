@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ConstTimesFunction.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //--------------------------ConstOverFunction-------------------------------//
@@ -23,7 +24,7 @@ namespace Genfun {
       public:
   
     // Constructor
-    ConstTimesFunction(double constant, const AbsFunction *arg);
+    ConstTimesFunction(CLHEPdouble constant, const AbsFunction *arg);
   
     // Copy constructor
     ConstTimesFunction(const ConstTimesFunction &right);
@@ -32,8 +33,8 @@ namespace Genfun {
     virtual ~ConstTimesFunction();
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override;
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override;
 
     // Dimensionality 
     virtual unsigned int dimensionality() const override;
@@ -49,7 +50,7 @@ namespace Genfun {
     // It is illegal to assign a ConstTimesFunction
     const ConstTimesFunction & operator=(const ConstTimesFunction &right);
 
-    double             _constant;
+    CLHEPdouble             _constant;
     const AbsFunction *_arg;
   };
 } // namespace Genfun

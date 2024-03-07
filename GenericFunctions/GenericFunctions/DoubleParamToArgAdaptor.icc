@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: DoubleParamToArgAdaptor.icc,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 #include "CLHEP/GenericFunctions/DoubleParamToArgAdaptor.hh"
@@ -37,10 +38,10 @@ DoubleParamToArgAdaptor<F>::DoubleParamToArgAdaptor(const F        &function,
   _parameterFetchMethod0(parameterFetchMethod0),
   _parameterFetchMethod1(parameterFetchMethod1)
 {
-  _parameterFetchMethod0(*_function).setLowerLimit(-std::numeric_limits<double>::max());
-  _parameterFetchMethod0(*_function).setUpperLimit(+std::numeric_limits<double>::max());
-  _parameterFetchMethod1(*_function).setLowerLimit(-std::numeric_limits<double>::max());
-  _parameterFetchMethod1(*_function).setUpperLimit(+std::numeric_limits<double>::max());
+  _parameterFetchMethod0(*_function).setLowerLimit(-std::numeric_limits<CLHEPdouble>::max());
+  _parameterFetchMethod0(*_function).setUpperLimit(+std::numeric_limits<CLHEPdouble>::max());
+  _parameterFetchMethod1(*_function).setLowerLimit(-std::numeric_limits<CLHEPdouble>::max());
+  _parameterFetchMethod1(*_function).setUpperLimit(+std::numeric_limits<CLHEPdouble>::max());
 }
 
 template <class F>
@@ -56,15 +57,15 @@ DoubleParamToArgAdaptor<F>::DoubleParamToArgAdaptor(const DoubleParamToArgAdapto
   _parameterFetchMethod1(right._parameterFetchMethod1),
   _function(right._function->clone())
 {
-  _parameterFetchMethod0(*_function).setLowerLimit(-std::numeric_limits<double>::max());
-  _parameterFetchMethod0(*_function).setUpperLimit(+std::numeric_limits<double>::max());
-  _parameterFetchMethod1(*_function).setLowerLimit(-std::numeric_limits<double>::max());
-  _parameterFetchMethod1(*_function).setUpperLimit(+std::numeric_limits<double>::max());
+  _parameterFetchMethod0(*_function).setLowerLimit(-std::numeric_limits<CLHEPdouble>::max());
+  _parameterFetchMethod0(*_function).setUpperLimit(+std::numeric_limits<CLHEPdouble>::max());
+  _parameterFetchMethod1(*_function).setLowerLimit(-std::numeric_limits<CLHEPdouble>::max());
+  _parameterFetchMethod1(*_function).setUpperLimit(+std::numeric_limits<CLHEPdouble>::max());
 }
 
 
 template <class F>
-double DoubleParamToArgAdaptor<F>::operator ()(double x) const
+CLHEPdouble DoubleParamToArgAdaptor<F>::operator ()(CLHEPdouble x) const
 {
   std::cerr
     << "Warning.  DoubleParamToArgAdaptor called with scalar argument"
@@ -99,7 +100,7 @@ unsigned int DoubleParamToArgAdaptor<F>::dimensionality() const {
 }
 
 template <class F> 
-double DoubleParamToArgAdaptor<F>::operator() (const Argument & a) const {
+CLHEPdouble DoubleParamToArgAdaptor<F>::operator() (const Argument & a) const {
   if (dimensionality()!= a.dimension()) {
     std::cerr
       << "Warning: DoubleParamToArgAdaptor function/argument dimension mismatch"

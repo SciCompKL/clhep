@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 
 #include "CLHEP/Random/MixMaxRng.h"
 

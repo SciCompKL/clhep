@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testSubscripts.cc,v 1.2 2003/08/13 20:00:14 garren Exp $
 // ---------------------------------------------------------------------------
@@ -21,9 +22,9 @@ typedef HepLorentzVector Vec4;
 
 class Rot3 : public HepRotation {
 public:  
-  void setMatrix(double xx1, double xy1, double xz1,
-                 double yx1, double yy1, double yz1,
-                 double zx1, double zy1, double zz1) {
+  void setMatrix(CLHEPdouble xx1, CLHEPdouble xy1, CLHEPdouble xz1,
+                 CLHEPdouble yx1, CLHEPdouble yy1, CLHEPdouble yz1,
+                 CLHEPdouble zx1, CLHEPdouble zy1, CLHEPdouble zz1) {
     rxx = xx1; rxy = xy1; rxz = xz1;
     ryx = yx1; ryy = yy1; ryz = yz1;
     rzx = zx1; rzy = zy1; rzz = zz1;
@@ -32,10 +33,10 @@ public:
 
 class Rot4 : public HepLorentzRotation {
 public:  
-  void setMatrix(double xx1, double xy1, double xz1, double xt1,
-                 double yx1, double yy1, double yz1, double yt1,
-                 double zx1, double zy1, double zz1, double zt1,
-                 double tx1, double ty1, double tz1, double tt1) {
+  void setMatrix(CLHEPdouble xx1, CLHEPdouble xy1, CLHEPdouble xz1, CLHEPdouble xt1,
+                 CLHEPdouble yx1, CLHEPdouble yy1, CLHEPdouble yz1, CLHEPdouble yt1,
+                 CLHEPdouble zx1, CLHEPdouble zy1, CLHEPdouble zz1, CLHEPdouble zt1,
+                 CLHEPdouble tx1, CLHEPdouble ty1, CLHEPdouble tz1, CLHEPdouble tt1) {
     mxx = xx1; mxy = xy1; mxz = xz1; mxt = xt1;
     myx = yx1; myy = yy1; myz = yz1; myt = yt1;
     mzx = zx1; mzy = zy1; mzz = zz1; mzt = zt1;
@@ -87,8 +88,8 @@ int main() {
   k = 1;
   for(i=0; i<3; i++) {
     for(j=0; j<3; j++) {
-      assert(R3(i,j)  == double(k));
-      assert(R3[i][j] == double(k));
+      assert(R3(i,j)  == CLHEPdouble(k));
+      assert(R3[i][j] == CLHEPdouble(k));
       k++;
     }
   }
@@ -101,8 +102,8 @@ int main() {
   k = 1;
   for(i=0; i<4; i++) {
     for(j=0; j<4; j++) {
-      assert(R4(i,j)  == double(k));
-      assert(R4[i][j] == double(k));
+      assert(R4(i,j)  == CLHEPdouble(k));
+      assert(R4[i][j] == CLHEPdouble(k));
       k++;
     }
   }

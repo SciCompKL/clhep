@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef ZMEXCEPTION_H
 #define ZMEXCEPTION_H
 

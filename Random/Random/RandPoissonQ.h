@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandPoissonQ.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -34,8 +35,8 @@ class RandPoissonQ : public RandPoisson {
 
 public:
 
-  inline RandPoissonQ ( HepRandomEngine& anEngine, double b1=1.0 );
-  inline RandPoissonQ ( HepRandomEngine* anEngine, double b1=1.0 );
+  inline RandPoissonQ ( HepRandomEngine& anEngine, CLHEPdouble b1=1.0 );
+  inline RandPoissonQ ( HepRandomEngine* anEngine, CLHEPdouble b1=1.0 );
   // These constructors should be used to instantiate a RandPoissonQ
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -73,29 +74,29 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  long shoot( double m=1.0 );
+  static  long shoot( CLHEPdouble m=1.0 );
 
-  static  void shootArray ( const int size, long* vect, double m=1.0 );
+  static  void shootArray ( const int size, long* vect, CLHEPdouble m=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  long shoot( HepRandomEngine* anEngine, double m=1.0 );
+  static  long shoot( HepRandomEngine* anEngine, CLHEPdouble m=1.0 );
 
   static  void shootArray ( HepRandomEngine* anEngine,
-                            const int size, long* vect, double m=1.0 );
+                            const int size, long* vect, CLHEPdouble m=1.0 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
   long  fire();
-  long  fire( double m );
+  long  fire( CLHEPdouble m );
 
   void fireArray ( const int size, long* vect );
-  void fireArray ( const int size, long* vect, double m);
+  void fireArray ( const int size, long* vect, CLHEPdouble m);
 
-  double operator()();
-  double operator()( double m );
+  CLHEPdouble operator()();
+  CLHEPdouble operator()( CLHEPdouble m );
 
   std::string name() const;
   HepRandomEngine & engine();
@@ -107,7 +108,7 @@ public:
   // static constants of possible interest to users:
 
   // RandPoisson will never return a deviate greater than this value:
-  static const double MAXIMUM_POISSON_DEVIATE; // Will be 2.0E9
+  static const CLHEPdouble MAXIMUM_POISSON_DEVIATE; // Will be 2.0E9
 
   static inline int tableBoundary();
 
@@ -117,19 +118,19 @@ private:
   void setupForDefaultMu();
 
   // algorithm helper methods - all static since the shoot methods mayneed them
-  static long poissonDeviateSmall ( HepRandomEngine * e, double mean );
-  static long poissonDeviateQuick ( HepRandomEngine * e, double mean );
+  static long poissonDeviateSmall ( HepRandomEngine * e, CLHEPdouble mean );
+  static long poissonDeviateQuick ( HepRandomEngine * e, CLHEPdouble mean );
   static long poissonDeviateQuick ( HepRandomEngine * e, 
-		double A0, double A1, double A2, double sig );
+		CLHEPdouble A0, CLHEPdouble A1, CLHEPdouble A2, CLHEPdouble sig );
 
   // All the engine info, and the default mean, are in the 
   // RandPoisson base class.
 
   // quantities for approximate Poisson by corrected Gaussian
-  double a0;      
-  double a1;	    	
-  double a2;	
-  double sigma;  
+  CLHEPdouble a0;      
+  CLHEPdouble a1;	    	
+  CLHEPdouble a2;	
+  CLHEPdouble sigma;  
 
   // static data - constants only, so that saveEngineStatus works properly!
 
@@ -141,9 +142,9 @@ private:
 
   // (These statics are given values near the start of the .cc file) 
 
-  static const double FIRST_MU;  // lowest mu value in table
-  static const double LAST_MU;   // highest mu value
-  static const double S;         // Spacing between mu values
+  static const CLHEPdouble FIRST_MU;  // lowest mu value in table
+  static const CLHEPdouble LAST_MU;   // highest mu value
+  static const CLHEPdouble S;         // Spacing between mu values
   static const int BELOW;        // Starting point for N is at mu - BELOW
   static const int ENTRIES;      // Number of entries in each mu row
 

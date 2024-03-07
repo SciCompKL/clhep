@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Plane3D.cc,v 1.4 2003/08/13 20:00:11 garren Exp $
 // ---------------------------------------------------------------------------
@@ -20,14 +21,14 @@
 namespace HepGeom {
   //--------------------------------------------------------------------------
   std::ostream &
-  operator<<(std::ostream & os, const Plane3D<float> & p) {
+  operator<<(std::ostream & os, const Plane3D<CLHEPfloat> & p) {
     return os
       << '(' << p.a() << ',' << p.b() << ',' << p.c() << ',' << p.d() << ')';
   }
 
   //--------------------------------------------------------------------------
   std::ostream &
-  operator<<(std::ostream & os, const Plane3D<double> & p) {
+  operator<<(std::ostream & os, const Plane3D<CLHEPdouble> & p) {
     return os
       << '(' << p.a() << ',' << p.b() << ',' << p.c() << ',' << p.d() << ')';
   }

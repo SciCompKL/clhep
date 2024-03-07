@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ConstMinusFunction.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/ConstMinusFunction.hh"
@@ -6,7 +7,7 @@
 namespace Genfun {
 FUNCTION_OBJECT_IMP(ConstMinusFunction)
 
-ConstMinusFunction::ConstMinusFunction(double constant, const AbsFunction *arg):
+ConstMinusFunction::ConstMinusFunction(CLHEPdouble constant, const AbsFunction *arg):
   _constant(constant),
   _arg(arg->clone())
 {
@@ -29,13 +30,13 @@ ConstMinusFunction::~ConstMinusFunction()
 
 
 
-double ConstMinusFunction::operator ()(double x) const
+CLHEPdouble ConstMinusFunction::operator ()(CLHEPdouble x) const
 {
   return _constant - (*_arg)(x);
 }
 
 
-double ConstMinusFunction::operator ()(const Argument & x) const
+CLHEPdouble ConstMinusFunction::operator ()(const Argument & x) const
 {
   return _constant - (*_arg)(x);
 }

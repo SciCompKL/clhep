@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 #include "CLHEP/Random/Randomize.h"
 #include "CLHEP/Random/NonRandomEngine.h"
@@ -29,11 +30,11 @@ using namespace CLHEP;
 
 
 // Absolutely Safe Equals Without Registers Screwing Us Up
-bool equals01(const std::vector<double> &ab) {
+bool equals01(const std::vector<CLHEPdouble> &ab) {
   return ab[1]==ab[0];
 }  
-bool equals(double a, double b) {
-  std::vector<double> ab(2);
+bool equals(CLHEPdouble a, CLHEPdouble b) {
+  std::vector<CLHEPdouble> ab(2);
   ab[0]=a;  ab[1]=b;
   return (equals01(ab));
 }
@@ -44,11 +45,11 @@ int checkSharingDistributions(D1 & d1, D2 & d2, int n1, int n2) {
   output << "checkSharingDistribution with: \n" 
   	    << d1.name() << " using " << d1.engine().name() << " and\n"
   	    << d2.name() << " using " << d2.engine().name() << "\n";
-  double r=0; 
+  CLHEPdouble r=0; 
   r = d1();
   r += d2();
-  double kv11,kv12,kv13,kv14;
-  double kv21,kv22,kv23,kv24;
+  CLHEPdouble kv11,kv12,kv13,kv14;
+  CLHEPdouble kv21,kv22,kv23,kv24;
   for (int i=0; i<n1; i++) r += d1();
   for (int j=0; j<n2; j++) r += d2();
   {std::ofstream os ("t1_shared.save"); os << d1.engine() << d1 << d2;}
@@ -79,15 +80,15 @@ int checkSharingDistributions(D1 & d1, D2 & d2, int n1, int n2) {
   D1 d1r(e);   
   D2 d2r(e);   
   { std::ifstream is ("t1_shared.save"); is >> e >> d1r >> d2r;}
-  double k11 = d1r();
-  double k21 = d2r();
-  double k12 = d1r();
-  double k22 = d2r();
+  CLHEPdouble k11 = d1r();
+  CLHEPdouble k21 = d2r();
+  CLHEPdouble k12 = d1r();
+  CLHEPdouble k22 = d2r();
   { std::ifstream is ("t2_shared.save"); is >> e >> d1r >> d2r;}
-  double k13 = d1r();
-  double k23 = d2r();
-  double k14 = d1r();
-  double k24 = d2r();
+  CLHEPdouble k13 = d1r();
+  CLHEPdouble k23 = d2r();
+  CLHEPdouble k14 = d1r();
+  CLHEPdouble k24 = d2r();
 #ifdef VERBOSER2
   pr = output.precision(20);
   output << "k11 = " << k11 <<

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ParameterSum.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //--------------------------ParameterSum------------------------------------//
@@ -33,7 +34,7 @@ namespace Genfun {
     virtual ~ParameterSum();
   
     // Retreive function value
-    virtual double getValue() const;
+    virtual CLHEPdouble getValue() const;
 
   private:
 

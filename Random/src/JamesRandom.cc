@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -216,7 +217,7 @@ void HepJamesRandom::setSeed(long seed, int)
   // but may have the same effect as other seeds below 900000000.
 
   int m, n;
-  float s, t;
+  CLHEPfloat s, t;
   long mm;
 
   if (seed < 0) {
@@ -265,9 +266,9 @@ void HepJamesRandom::setSeeds(const long* seeds, int)
   theSeeds = seeds;
 }
 
-double HepJamesRandom::flat()
+CLHEPdouble HepJamesRandom::flat()
 {
-   double uni;
+   CLHEPdouble uni;
 
    do {
       uni = u[i97] - u[j97];
@@ -290,9 +291,9 @@ double HepJamesRandom::flat()
    return uni;
 }
 
-void HepJamesRandom::flatArray(const int size, double* vect)
+void HepJamesRandom::flatArray(const int size, CLHEPdouble* vect)
 {
-//   double uni;
+//   CLHEPdouble uni;
    int i;
 
    for (i=0; i<size; ++i) {
@@ -300,12 +301,12 @@ void HepJamesRandom::flatArray(const int size, double* vect)
    }   
 }
 
-HepJamesRandom::operator double() {
+HepJamesRandom::operator CLHEPdouble() {
    return flat();
 }
 
-HepJamesRandom::operator float() {
-   return float( flat() );
+HepJamesRandom::operator CLHEPfloat() {
+   return CLHEPfloat( flat() );
 }
 
 HepJamesRandom::operator unsigned int() {
@@ -442,11 +443,11 @@ bool HepJamesRandom::getState (const std::vector<unsigned long> & v) {
   std::vector<unsigned long> t(2);
   for (int i=0; i<97; ++i) {
     t[0] = v[2*i+1]; t[1] = v[2*i+2];
-    u[i] = DoubConv::longs2double(t);
+    u[i] = DoubConv::longs2CLHEPdouble(t);
   }
-  t[0] = v[195]; t[1] = v[196]; c  = DoubConv::longs2double(t);
-  t[0] = v[197]; t[1] = v[198]; cd = DoubConv::longs2double(t);
-  t[0] = v[199]; t[1] = v[200]; cm = DoubConv::longs2double(t);
+  t[0] = v[195]; t[1] = v[196]; c  = DoubConv::longs2CLHEPdouble(t);
+  t[0] = v[197]; t[1] = v[198]; cd = DoubConv::longs2CLHEPdouble(t);
+  t[0] = v[199]; t[1] = v[200]; cm = DoubConv::longs2CLHEPdouble(t);
   j97  = v[201];
   i97  = (64+j97)%97; 
   return true;

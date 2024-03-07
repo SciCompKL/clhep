@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/GenericFunctions/RCBase.hh"
 namespace Genfun {
 RCBase::RCBase()

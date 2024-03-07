@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // This is a class the creates an N-Dimensional Phase Space     //
 
 // It is for use in computing the time development of classical //
@@ -38,10 +39,10 @@ namespace Classical {
     const Component & momenta()     const; 
     
     // Set starting values for the coordinates or momenta:
-    void   start (const Genfun::Variable & variable, double value);
+    void   start (const Genfun::Variable & variable, CLHEPdouble value);
 
     // Get starting values for the coordinates or momenta:
-    double startValue(const Genfun::Variable & component) const ;
+    CLHEPdouble startValue(const Genfun::Variable & component) const ;
 
 
     // Each component has N-dimensions:
@@ -75,8 +76,8 @@ namespace Classical {
 
     Component _coordinates; 
     Component _momenta;
-    std::vector<double> _q0;
-    std::vector<double> _p0;
+    std::vector<CLHEPdouble> _q0;
+    std::vector<CLHEPdouble> _p0;
     unsigned int DIM;
   };
 

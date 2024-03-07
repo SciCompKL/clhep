@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 #include "CLHEP/Units/GlobalPhysicalConstants.h"  // used to provoke shadowing warnings
 #include "CLHEP/Random/Randomize.h"
@@ -31,17 +32,17 @@ template <class E1, class E2> int anonymousRestoreStatics();
 
 
 // Absolutely Safe Equals Without Registers Screwing Us Up
-bool equals01(const std::vector<double> &ab) {
+bool equals01(const std::vector<CLHEPdouble> &ab) {
   return ab[1]==ab[0];
 }  
-bool equals(double a, double b) {
-  std::vector<double> ab(2);
+bool equals(CLHEPdouble a, CLHEPdouble b) {
+  std::vector<CLHEPdouble> ab(2);
   ab[0]=a;  ab[1]=b;
   return (equals01(ab));
 }
 
-std::vector<double> aSequence(int n) {
-  std::vector<double> v;
+std::vector<CLHEPdouble> aSequence(int n) {
+  std::vector<CLHEPdouble> v;
   DualRand e(13542);
   RandFlat f(e);
   for (int i=0; i<n; i++) {
@@ -75,8 +76,8 @@ void randomizeStatics(int n) {
   }
 }
 
-std::vector<double> captureStatics() {
-  std::vector<double> c;
+std::vector<CLHEPdouble> captureStatics() {
+  std::vector<CLHEPdouble> c;
   c.push_back( RandGauss::shoot() );
   c.push_back( RandGaussQ::shoot() );
   c.push_back( RandGaussT::shoot() );
@@ -118,10 +119,10 @@ void restoreStatics(std::string filename) {
 // ----------- Anonymous restore of engines -----------
 
 template <class E>
-void anonymousRestore1(int n, std::vector<double> & v) {
+void anonymousRestore1(int n, std::vector<CLHEPdouble> & v) {
   output << "Anonymous restore for " << E::engineName() << "\n";
   E e(12349876);				    
-  double r=0;					    
+  CLHEPdouble r=0;					    
   for (int i=0; i<n; i++) r += e.flat();	    
   std::ofstream os("anonymous.save");		    
   os << e;					    
@@ -134,14 +135,14 @@ void anonymousRestore1(int n, std::vector<double> & v) {
 }
 
 template <>
-void anonymousRestore1<NonRandomEngine> (int n, std::vector<double> & v) {
+void anonymousRestore1<NonRandomEngine> (int n, std::vector<CLHEPdouble> & v) {
 #ifdef VERBOSER
   output << "Anonymous restore for " << NonRandomEngine::engineName() << "\n";
 #endif
-  std::vector<double> nonRand = aSequence(500);
+  std::vector<CLHEPdouble> nonRand = aSequence(500);
   NonRandomEngine e; 
   e.setRandomSequence(&nonRand[0], nonRand.size());
-  double r=0;
+  CLHEPdouble r=0;
   for (int i=0; i<n; i++) r += e.flat();
   std::ofstream os("anonymous.save");
   os << e;
@@ -154,9 +155,9 @@ void anonymousRestore1<NonRandomEngine> (int n, std::vector<double> & v) {
 }
 
 template <class E>
-int anonymousRestore2(const std::vector<double> & v) {
+int anonymousRestore2(const std::vector<CLHEPdouble> & v) {
   int stat = 0;
-  std::vector<double> k;
+  std::vector<CLHEPdouble> k;
   std::ifstream is("anonymous.save");
   HepRandomEngine * a;
   a = HepRandomEngine::newEngine(is);
@@ -184,7 +185,7 @@ int anonymousRestore2(const std::vector<double> & v) {
 
 template <class E>
 int anonymousRestore(int n) {
-  std::vector<double> v;
+  std::vector<CLHEPdouble> v;
   anonymousRestore1<E>(n,v);
   return anonymousRestore2<E>(v);  
 }
@@ -200,13 +201,13 @@ int anonymousRestoreStatics1() {
   output << "\nRandomized, with theEngine = " << e->name() << "\n";
   saveStatics("anon_distribution.save");
   output << "Saved all static distributions\n";
-  std::vector<double> c = captureStatics();
+  std::vector<CLHEPdouble> c = captureStatics();
   output << "Captured output of all static distributions\n";
   randomizeStatics(11);
   output << "Randomized all static distributions\n";
   restoreStatics("anon_distribution.save");
   output << "Restored all static distributions to saved state\n";
-  std::vector<double> d = captureStatics();
+  std::vector<CLHEPdouble> d = captureStatics();
   output << "Captured output of all static distributions\n";
   for (unsigned int iv=0; iv<c.size(); iv++) {
     if (c[iv] != d[iv]) {
@@ -241,7 +242,7 @@ int anonymousRestoreStatics() {
 #ifdef VERBOSER2
   output << "Saved all static distributions\n";
 #endif
-  std::vector<double> c = captureStatics();
+  std::vector<CLHEPdouble> c = captureStatics();
 #ifdef VERBOSER2
   output << "Captured output of all static distributions\n";
 #endif
@@ -251,8 +252,8 @@ int anonymousRestoreStatics() {
   output << "Switched to theEngine = " << e2->name() << "\n";
   randomizeStatics(19);
   { std::ofstream os("anon_engine.save"); os << *e2; }
-  double v1 = e2->flat();
-  double v2 = e2->flat();
+  CLHEPdouble v1 = e2->flat();
+  CLHEPdouble v2 = e2->flat();
   { std::ifstream is("anon_engine.save"); is >> *e2; }
 #ifdef VERBOSER2
   output << "Saved the "  << e2->name() << " engine: \n"
@@ -264,7 +265,7 @@ int anonymousRestoreStatics() {
   output << "Restored all static distributions to saved state\n"
          << "This changes the engine type back to " << E1::engineName() << "\n";
 #endif
-  std::vector<double> d = captureStatics();
+  std::vector<CLHEPdouble> d = captureStatics();
 #ifdef VERBOSER2
   output << "Captured output of all static distributions\n";
 #endif
@@ -282,8 +283,8 @@ int anonymousRestoreStatics() {
   if ((stat & 524288) == 0) {
     output << "All captured output agrees with earlier values\n";
   }
-  double k1 = e2->flat();
-  double k2 = e2->flat();
+  CLHEPdouble k1 = e2->flat();
+  CLHEPdouble k2 = e2->flat();
 #ifdef VERBOSER2
   output << "The "  << e2->name() << " engine should not have been affected: \n"
          << "Next randoms  are  " << k1 << " " << k2 << "\n";

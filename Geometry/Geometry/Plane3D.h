@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Plane3D.h,v 1.5 2010/06/16 16:21:27 garren Exp $
 // ---------------------------------------------------------------------------
@@ -59,10 +60,10 @@ namespace HepGeom {
     Plane3D(const Plane3D<T> &) = default;
 
     /**
-     * Constructor for Plane3D<double> from Plane3D<float>. */
+     * Constructor for Plane3D<CLHEPdouble> from Plane3D<CLHEPfloat>. */
     template<typename U = T,
-             typename = typename std::enable_if<!std::is_same<U,float>::value >::type>
-    Plane3D(const Plane3D<float> & p)
+             typename = typename std::enable_if<!std::is_same<U,CLHEPfloat>::value >::type>
+    Plane3D(const Plane3D<CLHEPfloat> & p)
       : a_(p.a_), b_(p.b_), c_(p.c_), d_(p.d_) {}
 
     /**
@@ -101,7 +102,7 @@ namespace HepGeom {
     /**
      * Normalization. */
     Plane3D<T> & normalize() {
-      double ll = std::sqrt(a_*a_ + b_*b_ + c_*c_);
+      CLHEPdouble ll = std::sqrt(a_*a_ + b_*b_ + c_*c_);
       if (ll > 0.) { a_ /= ll; b_ /= ll; c_ /= ll, d_ /= ll; }
       return *this;
     }
@@ -152,19 +153,19 @@ namespace HepGeom {
    * Output to the stream.
    * @relates Plane3D
    */
-  std::ostream & operator<<(std::ostream & os, const Plane3D<float> & p);
+  std::ostream & operator<<(std::ostream & os, const Plane3D<CLHEPfloat> & p);
 
   /**
    * Output to the stream.
    * @relates Plane3D
    */
-  std::ostream & operator<<(std::ostream & os, const Plane3D<double> & p);
+  std::ostream & operator<<(std::ostream & os, const Plane3D<CLHEPdouble> & p);
 
 } /* namespace HepGeom */
 
 #ifdef ENABLE_BACKWARDS_COMPATIBILITY
 //  backwards compatibility will be enabled ONLY in CLHEP 1.9
-typedef HepGeom::Plane3D<double> HepPlane3D;
+typedef HepGeom::Plane3D<CLHEPdouble> HepPlane3D;
 #endif
 
 #endif /* HEP_PLANE3D_H */

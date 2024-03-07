@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testEvaluator.cc,v 1.1 2003/07/16 21:47:28 garren Exp $
 // ---------------------------------------------------------------------------
@@ -36,7 +37,7 @@ int main() {
       std::cout << std::endl;
       break;                         // exit
     }
-    double value = eval.evaluate(exp);
+    CLHEPdouble value = eval.evaluate(exp);
     switch(eval.status()) {
     case HepTool::Evaluator::OK:
       std::cout << value << std::endl;

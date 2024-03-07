@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // CLASSDOC OFF
 // $Id: Sqr.h,v 1.1 2003/07/22 21:29:12 garren Exp $

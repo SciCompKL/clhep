@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Parameter.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/Parameter.hh"
@@ -7,7 +8,7 @@
 namespace Genfun {
 PARAMETER_OBJECT_IMP(Parameter)
 
-Parameter::Parameter(std::string name, double value, double lowerLimit, double upperLimit):
+Parameter::Parameter(std::string name, CLHEPdouble value, CLHEPdouble lowerLimit, CLHEPdouble upperLimit):
   _name(name),_value(value),_lowerLimit(lowerLimit),_upperLimit(upperLimit),_sourceParameter(NULL)
 {
 } 
@@ -26,7 +27,7 @@ const std::string & Parameter::getName() const {
   return _name;
 }
 
-double Parameter::getValue() const
+CLHEPdouble Parameter::getValue() const
 {
   if (_sourceParameter) {
     return _sourceParameter->getValue();
@@ -36,7 +37,7 @@ double Parameter::getValue() const
   }
 }
 
-double Parameter::getLowerLimit() const
+CLHEPdouble Parameter::getLowerLimit() const
 {
   if (_sourceParameter) {
     return -1E-100;
@@ -46,7 +47,7 @@ double Parameter::getLowerLimit() const
   }
 }
 
-double Parameter::getUpperLimit() const
+CLHEPdouble Parameter::getUpperLimit() const
 {
   if (_sourceParameter) {
     return 1E100;
@@ -56,7 +57,7 @@ double Parameter::getUpperLimit() const
   }
 }
 
-void Parameter::setValue(double value)
+void Parameter::setValue(CLHEPdouble value)
 {
   if (_sourceParameter) {
     std::cerr
@@ -68,7 +69,7 @@ void Parameter::setValue(double value)
   }
 }
 
-void Parameter::setLowerLimit(double lowerLimit)
+void Parameter::setLowerLimit(CLHEPdouble lowerLimit)
 {
   if (_sourceParameter) {
     std::cerr
@@ -80,7 +81,7 @@ void Parameter::setLowerLimit(double lowerLimit)
   }
 }
 
-void Parameter::setUpperLimit(double upperLimit)
+void Parameter::setUpperLimit(CLHEPdouble upperLimit)
 {
   if (_sourceParameter) {
     std::cerr

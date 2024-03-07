@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -123,7 +124,7 @@ int HepMatrix::num_size() const { return size_;}
 
 // operator()
 
-double & HepMatrix::operator()(int row, int col)
+CLHEPdouble & HepMatrix::operator()(int row, int col)
 {
 #ifdef MATRIX_BOUND_CHECK
   if(row<1 || row>num_row() || col<1 || col>num_col())
@@ -132,7 +133,7 @@ double & HepMatrix::operator()(int row, int col)
   return *(m.begin()+(row-1)*ncol+col-1);
 }
 
-const double & HepMatrix::operator()(int row, int col) const 
+const CLHEPdouble & HepMatrix::operator()(int row, int col) const 
 {
 #ifdef MATRIX_BOUND_CHECK
   if(row<1 || row>num_row() || col<1 || col>num_col())
@@ -310,7 +311,7 @@ HepMatrix operator-(const HepMatrix &hm1,const HepMatrix &hm2)
    ----------------------------------------------------------------------- */
 
 HepMatrix operator/(
-const HepMatrix &hm1,double t)
+const HepMatrix &hm1,CLHEPdouble t)
 #ifdef HEP_GNU_OPTIMIZED_RETURN
      return mret(hm1);
 {
@@ -322,7 +323,7 @@ const HepMatrix &hm1,double t)
   return mret;
 }
 
-HepMatrix operator*(const HepMatrix &hm1,double t)
+HepMatrix operator*(const HepMatrix &hm1,CLHEPdouble t)
 #ifdef HEP_GNU_OPTIMIZED_RETURN
      return mret(hm1);
 {
@@ -334,7 +335,7 @@ HepMatrix operator*(const HepMatrix &hm1,double t)
   return mret;
 }
 
-HepMatrix operator*(double t,const HepMatrix &hm1)
+HepMatrix operator*(CLHEPdouble t,const HepMatrix &hm1)
 #ifdef HEP_GNU_OPTIMIZED_RETURN
      return mret(hm1);
 {
@@ -364,7 +365,7 @@ HepMatrix operator*(const HepMatrix &hm1,const HepMatrix &hm2)
   {
      for (int j=0; j<m1cols; j++) 
      {
-	double temp = hm1.m[i*m1cols+j];
+	CLHEPdouble temp = hm1.m[i*m1cols+j];
 	HepMatrix::mIter pt = mret.m.begin() + i*m2cols;
 	
 	// Loop over k (the column index in matrix hm2)
@@ -400,13 +401,13 @@ HepMatrix & HepMatrix::operator-=(const HepMatrix &hm2)
   return (*this);
 }
 
-HepMatrix & HepMatrix::operator/=(double t)
+HepMatrix & HepMatrix::operator/=(CLHEPdouble t)
 {
   SIMPLE_UOP(/=)
   return (*this);
 }
 
-HepMatrix & HepMatrix::operator*=(double t)
+HepMatrix & HepMatrix::operator*=(CLHEPdouble t)
 {
   SIMPLE_UOP(*=)
   return (*this);
@@ -471,7 +472,7 @@ return mret(ncol,nrow);
    return mret;
 }
 
-HepMatrix HepMatrix::apply(double (*f)(double, int, int)) const
+HepMatrix HepMatrix::apply(CLHEPdouble (*f)(CLHEPdouble, int, int)) const
 #ifdef HEP_GNU_OPTIMIZED_RETURN
 return mret(num_row(),num_col());
 {
@@ -495,8 +496,8 @@ int HepMatrix::dfinv_matrix(int *ir) {
   int n = num_col();
   if (n==1) return 0;
 
-  double s31, s32;
-  double s33, s34;
+  CLHEPdouble s31, s32;
+  CLHEPdouble s33, s34;
 
   mIter hm11 = m.begin();
   mIter hm12 = hm11 + 1;
@@ -583,7 +584,7 @@ int HepMatrix::dfinv_matrix(int *ir) {
       mIter mkj = hm11 + (k-1)*n + j - 1;
       // 2/24/05 David Sachs fix of improper swap bug that was present
       // for many years:
-      double ti = *mki; // 2/24/05
+      CLHEPdouble ti = *mki; // 2/24/05
       *mki = *mkj;
       *mkj = ti;	// 2/24/05
     }
@@ -591,20 +592,20 @@ int HepMatrix::dfinv_matrix(int *ir) {
   return 0;
 }
 
-int HepMatrix::dfact_matrix(double &det, int *ir) {
+int HepMatrix::dfact_matrix(CLHEPdouble &det, int *ir) {
   if (ncol!=nrow)
      error("dfact_matrix: Matrix is not NxN");
 
   int ifail, jfail;
   int n = ncol;
 
-  double tf;
-  double g1 = 1.0e-19, g2 = 1.0e19;
+  CLHEPdouble tf;
+  CLHEPdouble g1 = 1.0e-19, g2 = 1.0e19;
 
-  double p, q, t;
-  double s11, s12;
+  CLHEPdouble p, q, t;
+  CLHEPdouble s11, s12;
 
-  double epsilon = 8*DBL_EPSILON;
+  CLHEPdouble epsilon = 8*DBL_EPSILON;
   // could be set to zero (like it was before)
   // but then the algorithm often doesn't detect
   // that a matrix is singular
@@ -714,12 +715,12 @@ void HepMatrix::invert(int &ierr) {
     max_array = nrow;
     ir = new int [max_array+1];
   }
-  double t1, t2, t3;
-  double det, temp, sd;
+  CLHEPdouble t1, t2, t3;
+  CLHEPdouble det, temp, sd;
   int ifail;
   switch(nrow) {
   case 3:
-    double c11,c12,c13,c21,c22,c23,c31,c32,c33;
+    CLHEPdouble c11,c12,c13,c21,c22,c23,c31,c32,c33;
     ifail = 0;
     c11 = (*(m.begin()+4)) * (*(m.begin()+8)) - (*(m.begin()+5)) * (*(m.begin()+7));
     c12 = (*(m.begin()+5)) * (*(m.begin()+6)) - (*(m.begin()+3)) * (*(m.begin()+8));
@@ -753,7 +754,7 @@ void HepMatrix::invert(int &ierr) {
       return;
     }
     {
-      double s1 = temp/det;
+      CLHEPdouble s1 = temp/det;
       mIter hmm = m.begin();
       *(hmm++) = s1*c11;
       *(hmm++) = s1*c21;
@@ -810,7 +811,7 @@ void HepMatrix::invert(int &ierr) {
   return;
 }
 
-double HepMatrix::determinant() const {
+CLHEPdouble HepMatrix::determinant() const {
   static CLHEP_THREAD_LOCAL int max_array = 20;
   static CLHEP_THREAD_LOCAL int *ir = new int [max_array+1];
   if(ncol != nrow)
@@ -820,15 +821,15 @@ double HepMatrix::determinant() const {
     max_array = nrow;
     ir = new int [max_array+1];
   }
-  double det;
+  CLHEPdouble det;
   HepMatrix mt(*this);
   int i = mt.dfact_matrix(det, ir);
   if(i==0) return det;
   return 0;
 }
 
-double HepMatrix::trace() const {
-   double t = 0.0;
+CLHEPdouble HepMatrix::trace() const {
+   CLHEPdouble t = 0.0;
    for (mcIter d = m.begin(); d < m.end(); d += (ncol+1) )
       t += *d;
    return t;

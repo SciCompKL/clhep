@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/GenericFunctions/GenericFunctions.hh"
 #include "CLHEP/GenericFunctions/Sin.hh"
 #include "CLHEP/GenericFunctions/Cos.hh"
@@ -15,7 +16,7 @@ int  main(int, char **) {
   GENFUNCTION  f = Sin(), g = Cos();
   GENPARAMETER p = Parameter("Parameter", 4.0);
 
-  for (double x = 0; x < 100; x++) {
+  for (CLHEPdouble x = 0; x < 100; x++) {
     // Test Simple Arithmetic Operations Between Functions
     
     assert (fabs((f*g) (x) - (sin(x)*cos(x))) <= FLT_EPSILON);

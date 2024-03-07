@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ParamToArgAdaptor.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //-----------------------Class ParaToArgAdaptor-----------------------------//
@@ -52,8 +53,8 @@ namespace Genfun {
     virtual ~ParamToArgAdaptor();
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;    // Gives an error.
-    virtual double operator ()(const Argument & a) const override; // Must use this one
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;    // Gives an error.
+    virtual CLHEPdouble operator ()(const Argument & a) const override; // Must use this one
 
     // Dimensionality
     virtual unsigned int dimensionality() const override;

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "gsl/gsl_sf_airy.h"
@@ -28,7 +29,7 @@ namespace Genfun {
   
   
   inline
-  double Airy::operator() (double x) const {
+  CLHEPdouble Airy::operator() (CLHEPdouble x) const {
     gsl_sf_result result;
     if (_type==Ai) {
       int status = gsl_sf_airy_Ai_e(x, GSL_PREC_DOUBLE, &result);

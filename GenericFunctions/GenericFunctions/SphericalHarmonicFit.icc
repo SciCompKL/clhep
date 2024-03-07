@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include <sstream>
@@ -45,31 +46,31 @@ public:
     // Note, the calling sequence of the GSL Special Function forces us to 
     // transpose Plm from its "natural" order.. It is addressed as P[m][l].
     
-    //  double ampSq=0.0;
+    //  CLHEPdouble ampSq=0.0;
     
-    std::complex<double> I(0,1.0);
-    double f=1.0;
-    double fThisSum=0.0;
+    std::complex<CLHEPdouble> I(0,1.0);
+    CLHEPdouble f=1.0;
+    CLHEPdouble fThisSum=0.0;
     for (unsigned int l=0;l<=LMAX;l++) {
       
       // lStructThis is zero if l==0;
       // lStructNext is zero if l==LMAX;
       const LStruct *lStructThis= (l==0    ? NULL: & lstruct[l-1]);
       const LStruct *lStructNext= (l==LMAX ? NULL: & lstruct[l]);
-      double fHigher = lStructNext ? lStructNext->fractionLOrHigher->getValue() : NULL;
-      double fThis   = f*(1-fHigher);
+      CLHEPdouble fHigher = lStructNext ? lStructNext->fractionLOrHigher->getValue() : NULL;
+      CLHEPdouble fThis   = f*(1-fHigher);
       fThisSum+=fThis;
       
-      double g=1.0;
-      double gThisSum=0.0;
+      CLHEPdouble g=1.0;
+      CLHEPdouble gThisSum=0.0;
       for (int m=0;m<=int(l);m++) {
 	
 	// mStructThis is zero if m==0;
 	// mStructNext is zero if m==l;
 	const MStruct *mStructThis= ((m==0 || !lStructThis) ? NULL: & lStructThis->mstruct[m-1]);
 	const MStruct *mStructNext= (m==int(l) ? NULL: & lStructThis->mstruct[m]);
-	double gHigher = mStructNext ? mStructNext->fractionAbsMOrHigher->getValue() : NULL;
-	double gThis   = g*(1-gHigher);
+	CLHEPdouble gHigher = mStructNext ? mStructNext->fractionAbsMOrHigher->getValue() : NULL;
+	CLHEPdouble gThis   = g*(1-gHigher);
 	gThisSum+=gThis;
 	
 	if (fThis<0) {
@@ -80,28 +81,28 @@ public:
 	  std::cout << "M-fraction correction" << gThis << "-->0" << std::endl;
 	  gThis=0.0;
 	}
-	double px=0.0; // phase
+	CLHEPdouble px=0.0; // phase
 	if (m==0) {
 	  if (lStructThis) {
-	    double amplitude = sqrt(fThis*gThis);
+	    CLHEPdouble amplitude = sqrt(fThis*gThis);
 	    px = lStructThis->phaseLM0->getValue();;
 	    coefficientsA(l,m)=exp(I*px)*amplitude;
 	  }
 	  // L=0 occurs here:
 	  else {
-	    double amplitude = sqrt(fThis*gThis);
+	    CLHEPdouble amplitude = sqrt(fThis*gThis);
 	    coefficientsA(l,m)=exp(I*px)*amplitude;
 	  }
 	}
 	// Split it between positive and negative:
 	else {
 	  {
-	    double amplitude = sqrt(fThis*gThis*mStructThis->fractionMPositive->getValue());
+	    CLHEPdouble amplitude = sqrt(fThis*gThis*mStructThis->fractionMPositive->getValue());
 	    px = mStructThis->phaseMPlus->getValue();;
 	    coefficientsA(l,m)=exp(I*px)*amplitude;
 	  }
 	  {
-	    double amplitude = sqrt(fThis*gThis*(1-mStructThis->fractionMPositive->getValue()));
+	    CLHEPdouble amplitude = sqrt(fThis*gThis*(1-mStructThis->fractionMPositive->getValue()));
 	    px = mStructThis->phaseMMinus->getValue();;
 	    coefficientsA(l,-m)=exp(I*px)*amplitude;
 	  }
@@ -201,35 +202,35 @@ SphericalHarmonicFit::~SphericalHarmonicFit() {
   }
   
   inline
-  double SphericalHarmonicFit::operator() (double ) const {
+  CLHEPdouble SphericalHarmonicFit::operator() (CLHEPdouble ) const {
     throw std::runtime_error("Dimensionality error in SphericalHarmonicFit");
     return 0;
   }
   
   inline
-  double SphericalHarmonicFit::operator() (const Argument & a ) const {
+  CLHEPdouble SphericalHarmonicFit::operator() (const Argument & a ) const {
     unsigned int LMAX=c->LMAX;
-    double x = a[0];
-    double phi=a[1];
+    CLHEPdouble x = a[0];
+    CLHEPdouble phi=a[1];
 
     // Note, the calling sequence of the GSL Special Function forces us to 
     // transpose Plm from its "natural" order.. It is addressed as P[m][l].
 
-    //double Plm[LMAX+1][LMAX+1];  
-    std::vector< std::vector<double> > Plm(LMAX+1);
+    //CLHEPdouble Plm[LMAX+1][LMAX+1];  
+    std::vector< std::vector<CLHEPdouble> > Plm(LMAX+1);
     for (int m=0;m<=int(LMAX);m++) {
       Plm[m].resize(LMAX+1);
       gsl_sf_legendre_sphPlm_array (LMAX, m, x, &*Plm[m].begin());
     }
 
     c->recomputeCoefficients();
-    std::complex<double> P=0.0;
-    std::complex<double> I(0,1.0);
+    std::complex<CLHEPdouble> P=0.0;
+    std::complex<CLHEPdouble> I(0,1.0);
     for (unsigned int l=0;l<=LMAX;l++) {
       for (int m=0;m<=int(l);m++) {
 	{
 	  int LP=l-abs(m);
-	  double Pn= Plm[abs(m)][LP];
+	  CLHEPdouble Pn= Plm[abs(m)][LP];
 	  
 	  if (!finite(Pn)) return 0.0;
 
@@ -241,7 +242,7 @@ SphericalHarmonicFit::~SphericalHarmonicFit() {
       }
     }
     
-    double retVal=std::norm(P);
+    CLHEPdouble retVal=std::norm(P);
     if (!finite(retVal)) {
       return 0.0;
     }

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testRandom.cc,v 1.2 2010/06/16 17:24:53 garren Exp $
 // ----------------------------------------------------------------------
@@ -55,9 +56,9 @@ void init()
 
 void layout()
 {
-   float m1=3.0;
+   CLHEPfloat m1=3.0;
    const int size=5;
-   double vect[size];
+   CLHEPdouble vect[size];
 
    cout << " Flat ]0,1[          : " << RandFlat::shoot() << endl;
    cout << " Flat ]0,5[          : " << RandFlat::shoot(5) << endl;
@@ -91,9 +92,9 @@ void layout()
 
 void dist_layout()
 {
-   float m1=3.0;
+   CLHEPfloat m1=3.0;
    const int size=5;
-   double vect[size];
+   CLHEPdouble vect[size];
 
    HepJamesRandom aJamesEngine;
    RandEngine aRandEngine;
@@ -159,9 +160,9 @@ void dist_layout()
 
 void user_layout()
 {
-   float m1=3.0;
+   CLHEPfloat m1=3.0;
    const int size=5;
-   double vect[size];
+   CLHEPdouble vect[size];
    char sel;
    HepRandomEngine* anEngine;
 

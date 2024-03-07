@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionConvolution.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/FunctionConvolution.hh"
@@ -7,7 +8,7 @@
 namespace Genfun {
 FUNCTION_OBJECT_IMP(FunctionConvolution)
 
-FunctionConvolution::FunctionConvolution(const AbsFunction *arg1, const AbsFunction *arg2, double x0, double x1):_arg1(arg1->clone()),_arg2(arg2->clone()),_x0(x0), _x1(x1)
+FunctionConvolution::FunctionConvolution(const AbsFunction *arg1, const AbsFunction *arg2, CLHEPdouble x0, CLHEPdouble x1):_arg1(arg1->clone()),_arg2(arg2->clone()),_x0(x0), _x1(x1)
 {
   if ((arg1->dimensionality()!=1) || arg2->dimensionality()!=1) {
     std::cout
@@ -33,12 +34,12 @@ FunctionConvolution::~FunctionConvolution()
 
 
 
-double FunctionConvolution::operator ()(double argument) const
+CLHEPdouble FunctionConvolution::operator ()(CLHEPdouble argument) const
 {
-  const double NDIVISIONS=200.0;
-  double dx = (_x1-_x0)/NDIVISIONS;
-  double result=0.0;
-  for (double x=_x0; x<_x1; x+=dx) {
+  const CLHEPdouble NDIVISIONS=200.0;
+  CLHEPdouble dx = (_x1-_x0)/NDIVISIONS;
+  CLHEPdouble result=0.0;
+  for (CLHEPdouble x=_x0; x<_x1; x+=dx) {
     result += (*_arg1)(argument-x)*(*_arg2)(x);
   }
   result/=NDIVISIONS;

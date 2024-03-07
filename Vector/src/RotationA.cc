@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -21,16 +22,16 @@ namespace CLHEP  {
 
 // axis and angle
 
-HepRotation & HepRotation::set( const Hep3Vector & aaxis, double ddelta ) {
+HepRotation & HepRotation::set( const Hep3Vector & aaxis, CLHEPdouble ddelta ) {
 
-  double sinDelta = std::sin(ddelta), cosDelta = std::cos(ddelta);
-  double oneMinusCosDelta = 1.0 - cosDelta;
+  CLHEPdouble sinDelta = std::sin(ddelta), cosDelta = std::cos(ddelta);
+  CLHEPdouble oneMinusCosDelta = 1.0 - cosDelta;
 
   Hep3Vector u = aaxis.unit();
 
-  double uX = u.getX();
-  double uY = u.getY();
-  double uZ = u.getZ();
+  CLHEPdouble uX = u.getX();
+  CLHEPdouble uY = u.getY();
+  CLHEPdouble uZ = u.getZ();
 
   rxx = oneMinusCosDelta * uX * uX  +  cosDelta;
   rxy = oneMinusCosDelta * uX * uY  -  sinDelta * uZ;
@@ -48,7 +49,7 @@ HepRotation & HepRotation::set( const Hep3Vector & aaxis, double ddelta ) {
 
 } // HepRotation::set(axis, delta)
 
-HepRotation::HepRotation ( const Hep3Vector & aaxis, double ddelta ) 
+HepRotation::HepRotation ( const Hep3Vector & aaxis, CLHEPdouble ddelta ) 
 {
   set( aaxis, ddelta );
 }  
@@ -60,9 +61,9 @@ HepRotation::HepRotation ( const HepAxisAngle & ax )
   set ( ax.axis(), ax.delta() );
 }
 
-double    HepRotation::delta() const {
+CLHEPdouble    HepRotation::delta() const {
 
-  double cosdelta = (rxx + ryy + rzz - 1.0) / 2.0;
+  CLHEPdouble cosdelta = (rxx + ryy + rzz - 1.0) / 2.0;
   if (cosdelta > 1.0) {
     return 0;
   } else if (cosdelta < -1.0) {
@@ -75,23 +76,23 @@ double    HepRotation::delta() const {
 
 Hep3Vector HepRotation::axis () const {
 
-  const double eps = 1e-15;
+  const CLHEPdouble eps = 1e-15;
 
-  double Ux = rzy - ryz;
-  double Uy = rxz - rzx;
-  double Uz = ryx - rxy;
+  CLHEPdouble Ux = rzy - ryz;
+  CLHEPdouble Uy = rxz - rzx;
+  CLHEPdouble Uz = ryx - rxy;
   if (std::abs(Ux) < eps && std::abs(Uy) < eps && std::abs(Uz) < eps) {
 
-    double cosdelta = (rxx + ryy + rzz - 1.0) / 2.0;
+    CLHEPdouble cosdelta = (rxx + ryy + rzz - 1.0) / 2.0;
     if (cosdelta > 0.0) return Hep3Vector(0,0,1); // angle = 0, any axis is good
 
-    double xxt = (rxx + 1)/2;
-    double yyt = (ryy + 1)/2;
-    double zzt = (rzz + 1)/2;
-    double xyt = (rxy + ryx)/4;
-    double xzt = (rxz + rzx)/4;
-    double yzt = (ryz + rzy)/4;
-    double x, y, z;
+    CLHEPdouble xxt = (rxx + 1)/2;
+    CLHEPdouble yyt = (ryy + 1)/2;
+    CLHEPdouble zzt = (rzz + 1)/2;
+    CLHEPdouble xyt = (rxy + ryx)/4;
+    CLHEPdouble xzt = (rxz + rzx)/4;
+    CLHEPdouble yzt = (ryz + rzy)/4;
+    CLHEPdouble x, y, z;
 
     if (xxt > ryy && xxt > rzz) {
       x = std::sqrt(xxt);
@@ -129,7 +130,7 @@ void HepRotation::setAxis (const Hep3Vector & aaxis) {
   set ( aaxis, delta() );
 }
 
-void HepRotation::setDelta (double ddelta) {
+void HepRotation::setDelta (CLHEPdouble ddelta) {
   set ( axis(), ddelta );
 }
 

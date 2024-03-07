@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 
@@ -21,7 +22,7 @@ Gamma::Gamma(const Gamma & right) : AbsFunction(right)
 Gamma::~Gamma() {
 }
 
-double Gamma::operator() (double x) const {
+CLHEPdouble Gamma::operator() (CLHEPdouble x) const {
   return  exp(_logGamma(x));
 
 }

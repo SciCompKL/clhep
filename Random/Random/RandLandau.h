@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandLandau.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -72,27 +73,27 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  inline double shoot();
+  static  inline CLHEPdouble shoot();
 
-  static  void shootArray ( const int size, double* vect );
+  static  void shootArray ( const int size, CLHEPdouble* vect );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  inline double shoot( HepRandomEngine* anotherEngine );
+  static  inline CLHEPdouble shoot( HepRandomEngine* anotherEngine );
 
   static  void shootArray ( HepRandomEngine* anotherEngine, 
 			    const int size,
-                            double* vect );
+                            CLHEPdouble* vect );
 
   //  Instance methods using the localEngine to instead of the static 
   //  generator, and the default mean and stdDev established at construction
 
-  inline double fire();
+  inline CLHEPdouble fire();
 
-  void fireArray  ( const int size, double* vect);
+  void fireArray  ( const int size, CLHEPdouble* vect);
 
-  inline double operator()();
+  inline CLHEPdouble operator()();
 
   std::string name() const;
   HepRandomEngine & engine();
@@ -103,8 +104,8 @@ public:
 
 protected:
 
-  static double transform      (double r);
-  static double transformSmall (double r);
+  static CLHEPdouble transform      (CLHEPdouble r);
+  static CLHEPdouble transformSmall (CLHEPdouble r);
 
 private:
 

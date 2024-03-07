@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 #include "CLHEP/Random/Randomize.h"
 #include "CLHEP/Random/NonRandomEngine.h"
@@ -30,17 +31,17 @@
 
 using namespace CLHEP;
 
-double remembered_r2;
-double remembered_r1005;
-double remembered_r1006;
-double remembered_r1007;
+CLHEPdouble remembered_r2;
+CLHEPdouble remembered_r1005;
+CLHEPdouble remembered_r1006;
+CLHEPdouble remembered_r1007;
 
 // Absolutely Safe Equals Without Registers Screwing Us Up
-bool equals01(const std::vector<double> &ab) {
+bool equals01(const std::vector<CLHEPdouble> &ab) {
   return ab[1]==ab[0];
 }  
-bool equals(double a, double b) {
-  std::vector<double> ab(2);
+bool equals(CLHEPdouble a, CLHEPdouble b) {
+  std::vector<CLHEPdouble> ab(2);
   ab[0]=a;  ab[1]=b;
   return (equals01(ab));
 }
@@ -48,7 +49,7 @@ bool equals(double a, double b) {
 // ------------------- The following should all FAIL ------------
 
 int saveStepX() {
-  double r = RandGauss::shoot();
+  CLHEPdouble r = RandGauss::shoot();
   output << "r(1) = " << r << std::endl;
   HepRandom::saveEngineStatus();
   r = RandGauss::shoot();
@@ -68,7 +69,7 @@ int saveStepX() {
 
 int restoreStepX() {
   HepRandom::restoreEngineStatus();
-  double r = RandGauss::shoot();
+  CLHEPdouble r = RandGauss::shoot();
   output << "restored r(2) = " << r << std::endl;
   if ( ! equals(r,remembered_r2) ) {
     output << "THIS DOES NOT MATCH REMEMBERED VALUE BUT THAT IS EXPECTED\n";
@@ -95,7 +96,7 @@ int BsaveStepX() {
   remembered_r2 = r;
   r = RandFlat::shootBit();
   output << "r(3) = " << r << std::endl;
-  double d;
+  CLHEPdouble d;
   for (int i=0; i < 1001; i++) {
     d = RandFlat::shoot();
     if (d > 1) output << 
@@ -132,7 +133,7 @@ int BrestoreStepX() {
 
 int saveStep() {
   int stat=0;
-  double r = RandGauss::shoot();
+  CLHEPdouble r = RandGauss::shoot();
   output << "r(1) = " << r << std::endl;
   RandGauss::saveEngineStatus();
   r = RandGauss::shoot();
@@ -153,7 +154,7 @@ int saveStep() {
 int restoreStep() {
   int stat=0;
   RandGauss::restoreEngineStatus();
-  double r = RandGauss::shoot();
+  CLHEPdouble r = RandGauss::shoot();
   output << "restored r(2) = " << r << std::endl;
   if ( !equals(r,remembered_r2) ) {
     std::cout << "restored r(2) = " << r << std::endl;
@@ -328,7 +329,7 @@ int saveEngine(const char* filename) {
   HepRandomEngine * old = D::getTheEngine();
   E e(123);
   D::setTheEngine(&e);
-  double r=0; 
+  CLHEPdouble r=0; 
   for (int i=0; i<3; i++) r += D::shoot();
   D::saveEngineStatus(filename);
   if (r == -99999999.1) stat = 999; // This prevents clever compilers from
@@ -349,12 +350,12 @@ int checkSaveEngine(const char* filename) {
   // Generate save with current format (default file name is fine)
   E e(123);
   D::setTheEngine(&e);
-  double r=0; 
+  CLHEPdouble r=0; 
   for (int i=0; i<3; i++) r += D::shoot();
   D::saveEngineStatus();
 
   // Figure out what the key variate value should be
-  double keyValue = D::shoot();
+  CLHEPdouble keyValue = D::shoot();
 
   // Restore state based on old file, and check for proper value
   D::restoreEngineStatus(filename);

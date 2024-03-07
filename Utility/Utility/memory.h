@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef CLHEP_MEMORY_H
 #define CLHEP_MEMORY_H
 

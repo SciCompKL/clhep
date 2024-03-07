@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandPoissonT.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -42,8 +43,8 @@ class RandPoissonT : public RandPoisson {
 
 public:
 
-  RandPoissonT ( HepRandomEngine& anEngine, double m=1.0 );
-  RandPoissonT ( HepRandomEngine* anEngine, double m=1.0 );
+  RandPoissonT ( HepRandomEngine& anEngine, CLHEPdouble m=1.0 );
+  RandPoissonT ( HepRandomEngine* anEngine, CLHEPdouble m=1.0 );
   // These constructors should be used to instantiate a RandPoissonT
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -63,29 +64,29 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  long shoot( double m=1.0 );
+  static  long shoot( CLHEPdouble m=1.0 );
 
-  static  void shootArray ( const int size, long* vect, double m=1.0 );
+  static  void shootArray ( const int size, long* vect, CLHEPdouble m=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  long shoot( HepRandomEngine* anEngine, double m=1.0 );
+  static  long shoot( HepRandomEngine* anEngine, CLHEPdouble m=1.0 );
 
   static  void shootArray ( HepRandomEngine* anEngine,
-                            const int size, long* vect, double m=1.0 );
+                            const int size, long* vect, CLHEPdouble m=1.0 );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
   long  fire();
-  long  fire( double m );
+  long  fire( CLHEPdouble m );
 
   void fireArray ( const int size, long* vect );
-  void fireArray ( const int size, long* vect, double m);
+  void fireArray ( const int size, long* vect, CLHEPdouble m);
 
-  double operator()();
-  double operator()( double m );
+  CLHEPdouble operator()();
+  CLHEPdouble operator()( CLHEPdouble m );
 
   std::string name() const;
   HepRandomEngine & engine();

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: Random.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -24,7 +25,7 @@
 // =======================================================================
 // Gabriele Cosmo - Created: 5th Sep 1995
 //                - Minor update: 17th May 1996
-//                - Poisson now operates on doubles : 31st Oct 1996
+//                - Poisson now operates on CLHEPdoubles : 31st Oct 1996
 //                - Added methods for engine status: 19th Nov 1996
 //                - Fixed default values to setTheSeed() and
 //                  setTheSeeds() static methods: 16th Oct 1997
@@ -67,21 +68,21 @@ public:
   
   // implicitly allow compiler-generated copy functions 
 
-  double flat();
+  CLHEPdouble flat();
   // Returns the flat value ( interval ]0...1[ ).
 
-  void flatArray(const int size, double* vect);
+  void flatArray(const int size, CLHEPdouble* vect);
   // Fills "vect" array of flat random values, given the size.
 
-  inline double flat (HepRandomEngine* theNewEngine);
+  inline CLHEPdouble flat (HepRandomEngine* theNewEngine);
   // Returns a flat value, given a defined Random Engine.
 
   inline void flatArray(HepRandomEngine* theNewEngine, 
-                        const int size, double* vect);
+                        const int size, CLHEPdouble* vect);
   // Fills "vect" array of flat random values, given the size
   // and a defined Random Engine.
 
-  virtual double operator()();
+  virtual CLHEPdouble operator()();
   // To get a flat random number using the operator ().
 
   virtual std::string name() const;

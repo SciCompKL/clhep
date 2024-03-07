@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: RotationInterfaces.icc,v 1.1.1.1 2003/07/15 20:15:05 garren Exp $
 // ---------------------------------------------------------------------------
@@ -21,18 +22,18 @@ inline HepRep3x3::HepRep3x3() :
 	, zx_(0.0), zy_(0.0), zz_(1.0)
 {}
 
-inline HepRep3x3::HepRep3x3(  double xx, double xy, double xz
-                   , double yx, double yy, double yz
-                   , double zx, double zy, double zz
+inline HepRep3x3::HepRep3x3(  CLHEPdouble xx, CLHEPdouble xy, CLHEPdouble xz
+                   , CLHEPdouble yx, CLHEPdouble yy, CLHEPdouble yz
+                   , CLHEPdouble zx, CLHEPdouble zy, CLHEPdouble zz
                    ) :
 	  xx_(xx), xy_(xy), xz_(xz)
 	, yx_(yx), yy_(yy), yz_(yz)
 	, zx_(zx), zy_(zy), zz_(zz)
 {}
 
-inline HepRep3x3::HepRep3x3( const double * array ) {
-  const double * a = array; 
-  double * r = &xx_;
+inline HepRep3x3::HepRep3x3( const CLHEPdouble * array ) {
+  const CLHEPdouble * a = array; 
+  CLHEPdouble * r = &xx_;
   for ( int i = 0; i < 9; i++ ) { *r++ = *a++; }
 }
 
@@ -42,9 +43,9 @@ inline void HepRep3x3::setToIdentity() {
 	  zx_ = 0.0; zy_ = 0.0; zz_ = 1.0;
 }
 
-inline void HepRep3x3::getArray( double * array ) const {
-  double * a = array; 
-  const double * r = &xx_;
+inline void HepRep3x3::getArray( CLHEPdouble * array ) const {
+  CLHEPdouble * a = array; 
+  const CLHEPdouble * r = &xx_;
   for ( int i = 0; i < 9; i++ ) { *a++ = *r++; }
 }
 
@@ -61,10 +62,10 @@ inline HepRep4x4::HepRep4x4() :
 {}
 
 inline HepRep4x4::HepRep4x4(  
-		     double xx, double xy, double xz, double xt
-                   , double yx, double yy, double yz, double yt
-                   , double zx, double zy, double zz, double zt
-                   , double tx, double ty, double tz, double tt
+		     CLHEPdouble xx, CLHEPdouble xy, CLHEPdouble xz, CLHEPdouble xt
+                   , CLHEPdouble yx, CLHEPdouble yy, CLHEPdouble yz, CLHEPdouble yt
+                   , CLHEPdouble zx, CLHEPdouble zy, CLHEPdouble zz, CLHEPdouble zt
+                   , CLHEPdouble tx, CLHEPdouble ty, CLHEPdouble tz, CLHEPdouble tt
                    ) :
 	  xx_(xx), xy_(xy), xz_(xz), xt_(xt)
 	, yx_(yx), yy_(yy), yz_(yz), yt_(yt)
@@ -79,9 +80,9 @@ inline HepRep4x4::HepRep4x4( const HepRep4x4Symmetric & rep ) :
 	, tx_(rep.xt_), ty_(rep.yt_), tz_(rep.zt_), tt_(rep.tt_)
 {}
 
-inline HepRep4x4::HepRep4x4( const double * array ) {
-  const double * a = array; 
-  double * r = &xx_;
+inline HepRep4x4::HepRep4x4( const CLHEPdouble * array ) {
+  const CLHEPdouble * a = array; 
+  CLHEPdouble * r = &xx_;
   for ( int i = 0; i < 16; i++ ) { *r++ = *a++; }
 }
 
@@ -92,9 +93,9 @@ inline void HepRep4x4::setToIdentity() {
 	  tx_ = 0.0; ty_ = 0.0; tz_ = 0.0; tt_ = 1.0;
 }
 
-inline void HepRep4x4::getArray( double * array ) const {
-  double * a = array; 
-  const double * r = &xx_;
+inline void HepRep4x4::getArray( CLHEPdouble * array ) const {
+  CLHEPdouble * a = array; 
+  const CLHEPdouble * r = &xx_;
   for ( int i = 0; i < 16; i++ ) { *a++ = *r++; }
 }
 
@@ -121,19 +122,19 @@ inline HepRep4x4Symmetric::HepRep4x4Symmetric() :
 {}
 
 inline HepRep4x4Symmetric::HepRep4x4Symmetric 
-        ( double xx, double xy, double xz, double xt
-                      , double yy, double yz, double yt
-                                    , double zz, double zt
-                                                  , double tt ) :
+        ( CLHEPdouble xx, CLHEPdouble xy, CLHEPdouble xz, CLHEPdouble xt
+                      , CLHEPdouble yy, CLHEPdouble yz, CLHEPdouble yt
+                                    , CLHEPdouble zz, CLHEPdouble zt
+                                                  , CLHEPdouble tt ) :
 	  xx_(xx), xy_(xy), xz_(xz), xt_(xt)
 		 , yy_(yy), yz_(yz), yt_(yt)
 			  , zz_(zz), zt_(zt)
 				   , tt_(tt)
 {}
 
-inline HepRep4x4Symmetric::HepRep4x4Symmetric( const double * array ) {
-  const double * a = array; 
-  double * r = &xx_;
+inline HepRep4x4Symmetric::HepRep4x4Symmetric( const CLHEPdouble * array ) {
+  const CLHEPdouble * a = array; 
+  CLHEPdouble * r = &xx_;
   for ( int i = 0; i < 10; i++ ) { *r++ = *a++; }
 }
 
@@ -144,9 +145,9 @@ inline void HepRep4x4Symmetric::setToIdentity() {
 	                                   tt_ = 1.0;
 }
 
-inline void HepRep4x4Symmetric::getArray( double * array ) const {
-  double * a = array; 
-  const double * r = &xx_;
+inline void HepRep4x4Symmetric::getArray( CLHEPdouble * array ) const {
+  CLHEPdouble * a = array; 
+  const CLHEPdouble * r = &xx_;
   for ( int i = 0; i < 10; i++ ) { *a++ = *r++; }
 }
 

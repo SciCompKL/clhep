@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "CLHEP/GenericFunctions/Theta.hh"
@@ -16,7 +17,7 @@ Theta::Theta(const Theta & right) : AbsFunction(right)
 {  }
 
 
-double Theta::operator() (double x) const {
+CLHEPdouble Theta::operator() (CLHEPdouble x) const {
   return (x>=0) ? 1.0:0.0;
 }
 

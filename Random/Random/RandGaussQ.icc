@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandGaussQ.icc,v 1.4 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -22,18 +23,18 @@
 
 namespace CLHEP {
 
-RandGaussQ::RandGaussQ(HepRandomEngine & anEngine, double mean,
-                                                        double stdDev )
+RandGaussQ::RandGaussQ(HepRandomEngine & anEngine, CLHEPdouble mean,
+                                                        CLHEPdouble stdDev )
 : RandGauss(anEngine, mean, stdDev) {}
 
-RandGaussQ::RandGaussQ(HepRandomEngine * anEngine, double mean,
-                                                        double stdDev )
+RandGaussQ::RandGaussQ(HepRandomEngine * anEngine, CLHEPdouble mean,
+                                                        CLHEPdouble stdDev )
 : RandGauss(anEngine, mean, stdDev) {}
 
 // Getting a Gaussian deviate - static methods
 // -------------------------------------------
 
-double RandGaussQ::shoot()
+CLHEPdouble RandGaussQ::shoot()
 {
 #ifdef TRACE_DEBUG
   std::cout << "RandGaussQ::shoot() in icc file\n";
@@ -45,28 +46,28 @@ double RandGaussQ::shoot()
   return transformQuick (anEngine->flat());
 }
 
-double RandGaussQ::shoot( HepRandomEngine* anotherEngine )
+CLHEPdouble RandGaussQ::shoot( HepRandomEngine* anotherEngine )
 { 
   return transformQuick  (anotherEngine->flat());
 }
 
-double RandGaussQ::shoot(double mean, double stdDev) {
+CLHEPdouble RandGaussQ::shoot(CLHEPdouble mean, CLHEPdouble stdDev) {
   return shoot()*stdDev + mean;
 }
 
-double RandGaussQ::shoot(HepRandomEngine* anotherEngine,
-                                  double mean, double stdDev) {
+CLHEPdouble RandGaussQ::shoot(HepRandomEngine* anotherEngine,
+                                  CLHEPdouble mean, CLHEPdouble stdDev) {
   return shoot(anotherEngine)*stdDev + mean;
 }
 
 // Getting a Gaussian deviate - instance methods
 // ---------------------------------------------
 
-double RandGaussQ::fire() {
+CLHEPdouble RandGaussQ::fire() {
   return transformQuick(localEngine->flat()) * defaultStdDev + defaultMean;
 }
 
-double RandGaussQ::fire(double mean, double stdDev) {
+CLHEPdouble RandGaussQ::fire(CLHEPdouble mean, CLHEPdouble stdDev) {
   return transformQuick(localEngine->flat()) * stdDev + mean;
 }
 

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ATan.cc,v 1.4 2003/10/10 17:40:39 garren Exp $ 
 #include "CLHEP/GenericFunctions/ATan.hh"
@@ -18,7 +19,7 @@ ATan::ATan(const ATan & right) : AbsFunction(right)
 {  }
 
 
-double ATan::operator() (double x) const {
+CLHEPdouble ATan::operator() (CLHEPdouble x) const {
   return atan(x);
 }
 

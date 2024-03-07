@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionPlusParameter.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/FunctionPlusParameter.hh"
@@ -32,13 +33,13 @@ FunctionPlusParameter::~FunctionPlusParameter()
 }
 
 
-double FunctionPlusParameter::operator ()(double x) const
+CLHEPdouble FunctionPlusParameter::operator ()(CLHEPdouble x) const
 {
   return _parameter->getValue() + (*_function)(x);
 }
 
 
-double FunctionPlusParameter::operator ()(const Argument & x) const
+CLHEPdouble FunctionPlusParameter::operator ()(const Argument & x) const
 {
   return _parameter->getValue() + (*_function)(x);
 }

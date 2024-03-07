@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: NonRandomEngine.h,v 1.7 2011/07/01 15:20:30 garren Exp $
 // -*- C++ -*-
 //
@@ -11,7 +12,7 @@
 // other programs that depend on random numbers) by feeding them a stream
 // of "randoms" that the testing program supplies explicitly.
 //
-// The testing program calls setNextRandom (double) to setup the next
+// The testing program calls setNextRandom (CLHEPdouble) to setup the next
 // value to be produced when flat() is done.  
 //
 // To protect against accidental use of this NON-RANDOM engine as a random
@@ -45,22 +46,22 @@ public:
   virtual ~NonRandomEngine();
   // Constructors and destructor
 
-  void setNextRandom     (double r);
+  void setNextRandom     (CLHEPdouble r);
 	// Preset the next random to be delivered
-  void setRandomSequence (double *s, int n);
+  void setRandomSequence (CLHEPdouble *s, int n);
 	// Establish a sequence of n next randoms; 
 	// replaces setNextRandom n times.
-  void setRandomInterval (double x);
+  void setRandomInterval (CLHEPdouble x);
 	// Establish that if there is no sequence active each 
 	// random should be bumped by this interval (mod 1) compared 
 	// to the last.  x should be between 0 and 1.
 
-  double flat();
+  CLHEPdouble flat();
   // It returns the previously established setNextRandom and bumps that up
   // by the non-zero randomInterval supplied.  Thus repeated calls to flat()
   // generate an evenly spaced sequence (mod 1).
 
-  void flatArray (const int size, double* vect);
+  void flatArray (const int size, CLHEPdouble* vect);
   // Fills the array "vect" of specified size with flat random values.
 
   virtual std::ostream & put (std::ostream & os) const;
@@ -80,10 +81,10 @@ private:
   bool nextHasBeenSet;
   bool sequenceHasBeenSet;
   bool intervalHasBeenSet;
-  double  nextRandom;
-  std::vector<double> sequence;
+  CLHEPdouble  nextRandom;
+  std::vector<CLHEPdouble> sequence;
   unsigned int nInSeq;
-  double  randomInterval;
+  CLHEPdouble  randomInterval;
 
   // The following are necessary to fill virtual methods but should never 
   // be used:

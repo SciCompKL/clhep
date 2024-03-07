@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id:
 //---------------------Gaussian---------------------------------------------//
@@ -33,8 +34,8 @@ namespace Genfun {
     virtual ~LogisticFunction();
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & arg) const override {return operator() (arg[0]); }
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & arg) const override {return operator() (arg[0]); }
   
     // Get the starting value of the LogisticFunction
     Parameter & x0(); 
@@ -56,9 +57,9 @@ namespace Genfun {
     Parameter _a;
 
     // A vector of values.
-    mutable std::vector<double> fx;
+    mutable std::vector<CLHEPdouble> fx;
     // Some cache:
-    mutable double __a, __x0;
+    mutable CLHEPdouble __a, __x0;
 
   };
 } // namespace Genfun

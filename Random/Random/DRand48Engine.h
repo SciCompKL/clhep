@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: DRand48Engine.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -67,12 +68,12 @@ public:
   virtual ~DRand48Engine();
   // Constructors and destructor
 
-  double flat();
+  CLHEPdouble flat();
   // It returns a pseudo random number between 0 and 1,
   // according to the standard stdlib random function drand48()
   // but excluding the end points.
 
-  void flatArray (const int size, double* vect);
+  void flatArray (const int size, CLHEPdouble* vect);
   // Fills the array "vect" of specified size with flat random values.
 
   void setSeed(long seed, int dum=0);

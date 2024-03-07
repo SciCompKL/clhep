@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandGeneral.icc,v 1.2 2003/07/17 19:20:02 garren Exp $
 // -*- C++ -*-
 // 
@@ -16,29 +17,29 @@
 
 namespace CLHEP {
 
-inline double RandGeneral::fire()
+inline CLHEPdouble RandGeneral::fire()
 {
-  double rand = localEngine->flat();
+  CLHEPdouble rand = localEngine->flat();
   return mapRandom(rand);
 }
 
-inline double RandGeneral::shoot()
+inline CLHEPdouble RandGeneral::shoot()
 {
   return fire();
 }
 
-inline double RandGeneral::operator() ()
+inline CLHEPdouble RandGeneral::operator() ()
 {
   return fire();
 }
 
-inline double RandGeneral::shoot( HepRandomEngine* anEngine )
+inline CLHEPdouble RandGeneral::shoot( HepRandomEngine* anEngine )
 { 
-  double rand = anEngine->flat();
+  CLHEPdouble rand = anEngine->flat();
   return mapRandom(rand);
 }
 
-inline void RandGeneral::shootArray( const int size, double* vect )
+inline void RandGeneral::shootArray( const int size, CLHEPdouble* vect )
 {
   fireArray(size, vect);
 }

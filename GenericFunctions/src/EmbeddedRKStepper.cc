@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/GenericFunctions/EmbeddedRKStepper.hh"
 #include "CLHEP/GenericFunctions/ExtendedButcherTableau.hh"
 #include <stdexcept>
@@ -16,16 +17,16 @@ namespace Genfun {
   void EmbeddedRKStepper::step   (const RKIntegrator::RKData       * data, 
 				  const RKIntegrator::RKData::Data & s, 
 				  RKIntegrator::RKData::Data       & d, 
-				  std::vector<double>              & errors) const {
+				  std::vector<CLHEPdouble>              & errors) const {
 
     // First step:
-    double h = d.time - s.time;
+    CLHEPdouble h = d.time - s.time;
     if (h<=0) throw std::runtime_error ("Runtime error in RKIntegrator (zero or negative stepsize)");
     unsigned int nvar = s.variable.size();
 
     // Compute all of the k's..:
     //
-    std::vector<std::vector<double> >k(tableau.nSteps());
+    std::vector<std::vector<CLHEPdouble> >k(tableau.nSteps());
     for (unsigned int i=0;i<tableau.nSteps();i++) {
       k[i].resize(nvar,0);
       Argument arg(nvar);

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef ZMERRNO_H
 #define ZMERRNO_H
 

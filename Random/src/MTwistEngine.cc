@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: MTwistEngine.cc,v 1.6 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -18,7 +19,7 @@
 // J. Marraffino  - Added some explicit casts to deal with
 //                  machines where sizeof(int) != sizeof(long)  22 Aug 1998
 // M. Fischler    - Modified constructors such that no two
-//		    seeds will match sequences, no single/double
+//		    seeds will match sequences, no single/CLHEPdouble
 //		    seeds will match, explicit seeds give 
 //		    determined results, and default will not 
 //		    match any of the above or other defaults.
@@ -115,7 +116,7 @@ MTwistEngine::MTwistEngine( std::istream& is )
 
 MTwistEngine::~MTwistEngine() {}
 
-double MTwistEngine::flat() {
+CLHEPdouble MTwistEngine::flat() {
   unsigned int y;
 
    if( count624 >= N ) {
@@ -148,7 +149,7 @@ double MTwistEngine::flat() {
                 	    nearlyTwoToMinus_54();      // make sure non-zero
 }
 
-void MTwistEngine::flatArray( const int size, double *vect ) {
+void MTwistEngine::flatArray( const int size, CLHEPdouble *vect ) {
   for( int i=0; i < size; ++i) vect[i] = flat();
 }
 
@@ -234,11 +235,11 @@ void MTwistEngine::showStatus() const
    std::cout << "----------------------------------------" << std::endl;
 }
 
-MTwistEngine::operator double() {
+MTwistEngine::operator CLHEPdouble() {
   return flat();
 }
 
-MTwistEngine::operator float() {
+MTwistEngine::operator CLHEPfloat() {
   unsigned int y;
 
   if( count624 >= N ) {
@@ -266,7 +267,7 @@ MTwistEngine::operator float() {
   y ^= ((y << 15) & 0xefc60000);
   y ^= ( y >> 18);
 
-  return (float)(y * twoToMinus_32());
+  return (CLHEPfloat)(y * twoToMinus_32());
 }
 
 MTwistEngine::operator unsigned int() {

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ConstPlusFunction.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/ConstPlusFunction.hh"
@@ -5,7 +6,7 @@
 namespace Genfun {
 FUNCTION_OBJECT_IMP(ConstPlusFunction)
 
-ConstPlusFunction::ConstPlusFunction(double constant, const AbsFunction *arg):
+ConstPlusFunction::ConstPlusFunction(CLHEPdouble constant, const AbsFunction *arg):
   _constant(constant),
   _arg(arg->clone())
 {
@@ -28,13 +29,13 @@ ConstPlusFunction::~ConstPlusFunction()
 
 
 
-double ConstPlusFunction::operator ()(double x) const
+CLHEPdouble ConstPlusFunction::operator ()(CLHEPdouble x) const
 {
   return _constant + (*_arg)(x);
 }
 
 
-double ConstPlusFunction::operator ()(const Argument & x) const
+CLHEPdouble ConstPlusFunction::operator ()(const Argument & x) const
 {
   return _constant + (*_arg)(x);
 }

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // CLASSDOC OFF
 // ---------------------------------------------------------------------------
@@ -67,18 +68,18 @@ public:
 #endif
 
 #ifdef DISABLE_ALLOC
-   typedef std::vector<double >::iterator mIter;
-   typedef std::vector<double >::const_iterator mcIter;
+   typedef std::vector<CLHEPdouble >::iterator mIter;
+   typedef std::vector<CLHEPdouble >::const_iterator mcIter;
 #else
-   typedef std::vector<double,Alloc<double,25> >::iterator mIter;
-   typedef std::vector<double,Alloc<double,25> >::const_iterator mcIter;
+   typedef std::vector<CLHEPdouble,Alloc<CLHEPdouble,25> >::iterator mIter;
+   typedef std::vector<CLHEPdouble,Alloc<CLHEPdouble,25> >::const_iterator mcIter;
 #endif
 
    virtual int num_row() const = 0;
    virtual int num_col() const = 0;
 
-   virtual const double & operator()(int row, int col) const =0;
-   virtual double & operator()(int row, int col) =0;
+   virtual const CLHEPdouble & operator()(int row, int col) const =0;
+   virtual CLHEPdouble & operator()(int row, int col) =0;
    // Read or write a matrix element. 
    // ** Note that the indexing starts from (1,1). **
 
@@ -87,7 +88,7 @@ public:
    class HepGenMatrix_row {
    public:
       inline HepGenMatrix_row(HepGenMatrix&,int);
-      double & operator[](int);
+      CLHEPdouble & operator[](int);
    private:
       HepGenMatrix& _a;
       int _r;
@@ -95,7 +96,7 @@ public:
    class HepGenMatrix_row_const {
    public:
       inline HepGenMatrix_row_const (const HepGenMatrix&,int);
-      const double & operator[](int) const;
+      const CLHEPdouble & operator[](int) const;
    private:
       const HepGenMatrix& _a;
       int _r;
@@ -111,9 +112,9 @@ public:
 
    inline static void swap(int&,int&);
 #ifdef DISABLE_ALLOC
-   inline static void swap(std::vector<double >&, std::vector<double >&);
+   inline static void swap(std::vector<CLHEPdouble >&, std::vector<CLHEPdouble >&);
 #else
-   inline static void swap(std::vector<double,Alloc<double,25> >&, std::vector<double,Alloc<double,25> >&);
+   inline static void swap(std::vector<CLHEPdouble,Alloc<CLHEPdouble,25> >&, std::vector<CLHEPdouble,Alloc<CLHEPdouble,25> >&);
 #endif
 
    virtual bool operator== ( const HepGenMatrix& ) const;
@@ -123,8 +124,8 @@ public:
 
 protected:
    virtual int num_size() const = 0;
-   void delete_m(int size, double*);
-   double* new_m(int size);
+   void delete_m(int size, CLHEPdouble*);
+   CLHEPdouble* new_m(int size);
 
 public:
    enum{size_max = 25};
@@ -142,13 +143,13 @@ private:
    friend class HepGenMatrix_row;
    friend class HepGenMatrix_row_const;
 
-   //-ap: removed this as it is taken over by the std::vector<double>
-   //-ap  double data_array[size_max];  
+   //-ap: removed this as it is taken over by the std::vector<CLHEPdouble>
+   //-ap  CLHEPdouble data_array[size_max];  
 };
 
-double norm(const HepGenMatrix &m);
-double norm1(const HepGenMatrix &m);
-double norm_infinity(const HepGenMatrix &m);
+CLHEPdouble norm(const HepGenMatrix &m);
+CLHEPdouble norm1(const HepGenMatrix &m);
+CLHEPdouble norm_infinity(const HepGenMatrix &m);
 // 2, 1 or infinity-norm of a matrix.
 
 }  // namespace CLHEP

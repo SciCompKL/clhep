@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testVectorSave.cc,v 1.3 2010/06/16 17:24:53 garren Exp $
 // ----------------------------------------------------------------------
@@ -28,17 +29,17 @@
 using namespace CLHEP;
 
 // Absolutely Safe Equals Without Registers Screwing Us Up
-bool equals01(const std::vector<double> &ab) {
+bool equals01(const std::vector<CLHEPdouble> &ab) {
   return ab[1]==ab[0];
 }  
-bool equals(double a, double b) {
-  std::vector<double> ab(2);
+bool equals(CLHEPdouble a, CLHEPdouble b) {
+  std::vector<CLHEPdouble> ab(2);
   ab[0]=a;  ab[1]=b;
   return (equals01(ab));
 }
 
-std::vector<double> aSequence(int n) {
-  std::vector<double> v;
+std::vector<CLHEPdouble> aSequence(int n) {
+  std::vector<CLHEPdouble> v;
   DualRand e(13542);
   RandFlat f(e);
   for (int i=0; i<n; i++) {
@@ -57,7 +58,7 @@ int vectorTest64(int n) {
   output << "Vector restore 64bit test for " << E::engineName() << "\n";
 
   E e;				    
-  double x = 0;	
+  CLHEPdouble x = 0;	
   for (int i=0; i<n; i++) x += e.flat();	    
   std::vector<unsigned long> v = e.put();
   x = e.flat();
@@ -66,7 +67,7 @@ int vectorTest64(int n) {
   E f;
   v[0] &= 0xffffffffUL;
   f.get(v);
-  double y = f.flat();
+  CLHEPdouble y = f.flat();
   output << "y = " << y << std::endl;
   if( x != y ) return n;
 
@@ -77,11 +78,11 @@ template <>
 int vectorTest64<NonRandomEngine>(int n) {
   output << "Vector restore 64bit test for " << NonRandomEngine::engineName() << "\n";
 
-  std::vector<double> nonRand = aSequence(500);
+  std::vector<CLHEPdouble> nonRand = aSequence(500);
   NonRandomEngine e; 
   e.setRandomSequence(&nonRand[0], nonRand.size());
 
-  double x = 0;	
+  CLHEPdouble x = 0;	
   for (int i=0; i<n; i++) x += e.flat();	    
   std::vector<unsigned long> v = e.put();
   x = e.flat();
@@ -92,7 +93,7 @@ int vectorTest64<NonRandomEngine>(int n) {
 
   v[0] &= 0xffffffffUL;
   f.get(v);
-  double y = f.flat();
+  CLHEPdouble y = f.flat();
   output << "y = " << y << std::endl;
   if( x != y ) return n;
 
@@ -100,10 +101,10 @@ int vectorTest64<NonRandomEngine>(int n) {
 }
 
 template <class E>
-std::vector<unsigned long> vectorRestore1(int n, std::vector<double> & v) {
+std::vector<unsigned long> vectorRestore1(int n, std::vector<CLHEPdouble> & v) {
   output << "Vector restore for " << E::engineName() << "\n";
   E e(97538466);				    
-  double r=0;					    
+  CLHEPdouble r=0;					    
   for (int i=0; i<n; i++) r += e.flat();	    
   std::vector<unsigned long> state = e.put();	    
   for (int j=0; j<25; j++) v.push_back(e.flat());   
@@ -116,14 +117,14 @@ std::vector<unsigned long> vectorRestore1(int n, std::vector<double> & v) {
 
 template <>
 std::vector<unsigned long>
-vectorRestore1<NonRandomEngine> (int n, std::vector<double> & v) {
+vectorRestore1<NonRandomEngine> (int n, std::vector<CLHEPdouble> & v) {
 #ifdef VERBOSER2
   output << "Vector restore for " << NonRandomEngine::engineName() << "\n";
 #endif
-  std::vector<double> nonRand = aSequence(500);
+  std::vector<CLHEPdouble> nonRand = aSequence(500);
   NonRandomEngine e; 
   e.setRandomSequence(&nonRand[0], nonRand.size());
-  double r=0;
+  CLHEPdouble r=0;
   for (int i=0; i<n; i++) r += e.flat();
   std::vector<unsigned long> state = e.put();	    
   for (int j=0; j<25; j++) v.push_back(e.flat()); 
@@ -136,9 +137,9 @@ vectorRestore1<NonRandomEngine> (int n, std::vector<double> & v) {
 
 template <class E>
 int vectorRestore2(const std::vector<unsigned long> state,
-		   const std::vector<double> & v) {
+		   const std::vector<CLHEPdouble> & v) {
   int stat = 0;
-  std::vector<double> k;
+  std::vector<CLHEPdouble> k;
   HepRandomEngine * a;
   a = HepRandomEngine::newEngine(state);
   if (!a) {
@@ -189,7 +190,7 @@ int vectorRestore2(const std::vector<unsigned long> state,
 
 template <class E>
 int vectorRestore(int n) {
-  std::vector<double> v;
+  std::vector<CLHEPdouble> v;
   int status1 = vectorTest64<E>(n);
   std::vector<unsigned long> state = vectorRestore1<E>(n,v);
   int status2 = vectorRestore2<E>(state, v);  

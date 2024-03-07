@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Vector3D.h,v 1.3 2003/10/23 21:29:50 garren Exp $
 // ---------------------------------------------------------------------------
@@ -26,7 +27,7 @@ namespace HepGeom {
   /**
    * Geometrical 3D Vector.
    * This is just a declaration of the class needed to define
-   * specializations Vector3D<float> and Vector3D<double>.
+   * specializations Vector3D<CLHEPfloat> and Vector3D<CLHEPdouble>.
    *
    * @ingroup geometry
    * @author Evgeni Chernyaev <Evgueni.Tcherniaev@cern.ch>
@@ -35,13 +36,13 @@ namespace HepGeom {
   class Vector3D : public BasicVector3D<T> {};
 
   /**
-   * Geometrical 3D Vector with components of float type.
+   * Geometrical 3D Vector with components of CLHEPfloat type.
    *
    * @author Evgeni Chernyaev <Evgueni.Tcherniaev@cern.ch>
    * @ingroup geometry
    */
   template<>
-  class Vector3D<float> : public BasicVector3D<float> {
+  class Vector3D<CLHEPfloat> : public BasicVector3D<CLHEPfloat> {
   public:
     /**
      * Default constructor. */
@@ -49,24 +50,24 @@ namespace HepGeom {
 
     /**
      * Constructor from three numbers. */
-    Vector3D(float x1, float y1, float z1) : BasicVector3D<float>(x1,y1,z1) {}
+    Vector3D(CLHEPfloat x1, CLHEPfloat y1, CLHEPfloat z1) : BasicVector3D<CLHEPfloat>(x1,y1,z1) {}
 
     /**
-     * Constructor from array of floats. */
-    explicit Vector3D(const float * a)
-      : BasicVector3D<float>(a[0],a[1],a[2]) {}
+     * Constructor from array of CLHEPfloats. */
+    explicit Vector3D(const CLHEPfloat * a)
+      : BasicVector3D<CLHEPfloat>(a[0],a[1],a[2]) {}
 
     /**
      * Copy constructor. */
-    Vector3D(const Vector3D<float> &) = default;
+    Vector3D(const Vector3D<CLHEPfloat> &) = default;
 
     /**
      * Move constructor. */
-    Vector3D(Vector3D<float> &&) = default;
+    Vector3D(Vector3D<CLHEPfloat> &&) = default;
 
     /**
-     * Constructor from BasicVector3D<float>. */
-    Vector3D(const BasicVector3D<float> & v) : BasicVector3D<float>(v) {}
+     * Constructor from BasicVector3D<CLHEPfloat>. */
+    Vector3D(const BasicVector3D<CLHEPfloat> & v) : BasicVector3D<CLHEPfloat>(v) {}
 
     /**
      * Destructor. */
@@ -74,39 +75,39 @@ namespace HepGeom {
 
     /**
      * Assignment. */
-    Vector3D<float> & operator=(const Vector3D<float> &) = default;
+    Vector3D<CLHEPfloat> & operator=(const Vector3D<CLHEPfloat> &) = default;
 
     /**
-     * Assignment from BasicVector3D<float>. */
-    Vector3D<float> & operator=(const BasicVector3D<float> & v) {
-      this->BasicVector3D<float>::operator=(v);
+     * Assignment from BasicVector3D<CLHEPfloat>. */
+    Vector3D<CLHEPfloat> & operator=(const BasicVector3D<CLHEPfloat> & v) {
+      this->BasicVector3D<CLHEPfloat>::operator=(v);
       return *this;
     }
 
     /**
      * Move assignment. */
-    Vector3D<float> & operator=(Vector3D<float> &&) = default;
+    Vector3D<CLHEPfloat> & operator=(Vector3D<CLHEPfloat> &&) = default;
 
     /**
      * Transformation by Transform3D. */
-    Vector3D<float> & transform(const Transform3D & m);
+    Vector3D<CLHEPfloat> & transform(const Transform3D & m);
   };
 
   /**
-   * Transformation of Vector<float> by Transform3D.
+   * Transformation of Vector<CLHEPfloat> by Transform3D.
    * @relates Vector3D
    */
-  Vector3D<float>
-  operator*(const Transform3D & m, const Vector3D<float> & v);
+  Vector3D<CLHEPfloat>
+  operator*(const Transform3D & m, const Vector3D<CLHEPfloat> & v);
 
   /**
-   * Geometrical 3D Vector with components of double type.
+   * Geometrical 3D Vector with components of CLHEPdouble type.
    *
    * @author Evgeni Chernyaev <Evgueni.Tcherniaev@cern.ch>
    * @ingroup geometry
    */
   template<>
-  class Vector3D<double> : public BasicVector3D<double> {
+  class Vector3D<CLHEPdouble> : public BasicVector3D<CLHEPdouble> {
   public:
     /**
      * Default constructor. */
@@ -114,33 +115,33 @@ namespace HepGeom {
 
     /**
      * Constructor from three numbers. */
-    Vector3D(double x1, double y1, double z1) : BasicVector3D<double>(x1,y1,z1) {}
+    Vector3D(CLHEPdouble x1, CLHEPdouble y1, CLHEPdouble z1) : BasicVector3D<CLHEPdouble>(x1,y1,z1) {}
 
     /**
-     * Constructor from array of floats. */
-    explicit Vector3D(const float * a)
-      : BasicVector3D<double>(a[0],a[1],a[2]) {}
+     * Constructor from array of CLHEPfloats. */
+    explicit Vector3D(const CLHEPfloat * a)
+      : BasicVector3D<CLHEPdouble>(a[0],a[1],a[2]) {}
 
     /**
-     * Constructor from array of doubles. */
-    explicit Vector3D(const double * a)
-      : BasicVector3D<double>(a[0],a[1],a[2]) {}
+     * Constructor from array of CLHEPdoubles. */
+    explicit Vector3D(const CLHEPdouble * a)
+      : BasicVector3D<CLHEPdouble>(a[0],a[1],a[2]) {}
 
     /**
      * Copy constructor. */
-    Vector3D(const Vector3D<double> &) = default;
+    Vector3D(const Vector3D<CLHEPdouble> &) = default;
 
     /**
      * Move constructor. */
-    Vector3D(Vector3D<double> &&) = default;
+    Vector3D(Vector3D<CLHEPdouble> &&) = default;
 
     /**
-     * Constructor from BasicVector3D<float>. */
-    Vector3D(const BasicVector3D<float> & v) : BasicVector3D<double>(v) {}
+     * Constructor from BasicVector3D<CLHEPfloat>. */
+    Vector3D(const BasicVector3D<CLHEPfloat> & v) : BasicVector3D<CLHEPdouble>(v) {}
 
     /**
-     * Constructor from BasicVector3D<double>. */
-    Vector3D(const BasicVector3D<double> & v) : BasicVector3D<double>(v) {}
+     * Constructor from BasicVector3D<CLHEPdouble>. */
+    Vector3D(const BasicVector3D<CLHEPdouble> & v) : BasicVector3D<CLHEPdouble>(v) {}
 
     /**
      * Destructor. */
@@ -152,7 +153,7 @@ namespace HepGeom {
      * in principle should be absent.
      */
     Vector3D(const CLHEP::Hep3Vector & v)
-      : BasicVector3D<double>(v.x(),v.y(),v.z()) {}
+      : BasicVector3D<CLHEPdouble>(v.x(),v.y(),v.z()) {}
 
     /**
      * Conversion (cast) to CLHEP::Hep3Vector.
@@ -163,43 +164,43 @@ namespace HepGeom {
 
     /**
      * Assignment. */
-    Vector3D<double> & operator=(const Vector3D<double> &) = default;
+    Vector3D<CLHEPdouble> & operator=(const Vector3D<CLHEPdouble> &) = default;
 
     /**
-     * Assignment from BasicVector3D<float>. */
-    Vector3D<double> & operator=(const BasicVector3D<float> & v) {
-      this->BasicVector3D<double>::operator=(v);
+     * Assignment from BasicVector3D<CLHEPfloat>. */
+    Vector3D<CLHEPdouble> & operator=(const BasicVector3D<CLHEPfloat> & v) {
+      this->BasicVector3D<CLHEPdouble>::operator=(v);
       return *this;
     }
 
     /**
-     * Assignment from BasicVector3D<double>. */
-    Vector3D<double> & operator=(const BasicVector3D<double> & v) {
-      this->BasicVector3D<double>::operator=(v);
+     * Assignment from BasicVector3D<CLHEPdouble>. */
+    Vector3D<CLHEPdouble> & operator=(const BasicVector3D<CLHEPdouble> & v) {
+      this->BasicVector3D<CLHEPdouble>::operator=(v);
       return *this;
     }
 
     /**
      * Move assignment. */
-    Vector3D<double> & operator=(Vector3D<double> &&) = default;
+    Vector3D<CLHEPdouble> & operator=(Vector3D<CLHEPdouble> &&) = default;
 
     /**
      * Transformation by Transform3D. */
-    Vector3D<double> & transform(const Transform3D & m);
+    Vector3D<CLHEPdouble> & transform(const Transform3D & m);
   };
 
   /**
-   * Transformation of Vector<double> by Transform3D.
+   * Transformation of Vector<CLHEPdouble> by Transform3D.
    * @relates Vector3D
    */
-  Vector3D<double>
-  operator*(const Transform3D & m, const Vector3D<double> & v);
+  Vector3D<CLHEPdouble>
+  operator*(const Transform3D & m, const Vector3D<CLHEPdouble> & v);
 
 } /* namespace HepGeom */
 
 #ifdef ENABLE_BACKWARDS_COMPATIBILITY
 //  backwards compatibility will be enabled ONLY in CLHEP 1.9
-typedef HepGeom::Vector3D<double> HepVector3D;
+typedef HepGeom::Vector3D<CLHEPdouble> HepVector3D;
 #endif
 
 #endif /* HEP_VECTOR3D_H */

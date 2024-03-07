@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef HEP_AXISANGLE_H
 #define HEP_AXISANGLE_H
 
@@ -37,7 +38,7 @@ std::istream & operator>>( std::istream & is,       HepAxisAngle & aa );
 class HepAxisAngle {
 
 public:
-  typedef double Scalar;
+  typedef CLHEPdouble Scalar;
 
 protected:
   typedef HepAxisAngle AA;         // just an abbreviation
@@ -59,8 +60,8 @@ public:
   inline Hep3Vector            axis() const;
   inline AA &                  setAxis( const Hep3Vector axis );
 
-  inline double             getDelta() const;
-  inline double             delta() const ;
+  inline CLHEPdouble             getDelta() const;
+  inline CLHEPdouble             delta() const ;
   inline AA &                  setDelta( Scalar delta );
 
   inline AA & set( const Hep3Vector axis, Scalar delta );
@@ -78,15 +79,15 @@ public:
   inline bool operator>=( const AA & aa ) const;
 
   //   relative comparison:
-  inline static double getTolerance();
-  inline static double setTolerance( Scalar tol );
+  inline static CLHEPdouble getTolerance();
+  inline static CLHEPdouble setTolerance( Scalar tol );
 
 protected:
-    double distance( const HepAxisAngle & aa ) const;
+    CLHEPdouble distance( const HepAxisAngle & aa ) const;
 public:
 
   bool isNear ( const AA & aa, Scalar epsilon = tolerance ) const;
-  double  howNear( const AA & aa ) const;
+  CLHEPdouble  howNear( const AA & aa ) const;
 
   // ----------  I/O:
 
@@ -95,7 +96,7 @@ public:
 
 private:
   Hep3Vector axis_;  // Note:  After construction, this is always of mag 1
-  double  delta_;
+  CLHEPdouble  delta_;
 
 };  // HepAxisAngle
 

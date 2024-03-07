@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/GenericFunctions/NonrelativisticBW.hh"
 #include "CLHEP/GenericFunctions/Variable.hh"
 #include <assert.h>
@@ -31,10 +32,10 @@ NonrelativisticBWDistribution::NonrelativisticBWDistribution():
 NonrelativisticBWDistribution::~NonrelativisticBWDistribution() {
 }
 
-double NonrelativisticBWDistribution::operator() (double x) const {
-  double M=_mass.getValue();
-  double G=_width.getValue()/2.0;
-  double f = (1.0/M_PI)*G/((x-M)*(x-M) +G*G);
+CLHEPdouble NonrelativisticBWDistribution::operator() (CLHEPdouble x) const {
+  CLHEPdouble M=_mass.getValue();
+  CLHEPdouble G=_width.getValue()/2.0;
+  CLHEPdouble f = (1.0/M_PI)*G/((x-M)*(x-M) +G*G);
   return f;
 
 }

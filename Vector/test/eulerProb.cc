@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // HepRotatonTest.cc
 
 #include <iostream>
@@ -12,15 +13,15 @@ using namespace CLHEP;
 class myRotClass: public HepRotation {
 public:
   myRotClass (const HepRotationZ& rot): HepRotation (rot) {;};
-  void setXX (const double& v) {rxx = v;};
-  void setXY (const double& v) {rxy = v;};
-  void setXZ (const double& v) {rxz = v;};
-  void setYX (const double& v) {ryx = v;};
-  void setYY (const double& v) {ryy = v;};
-  void setYZ (const double& v) {ryz = v;};
-  void setZX (const double& v) {rzx = v;};
-  void setZY (const double& v) {rzy = v;};
-  void setZZ (const double& v) {rzz = v;};
+  void setXX (const CLHEPdouble& v) {rxx = v;};
+  void setXY (const CLHEPdouble& v) {rxy = v;};
+  void setXZ (const CLHEPdouble& v) {rxz = v;};
+  void setYX (const CLHEPdouble& v) {ryx = v;};
+  void setYY (const CLHEPdouble& v) {ryy = v;};
+  void setYZ (const CLHEPdouble& v) {ryz = v;};
+  void setZX (const CLHEPdouble& v) {rzx = v;};
+  void setZY (const CLHEPdouble& v) {rzy = v;};
+  void setZZ (const CLHEPdouble& v) {rzz = v;};
 };
 
 
@@ -29,17 +30,17 @@ int main () {
   // HepRotation rot (az);
   myRotClass rot(az);
 
-  const double corr = 0.9999999999999999;
+  const CLHEPdouble corr = 0.9999999999999999;
   rot.setZZ (corr);
   // Make sure that det(rot)=1, so that its still a valid rotation
   // (in principal I would expect that HepRotation should be robust
   // enough to give reasonable results even without this step since
-  // round off errors in floating point operations could also cause
+  // round off errors in CLHEPfloating point operations could also cause
   // such a loss of precision).
   rot.setXX (rot.xx()/std::sqrt(corr));  rot.setXY (rot.xy()/std::sqrt(corr));
   rot.setYX (rot.yx()/std::sqrt(corr));  rot.setYY (rot.yy()/std::sqrt(corr));
 
-  cout.setf (std::ios::scientific, std::ios::floatfield);
+  cout.setf (std::ios::scientific, std::ios::CLHEPfloatfield);
   rot.print (cout); cout << "\n";
   cout.precision (30);
   cout << rot.xx() << "\t" << rot.xy() << "\t" << rot.xz() << "\n"

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "CLHEP/GenericFunctions/defs.h"
@@ -40,14 +41,14 @@ _p5(right._p5)
 {
 }
 
-double PtRelFcn::operator() (double x) const {
+CLHEPdouble PtRelFcn::operator() (CLHEPdouble x) const {
   
-  double p0   = _p0.getValue();
-  double p1   = _p1.getValue();
-  double p2   = _p2.getValue();
-  double p3   = _p3.getValue();
-  double p4   = _p4.getValue();
-  double p5   = _p5.getValue();
+  CLHEPdouble p0   = _p0.getValue();
+  CLHEPdouble p1   = _p1.getValue();
+  CLHEPdouble p2   = _p2.getValue();
+  CLHEPdouble p3   = _p3.getValue();
+  CLHEPdouble p4   = _p4.getValue();
+  CLHEPdouble p5   = _p5.getValue();
 
   //assert ((p0>=0.0) && (p0<=1.0));
   if (p0<0.0) p0=FLT_MIN;
@@ -55,12 +56,12 @@ double PtRelFcn::operator() (double x) const {
 
   if (x<=0.0) return 1.0E-10;
 
-  double n = (1+p1)/p3;
-  double a = (1/p3)*std::pow(p2,-n);
+  CLHEPdouble n = (1+p1)/p3;
+  CLHEPdouble a = (1/p3)*std::pow(p2,-n);
   
-  double norm = 1.0/(a*exp(_logGamma(n)));
-  static const double s2 = sqrt(2.0);
-  double retVal= 
+  CLHEPdouble norm = 1.0/(a*exp(_logGamma(n)));
+  static const CLHEPdouble s2 = sqrt(2.0);
+  CLHEPdouble retVal= 
     norm*p0*std::pow(x,p1)*exp(-p2*std::pow(x,p3)) +
     (2.0/(1+_erf(p5/p4/s2))*(1.0-p0)/(sqrt(2*M_PI)*p4))*exp(-(x-p5)*(x-p5)/(2.0*p4*p4));
 

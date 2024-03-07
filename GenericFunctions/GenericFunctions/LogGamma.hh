@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: LogGamma.hh,v 1.3 2010/06/16 18:22:01 garren Exp $
 //---------------------Logarithm of Gamma Function--------------------------//
@@ -32,8 +33,8 @@ namespace Genfun {
     virtual ~LogGamma();
     
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
     
   private:
     
@@ -41,7 +42,7 @@ namespace Genfun {
     const LogGamma & operator=(const LogGamma &right);
 
     // Constants used in evaluating the function call:
-    static const double _coefficient[6];
+    static const CLHEPdouble _coefficient[6];
     
   };
 } // namespace Genfun

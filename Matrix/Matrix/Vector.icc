@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -19,10 +20,10 @@ inline HepVector::HepVector()
    : m(0), nrow(0)
 {}
 
-inline double HepVector::normsq() const {return dot((*this),(*this));}
-inline double HepVector::norm() const {return sqrt(normsq());}
+inline CLHEPdouble HepVector::normsq() const {return dot((*this),(*this));}
+inline CLHEPdouble HepVector::norm() const {return sqrt(normsq());}
 
-inline double & HepVector::operator()(int row)
+inline CLHEPdouble & HepVector::operator()(int row)
 {
 #ifdef MATRIX_BOUND_CHECK
   if(row<1 || row>nrow)
@@ -31,7 +32,7 @@ inline double & HepVector::operator()(int row)
 
   return *(m.begin()+row-1);
 }
-inline const double & HepVector::operator()(int row) const 
+inline const CLHEPdouble & HepVector::operator()(int row) const 
 {
 #ifdef MATRIX_BOUND_CHECK
   if(row<1 || row>nrow)
@@ -40,7 +41,7 @@ inline const double & HepVector::operator()(int row) const
 
   return *(m.begin()+row-1);
 }
-inline double & HepVector::operator[](int row)
+inline CLHEPdouble & HepVector::operator[](int row)
 {
 #ifdef MATRIX_BOUND_CHECK
    if(row<0 || row>=nrow)
@@ -49,7 +50,7 @@ inline double & HepVector::operator[](int row)
 
   return *(m.begin()+row);
 }
-inline const double & HepVector::operator[](int row) const 
+inline const CLHEPdouble & HepVector::operator[](int row) const 
 {
 #ifdef MATRIX_BOUND_CHECK
   if(row<0 || row>=nrow)

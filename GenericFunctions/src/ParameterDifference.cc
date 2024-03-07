@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ParameterDifference.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/ParameterDifference.hh"
@@ -28,7 +29,7 @@ ParameterDifference::~ParameterDifference()
 }
 
 
-double ParameterDifference::getValue() const {
+CLHEPdouble ParameterDifference::getValue() const {
   return _arg1->getValue()-_arg2->getValue();
 }
 

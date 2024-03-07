@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ACos.cc,v 1.4 2003/10/10 17:40:39 garren Exp $
 #include "CLHEP/GenericFunctions/ACos.hh"
@@ -19,7 +20,7 @@ ACos::ACos(const ACos & right) : AbsFunction(right)
 {  }
 
 
-double ACos::operator() (double x) const {
+CLHEPdouble ACos::operator() (CLHEPdouble x) const {
   return acos(x);
 }
 

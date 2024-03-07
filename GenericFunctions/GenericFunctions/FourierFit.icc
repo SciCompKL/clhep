@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include <sstream>
@@ -42,24 +43,24 @@ FourierFit::FourierFit(const FourierFit & right):
 }
 
 inline
-double FourierFit::operator() (double x) const {
+CLHEPdouble FourierFit::operator() (CLHEPdouble x) const {
 
     unsigned int n=N;
-    std::complex<double> P=0.0;
-    std::complex<double> I(0,1.0);
-    double f=1.0;
+    std::complex<CLHEPdouble> P=0.0;
+    std::complex<CLHEPdouble> I(0,1.0);
+    CLHEPdouble f=1.0;
     while (1) {
       if (n==0) {
-	double fn=1.0;
-	double Pn=sqrt(1/2.0/M_PI);
+	CLHEPdouble fn=1.0;
+	CLHEPdouble Pn=sqrt(1/2.0/M_PI);
        
 	P+=(sqrt(f*fn)*Pn);
 	break;
       }
       else {
-	double fn=getFraction(n-1)->getValue();
-	double px=getPhase(n-1)->getValue();
-	double Pn=sqrt(1/M_PI)*sin(n*x/2.0);
+	CLHEPdouble fn=getFraction(n-1)->getValue();
+	CLHEPdouble px=getPhase(n-1)->getValue();
+	CLHEPdouble Pn=sqrt(1/M_PI)*sin(n*x/2.0);
 	P+=exp(I*px)*sqrt(f*fn)*Pn;
 	f*=(1-fn);
 	n--;

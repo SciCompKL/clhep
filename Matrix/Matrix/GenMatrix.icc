@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -12,12 +13,12 @@ namespace CLHEP {
 //
 inline void HepGenMatrix::swap(int &i,int &j) {int t=i;i=j;j=t;}
 #ifdef DISABLE_ALLOC
-inline void HepGenMatrix::swap(std::vector<double >& i, std::vector<double >& j) {
-  std::vector<double > t=i;i=j;j=t;
+inline void HepGenMatrix::swap(std::vector<CLHEPdouble >& i, std::vector<CLHEPdouble >& j) {
+  std::vector<CLHEPdouble > t=i;i=j;j=t;
 }
 #else
-inline void HepGenMatrix::swap(std::vector<double,Alloc<double,25> >& i, std::vector<double,Alloc<double,25> >& j) {
-  std::vector<double,Alloc<double,25> > t=i;i=j;j=t;
+inline void HepGenMatrix::swap(std::vector<CLHEPdouble,Alloc<CLHEPdouble,25> >& i, std::vector<CLHEPdouble,Alloc<CLHEPdouble,25> >& j) {
+  std::vector<CLHEPdouble,Alloc<CLHEPdouble,25> > t=i;i=j;j=t;
 }
 #endif
 
@@ -25,11 +26,11 @@ inline void HepGenMatrix::swap(std::vector<double,Alloc<double,25> >& i, std::ve
 // operator [] (I cannot make it virtual because return types are different.)
 // Therefore I will have to use the virtual operator (,).
 //
-inline double &HepGenMatrix::HepGenMatrix_row::operator[](int c) {
+inline CLHEPdouble &HepGenMatrix::HepGenMatrix_row::operator[](int c) {
   return _a(_r+1,c+1);
 }
 
-inline const double &HepGenMatrix::HepGenMatrix_row_const::
+inline const CLHEPdouble &HepGenMatrix::HepGenMatrix_row_const::
 operator[](int c) const {
   return _a(_r+1,c+1);
 }

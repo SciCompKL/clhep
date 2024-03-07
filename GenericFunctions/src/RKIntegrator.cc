@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "CLHEP/GenericFunctions/RKIntegrator.hh"
@@ -32,7 +33,7 @@ RKIntegrator::RKFunction::RKFunction(const RKIntegrator::RKFunction & right)
 }
 
 
-double RKIntegrator::RKFunction::operator() (double t) const {
+CLHEPdouble RKIntegrator::RKFunction::operator() (CLHEPdouble t) const {
   if (t<0) return 0;
   if (!_data->_locked) _data->lock();
 
@@ -107,9 +108,9 @@ RKIntegrator::~RKIntegrator() {
 
 Parameter * RKIntegrator::addDiffEquation(const AbsFunction * diffEquation,
 					  const std::string &variableName,
-					  double defStartingValue,
-					  double defValueMin,
-					  double defValueMax) {
+					  CLHEPdouble defStartingValue,
+					  CLHEPdouble defValueMin,
+					  CLHEPdouble defValueMax) {
   Parameter *par = new Parameter(variableName, defStartingValue, defValueMin, defValueMax);
   _data->_startingValParameter.push_back(par);
   _data->_diffEqn.push_back(diffEquation->clone());
@@ -123,9 +124,9 @@ Parameter * RKIntegrator::addDiffEquation(const AbsFunction * diffEquation,
 
 
 Parameter * RKIntegrator::createControlParameter (const std::string & variableName,
-						  double defStartingValue,
-						  double startingValueMin,
-						  double startingValueMax) {
+						  CLHEPdouble defStartingValue,
+						  CLHEPdouble startingValueMin,
+						  CLHEPdouble startingValueMax) {
 
   Parameter *par = new Parameter(variableName, defStartingValue, startingValueMin, startingValueMax);
   _data->_controlParameter.push_back(par);

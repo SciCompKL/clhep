@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ParameterQuotient.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/ParameterQuotient.hh"
@@ -28,7 +29,7 @@ ParameterQuotient::~ParameterQuotient()
 }
 
 
-double ParameterQuotient::getValue() const {
+CLHEPdouble ParameterQuotient::getValue() const {
   return _arg1->getValue()/_arg2->getValue();
 }
 

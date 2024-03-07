@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ConstOverParameter.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/ConstOverParameter.hh"
@@ -6,7 +7,7 @@
 namespace Genfun {
 PARAMETER_OBJECT_IMP(ConstOverParameter)
 
-ConstOverParameter::ConstOverParameter(double xconstant, const AbsParameter *aparm):
+ConstOverParameter::ConstOverParameter(CLHEPdouble xconstant, const AbsParameter *aparm):
   _constant(xconstant),
   _parameter(aparm->clone())
 {
@@ -26,7 +27,7 @@ ConstOverParameter::~ConstOverParameter()
 }
 
 
-double ConstOverParameter::getValue() const {
+CLHEPdouble ConstOverParameter::getValue() const {
   return _constant / _parameter->getValue();
 }
 

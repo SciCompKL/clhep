@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: SphericalNeumann.icc,v 1.4 2010/06/16 18:22:01 garren Exp $
 #include "CLHEP/GenericFunctions/Sin.hh"
@@ -33,7 +34,7 @@ _l(right._l)
 }
 
 inline
-double SphericalNeumann::operator() (double x) const {
+CLHEPdouble SphericalNeumann::operator() (CLHEPdouble x) const {
   //
   // First try the GSL implementation:
   //

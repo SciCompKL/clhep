@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testBasicVector3D.cc,v 1.5 2010/06/16 16:21:27 garren Exp $
 // ---------------------------------------------------------------------------
@@ -12,8 +13,8 @@
 #include <cmath>
 #include <iostream>
 
-bool EQUAL(double a, double b) {
-  double del = a - b;
+bool EQUAL(CLHEPdouble a, CLHEPdouble b) {
+  CLHEPdouble del = a - b;
   if (del < 0) del = -del;
   return del < 0.000001;
 }
@@ -33,7 +34,7 @@ using namespace HepGeom;
   assert(p02.x() == 4 && p02.y() == 5 && p02.z() == 6);           \
                                                                   \
   /* Check constructor from array */                              \
-  float farray[] = {1,2,3};                                       \
+  CLHEPfloat farray[] = {1,2,3};                                       \
   type  darray[] = {4,5,6};                                       \
   point p03(farray);                 assert(p03 == point(1,2,3)); \
   point p04(darray);                 assert(p04 == point(4,5,6)); \
@@ -52,18 +53,18 @@ using namespace HepGeom;
                                                                   \
   /* Check copy constructor */                                    \
   point p10(p01);                    assert(p10 == point(1,2,3)); \
-  point p11(Point3D <float>(1,2,3)); assert(p11 == point(1,2,3)); \
-  point p12(Vector3D<float>(4,5,6)); assert(p12 == point(4,5,6)); \
-  point p13(Normal3D<float>(7,8,9)); assert(p13 == point(7,8,9)); \
+  point p11(Point3D <CLHEPfloat>(1,2,3)); assert(p11 == point(1,2,3)); \
+  point p12(Vector3D<CLHEPfloat>(4,5,6)); assert(p12 == point(4,5,6)); \
+  point p13(Normal3D<CLHEPfloat>(7,8,9)); assert(p13 == point(7,8,9)); \
   point p14(Point3D <type> (1,2,3)); assert(p14 == point(1,2,3)); \
   point p15(Vector3D<type> (4,5,6)); assert(p15 == point(4,5,6)); \
   point p16(Normal3D<type> (7,8,9)); assert(p16 == point(7,8,9)); \
                                                                   \
   /* Check assignment */                                          \
   point p20;                                                      \
-  p20 = Point3D <float>(1,2,3);      assert(p20 == point(1,2,3)); \
-  p20 = Vector3D<float>(4,5,6);      assert(p20 == point(4,5,6)); \
-  p20 = Normal3D<float>(7,8,9);      assert(p20 == point(7,8,9)); \
+  p20 = Point3D <CLHEPfloat>(1,2,3);      assert(p20 == point(1,2,3)); \
+  p20 = Vector3D<CLHEPfloat>(4,5,6);      assert(p20 == point(4,5,6)); \
+  p20 = Normal3D<CLHEPfloat>(7,8,9);      assert(p20 == point(7,8,9)); \
   p20 = Point3D <type> (1,2,3);      assert(p20 == point(1,2,3)); \
   p20 = Vector3D<type> (4,5,6);      assert(p20 == point(4,5,6)); \
   p20 = Normal3D<type> (7,8,9);      assert(p20 == point(7,8,9)); \
@@ -71,9 +72,9 @@ using namespace HepGeom;
   /* Check arithmetic operations */                               \
   point p21(1,2,3);                                               \
   p21 += point(1,2,3);               assert(p21 == point(2,4,6)); \
-  p21 += Point3D <float>(1,1,1);     assert(p21 == point(3,5,7)); \
-  p21 += Vector3D<float>(1,1,1);     assert(p21 == point(4,6,8)); \
-  p21 += Normal3D<float>(1,1,1);     assert(p21 == point(5,7,9)); \
+  p21 += Point3D <CLHEPfloat>(1,1,1);     assert(p21 == point(3,5,7)); \
+  p21 += Vector3D<CLHEPfloat>(1,1,1);     assert(p21 == point(4,6,8)); \
+  p21 += Normal3D<CLHEPfloat>(1,1,1);     assert(p21 == point(5,7,9)); \
   p21 -= point(1,2,3);               assert(p21 == point(4,5,6)); \
   p21 -= Point3D <type>(1,1,1);      assert(p21 == point(3,4,5)); \
   p21 -= Vector3D<type>(1,1,1);      assert(p21 == point(2,3,4)); \
@@ -175,7 +176,7 @@ using namespace HepGeom;
                                 assert(EQUAL(p92.y(),1));         \
                                 assert(p92.z()    == 2);          \
   point p93(1,1,std::sqrt(2.));                                         \
-  p93.rotate(CLHEP::pi,Vector3D<float>(-1,-1,std::sqrt(2.)));                \
+  p93.rotate(CLHEP::pi,Vector3D<CLHEPfloat>(-1,-1,std::sqrt(2.)));                \
                                 assert(EQUAL(p93.x(),-1));        \
                                 assert(EQUAL(p93.y(),-1));        \
                                 assert(EQUAL(p93.z(),-std::sqrt(2.)));  \
@@ -183,7 +184,7 @@ using namespace HepGeom;
   /* Check transformations */                                     \
   point p100(1,1,std::sqrt(2.));                                        \
   Transform3D m;                                                  \
-  m = Rotate3D(CLHEP::pi,Vector3D<float>(-1,-1,std::sqrt(2.)));              \
+  m = Rotate3D(CLHEP::pi,Vector3D<CLHEPfloat>(-1,-1,std::sqrt(2.)));              \
   p100.transform(m);            assert(EQUAL(p100.x(),-1));       \
                                 assert(EQUAL(p100.y(),-1));       \
                                 assert(EQUAL(p100.z(),-std::sqrt(2.))); \
@@ -198,9 +199,9 @@ using namespace HepGeom;
   p120 = +p120;                 assert(p120 == point(-1,-2,-3));  \
   p120 = -p120;                 assert(p120 == point(1,2,3));     \
   point p121(1,2,3);                                              \
-  p121 = p121 + Point3D <float>(1,1,1); assert(p121 == point(2,3,4));\
-  p121 = p121 + Vector3D<float>(1,1,1); assert(p121 == point(3,4,5));\
-  p121 = p121 + Normal3D<float>(1,1,1); assert(p121 == point(4,5,6));\
+  p121 = p121 + Point3D <CLHEPfloat>(1,1,1); assert(p121 == point(2,3,4));\
+  p121 = p121 + Vector3D<CLHEPfloat>(1,1,1); assert(p121 == point(3,4,5));\
+  p121 = p121 + Normal3D<CLHEPfloat>(1,1,1); assert(p121 == point(4,5,6));\
   p121 = p121 - Point3D <type> (1,1,1); assert(p121 == point(3,4,5));\
   p121 = p121 - Vector3D<type> (1,1,1); assert(p121 == point(2,3,4));\
   p121 = p121 - Normal3D<type> (1,1,1); assert(p121 == point(1,2,3));\
@@ -214,23 +215,23 @@ using namespace HepGeom;
   p121 = 0.5f * p121;           assert(p121 == point(1,2,3));     \
   p121 = 2.0  * p121;           assert(p121 == point(2,4,6));     \
   assert(p121 *  p121 == p121.mag2());                            \
-  assert(p121 *  Point3D <float>(1,1,1) == 12);                   \
-  assert(p121 *  Vector3D<float>(1,1,1) == 12);                   \
-  assert(p121 *  Normal3D<float>(1,1,1) == 12);                   \
-  assert(p121 == Point3D <float>(2,4,6));                         \
-  assert(p121 == Vector3D<float>(2,4,6));                         \
-  assert(p121 == Normal3D<float>(2,4,6));                         \
+  assert(p121 *  Point3D <CLHEPfloat>(1,1,1) == 12);                   \
+  assert(p121 *  Vector3D<CLHEPfloat>(1,1,1) == 12);                   \
+  assert(p121 *  Normal3D<CLHEPfloat>(1,1,1) == 12);                   \
+  assert(p121 == Point3D <CLHEPfloat>(2,4,6));                         \
+  assert(p121 == Vector3D<CLHEPfloat>(2,4,6));                         \
+  assert(p121 == Normal3D<CLHEPfloat>(2,4,6));                         \
   assert(p121 != Point3D <type> (3,4,6));                         \
   assert(p121 != Vector3D<type> (2,5,6));                         \
   assert(p121 != Normal3D<type> (2,4,7));                         \
 
 // don't generate warnings about unused variables inside assert
-void CheckPointFloat()   { CHECK(Point3D<float>  , float)  }
-void CheckVectorFloat()  { CHECK(Vector3D<float> , float)  }
-void CheckNormalFloat()  { CHECK(Normal3D<float> , float)  }
-void CheckPointDouble()  { CHECK(Point3D<double> , double) }
-void CheckVectorDouble() { CHECK(Vector3D<double>, double) }
-void CheckNormalDouble() { CHECK(Normal3D<double>, double) }
+void CheckPointFloat()   { CHECK(Point3D<CLHEPfloat>  , CLHEPfloat)  }
+void CheckVectorFloat()  { CHECK(Vector3D<CLHEPfloat> , CLHEPfloat)  }
+void CheckNormalFloat()  { CHECK(Normal3D<CLHEPfloat> , CLHEPfloat)  }
+void CheckPointDouble()  { CHECK(Point3D<CLHEPdouble> , CLHEPdouble) }
+void CheckVectorDouble() { CHECK(Vector3D<CLHEPdouble>, CLHEPdouble) }
+void CheckNormalDouble() { CHECK(Normal3D<CLHEPdouble>, CLHEPdouble) }
 
 int main()
 {

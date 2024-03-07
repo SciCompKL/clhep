@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -179,13 +180,13 @@ void RanluxEngine::setSeed(long seed, int lux) {
   }     
 
   for(i = 0;i != 24;i++)
-    float_seed_table[i] = int_seed_table[i] * mantissa_bit_24();
+    CLHEPfloat_seed_table[i] = int_seed_table[i] * mantissa_bit_24();
 
   i_lag = 23;
   j_lag = 9;
   carry = 0. ;
 
-  if( float_seed_table[23] == 0. ) carry = mantissa_bit_24();
+  if( CLHEPfloat_seed_table[23] == 0. ) carry = mantissa_bit_24();
   
   count24 = 0;
 }
@@ -245,13 +246,13 @@ void RanluxEngine::setSeeds(const long *seeds, int lux) {
   }
 
   for(i = 0;i != 24;i++)
-    float_seed_table[i] = int_seed_table[i] * mantissa_bit_24();
+    CLHEPfloat_seed_table[i] = int_seed_table[i] * mantissa_bit_24();
 
   i_lag = 23;
   j_lag = 9;
   carry = 0. ;
 
-  if( float_seed_table[23] == 0. ) carry = mantissa_bit_24();
+  if( CLHEPfloat_seed_table[23] == 0. ) carry = mantissa_bit_24();
   
   count24 = 0;
 }
@@ -280,7 +281,7 @@ void RanluxEngine::saveStatus( const char filename[] ) const
    if (!outFile.bad()) {
      outFile << theSeed << std::endl;
      for (int i=0; i<24; ++i)
-       outFile <<std::setprecision(20) << float_seed_table[i] << " ";
+       outFile <<std::setprecision(20) << CLHEPfloat_seed_table[i] << " ";
      outFile << std::endl;
      outFile << i_lag << " " << j_lag << std::endl;
      outFile << std::setprecision(20) << carry << " " << count24 << std::endl;
@@ -321,7 +322,7 @@ void RanluxEngine::restoreStatus( const char filename[] )
    if (!inFile.bad() && !inFile.eof()) {
 //     inFile >> theSeed;  removed -- encompased by possibleKeywordInput
      for (int i=0; i<24; ++i)
-       inFile >> float_seed_table[i];
+       inFile >> CLHEPfloat_seed_table[i];
      inFile >> i_lag; inFile >> j_lag;
      inFile >> carry; inFile >> count24;
      inFile >> luxury; inFile >> nskip;
@@ -333,9 +334,9 @@ void RanluxEngine::showStatus() const
    std::cout << std::endl;
    std::cout << "--------- Ranlux engine status ---------" << std::endl;
    std::cout << " Initial seed = " << theSeed << std::endl;
-   std::cout << " float_seed_table[] = ";
+   std::cout << " CLHEPfloat_seed_table[] = ";
    for (int i=0; i<24; ++i)
-     std::cout << float_seed_table[i] << " ";
+     std::cout << CLHEPfloat_seed_table[i] << " ";
    std::cout << std::endl;
    std::cout << " i_lag = " << i_lag << ", j_lag = " << j_lag << std::endl;
    std::cout << " carry = " << carry << ", count24 = " << count24 << std::endl;
@@ -343,24 +344,24 @@ void RanluxEngine::showStatus() const
    std::cout << "----------------------------------------" << std::endl;
 }
 
-double RanluxEngine::flat() {
+CLHEPdouble RanluxEngine::flat() {
 
-  float next_random;
-  float uni;
+  CLHEPfloat next_random;
+  CLHEPfloat uni;
   int i;
 
-  uni = float_seed_table[j_lag] - float_seed_table[i_lag] - carry;
+  uni = CLHEPfloat_seed_table[j_lag] - CLHEPfloat_seed_table[i_lag] - carry;
 	#ifdef TRACE_IO
 	if (flat_trace) {
-	  std::cout << "float_seed_table[" << j_lag << "] = "
-	  << float_seed_table[j_lag] 
-	  << "  float_seed_table[" << i_lag << "] = " << float_seed_table[i_lag]
+	  std::cout << "CLHEPfloat_seed_table[" << j_lag << "] = "
+	  << CLHEPfloat_seed_table[j_lag] 
+	  << "  CLHEPfloat_seed_table[" << i_lag << "] = " << CLHEPfloat_seed_table[i_lag]
 	  << "  uni = " << uni << "\n";
-	  std::cout << float_seed_table[j_lag] 
-	            << " - " << float_seed_table[i_lag]
+	  std::cout << CLHEPfloat_seed_table[j_lag] 
+	            << " - " << CLHEPfloat_seed_table[i_lag]
 		    << " - " << carry << " = " 
-		    << (double)float_seed_table[j_lag] 
-		    -  (double) float_seed_table[i_lag] - (double)carry
+		    << (CLHEPdouble)CLHEPfloat_seed_table[j_lag] 
+		    -  (CLHEPdouble) CLHEPfloat_seed_table[i_lag] - (CLHEPdouble)carry
 		    << "\n";
 	}
 	#endif
@@ -371,14 +372,14 @@ double RanluxEngine::flat() {
      carry = 0.;
   }
 
-  float_seed_table[i_lag] = uni;
+  CLHEPfloat_seed_table[i_lag] = uni;
   i_lag --;
   j_lag --;
   if(i_lag < 0) i_lag = 23;
   if(j_lag < 0) j_lag = 23;
 
   if( uni < mantissa_bit_12() ){
-     uni += mantissa_bit_24() * float_seed_table[j_lag];
+     uni += mantissa_bit_24() * CLHEPfloat_seed_table[j_lag];
      if( uni == 0) uni = mantissa_bit_24() * mantissa_bit_24();
   }
   next_random = uni;
@@ -395,17 +396,17 @@ double RanluxEngine::flat() {
 		}
 		#endif
      for( i = 0; i != nskip ; i++){
-         uni = float_seed_table[j_lag] - float_seed_table[i_lag] - carry;
+         uni = CLHEPfloat_seed_table[j_lag] - CLHEPfloat_seed_table[i_lag] - carry;
          if(uni < 0. ){
             uni += 1.0;
             carry = mantissa_bit_24();
          }else{
             carry = 0.;
          }
-         float_seed_table[i_lag] = uni;
+         CLHEPfloat_seed_table[i_lag] = uni;
          	#ifdef TRACE_IO
 		if (flat_trace) {
-		  double xfst = float_seed_table[i_lag];
+		  CLHEPdouble xfst = CLHEPfloat_seed_table[i_lag];
 		  std::cout << "fst[" << i_lag << "] = " 
 			    << DoubConv::d2x(xfst) << "\n";
 		}
@@ -422,18 +423,18 @@ double RanluxEngine::flat() {
           // flat_trace = false;
 	}
 	#endif
-  return (double) next_random;
+  return (CLHEPdouble) next_random;
 }
 
-void RanluxEngine::flatArray(const int size, double* vect)
+void RanluxEngine::flatArray(const int size, CLHEPdouble* vect)
 {
-  float next_random;
-  float uni;
+  CLHEPfloat next_random;
+  CLHEPfloat uni;
   int i;
   int index;
 
   for (index=0; index<size; ++index) {
-    uni = float_seed_table[j_lag] - float_seed_table[i_lag] - carry;
+    uni = CLHEPfloat_seed_table[j_lag] - CLHEPfloat_seed_table[i_lag] - carry;
     if(uni < 0. ){
        uni += 1.0;
        carry = mantissa_bit_24();
@@ -441,18 +442,18 @@ void RanluxEngine::flatArray(const int size, double* vect)
        carry = 0.;
     }
 
-    float_seed_table[i_lag] = uni;
+    CLHEPfloat_seed_table[i_lag] = uni;
     i_lag --;
     j_lag --;
     if(i_lag < 0) i_lag = 23;
     if(j_lag < 0) j_lag = 23;
 
     if( uni < mantissa_bit_12() ){
-       uni += mantissa_bit_24() * float_seed_table[j_lag];
+       uni += mantissa_bit_24() * CLHEPfloat_seed_table[j_lag];
        if( uni == 0) uni = mantissa_bit_24() * mantissa_bit_24();
     }
     next_random = uni;
-    vect[index] = (double)next_random;
+    vect[index] = (CLHEPdouble)next_random;
     count24 ++;
 
 // every 24th number generation, several random numbers are generated
@@ -461,14 +462,14 @@ void RanluxEngine::flatArray(const int size, double* vect)
     if(count24 == 24 ){
        count24 = 0;
        for( i = 0; i != nskip ; i++){
-           uni = float_seed_table[j_lag] - float_seed_table[i_lag] - carry;
+           uni = CLHEPfloat_seed_table[j_lag] - CLHEPfloat_seed_table[i_lag] - carry;
            if(uni < 0. ){
               uni += 1.0;
               carry = mantissa_bit_24();
            }else{
               carry = 0.;
            }
-           float_seed_table[i_lag] = uni;
+           CLHEPfloat_seed_table[i_lag] = uni;
            i_lag --;
            j_lag --;
            if(i_lag < 0)i_lag = 23;
@@ -478,18 +479,18 @@ void RanluxEngine::flatArray(const int size, double* vect)
   }
 } 
 
-RanluxEngine::operator double() {
+RanluxEngine::operator CLHEPdouble() {
   return flat();
 }
 
-RanluxEngine::operator float() {
-  return float( flat() );
+RanluxEngine::operator CLHEPfloat() {
+  return CLHEPfloat( flat() );
 }
 
 RanluxEngine::operator unsigned int() {
    return ((unsigned int)(flat() * exponent_bit_32()) & 0xffffffff) |
-         (((unsigned int)(float_seed_table[i_lag]*exponent_bit_32())>>16) & 0xff);
-   // needed because Ranlux doesn't fill all bits of the double
+         (((unsigned int)(CLHEPfloat_seed_table[i_lag]*exponent_bit_32())>>16) & 0xff);
+   // needed because Ranlux doesn't fill all bits of the CLHEPdouble
    // which therefore doesn't fill all bits of the integer.
 }
 
@@ -508,7 +509,7 @@ std::ostream & RanluxEngine::put ( std::ostream& os ) const
    os << " " << beginMarker << " ";
    os << theSeed << "\n";
    for (int i=0; i<24; ++i) {
-     os << float_seed_table[i] << "\n";
+     os << CLHEPfloat_seed_table[i] << "\n";
    }
    os << i_lag << " " << j_lag << "\n";
    os << carry << " " << count24 << " ";
@@ -527,10 +528,10 @@ std::vector<unsigned long> RanluxEngine::put () const {
 	#endif
   for (int i=0; i<24; ++i) {
     v.push_back
-    	(static_cast<unsigned long>(float_seed_table[i]/mantissa_bit_24()));
+    	(static_cast<unsigned long>(CLHEPfloat_seed_table[i]/mantissa_bit_24()));
 	#ifdef TRACE_IO
 	std::cout << "v[" << i+1 << "] = " << v[i+1] << 
-	" float_seed_table[" << i << "] = " << float_seed_table[i] << "\n";
+	" CLHEPfloat_seed_table[" << i << "] = " << CLHEPfloat_seed_table[i] << "\n";
 	#endif
   }
   v.push_back(static_cast<unsigned long>(i_lag));
@@ -601,7 +602,7 @@ std::istream & RanluxEngine::getState ( std::istream& is )
 
   char endMarker   [MarkerLen];
   for (int i=0; i<24; ++i) {
-     is >> float_seed_table[i];
+     is >> CLHEPfloat_seed_table[i];
   }
   is >> i_lag; is >>  j_lag;
   is >> carry; is >> count24;
@@ -634,10 +635,10 @@ bool RanluxEngine::getState (const std::vector<unsigned long> & v) {
     return false;
   }
   for (int i=0; i<24; ++i) {
-    float_seed_table[i] = v[i+1]*mantissa_bit_24();
+    CLHEPfloat_seed_table[i] = v[i+1]*mantissa_bit_24();
 	#ifdef TRACE_IO
 	std::cout <<
-	"float_seed_table[" << i << "] = " << float_seed_table[i] << "\n";
+	"CLHEPfloat_seed_table[" << i << "] = " << CLHEPfloat_seed_table[i] << "\n";
 	#endif
   }
   i_lag    = v[25];

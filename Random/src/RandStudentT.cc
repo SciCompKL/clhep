@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -13,7 +14,7 @@
 //                   methods : 20th Aug 1998
 // M Fischler      - put and get to/from streams 12/13/04
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing CLHEPdoubles avoid problems with precision 
 //			4/14/05
 // =======================================================================
 
@@ -36,15 +37,15 @@ RandStudentT::~RandStudentT()
 {
 }
 
-double RandStudentT::operator()() {
+CLHEPdouble RandStudentT::operator()() {
   return fire( defaultA );
 }
 
-double RandStudentT::operator()( double a ) {
+CLHEPdouble RandStudentT::operator()( CLHEPdouble a ) {
   return fire( a );
 }
 
-double RandStudentT::shoot( double a ) {
+CLHEPdouble RandStudentT::shoot( CLHEPdouble a ) {
 /******************************************************************
  *                                                                *
  *           Student-t Distribution - Polar Method                *
@@ -69,7 +70,7 @@ double RandStudentT::shoot( double a ) {
  * Implemented by F. Niederl, 1994                                *
  ******************************************************************/
 
- double u,v,w;
+ CLHEPdouble u,v,w;
 
 // Check for valid input value
 
@@ -85,24 +86,24 @@ double RandStudentT::shoot( double a ) {
  return(u * std::sqrt( a * ( std::exp(- 2.0 / a * std::log(w)) - 1.0) / w));
 }
 
-void RandStudentT::shootArray( const int size, double* vect,
-                            double a )
+void RandStudentT::shootArray( const int size, CLHEPdouble* vect,
+                            CLHEPdouble a )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = shoot(a);
 }
 
 void RandStudentT::shootArray( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double a )
+                            const int size, CLHEPdouble* vect,
+                            CLHEPdouble a )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = shoot(anEngine,a);
 }
 
-double RandStudentT::fire( double a ) {
+CLHEPdouble RandStudentT::fire( CLHEPdouble a ) {
 
- double u,v,w;
+ CLHEPdouble u,v,w;
 
  do
  {
@@ -114,22 +115,22 @@ double RandStudentT::fire( double a ) {
  return(u * std::sqrt( a * ( std::exp(- 2.0 / a * std::log(w)) - 1.0) / w));
 }
 
-void RandStudentT::fireArray( const int size, double* vect)
+void RandStudentT::fireArray( const int size, CLHEPdouble* vect)
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = fire(defaultA);
 }
 
-void RandStudentT::fireArray( const int size, double* vect,
-                           double a )
+void RandStudentT::fireArray( const int size, CLHEPdouble* vect,
+                           CLHEPdouble a )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = fire(a);
 }
 
-double RandStudentT::shoot( HepRandomEngine *anEngine, double a ) {
+CLHEPdouble RandStudentT::shoot( HepRandomEngine *anEngine, CLHEPdouble a ) {
 
- double u,v,w;
+ CLHEPdouble u,v,w;
 
  do
  {
@@ -172,7 +173,7 @@ std::istream & RandStudentT::get ( std::istream & is ) {
   }
   if (possibleKeywordInput(is, "Uvec", defaultA)) {
     std::vector<unsigned long> t(2);
-    is >> defaultA >> t[0] >> t[1]; defaultA = DoubConv::longs2double(t); 
+    is >> defaultA >> t[0] >> t[1]; defaultA = DoubConv::longs2CLHEPdouble(t); 
     return is;
   }
   // is >> defaultA encompassed by possibleKeywordInput

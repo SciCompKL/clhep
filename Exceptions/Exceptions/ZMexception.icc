@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef ZMEXCEPTION_ICC
 #error "Exceptions/ZMexception.icc included without Exceptions/ZMexception.h"
 #endif

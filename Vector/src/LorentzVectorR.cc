@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -13,13 +14,13 @@
 
 namespace CLHEP  {
 
-HepLorentzVector &  HepLorentzVector::rotate(double a, const Hep3Vector &v1) {
+HepLorentzVector &  HepLorentzVector::rotate(CLHEPdouble a, const Hep3Vector &v1) {
   pp.rotate(a,v1);
   return *this;
 }
 
 HepLorentzVector & HepLorentzVector::rotate ( const Hep3Vector & aaxis, 
-					      double ddelta )		{
+					      CLHEPdouble ddelta )		{
   pp.rotate (aaxis, ddelta);
   return *this;
 }
@@ -34,16 +35,16 @@ HepLorentzVector & HepLorentzVector::rotate ( const HepEulerAngles & e1 ) {
   return *this;
 }
 
-HepLorentzVector & HepLorentzVector::rotate ( double phi1,
-		                              double theta1,
-                		              double psi1 ) {
+HepLorentzVector & HepLorentzVector::rotate ( CLHEPdouble phi1,
+		                              CLHEPdouble theta1,
+                		              CLHEPdouble psi1 ) {
   pp.rotate (phi1, theta1, psi1);
   return *this;
 }
 
 HepLorentzVector rotationOf (const HepLorentzVector & vec, 
 			     const Hep3Vector & aaxis,  
-			     double ddelta) {
+			     CLHEPdouble ddelta) {
   HepLorentzVector vv (vec);
   return vv.rotate (aaxis, ddelta);
 }
@@ -61,9 +62,9 @@ HepLorentzVector rotationOf
 }
 
 HepLorentzVector rotationOf (const HepLorentzVector & vec, 
-				   double phi1,
-				   double theta1,
-				   double psi1) {
+				   CLHEPdouble phi1,
+				   CLHEPdouble theta1,
+				   CLHEPdouble psi1) {
   HepLorentzVector vv (vec);
   return vv.rotate (phi1, theta1, psi1);
 }

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -11,7 +12,7 @@
 // John Marraffino - Created: 12th May 1998
 // M Fischler     - put and get to/from streams 12/10/04
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing CLHEPdoubles avoid problems with precision 
 //			4/14/05
 //
 // =======================================================================
@@ -33,45 +34,45 @@ HepRandomEngine & RandBinomial::engine() {return *localEngine;}
 RandBinomial::~RandBinomial() {
 }
 
-double RandBinomial::shoot( HepRandomEngine *anEngine, long n,
-                                                          double p ) {
+CLHEPdouble RandBinomial::shoot( HepRandomEngine *anEngine, long n,
+                                                          CLHEPdouble p ) {
   return genBinomial( anEngine, n, p );
 }
 
-double RandBinomial::shoot( long n, double p ) {
+CLHEPdouble RandBinomial::shoot( long n, CLHEPdouble p ) {
   HepRandomEngine *anEngine = HepRandom::getTheEngine();
   return genBinomial( anEngine, n, p );
 }
 
-double RandBinomial::fire( long n, double p ) {
+CLHEPdouble RandBinomial::fire( long n, CLHEPdouble p ) {
   return genBinomial( localEngine.get(), n, p );
 }
 
-void RandBinomial::shootArray( const int size, double* vect,
-                            long n, double p )
+void RandBinomial::shootArray( const int size, CLHEPdouble* vect,
+                            long n, CLHEPdouble p )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = shoot(n,p);
 }
 
 void RandBinomial::shootArray( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            long n, double p )
+                            const int size, CLHEPdouble* vect,
+                            long n, CLHEPdouble p )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = shoot(anEngine,n,p);
 }
 
-void RandBinomial::fireArray( const int size, double* vect)
+void RandBinomial::fireArray( const int size, CLHEPdouble* vect)
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = fire(defaultN,defaultP);
 }
 
-void RandBinomial::fireArray( const int size, double* vect,
-                           long n, double p )
+void RandBinomial::fireArray( const int size, CLHEPdouble* vect,
+                           long n, CLHEPdouble p )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = fire(n,p);
 }
 
@@ -93,14 +94,14 @@ void RandBinomial::fireArray( const int size, double* vect,
  *                                                                       *
  *************************************************************************/
 
-static double StirlingCorrection(long int k)
+static CLHEPdouble StirlingCorrection(long int k)
 {
   #define   C1               8.33333333333333333e-02     //  +1/12 
   #define   C3              -2.77777777777777778e-03     //  -1/360
   #define   C5               7.93650793650793651e-04     //  +1/1260
   #define   C7              -5.95238095238095238e-04     //  -1/1680
 
-  static const double  c[31] = {   0.0,
+  static const CLHEPdouble  c[31] = {   0.0,
 			     8.106146679532726e-02, 4.134069595540929e-02,
 			     2.767792568499834e-02, 2.079067210376509e-02,
 			     1.664469118982119e-02, 1.387612882307075e-02,
@@ -117,16 +118,16 @@ static double StirlingCorrection(long int k)
 			     3.086278682608780e-03, 2.976063983550410e-03,
 			     2.873449362352470e-03, 2.777674929752690e-03,
   };
-  double    r, rr;
+  CLHEPdouble    r, rr;
 
   if (k > 30L) {
-    r = 1.0 / (double) k;  rr = r * r;
+    r = 1.0 / (CLHEPdouble) k;  rr = r * r;
     return(r*(C1 + rr*(C3 + rr*(C5 + rr*C7))));
 	}
 	else  return(c[k]);
 }
 
-double RandBinomial::genBinomial( HepRandomEngine *anEngine, long n, double p )
+CLHEPdouble RandBinomial::genBinomial( HepRandomEngine *anEngine, long n, CLHEPdouble p )
 {
 /******************************************************************
  *                                                                *
@@ -179,13 +180,13 @@ double RandBinomial::genBinomial( HepRandomEngine *anEngine, long n, double p )
 #define DMAX_KM  20L
 
   static CLHEP_THREAD_LOCAL long int      n_last = -1L,  n_prev = -1L;
-  static CLHEP_THREAD_LOCAL double        par,np,p0,q,p_last = -1.0, p_prev = -1.0;
+  static CLHEP_THREAD_LOCAL CLHEPdouble        par,np,p0,q,p_last = -1.0, p_prev = -1.0;
   static CLHEP_THREAD_LOCAL long          b,m,nm;
-  static CLHEP_THREAD_LOCAL double        pq, rc, ss, xm, xl, xr, ll, lr, c,
+  static CLHEP_THREAD_LOCAL CLHEPdouble        pq, rc, ss, xm, xl, xr, ll, lr, c,
 				 p1, p2, p3, p4, ch;
 
   long                 bh,i, K, Km, nK;
-  double               f, rm, U, V, X, T, E;
+  CLHEPdouble               f, rm, U, V, X, T, E;
 
   if (n != n_last || p != p_last)                 // set-up 
 	{
@@ -213,11 +214,11 @@ double RandBinomial::genBinomial( HepRandomEngine *anEngine, long n, double p )
 	ss = np * q;                              // variance  
 	i  = (long int) (2.195*std::sqrt(ss) - 4.6*q); // i = p1 - 0.5
 	xm = m + 0.5;
-	xl = (double) (m - i);                    // limit left 
-	xr = (double) (m + i + 1L);               // limit right
+	xl = (CLHEPdouble) (m - i);                    // limit left 
+	xr = (CLHEPdouble) (m + i + 1L);               // limit right
 	f  = (rm - xl) / (rm - xl*par);  ll = f * (1.0 + 0.5*f);
 	f  = (xr - rm) / (xr * q);     lr = f * (1.0 + 0.5*f);
-	c  = 0.134 + 20.5/(15.3 + (double) m);    // parallelogram
+	c  = 0.134 + 20.5/(15.3 + (CLHEPdouble) m);    // parallelogram
 						  // height
 	p1 = i + 0.5;
 	p2 = p1 * (1.0 + c + c);                  // probabilities
@@ -228,7 +229,7 @@ double RandBinomial::genBinomial( HepRandomEngine *anEngine, long n, double p )
   if( np <= 0.0 ) return (-1.0);
   if (np<10)                                      //Inversion Chop-down
 	 {
-	  double pk;
+	  CLHEPdouble pk;
 
 	  K=0;
 	  pk=p0;
@@ -245,10 +246,10 @@ double RandBinomial::genBinomial( HepRandomEngine *anEngine, long n, double p )
 		 else
 			 {
 		U-=pk;
-		pk=(double)(((n-K+1)*par*pk)/(K*q));
+		pk=(CLHEPdouble)(((n-K+1)*par*pk)/(K*q));
 			 }
 		}
-	  return ((p>0.5) ? (double)(n-K):(double)K);
+	  return ((p>0.5) ? (CLHEPdouble)(n-K):(CLHEPdouble)K);
 	 }
 
   for (;;)
@@ -257,7 +258,7 @@ double RandBinomial::genBinomial( HepRandomEngine *anEngine, long n, double p )
 	 if ((U = anEngine->flat() * p4) <= p1)  // triangular region
 		{
 		 K=(long int) (xm - U + p1*V);
-	return ((p>0.5) ? (double)(n-K):(double)K);  // immediate accept
+	return ((p>0.5) ? (CLHEPdouble)(n-K):(CLHEPdouble)K);  // immediate accept
 		}
 	 if (U <= p2)                                // parallelogram
 		{
@@ -322,13 +323,13 @@ double RandBinomial::genBinomial( HepRandomEngine *anEngine, long n, double p )
 
  // computation of log f(K) via Stirling's formula
  // final acceptance-rejection test
-	if (V <= ch + (n + 1.0)*std::log((double) nm / (double) nK) +
+	if (V <= ch + (n + 1.0)*std::log((CLHEPdouble) nm / (CLHEPdouble) nK) +
                  (K + 0.5)*std::log(nK * pq / (K + 1.0)) -
                  StirlingCorrection(K + 1L) - StirlingCorrection(nK))  break;
 		}
 	 }
   }
-  return ((p>0.5) ? (double)(n-K):(double)K);
+  return ((p>0.5) ? (CLHEPdouble)(n-K):(CLHEPdouble)K);
 }
 
 std::ostream & RandBinomial::put ( std::ostream & os ) const {
@@ -363,7 +364,7 @@ std::istream & RandBinomial::get ( std::istream & is ) {
   if (possibleKeywordInput(is, "Uvec", defaultN)) {
     std::vector<unsigned long> t(2);
     is >> defaultN >> defaultP;
-    is >> t[0] >> t[1]; defaultP = DoubConv::longs2double(t); 
+    is >> t[0] >> t[1]; defaultP = DoubConv::longs2CLHEPdouble(t); 
     return is;
   }
   // is >> defaultN encompassed by possibleKeywordInput

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: CumulativeChiSquare.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //---------------------CumulativeChiSquare----------------------------------//
@@ -32,8 +33,8 @@ namespace Genfun {
     virtual ~CumulativeChiSquare();
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
   
     // Get the integer variable l
     unsigned int nDof() const;

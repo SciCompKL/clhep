@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: LikelihoodFunctional.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //-------------------------------------------------------------//
@@ -28,7 +29,7 @@ namespace Genfun {
     ~LikelihoodFunctional();
 
     // Evaluate ChiSquared of a function w.r.t the data.
-    virtual double operator [] (const AbsFunction & function) const;
+    virtual CLHEPdouble operator [] (const AbsFunction & function) const;
 
   private:
 

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ParameterProduct.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/ParameterProduct.hh"
@@ -28,7 +29,7 @@ ParameterProduct::~ParameterProduct()
 }
 
 
-double ParameterProduct::getValue() const {
+CLHEPdouble ParameterProduct::getValue() const {
   return _arg1->getValue()*_arg2->getValue();
 }
 

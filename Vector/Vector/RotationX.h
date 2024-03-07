@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // CLASSDOC OFF
 // ---------------------------------------------------------------------------
@@ -46,7 +47,7 @@ public:
   inline HepRotationX();
   // Default constructor. Gives an identity rotation. 
 
-  HepRotationX(double delta);
+  HepRotationX(CLHEPdouble delta);
   // supply angle of rotation 
 
   inline HepRotationX(const HepRotationX & orig);
@@ -57,7 +58,7 @@ public:
   inline HepRotationX & operator = (HepRotationX && r) = default;
   // Copy and move assignments from a Rotation, which must be RotationX
 
-  HepRotationX & set ( double delta );
+  HepRotationX & set ( CLHEPdouble delta );
   // set angle of rotation 
 
   inline ~HepRotationX();
@@ -75,45 +76,45 @@ public:
   inline Hep3Vector rowZ() const;
   // orthogonal unit-length row vectors
                                 
-  inline double xx() const;
-  inline double xy() const;
-  inline double xz() const;
-  inline double yx() const;
-  inline double yy() const;
-  inline double yz() const;
-  inline double zx() const;
-  inline double zy() const;
-  inline double zz() const;
+  inline CLHEPdouble xx() const;
+  inline CLHEPdouble xy() const;
+  inline CLHEPdouble xz() const;
+  inline CLHEPdouble yx() const;
+  inline CLHEPdouble yy() const;
+  inline CLHEPdouble yz() const;
+  inline CLHEPdouble zx() const;
+  inline CLHEPdouble zy() const;
+  inline CLHEPdouble zz() const;
   // Elements of the rotation matrix (Geant4).
 
   inline HepRep3x3 rep3x3() const;
   //   3x3 representation:
 
   // ------------  Euler angles:
-  inline  double getPhi  () const;
-  inline  double getTheta() const;
-  inline  double getPsi  () const;
-  double    phi  () const;
-  double    theta() const;
-  double    psi  () const;
+  inline  CLHEPdouble getPhi  () const;
+  inline  CLHEPdouble getTheta() const;
+  inline  CLHEPdouble getPsi  () const;
+  CLHEPdouble    phi  () const;
+  CLHEPdouble    theta() const;
+  CLHEPdouble    psi  () const;
   HepEulerAngles eulerAngles() const;
 
   // ------------  axis & angle of rotation:
-  inline  double  getDelta() const;
+  inline  CLHEPdouble  getDelta() const;
   inline  Hep3Vector getAxis () const;
-  inline  double     delta() const;
+  inline  CLHEPdouble     delta() const;
   inline  Hep3Vector    axis () const;
   inline  HepAxisAngle  axisAngle() const;
-  inline  void getAngleAxis(double & delta, Hep3Vector & axis) const;
+  inline  void getAngleAxis(CLHEPdouble & delta, Hep3Vector & axis) const;
   // Returns the rotation angle and rotation axis (Geant4). 	
 
   // ------------- Angles of rotated axes
-  double phiX() const;
-  double phiY() const;
-  double phiZ() const;
-  double thetaX() const;
-  double thetaY() const;
-  double thetaZ() const;
+  CLHEPdouble phiX() const;
+  CLHEPdouble phiY() const;
+  CLHEPdouble phiZ() const;
+  CLHEPdouble thetaX() const;
+  CLHEPdouble thetaY() const;
+  CLHEPdouble thetaZ() const;
   // Return angles (RADS) made by rotated axes against original axes (Geant4).
 
   // ----------  Other accessors treating pure rotation as a 4-rotation
@@ -134,15 +135,15 @@ public:
   inline HepLorentzVector row4() const;
   // Will be (0,0,0,1) for this pure Rotation.
 
-  inline double xt() const;
-  inline double yt() const;
-  inline double zt() const;
-  inline double tx() const;
-  inline double ty() const;
-  inline double tz() const;
+  inline CLHEPdouble xt() const;
+  inline CLHEPdouble yt() const;
+  inline CLHEPdouble zt() const;
+  inline CLHEPdouble tx() const;
+  inline CLHEPdouble ty() const;
+  inline CLHEPdouble tz() const;
   // Will be zero for this pure Rotation
 
-  inline double tt() const;
+  inline CLHEPdouble tt() const;
   // Will be one for this pure Rotation
 
   inline HepRep4x4 rep4x4() const;
@@ -150,7 +151,7 @@ public:
 
   // ---------   Mutators 
 
-  void setDelta (double delta);
+  void setDelta (CLHEPdouble delta);
   // change angle of rotation, leaving rotation axis unchanged.
 
   // ----------  Decomposition:
@@ -177,34 +178,34 @@ public:
   inline bool operator<= ( const HepRotationX & r ) const;
   inline bool operator>= ( const HepRotationX & r ) const;
   
-  double distance2( const HepRotationX & r  ) const; 
+  CLHEPdouble distance2( const HepRotationX & r  ) const; 
   // 3 - Tr ( this/r )
 
-  double distance2( const HepRotation &  r  ) const; 
+  CLHEPdouble distance2( const HepRotation &  r  ) const; 
   // 3 - Tr ( this/r ) -- This works with RotationY or Z also
 
-  double howNear( const HepRotationX & r ) const;
-  double howNear( const HepRotation  & r ) const;
+  CLHEPdouble howNear( const HepRotationX & r ) const;
+  CLHEPdouble howNear( const HepRotation  & r ) const;
   bool isNear( const HepRotationX & r,
-               double epsilon=Hep4RotationInterface::tolerance) const;
+               CLHEPdouble epsilon=Hep4RotationInterface::tolerance) const;
   bool isNear( const HepRotation  & r,
-               double epsilon=Hep4RotationInterface::tolerance) const;
+               CLHEPdouble epsilon=Hep4RotationInterface::tolerance) const;
 
-  double distance2( const HepBoost           & lt  ) const; 
+  CLHEPdouble distance2( const HepBoost           & lt  ) const; 
   // 3 - Tr ( this ) + |b|^2 / (1-|b|^2) 
-  double distance2( const HepLorentzRotation & lt  ) const; 
+  CLHEPdouble distance2( const HepLorentzRotation & lt  ) const; 
   // 3 - Tr ( this/r ) + |b|^2 / (1-|b|^2) where b is the boost vector of lt
 
-  double howNear( const HepBoost           & lt ) const;
-  double howNear( const HepLorentzRotation & lt ) const;
+  CLHEPdouble howNear( const HepBoost           & lt ) const;
+  CLHEPdouble howNear( const HepLorentzRotation & lt ) const;
   bool isNear( const HepBoost           & lt, 
-               double epsilon=Hep4RotationInterface::tolerance) const;
+               CLHEPdouble epsilon=Hep4RotationInterface::tolerance) const;
   bool isNear( const HepLorentzRotation & lt,
-               double epsilon=Hep4RotationInterface::tolerance) const;
+               CLHEPdouble epsilon=Hep4RotationInterface::tolerance) const;
 
   // ----------  Properties:
 
-  double norm2() const; 
+  CLHEPdouble norm2() const; 
   // distance2 (IDENTITY), which is 3 - Tr ( *this )
 
   inline void rectify();
@@ -251,22 +252,22 @@ public:
 
   // ---------- Tolerance
 
-  static inline double getTolerance();
-  static inline double setTolerance(double tol);
+  static inline CLHEPdouble getTolerance();
+  static inline CLHEPdouble setTolerance(CLHEPdouble tol);
 
 protected:
 
-  double its_d;
+  CLHEPdouble its_d;
   // The angle of rotation.
 
-  double its_s;
-  double its_c;
+  CLHEPdouble its_s;
+  CLHEPdouble its_c;
   // Cache the trig functions, for rapid operations.
 
-  inline HepRotationX ( double dd, double ss, double cc );
+  inline HepRotationX ( CLHEPdouble dd, CLHEPdouble ss, CLHEPdouble cc );
   // Unchecked load-the-data-members
 
-  static inline double proper (double delta);
+  static inline CLHEPdouble proper (CLHEPdouble delta);
   // Put an angle into the range of (-PI, PI].  Useful helper method.
 
 };  // HepRotationX

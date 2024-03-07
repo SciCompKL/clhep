@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: flatToGaussian.cc,v 1.4 2003/08/13 20:00:12 garren Exp $
 // -*- C++ -*-
 //
@@ -9,9 +10,9 @@
 
 // Contains the methods that depend on the 30K-footpring gaussTables.cdat.
 //
-// flatToGaussian (double x)
-// inverseErf     (double x)
-// erf		  (double x)
+// flatToGaussian (CLHEPdouble x)
+// inverseErf     (CLHEPdouble x)
+// erf		  (CLHEPdouble x)
 
 // =======================================================================
 // M Fischler	  - Created 1/25/00.
@@ -26,7 +27,7 @@
 
 namespace CLHEP {
 
-double transformSmall (double r);
+CLHEPdouble transformSmall (CLHEPdouble r);
 
 
 //
@@ -64,7 +65,7 @@ static const int Tsizes[5] =   { Table0size,
 #define Table3step  (2.0E-6) 
 #define Table4step  (5.0E-4)
 
-static const double Tsteps[5] = { Table0step,
+static const CLHEPdouble Tsteps[5] = { Table0step,
 				 Table1step,
 				 Table2step,
 				 Table3step,
@@ -84,14 +85,14 @@ static const int Toffsets[5] = { Table0offset,
 
   // Here comes the big (30K bytes) table, kept in a file ---
 
-static const double gaussTables [2*TableSize] = {
+static const CLHEPdouble gaussTables [2*TableSize] = {
 #include "gaussTables.cdat"
 };
 
 
-double HepStat::flatToGaussian (double r) {
+CLHEPdouble HepStat::flatToGaussian (CLHEPdouble r) {
 
-  double sign = +1.0;	// We always compute a negative number of 
+  CLHEPdouble sign = +1.0;	// We always compute a negative number of 
 				// sigmas.  For r > 0 we will multiply by
 				// sign = -1 to return a positive number.
 #ifdef Trace1
@@ -119,9 +120,9 @@ std::cout << "r = " << r << "sign negative \n";
   // Past the case of table 4, we need not be as concerned about speed since
   // this will happen only .1% of the time.
 
-  const double* tptr = 0;
-  double  dx = 0;
-  double  h = 0;
+  const CLHEPdouble* tptr = 0;
+  CLHEPdouble  dx = 0;
+  CLHEPdouble  h = 0;
 
   // The following big if block will locate tptr, h, and dx from whichever
   // table is applicable:
@@ -160,7 +161,7 @@ std::cout << "offset index = " << index << "\n";
 #ifdef Trace2 
 std::cout << "Using table " << tableN << "\n";
 #endif
-      double step = Tsteps[tableN];
+      CLHEPdouble step = Tsteps[tableN];
       index = int(r/step);			// 1 to TableNsize-1 
         // The following two tests should probably never be true, but
         // roundoff might cause index to be outside its proper range.
@@ -187,29 +188,29 @@ std::cout << "index = " << index << " dx = " << dx << " h = " << h << "\n";
   // At the end of this if block, we have tptr, dx and h -- and if r is less 
   // than the smallest step, we have already returned the proper answer.  
 
-  double  y0 = *tptr++;
-  double  d0 = *tptr++;
-  double  y1 = *tptr++;
-  double  d1 = *tptr;
+  CLHEPdouble  y0 = *tptr++;
+  CLHEPdouble  d0 = *tptr++;
+  CLHEPdouble  y1 = *tptr++;
+  CLHEPdouble  d1 = *tptr;
 
 #ifdef Trace3
 std::cout << "y0: " << y0 << " y1: " << y1 << " d0: " << d0 << " d1: " << d1 << "\n";
 #endif
 
-  double  x2 = dx * dx;
-  double  oneMinusX = 1 - dx;
-  double  oneMinusX2 = oneMinusX * oneMinusX;
+  CLHEPdouble  x2 = dx * dx;
+  CLHEPdouble  oneMinusX = 1 - dx;
+  CLHEPdouble  oneMinusX2 = oneMinusX * oneMinusX;
 
-  double  f0 = (2. * dx + 1.) * oneMinusX2;
-  double  f1 = (3. - 2. * dx) * x2;
-  double  g0 =  h * dx * oneMinusX2;
-  double  g1 =  - h * oneMinusX * x2;
+  CLHEPdouble  f0 = (2. * dx + 1.) * oneMinusX2;
+  CLHEPdouble  f1 = (3. - 2. * dx) * x2;
+  CLHEPdouble  g0 =  h * dx * oneMinusX2;
+  CLHEPdouble  g1 =  - h * oneMinusX * x2;
 
 #ifdef Trace3
 std::cout << "f0: " << f0 << " f1: " << f1 << " g0: " << g0 << " g1: " << g1 << "\n";
 #endif
 
-  double answer = f0 * y0 + f1 * y1 + g0 * d0 + g1 * d1;
+  CLHEPdouble answer = f0 * y0 + f1 * y1 + g0 * d0 + g1 * d1;
 
 #ifdef Trace1
 std::cout << "variate is: " << sign*answer << "\n";
@@ -220,7 +221,7 @@ std::cout << "variate is: " << sign*answer << "\n";
 } // flatToGaussian
 
 
-double transformSmall (double r) {
+CLHEPdouble transformSmall (CLHEPdouble r) {
 
   // Solve for -v in the asymtotic formula 
   //
@@ -230,7 +231,7 @@ double transformSmall (double r) {
 
   // The value of r (=errInt(-v)) supplied is going to less than 2.0E-13,
   // which is such that v < -7.25.  Since the value of r is meaningful only
-  // to an absolute error of 1E-16 (double precision accuracy for a number 
+  // to an absolute error of 1E-16 (CLHEPdouble precision accuracy for a number 
   // which on the high side could be of the form 1-epsilon), computing
   // v to more than 3-4 digits of accuracy is suspect; however, to ensure 
   // smoothness with the table generator (which uses quite a few terms) we
@@ -241,13 +242,13 @@ double transformSmall (double r) {
   // speed is of no concern.  As a matter of technique, we terminate the
   // iterations in case they would be infinite, but this should not happen.
 
-  double eps = 1.0e-7;
-  double guess = 7.5;
-  double v;
+  CLHEPdouble eps = 1.0e-7;
+  CLHEPdouble guess = 7.5;
+  CLHEPdouble v;
   
   for ( int i = 1; i < 50; i++ ) {
-    double vn2 = 1.0/(guess*guess);
-    double s1 = -13*11*9*7*5*3 * vn2*vn2*vn2*vn2*vn2*vn2*vn2;
+    CLHEPdouble vn2 = 1.0/(guess*guess);
+    CLHEPdouble s1 = -13*11*9*7*5*3 * vn2*vn2*vn2*vn2*vn2*vn2*vn2;
     	      s1 +=    11*9*7*5*3 * vn2*vn2*vn2*vn2*vn2*vn2;
     	      s1 +=      -9*7*5*3 * vn2*vn2*vn2*vn2*vn2;
 	      s1 +=         7*5*3 * vn2*vn2*vn2*vn2;
@@ -263,7 +264,7 @@ double transformSmall (double r) {
 } // transformSmall()
 
 
-double HepStat::inverseErf (double t) {
+CLHEPdouble HepStat::inverseErf (CLHEPdouble t) {
 
   // This uses erf(x) = 2*gaussCDF(std::sqrt(2)*x) - 1
 
@@ -272,7 +273,7 @@ double HepStat::inverseErf (double t) {
 }
 
 
-double HepStat::erf (double x) {
+CLHEPdouble HepStat::erf (CLHEPdouble x) {
 
 // Math:
 //
@@ -296,8 +297,8 @@ double HepStat::erf (double x) {
 // erf(x) = erfQ(x) - (inverseErf(erfQ(x))-x) * std::exp(-x**2) * 2/std::sqrt(CLHEP::pi)
 //
 
-  double t0 = erfQ(x);
-  double deriv = std::exp(-x*x) * (2.0 / std::sqrt(CLHEP::pi));
+  CLHEPdouble t0 = erfQ(x);
+  CLHEPdouble deriv = std::exp(-x*x) * (2.0 / std::sqrt(CLHEP::pi));
 
   return t0 - (inverseErf (t0) - x) * deriv;
 

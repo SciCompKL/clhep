@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Exp.cc,v 1.4 2003/10/10 17:40:39 garren Exp $ 
 #include "CLHEP/GenericFunctions/Exp.hh"
@@ -16,7 +17,7 @@ Exp::Exp(const Exp & right) : AbsFunction(right)
 Exp::~Exp() {
 }
 
-double Exp::operator() (double x) const {
+CLHEPdouble Exp::operator() (CLHEPdouble x) const {
   return exp(x);
 }
 

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 //
 // ZMexSeverity.cc - define severity codes & ancillary information

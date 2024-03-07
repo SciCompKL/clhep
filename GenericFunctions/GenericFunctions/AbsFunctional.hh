@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: AbsFunctional.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 // A functional is a mapping from functions to real numbers.
@@ -25,7 +26,7 @@ namespace Genfun {
 
     // A functional is a mapping from functions to 
     // real numbers.  This defines that mapping:
-    virtual double operator[] (const AbsFunction & function) const = 0;
+    virtual CLHEPdouble operator[] (const AbsFunction & function) const = 0;
 
   };
 } // namespace Genfun

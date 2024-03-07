@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandBreitWigner.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -39,10 +40,10 @@ class RandBreitWigner : public HepRandom {
 
 public:
 
-  inline RandBreitWigner ( HepRandomEngine& anEngine, double a=1.0,
-                                       double b=0.2 );
-  inline RandBreitWigner ( HepRandomEngine* anEngine, double a=1.0,
-                                       double b=0.2 );
+  inline RandBreitWigner ( HepRandomEngine& anEngine, CLHEPdouble a=1.0,
+                                       CLHEPdouble b=0.2 );
+  inline RandBreitWigner ( HepRandomEngine* anEngine, CLHEPdouble a=1.0,
+                                       CLHEPdouble b=0.2 );
   // These constructors should be used to instantiate a RandBreitWigner
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -57,69 +58,69 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  double shoot( double a=1.0, double b=0.2 );
+  static  CLHEPdouble shoot( CLHEPdouble a=1.0, CLHEPdouble b=0.2 );
 
-  static  double shoot( double a, double b, double c );
+  static  CLHEPdouble shoot( CLHEPdouble a, CLHEPdouble b, CLHEPdouble c );
 
-  static  double shootM2( double a=1.0, double b=0.2 );
+  static  CLHEPdouble shootM2( CLHEPdouble a=1.0, CLHEPdouble b=0.2 );
 
-  static  double shootM2( double a, double b, double c );
+  static  CLHEPdouble shootM2( CLHEPdouble a, CLHEPdouble b, CLHEPdouble c );
 
-  static  void shootArray ( const int size, double* vect);
+  static  void shootArray ( const int size, CLHEPdouble* vect);
 
-  static  void shootArray ( const int size, double* vect,
-                            double a, double b );
+  static  void shootArray ( const int size, CLHEPdouble* vect,
+                            CLHEPdouble a, CLHEPdouble b );
 
-  static  void shootArray ( const int size, double* vect,
-                            double a, double b, double c );
+  static  void shootArray ( const int size, CLHEPdouble* vect,
+                            CLHEPdouble a, CLHEPdouble b, CLHEPdouble c );
                            
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  double shoot( HepRandomEngine* anEngine, double a=1.0,
-                           double b=0.2 );
-  static  double shoot( HepRandomEngine* anEngine, double a,
-                           double b, double c );
-  static  double shootM2( HepRandomEngine* anEngine, double a=1.0,
-                             double b=0.2 );
-  static  double shootM2( HepRandomEngine* anEngine, double a,
-                             double b, double c );
+  static  CLHEPdouble shoot( HepRandomEngine* anEngine, CLHEPdouble a=1.0,
+                           CLHEPdouble b=0.2 );
+  static  CLHEPdouble shoot( HepRandomEngine* anEngine, CLHEPdouble a,
+                           CLHEPdouble b, CLHEPdouble c );
+  static  CLHEPdouble shootM2( HepRandomEngine* anEngine, CLHEPdouble a=1.0,
+                             CLHEPdouble b=0.2 );
+  static  CLHEPdouble shootM2( HepRandomEngine* anEngine, CLHEPdouble a,
+                             CLHEPdouble b, CLHEPdouble c );
   static  void shootArray ( HepRandomEngine* anEngine,
-                            const int size, double* vect );
+                            const int size, CLHEPdouble* vect );
   static  void shootArray ( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double a, double b );
+                            const int size, CLHEPdouble* vect,
+                            CLHEPdouble a, CLHEPdouble b );
   static  void shootArray ( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double a, double b, double c );
+                            const int size, CLHEPdouble* vect,
+                            CLHEPdouble a, CLHEPdouble b, CLHEPdouble c );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator. These methods respect distribution parameters
   //  passed by the user at instantiation unless superseded by actual
   //  arguments in the call.
 
-  double fire();
+  CLHEPdouble fire();
 
-  double fire( double a, double b );
+  CLHEPdouble fire( CLHEPdouble a, CLHEPdouble b );
 
-  double fire( double a, double b, double c );
+  CLHEPdouble fire( CLHEPdouble a, CLHEPdouble b, CLHEPdouble c );
 
-  double fireM2();
+  CLHEPdouble fireM2();
 
-  double fireM2( double a, double b );
+  CLHEPdouble fireM2( CLHEPdouble a, CLHEPdouble b );
 
-  double fireM2( double a, double b, double c );
+  CLHEPdouble fireM2( CLHEPdouble a, CLHEPdouble b, CLHEPdouble c );
 
-  void fireArray ( const int size, double* vect);
+  void fireArray ( const int size, CLHEPdouble* vect);
 
-  void fireArray ( const int size, double* vect,
-                   double a, double b );
+  void fireArray ( const int size, CLHEPdouble* vect,
+                   CLHEPdouble a, CLHEPdouble b );
 
-  void fireArray ( const int size, double* vect,
-                   double a, double b, double c );
-  double operator()();
-  double operator()( double a, double b );
-  double operator()( double a, double b, double c );
+  void fireArray ( const int size, CLHEPdouble* vect,
+                   CLHEPdouble a, CLHEPdouble b, CLHEPdouble c );
+  CLHEPdouble operator()();
+  CLHEPdouble operator()( CLHEPdouble a, CLHEPdouble b );
+  CLHEPdouble operator()( CLHEPdouble a, CLHEPdouble b, CLHEPdouble c );
 
   // Save and restore to/from streams
   
@@ -135,8 +136,8 @@ public:
 private:
 
   std::shared_ptr<HepRandomEngine> localEngine;
-  double defaultA;
-  double defaultB;
+  CLHEPdouble defaultA;
+  CLHEPdouble defaultB;
 
 };
 

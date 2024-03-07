@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionNumDeriv.cc,v 1.4 2003/10/10 17:40:39 garren Exp $
 // ---------------------------------------------------------------------------
@@ -35,59 +36,59 @@ unsigned int FunctionNumDeriv::dimensionality() const {
 #define ROBUST_DERIVATIVES 
 #ifdef  ROBUST_DERIVATIVES
 
-double FunctionNumDeriv::f_x (double x) const   { 
+CLHEPdouble FunctionNumDeriv::f_x (CLHEPdouble x) const   { 
   return (*_arg1)(x);
 }
 
 
-double FunctionNumDeriv::f_Arg (double x) const { 
+CLHEPdouble FunctionNumDeriv::f_Arg (CLHEPdouble x) const { 
   _xArg [_wrtIndex] = x;
   return (*_arg1)(_xArg);
 }
 
 
-double FunctionNumDeriv::operator ()(double x) const
+CLHEPdouble FunctionNumDeriv::operator ()(CLHEPdouble x) const
 {
   assert (_wrtIndex==0);
   return numericalDerivative ( &FunctionNumDeriv::f_x, x );
 }
 
-double FunctionNumDeriv::operator ()(const Argument & x) const
+CLHEPdouble FunctionNumDeriv::operator ()(const Argument & x) const
 {
   assert (_wrtIndex<x.dimension());
   _xArg = x;
-  double xx = x[_wrtIndex];
+  CLHEPdouble xx = x[_wrtIndex];
   return numericalDerivative ( &FunctionNumDeriv::f_Arg, xx );
 }
 
 
-double FunctionNumDeriv::numericalDerivative
-        ( double (FunctionNumDeriv::*f)(double)const, double x ) const {
+CLHEPdouble FunctionNumDeriv::numericalDerivative
+        ( CLHEPdouble (FunctionNumDeriv::*f)(CLHEPdouble)const, CLHEPdouble x ) const {
 
-  const double h0 = 5 * std::pow(2.0, -17);
+  const CLHEPdouble h0 = 5 * std::pow(2.0, -17);
 
-  const double maxErrorA = .0012;    // These are the largest errors in steps 
-  const double maxErrorB = .0000026; // A, B consistent with 8-digit accuracy.
+  const CLHEPdouble maxErrorA = .0012;    // These are the largest errors in steps 
+  const CLHEPdouble maxErrorB = .0000026; // A, B consistent with 8-digit accuracy.
 
-  const double maxErrorC = .0003; // Largest acceptable validation discrepancy.
+  const CLHEPdouble maxErrorC = .0003; // Largest acceptable validation discrepancy.
 
   // This value of gives 8-digit accuracy for 1250 > curvature scale < 1/1250.
 
   const int nItersMax = 6;
   int nIters;
-  double bestError = 1.0E30;
-  double bestAns = 0;
+  CLHEPdouble bestError = 1.0E30;
+  CLHEPdouble bestAns = 0;
 
-  const double valFactor  = std::pow(2.0, -16);
+  const CLHEPdouble valFactor  = std::pow(2.0, -16);
 
-  const double w   = 5.0/8;
-  const double wi2 = 64.0/25.0;
-  const double wi4 = wi2*wi2;
+  const CLHEPdouble w   = 5.0/8;
+  const CLHEPdouble wi2 = 64.0/25.0;
+  const CLHEPdouble wi4 = wi2*wi2;
 
-  double size    = fabs((this->*f)(x));
+  CLHEPdouble size    = fabs((this->*f)(x));
   if (size==0) size = std::pow(2.0, -53);
 
-  const double adjustmentFactor[nItersMax] = {
+  const CLHEPdouble adjustmentFactor[nItersMax] = {
     1.0,
     std::pow(2.0, -17),
     std::pow(2.0, +17),
@@ -97,21 +98,21 @@ double FunctionNumDeriv::numericalDerivative
 
   for ( nIters = 0; nIters < nItersMax; ++nIters ) {
 
-    double h = h0 * adjustmentFactor[nIters];
+    CLHEPdouble h = h0 * adjustmentFactor[nIters];
 
     // Step A: Three estimates based on h and two smaller values:
 
-    double A1 = ((this->*f)(x+h) - (this->*f)(x-h))/(2.0*h);
+    CLHEPdouble A1 = ((this->*f)(x+h) - (this->*f)(x-h))/(2.0*h);
 //    size = max(fabs(A1), size);
     if (fabs(A1) > size) size = fabs(A1);
 
-    double hh = w*h;
-    double A2 = ((this->*f)(x+hh) - (this->*f)(x-hh))/(2.0*hh);
+    CLHEPdouble hh = w*h;
+    CLHEPdouble A2 = ((this->*f)(x+hh) - (this->*f)(x-hh))/(2.0*hh);
 //    size = max(fabs(A2), size);
     if (fabs(A2) > size) size = fabs(A2);
 
     hh *= w; 
-    double A3 = ((this->*f)(x+hh) - (this->*f)(x-hh))/(2.0*hh);
+    CLHEPdouble A3 = ((this->*f)(x+hh) - (this->*f)(x-hh))/(2.0*hh);
 //    size = max(fabs(A3), size);
     if (fabs(A3) > size) size = fabs(A3);
 
@@ -121,16 +122,16 @@ double FunctionNumDeriv::numericalDerivative
 
     // Step B: Two second-order estimates based on h h*w, from A estimates
 
-    double B1 = ( A2 * wi2 - A1 ) / ( wi2 - 1 );
-    double B2 = ( A3 * wi2 - A2 ) / ( wi2 - 1 );
+    CLHEPdouble B1 = ( A2 * wi2 - A1 ) / ( wi2 - 1 );
+    CLHEPdouble B2 = ( A3 * wi2 - A2 ) / ( wi2 - 1 );
     if ( fabs(B1-B2)/size > maxErrorB ) { 
       continue;
     }
 
     // Step C: Third-order estimate, from B estimates:
 
-    double ans = ( B2 * wi4 - B1 ) / ( wi4 - 1 );
-    double err = fabs ( ans - B1 );
+    CLHEPdouble ans = ( B2 * wi4 - B1 ) / ( wi4 - 1 );
+    CLHEPdouble err = fabs ( ans - B1 );
     if ( err < bestError ) {
       bestError = err;
       bestAns = ans;
@@ -139,7 +140,7 @@ double FunctionNumDeriv::numericalDerivative
     // Validation estimate based on much smaller h value:
 
     hh = h * valFactor;
-    double val = ((this->*f)(x+hh) - (this->*f)(x-hh))/(2.0*hh);
+    CLHEPdouble val = ((this->*f)(x+hh) - (this->*f)(x-hh))/(2.0*hh);
     if ( fabs(val-ans)/size > maxErrorC ) {
       continue;
     }
@@ -156,17 +157,17 @@ double FunctionNumDeriv::numericalDerivative
 
 
 #ifdef SIMPLER_DERIVATIVES
-double FunctionNumDeriv::operator ()(double x) const
+CLHEPdouble FunctionNumDeriv::operator ()(CLHEPdouble x) const
 {
   assert (_wrtIndex==0);
-  const double h=1.0E-6;
+  const CLHEPdouble h=1.0E-6;
   return ((*_arg1)(x+h) - (*_arg1)(x-h))/(2.0*h);
 }
 
-double FunctionNumDeriv::operator ()(const Argument & x) const
+CLHEPdouble FunctionNumDeriv::operator ()(const Argument & x) const
 {
   assert (_wrtIndex<x.dimension());
-  const double h=1.0E-6;
+  const CLHEPdouble h=1.0E-6;
   Argument x1=x, x0=x;
   x1[_wrtIndex] +=h;
   x0[_wrtIndex] -=h; 

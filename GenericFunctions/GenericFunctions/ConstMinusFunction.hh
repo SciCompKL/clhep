@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ConstMinusFunction.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //--------------------------ConstMinusFunction------------------------------//
@@ -24,7 +25,7 @@ namespace Genfun {
       public:
   
     // Constructor
-    ConstMinusFunction(double constant, const AbsFunction *arg);
+    ConstMinusFunction(CLHEPdouble constant, const AbsFunction *arg);
   
     // Copy constructor
     ConstMinusFunction(const ConstMinusFunction &right);
@@ -33,8 +34,8 @@ namespace Genfun {
     virtual ~ConstMinusFunction();
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override;
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override;
 
     // Dimensionality 
     virtual unsigned int dimensionality() const override;
@@ -50,7 +51,7 @@ namespace Genfun {
     // It is illegal to assign a ConstMinusFunction
     const ConstMinusFunction & operator=(const ConstMinusFunction &right);
 
-    double             _constant;
+    CLHEPdouble             _constant;
     const AbsFunction *_arg;
   };
 } // namespace Genfun

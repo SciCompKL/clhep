@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/Random/defs.h"
 #include "CLHEP/Random/RandGaussZiggurat.h"
 #include "CLHEP/Units/PhysicalConstants.h"
@@ -7,7 +8,7 @@
 namespace CLHEP {
 
 CLHEP_THREAD_LOCAL unsigned long RandGaussZiggurat::kn[128], RandGaussZiggurat::ke[256];
-CLHEP_THREAD_LOCAL float RandGaussZiggurat::wn[128],RandGaussZiggurat::fn[128],RandGaussZiggurat::we[256],RandGaussZiggurat::fe[256];
+CLHEP_THREAD_LOCAL CLHEPfloat RandGaussZiggurat::wn[128],RandGaussZiggurat::fn[128],RandGaussZiggurat::we[256],RandGaussZiggurat::fe[256];
 CLHEP_THREAD_LOCAL bool RandGaussZiggurat::ziggurat_is_init = false;
 
 HepRandomEngine & RandGaussZiggurat::engine() {return RandGauss::engine();}
@@ -22,9 +23,9 @@ std::string RandGaussZiggurat::name() const
 
 bool RandGaussZiggurat::ziggurat_init()
 {  
-  const double rzm1 = 2147483648.0, rzm2 = 4294967296.;
-  double dn=3.442619855899,tn=dn,vn=9.91256303526217e-3, q;
-  double de=7.697117470131487, te=de, ve=3.949659822581572e-3;
+  const CLHEPdouble rzm1 = 2147483648.0, rzm2 = 4294967296.;
+  CLHEPdouble dn=3.442619855899,tn=dn,vn=9.91256303526217e-3, q;
+  CLHEPdouble de=7.697117470131487, te=de, ve=3.949659822581572e-3;
   int i;
 
 /* Set up tables for RNOR */
@@ -71,11 +72,11 @@ bool RandGaussZiggurat::ziggurat_init()
   return true;
 }
 
-float RandGaussZiggurat::ziggurat_nfix(long hz,HepRandomEngine* anEngine)
+CLHEPfloat RandGaussZiggurat::ziggurat_nfix(long hz,HepRandomEngine* anEngine)
 {
   if(!ziggurat_is_init) ziggurat_init();
-  const float r = 3.442620f;     /* The start of the right tail */
-  float x, y;
+  const CLHEPfloat r = 3.442620f;     /* The start of the right tail */
+  CLHEPfloat x, y;
   unsigned long iz=hz&127;
   for(;;)
   {  
@@ -99,64 +100,64 @@ float RandGaussZiggurat::ziggurat_nfix(long hz,HepRandomEngine* anEngine)
   }
 }
 
-double RandGaussZiggurat::operator()() {
+CLHEPdouble RandGaussZiggurat::operator()() {
   return ziggurat_RNOR(localEngine.get()) * defaultStdDev + defaultMean;
 }
 
-double RandGaussZiggurat::operator()( double mean, double stdDev ) {
+CLHEPdouble RandGaussZiggurat::operator()( CLHEPdouble mean, CLHEPdouble stdDev ) {
   return ziggurat_RNOR(localEngine.get()) * stdDev + mean;
 }
 
-void RandGaussZiggurat::shootArray( const int size, float* vect, float mean, float stdDev )
+void RandGaussZiggurat::shootArray( const int size, CLHEPfloat* vect, CLHEPfloat mean, CLHEPfloat stdDev )
 {
    for (int i=0; i<size; ++i) {
      vect[i] = shoot(mean,stdDev);
    }
 }
 
-void RandGaussZiggurat::shootArray( const int size, double* vect, double mean, double stdDev )
+void RandGaussZiggurat::shootArray( const int size, CLHEPdouble* vect, CLHEPdouble mean, CLHEPdouble stdDev )
 {
    for (int i=0; i<size; ++i) {
      vect[i] = shoot(mean,stdDev);
    }
 }
 
-void RandGaussZiggurat::shootArray( HepRandomEngine* anEngine, const int size, float* vect, float mean, float stdDev )
+void RandGaussZiggurat::shootArray( HepRandomEngine* anEngine, const int size, CLHEPfloat* vect, CLHEPfloat mean, CLHEPfloat stdDev )
 {
    for (int i=0; i<size; ++i) {
      vect[i] = shoot(anEngine,mean,stdDev);
    }
 }
 
-void RandGaussZiggurat::shootArray( HepRandomEngine* anEngine, const int size, double* vect, double mean, double stdDev )
+void RandGaussZiggurat::shootArray( HepRandomEngine* anEngine, const int size, CLHEPdouble* vect, CLHEPdouble mean, CLHEPdouble stdDev )
 {
    for (int i=0; i<size; ++i) {
      vect[i] = shoot(anEngine,mean,stdDev);
    }
 }
 
-void RandGaussZiggurat::fireArray( const int size, float* vect)
+void RandGaussZiggurat::fireArray( const int size, CLHEPfloat* vect)
 {
    for (int i=0; i<size; ++i) {
      vect[i] = fire( defaultMean, defaultStdDev );
    }
 }
 
-void RandGaussZiggurat::fireArray( const int size, double* vect)
+void RandGaussZiggurat::fireArray( const int size, CLHEPdouble* vect)
 {
    for (int i=0; i<size; ++i) {
      vect[i] = fire( defaultMean, defaultStdDev );
    }
 }
 
-void RandGaussZiggurat::fireArray( const int size, float* vect, float mean, float stdDev )
+void RandGaussZiggurat::fireArray( const int size, CLHEPfloat* vect, CLHEPfloat mean, CLHEPfloat stdDev )
 {
    for (int i=0; i<size; ++i) {
      vect[i] = fire( mean, stdDev );
    }
 }
 
-void RandGaussZiggurat::fireArray( const int size, double* vect, double mean, double stdDev )
+void RandGaussZiggurat::fireArray( const int size, CLHEPdouble* vect, CLHEPdouble mean, CLHEPdouble stdDev )
 {
    for (int i=0; i<size; ++i) {
      vect[i] = fire( mean, stdDev );

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: CumulativeChiSquare.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 // ---------------------------------------------------------------------------
@@ -31,7 +32,7 @@ _nDof(right._nDof)
   create();
 }
 
-double CumulativeChiSquare::operator() (double x) const {
+CLHEPdouble CumulativeChiSquare::operator() (CLHEPdouble x) const {
   return (*_function)(x);
 }
 

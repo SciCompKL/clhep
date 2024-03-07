@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/Random/Randomize.h"
 #include "CLHEP/Random/defs.h"
 #include <iostream>
@@ -26,20 +27,20 @@ using namespace CLHEP;
 //   		(gcc3.3.1 exposed previously innocuous mistake)
 // ---------
 
-double gammln1(double xx) {
+CLHEPdouble gammln1(CLHEPdouble xx) {
 
 // Returns the value ln(Gamma(xx) for xx > 0.  Full accuracy is obtained for 
 // xx > 1. For 0 < xx < 1. the reflection formula (6.1.4) can be used first.
 // (Adapted from Numerical Recipes in C)
 
-  static double cof[6] = {76.18009172947146,-86.50532032941677,
+  static CLHEPdouble cof[6] = {76.18009172947146,-86.50532032941677,
                              24.01409824083091, -1.231739572450155,
                              0.1208650973866179e-2, -0.5395239384953e-5};
   int j;
-  double x = xx - 1.0;
-  double tmp = x + 5.5;
+  CLHEPdouble x = xx - 1.0;
+  CLHEPdouble tmp = x + 5.5;
   tmp -= (x + 0.5) * std::log(tmp);
-  double ser = 1.000000000190015;
+  CLHEPdouble ser = 1.000000000190015;
 
   for ( j = 0; j <= 5; j++ ) {
     x += 1.0;
@@ -48,20 +49,20 @@ double gammln1(double xx) {
   return -tmp + std::log(2.5066282746310005*ser);
 }
 
-double gammln2(double xx) {
+CLHEPdouble gammln2(CLHEPdouble xx) {
 
 // Returns the value ln(Gamma(xx) for xx > 0.  Full accuracy is obtained for 
 // xx > 1. For 0 < xx < 1. the reflection formula (6.1.4) can be used first.
 // (Adapted from Numerical Recipes in C)
 
-  static double cof[6] = {76.18009172947146,-86.50532032941677,
+  static CLHEPdouble cof[6] = {76.18009172947146,-86.50532032941677,
                              24.01409824083091, -1.231739572450155,
                              0.1208650973866179e-2, -0.5395239384953e-5};
   int j;
-  double x = xx - 0.0;
-  double tmp = x + 5.5;
+  CLHEPdouble x = xx - 0.0;
+  CLHEPdouble tmp = x + 5.5;
   tmp -= (x + 0.5) * std::log(tmp);
-  double ser = 1.000000000190015;
+  CLHEPdouble ser = 1.000000000190015;
 
   for ( j = 0; j <= 5; j++ ) {
     x += 1.0;
@@ -95,7 +96,7 @@ if (choice==1) {
   DualRand eng (seed);
   RandGauss dist (eng);
 
-  double sum = 0;
+  CLHEPdouble sum = 0;
 
 
   for (int i=0; i < nNumbers; i++) {
@@ -121,7 +122,7 @@ if (choice==2) {
   DualRand eng (seed);
   RandGaussQ dist (eng);
 
-  double sum = 0;
+  CLHEPdouble sum = 0;
 
 
   for (int i=0; i < nNumbers; i++) {
@@ -146,7 +147,7 @@ if (choice==3) {
   cout << "\nInstantiating distribution utilizing DualRand engine...\n";
   DualRand eng (seed);
 
-  double sum = 0;
+  CLHEPdouble sum = 0;
 
 
   for (int i=0; i < nNumbers; i++) {
@@ -160,7 +161,7 @@ if (choice==3) {
 #ifdef GAMMA
   cout << "\nNow we will compute the first 20 gammas, using gammln:\n";
 
-  double x;
+  CLHEPdouble x;
   for (x=1; x <= 20; x+=1) {
     cout << x << std::setprecision(20) << "    " << std::exp(gammln1(x)) 
 	<< "    " << std::exp(gammln2(x)) << " difference in gammln2 = " << 
@@ -187,7 +188,7 @@ if (choice==3) {
   cout << "Please enter an integer seed:        ";
   cin >> seed;
 
-  double mu;
+  CLHEPdouble mu;
   cout << "Please enter mu:        ";
   cin >> mu;
 
@@ -200,7 +201,7 @@ if (choice==3) {
   RandPoisson dist (eng, mu);
   // RandFlat dist (eng);
  
-  double sum = 0;
+  CLHEPdouble sum = 0;
 
 
   for (int i=0; i < nNumbers; i++) {

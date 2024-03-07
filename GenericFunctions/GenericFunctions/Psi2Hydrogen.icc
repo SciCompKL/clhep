@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "CLHEP/GenericFunctions/Psi2Hydrogen.hh"
@@ -16,7 +17,7 @@ namespace Genfun {
 FUNCTION_OBJECT_IMP(Psi2Hydrogen)
 
 // This is the product n (n-1) (n-1)... 
-inline double factorial (int n) {
+inline CLHEPdouble factorial (int n) {
   if (n<=1) return 1.0;
   else return n*factorial(n-1);
 }
@@ -47,13 +48,13 @@ _m(right._m)
 }
 
 inline
-double Psi2Hydrogen::operator() (const Argument & a) const {
+CLHEPdouble Psi2Hydrogen::operator() (const Argument & a) const {
   assert (a.dimension()==3);
   return (*_function)(a);
 }
 
 inline
-double Psi2Hydrogen::operator() (double x) const {
+CLHEPdouble Psi2Hydrogen::operator() (CLHEPdouble x) const {
   std::cerr
     << "Warning. Psi2Hydrogen called with scalar argument"
     << std::endl;
@@ -81,7 +82,7 @@ inline
 void Psi2Hydrogen::create() {
   FixedConstant I(1.0);
   Variable r;
-  double asq = pow(2.0/_n, 3.0)*factorial(_n-_l-1)/(2.0*_n*factorial(_n+_l));
+  CLHEPdouble asq = pow(2.0/_n, 3.0)*factorial(_n-_l-1)/(2.0*_n*factorial(_n+_l));
   GENFUNCTION ar = (2.0/_n)*r;
   AssociatedLegendre P(_l, _m);
   AssociatedLaguerre L(_n-_l-1, 2*_l+1);

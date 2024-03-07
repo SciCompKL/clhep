@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Evaluator.cc,v 1.4 2010/07/20 17:00:49 garren Exp $
 // ---------------------------------------------------------------------------
@@ -22,7 +23,7 @@
 typedef void (*voidfuncptr)();
 struct Item {
   enum { UNKNOWN, VARIABLE, EXPRESSION, FUNCTION } what;
-  double variable;
+  CLHEPdouble variable;
   string expression;
   // Fix non ISO C++ compliant cast from pointer to function
   // to void*, which is a pointer to an object
@@ -30,7 +31,7 @@ struct Item {
   voidfuncptr function;
 
   Item()         : what(UNKNOWN),   variable(0),expression(), function(0) {}
-  Item(double x) : what(VARIABLE),  variable(x),expression(), function(0) {}
+  Item(CLHEPdouble x) : what(VARIABLE),  variable(x),expression(), function(0) {}
   Item(string x) : what(EXPRESSION),variable(0),expression(x),function(0) {}
   Item(voidfuncptr x) : what(FUNCTION),  variable(0),expression(), function(x) {}
 };
@@ -43,7 +44,7 @@ struct Struct {
   pchar    theExpression;
   pchar    thePosition;
   int      theStatus;
-  double   theResult;
+  CLHEPdouble   theResult;
 };
 
 //---------------------------------------------------------------------------
@@ -67,9 +68,9 @@ static const char sss[MAX_N_PAR+2] = "012345";
 enum { ENDL, LBRA, OR, AND, EQ, NE, GE, GT, LE, LT,
        PLUS, MINUS, UNARY_PLUS, UNARY_MINUS, MULT, DIV, POW, RBRA, VALUE };
 
-static int engine(pchar, pchar, double &, pchar &, const dic_type &);
+static int engine(pchar, pchar, CLHEPdouble &, pchar &, const dic_type &);
 
-static int variable(const string & name, double & result,
+static int variable(const string & name, CLHEPdouble & result,
 		    const dic_type & dictionary)
 /***********************************************************************
  *                                                                     *
@@ -117,8 +118,8 @@ static int variable(const string & name, double & result,
     #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
   #endif
 #endif 
-static int function(const string & name, stack<double> & par,
-		    double & result, const dic_type & dictionary) 
+static int function(const string & name, stack<CLHEPdouble> & par,
+		    CLHEPdouble & result, const dic_type & dictionary) 
 /***********************************************************************
  *                                                                     *
  * Name: function                                    Date:    03.10.00 *
@@ -142,30 +143,30 @@ static int function(const string & name, stack<double> & par,
   if (iter == dictionary.end()) return EVAL::ERROR_UNKNOWN_FUNCTION;
   Item item = iter->second;
 
-  double pp[MAX_N_PAR] = {0.0};
+  CLHEPdouble pp[MAX_N_PAR] = {0.0};
   for(int i=0; i<npar; i++) { pp[i] = par.top(); par.pop(); }
   errno = 0;
   if (item.function == 0)       return EVAL::ERROR_CALCULATION_ERROR;
   switch (npar) {
   case 0:
-    result = ((double (*)())item.function)();
+    result = ((CLHEPdouble (*)())item.function)();
     break;  
   case 1:
-    result = ((double (*)(double))item.function)(pp[0]);
+    result = ((CLHEPdouble (*)(CLHEPdouble))item.function)(pp[0]);
     break;  
   case 2:
-    result = ((double (*)(double,double))item.function)(pp[1], pp[0]);
+    result = ((CLHEPdouble (*)(CLHEPdouble,CLHEPdouble))item.function)(pp[1], pp[0]);
     break;  
   case 3:
-    result = ((double (*)(double,double,double))item.function)
+    result = ((CLHEPdouble (*)(CLHEPdouble,CLHEPdouble,CLHEPdouble))item.function)
       (pp[2],pp[1],pp[0]);
     break;  
   case 4:
-    result = ((double (*)(double,double,double,double))item.function)
+    result = ((CLHEPdouble (*)(CLHEPdouble,CLHEPdouble,CLHEPdouble,CLHEPdouble))item.function)
       (pp[3],pp[2],pp[1],pp[0]);
     break;  
   case 5:
-    result = ((double (*)(double,double,double,double,double))item.function)
+    result = ((CLHEPdouble (*)(CLHEPdouble,CLHEPdouble,CLHEPdouble,CLHEPdouble,CLHEPdouble))item.function)
       (pp[4],pp[3],pp[2],pp[1],pp[0]);
     break;  
   }
@@ -180,7 +181,7 @@ static int function(const string & name, stack<double> & par,
   #endif
 #endif
 
-static int operand(pchar begin, pchar end, double & result,
+static int operand(pchar begin, pchar end, CLHEPdouble & result,
 		   pchar & endp, const dic_type & dictionary) 
 /***********************************************************************
  *                                                                     *
@@ -240,8 +241,8 @@ static int operand(pchar begin, pchar end, double & result,
   //   G E T   F U N C T I O N
 
   stack<pchar>  pos;                // position stack 
-  stack<double> par;                // parameter stack
-  double        value;
+  stack<CLHEPdouble> par;                // parameter stack
+  CLHEPdouble        value;
   pchar         par_begin = pointer+1, par_end;
 
   for(;;pointer++) {
@@ -302,11 +303,11 @@ static int operand(pchar begin, pchar end, double & result,
  *   val - stack of values.                                            *
  *                                                                     *
  ***********************************************************************/
-static int maker(int op, stack<double> & val)
+static int maker(int op, stack<CLHEPdouble> & val)
 {
   if (val.size() < 2) return EVAL::ERROR_SYNTAX_ERROR;
-  double val2 = val.top(); val.pop();
-  double val1 = val.top();
+  CLHEPdouble val2 = val.top(); val.pop();
+  CLHEPdouble val1 = val.top();
   switch (op) {
   case OR:                                // operator ||
     val.top() = (val1 || val2) ? 1. : 0.;
@@ -376,7 +377,7 @@ static int maker(int op, stack<double> & val)
  *   dictionary - dictionary of available variables and functions.     *
  *                                                                     *
  ***********************************************************************/
-static int engine(pchar begin, pchar end, double & result,
+static int engine(pchar begin, pchar end, CLHEPdouble & result,
 		  pchar & endp, const dic_type & dictionary)
 {
   enum SyntaxTableEntry {
@@ -438,8 +439,8 @@ static int engine(pchar begin, pchar end, double & result,
 
   stack<int>    op;                      // operator stack
   stack<pchar>  pos;                     // position stack
-  stack<double> val;                     // value stack
-  double        value;
+  stack<CLHEPdouble> val;                     // value stack
+  CLHEPdouble        value;
   pchar         pointer = begin;
   int           iWhat, iCur, iPrev = 0, iTop, EVAL_STATUS;
   char          c;
@@ -629,7 +630,7 @@ Evaluator::~Evaluator() {
 }
 
 //---------------------------------------------------------------------------
-double Evaluator::evaluate(const char * expression) {
+CLHEPdouble Evaluator::evaluate(const char * expression) {
   Struct * s = (Struct *)(p);
   if (s->theExpression != 0) { delete[] s->theExpression; }
   s->theExpression = 0;
@@ -705,7 +706,7 @@ std::string Evaluator::error_name() const
 }
 
 //---------------------------------------------------------------------------
-void Evaluator::setVariable(const char * name, double value)
+void Evaluator::setVariable(const char * name, CLHEPdouble value)
 { setItem("", name, Item(value), (Struct *)p); }
 
 void Evaluator::setVariable(const char * name, const char * expression)
@@ -715,27 +716,27 @@ void Evaluator::setVariable(const char * name, const char * expression)
 // Fix non ISO C++ compliant cast from pointer to function
 // to void*, which is a pointer to an object
 void Evaluator::setFunction(const char * name,
-			    double (*fun)())
+			    CLHEPdouble (*fun)())
 { setItem("0", name, Item(reinterpret_cast<voidfuncptr>(fun)), (Struct *)p); }
 
 void Evaluator::setFunction(const char * name,
-			    double (*fun)(double))
+			    CLHEPdouble (*fun)(CLHEPdouble))
 { setItem("1", name, Item(reinterpret_cast<voidfuncptr>(fun)), (Struct *)p); }
 
 void Evaluator::setFunction(const char * name,
-			    double (*fun)(double,double))
+			    CLHEPdouble (*fun)(CLHEPdouble,CLHEPdouble))
 { setItem("2", name, Item(reinterpret_cast<voidfuncptr>(fun)), (Struct *)p); }
 
 void Evaluator::setFunction(const char * name,
-			    double (*fun)(double,double,double))
+			    CLHEPdouble (*fun)(CLHEPdouble,CLHEPdouble,CLHEPdouble))
 { setItem("3", name, Item(reinterpret_cast<voidfuncptr>(fun)), (Struct *)p); }
 
 void Evaluator::setFunction(const char * name,
-			    double (*fun)(double,double,double,double))
+			    CLHEPdouble (*fun)(CLHEPdouble,CLHEPdouble,CLHEPdouble,CLHEPdouble))
 { setItem("4", name, Item(reinterpret_cast<voidfuncptr>(fun)), (Struct *)p); }
 
 void Evaluator::setFunction(const char * name,
-			    double (*fun)(double,double,double,double,double))
+			    CLHEPdouble (*fun)(CLHEPdouble,CLHEPdouble,CLHEPdouble,CLHEPdouble,CLHEPdouble))
 { setItem("5", name, Item(reinterpret_cast<voidfuncptr>(fun)), (Struct *)p); }
 
 //---------------------------------------------------------------------------

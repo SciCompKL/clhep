@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -19,14 +20,14 @@ namespace CLHEP  {
 
 // ----------  Constructors and Assignment:
 
-HepBoost & HepBoost::set (double bx, double by, double bz) {
-  double bp2 = bx*bx + by*by + bz*bz;
+HepBoost & HepBoost::set (CLHEPdouble bx, CLHEPdouble by, CLHEPdouble bz) {
+  CLHEPdouble bp2 = bx*bx + by*by + bz*bz;
   if (bp2 >= 1) {
     ZMthrowA (ZMxpvTachyonic(
     "Boost Vector supplied to set HepBoost represents speed >= c."));
   }    
-  double ggamma = 1.0 / std::sqrt(1.0 - bp2);
-  double bgamma = ggamma * ggamma / (1.0 + ggamma);
+  CLHEPdouble ggamma = 1.0 / std::sqrt(1.0 - bp2);
+  CLHEPdouble bgamma = ggamma * ggamma / (1.0 + ggamma);
   rep_.xx_ = 1.0 + bgamma * bx * bx;
   rep_.yy_ = 1.0 + bgamma * by * by;
   rep_.zz_ = 1.0 + bgamma * bz * bz;
@@ -45,8 +46,8 @@ HepBoost & HepBoost::set (const HepRep4x4Symmetric & m1) {
   return *this;
 }
 
-HepBoost & HepBoost::set (Hep3Vector ddirection, double bbeta) {
-  double length = ddirection.mag();
+HepBoost & HepBoost::set (Hep3Vector ddirection, CLHEPdouble bbeta) {
+  CLHEPdouble length = ddirection.mag();
   if (length <= 0) {				// Nan-proofing
     ZMthrowA (ZMxpvZeroVector(
     "Direction supplied to set HepBoost is zero."));
@@ -93,53 +94,53 @@ void HepBoost::decompose (Hep3Vector & boost, HepAxisAngle & rotation) const {
 
 // ----------  Comparisons:
 
-double HepBoost::distance2( const HepRotation & r ) const {
-  double db2 = norm2();
-  double dr2  = r.norm2();
+CLHEPdouble HepBoost::distance2( const HepRotation & r ) const {
+  CLHEPdouble db2 = norm2();
+  CLHEPdouble dr2  = r.norm2();
   return (db2 + dr2);
 }
 
-double HepBoost::distance2( const HepLorentzRotation & lt ) const {
+CLHEPdouble HepBoost::distance2( const HepLorentzRotation & lt ) const {
   HepBoost b1;
   HepRotation r1;
   lt.decompose(b1,r1);
-  double db2 = distance2(b1);
-  double dr2  = r1.norm2();
+  CLHEPdouble db2 = distance2(b1);
+  CLHEPdouble dr2  = r1.norm2();
   return (db2 + dr2);
 }
 
-double HepBoost::howNear ( const HepRotation & r  ) const {
+CLHEPdouble HepBoost::howNear ( const HepRotation & r  ) const {
   return std::sqrt(distance2(r));
 }
 
-double HepBoost::howNear ( const HepLorentzRotation & lt  ) const {
+CLHEPdouble HepBoost::howNear ( const HepLorentzRotation & lt  ) const {
   return std::sqrt(distance2(lt));
 }
 
-bool HepBoost::isNear (const HepRotation & r, double epsilon) const {
-  double db2 = norm2();
+bool HepBoost::isNear (const HepRotation & r, CLHEPdouble epsilon) const {
+  CLHEPdouble db2 = norm2();
   if (db2 > epsilon*epsilon) return false;
-  double dr2  = r.norm2();
+  CLHEPdouble dr2  = r.norm2();
   return (db2+dr2 <= epsilon*epsilon);
 }
 
 bool HepBoost::isNear (const HepLorentzRotation & lt, 
-			           double epsilon) const {
+			           CLHEPdouble epsilon) const {
   HepBoost b1;
   HepRotation r1;
-  double db2 = distance2(b1);
+  CLHEPdouble db2 = distance2(b1);
   lt.decompose(b1,r1);
   if (db2 > epsilon*epsilon) return false;
-  double dr2  = r1.norm2();
+  CLHEPdouble dr2  = r1.norm2();
   return (db2 + dr2);
 }
 
 // ----------  Properties:
 
-double HepBoost::norm2() const {
-  double bgx = rep_.xt_;
-  double bgy = rep_.yt_;
-  double bgz = rep_.zt_;
+CLHEPdouble HepBoost::norm2() const {
+  CLHEPdouble bgx = rep_.xt_;
+  CLHEPdouble bgy = rep_.yt_;
+  CLHEPdouble bgz = rep_.zt_;
   return bgx*bgx+bgy*bgy+bgz*bgz;
 }
 
@@ -159,7 +160,7 @@ void HepBoost::rectify() {
   // but if that happens, we ZMthrow and (if continuing) just rescale, which
   // will change the sign of the last column when computing the boost.
 
-  double gam = tt();
+  CLHEPdouble gam = tt();
   if (gam <= 0) {				    // 4/12/01 mf 
 //  ZMthrowA (ZMxpvTachyonic(
     ZMthrowC (ZMxpvTachyonic(
@@ -249,7 +250,7 @@ std::ostream & HepBoost::print( std::ostream & os ) const {
   if ( rep_.tt_ <= 1 ) {
     os << "Lorentz Boost( IDENTITY )";
   } else {
-    double norm = boostVector().mag();
+    CLHEPdouble norm = boostVector().mag();
     os << "\nLorentz Boost " << boostVector()/norm <<
           "\n{beta = " << beta() << " gamma = " << gamma() << "}\n";
   }

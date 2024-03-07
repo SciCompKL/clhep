@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: Random.cc,v 1.6 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -198,17 +199,17 @@ HepRandom::HepRandom(HepRandomEngine * algorithm)
 HepRandom::~HepRandom()
 { }
 
-double HepRandom::flat()
+CLHEPdouble HepRandom::flat()
 {
   return theDefaults().theEngine->flat();
 }
 
-void HepRandom::flatArray(const int size, double* vect)
+void HepRandom::flatArray(const int size, CLHEPdouble* vect)
 {
   theDefaults().theEngine->flatArray(size,vect);
 }
 
-double HepRandom::operator()() {
+CLHEPdouble HepRandom::operator()() {
   return flat();
 }
 

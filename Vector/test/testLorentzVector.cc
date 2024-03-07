@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testLorentzVector.cc,v 1.2 2003/08/13 20:00:14 garren Exp $
 // ---------------------------------------------------------------------------
@@ -24,13 +25,13 @@ using namespace CLHEP;
 #define DEPS 1.0e-14
 #define FEPS 1.0e-6
 
-bool approx(double a, double b, double eps) {
+bool approx(CLHEPdouble a, CLHEPdouble b, CLHEPdouble eps) {
   return bool( std::abs(a-b) < eps );
 }
 
 bool
-test(const HepLorentzVector & p, double x, double y, double z, double e,
-     double eps) {
+test(const HepLorentzVector & p, CLHEPdouble x, CLHEPdouble y, CLHEPdouble z, CLHEPdouble e,
+     CLHEPdouble eps) {
   bool t = bool( approx(p.x(), x, eps) && approx(p.y(), y, eps) &&
 			     approx(p.z(), z, eps) && approx(p.t(), e, eps));
   if ( !t ) std::cerr << p << std::endl
@@ -68,7 +69,7 @@ void conversion_test(const Hep3Vector & v3, const HepLorentzVector & v4) {
 #endif
 
 bool
-test(const HepLorentzVector & p, const HepLorentzVector & q, double eps) {
+test(const HepLorentzVector & p, const HepLorentzVector & q, CLHEPdouble eps) {
   bool t = bool( approx(p.x(), q.x(), eps) &&
 			     approx(p.y(), q.y(), eps) &&
 			     approx(p.z(), q.z(), eps) &&
@@ -206,14 +207,14 @@ int main () {
 
   d5 = d3 = d1 = HepLorentzVector(1.0, 2.0, -1.0, 3.0);
   d6 = d4 = d2 = HepLorentzVector(-1.0, 1.0, 2.0, 4.0);
-  double M = (d1 + d2).mag();
-  double dm1 = d1.mag();
-  double dm2 = d2.mag();
-  double p2 = (sqr(M)-sqr(dm1+dm2))*(sqr(M)-sqr(dm1-dm2))/(4.0*sqr(M));
+  CLHEPdouble M = (d1 + d2).mag();
+  CLHEPdouble dm1 = d1.mag();
+  CLHEPdouble dm2 = d2.mag();
+  CLHEPdouble p2 = (sqr(M)-sqr(dm1+dm2))*(sqr(M)-sqr(dm1-dm2))/(4.0*sqr(M));
   d30 = -(d1 + d2).boostVector();
   d1.boost(d30);
-  double phi = d1.phi();
-  double theta = d1.theta();
+  CLHEPdouble phi = d1.phi();
+  CLHEPdouble theta = d1.theta();
   d1.rotateZ(-phi);
   d1.rotateY(-theta);
   HepRotation r;

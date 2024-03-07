@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandMultiGauss.h,v 1.3 2003/10/23 21:29:51 garren Exp $
 // -*- C++ -*-
 //
@@ -19,7 +20,7 @@
 // The author of this distribution relies on diagonalize() being correct.
 //
 // Although original distribution classes in the Random package return a 
-// double when fire() (or operator()) is done, RandMultiGauss returns a 
+// CLHEPdouble when fire() (or operator()) is done, RandMultiGauss returns a 
 // HepVector of values.
 //	  
 // =======================================================================
@@ -118,7 +119,7 @@ private:
   HepVector    defaultSigmas;	// Each sigma is sqrt(D[i,i])
 
   bool set;
-  double nextGaussian;
+  CLHEPdouble nextGaussian;
 
   static void prepareUsigmas (  const HepSymMatrix & S,
 		   		HepMatrix & U,
@@ -128,7 +129,7 @@ private:
 		       	      const HepVector & sigmas, 
 		       	      HepRandomEngine * engine,
 		       	      bool& available,
-		 	      double& next);
+		 	      CLHEPdouble& next);
   // Returns vector of gaussian randoms based on sigmas, rotated by U,
   // with means of 0.
 		       

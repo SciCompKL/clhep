@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Sqrt.cc,v 1.7 2010/06/16 18:22:01 garren Exp $
 #include "CLHEP/GenericFunctions/Sqrt.hh"
@@ -16,7 +17,7 @@ Sqrt::Sqrt(const Sqrt & right) : AbsFunction(right)
 Sqrt::~Sqrt() {
 }
 
-double Sqrt::operator() (double x) const {
+CLHEPdouble Sqrt::operator() (CLHEPdouble x) const {
   return sqrt(x);
 }
 

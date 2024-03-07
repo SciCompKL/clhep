@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandGaussQ.cc,v 1.6 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -26,39 +27,39 @@ HepRandomEngine & RandGaussQ::engine() {return RandGauss::engine();}
 RandGaussQ::~RandGaussQ() {
 }
 
-double RandGaussQ::operator()() {
+CLHEPdouble RandGaussQ::operator()() {
   return transformQuick(localEngine->flat()) * defaultStdDev + defaultMean;
 }
 
-double RandGaussQ::operator()( double mean, double stdDev ) {
+CLHEPdouble RandGaussQ::operator()( CLHEPdouble mean, CLHEPdouble stdDev ) {
   return transformQuick(localEngine->flat()) * stdDev + mean;
 }
 
-void RandGaussQ::shootArray( const int size, double* vect,
-                            double mean, double stdDev )
+void RandGaussQ::shootArray( const int size, CLHEPdouble* vect,
+                            CLHEPdouble mean, CLHEPdouble stdDev )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = shoot(mean,stdDev);
 }
 
 void RandGaussQ::shootArray( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double mean, double stdDev )
+                            const int size, CLHEPdouble* vect,
+                            CLHEPdouble mean, CLHEPdouble stdDev )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = shoot(anEngine,mean,stdDev);
 }
 
-void RandGaussQ::fireArray( const int size, double* vect)
+void RandGaussQ::fireArray( const int size, CLHEPdouble* vect)
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = fire( defaultMean, defaultStdDev );
 }
 
-void RandGaussQ::fireArray( const int size, double* vect,
-                           double mean, double stdDev )
+void RandGaussQ::fireArray( const int size, CLHEPdouble* vect,
+                           CLHEPdouble mean, CLHEPdouble stdDev )
 {
-  for( double* v = vect; v != vect + size; ++v )
+  for( CLHEPdouble* v = vect; v != vect + size; ++v )
     *v = fire( mean, stdDev );
 }
 
@@ -87,13 +88,13 @@ void RandGaussQ::fireArray( const int size, double* vect,
 
   // Here comes the big (5K bytes) table, kept in a file ---
 
-static const float gaussTables [TableSize] = {
+static const CLHEPfloat gaussTables [TableSize] = {
 #include "gaussQTables.cdat"
 };
 
 
-double RandGaussQ::transformQuick (double r) {
-  double sign = +1.0;	// We always compute a negative number of 
+CLHEPdouble RandGaussQ::transformQuick (CLHEPdouble r) {
+  CLHEPdouble sign = +1.0;	// We always compute a negative number of 
 				// sigmas.  For r > 0 we will multiply by
 				// sign = -1 to return a positive number.
   if ( r > .5 ) {
@@ -102,7 +103,7 @@ double RandGaussQ::transformQuick (double r) {
   } 
 
   int index;
-  double  dx;
+  CLHEPdouble  dx;
 
   if ( r >= Table1step ) { 
     index = int((Table1size<<1) * r);	// 1 to Table1size
@@ -110,7 +111,7 @@ double RandGaussQ::transformQuick (double r) {
     dx = (Table1size<<1) * r - index; 		// fraction of way to next bin
     index += Table1offset-1;	
   } else if ( r > Table0step ) {
-    double rr = r * Table0scale;
+    CLHEPdouble rr = r * Table0scale;
     index = int(Table0size * rr);		// 1 to Table0size
     dx = Table0size * rr - index; 		// fraction of way to next bin
     index += Table0offset-1;	
@@ -118,16 +119,16 @@ double RandGaussQ::transformQuick (double r) {
     return sign*transformSmall(r);	
   }				
 
-  double y0 = gaussTables [index++];
-  double y1 = gaussTables [index];
+  CLHEPdouble y0 = gaussTables [index++];
+  CLHEPdouble y1 = gaussTables [index];
   
-  return (float) (sign * ( y1 * dx + y0 * (1.0-dx) ));
+  return (CLHEPfloat) (sign * ( y1 * dx + y0 * (1.0-dx) ));
 
 } // transformQuick()
 
 
 
-double RandGaussQ::transformSmall (double r) {
+CLHEPdouble RandGaussQ::transformSmall (CLHEPdouble r) {
 
   // Solve for -v in the asymtotic formula 
   //
@@ -137,7 +138,7 @@ double RandGaussQ::transformSmall (double r) {
 
   // The value of r (=errInt(-v)) supplied is going to less than 2.0E-13,
   // which is such that v < -7.25.  Since the value of r is meaningful only
-  // to an absolute error of 1E-16 (double precision accuracy for a number 
+  // to an absolute error of 1E-16 (CLHEPdouble precision accuracy for a number 
   // which on the high side could be of the form 1-epsilon), computing
   // v to more than 3-4 digits of accuracy is suspect; however, to ensure 
   // smoothness with the table generator (which uses quite a few terms) we
@@ -148,13 +149,13 @@ double RandGaussQ::transformSmall (double r) {
   // speed is of no concern.  As a matter of technique, we terminate the
   // iterations in case they would be infinite, but this should not happen.
 
-  double eps = 1.0e-7;
-  double guess = 7.5;
-  double v;
+  CLHEPdouble eps = 1.0e-7;
+  CLHEPdouble guess = 7.5;
+  CLHEPdouble v;
   
   for ( int i = 1; i < 50; i++ ) {
-    double vn2 = 1.0/(guess*guess);
-    double s1 = -13*11*9*7*5*3 * vn2*vn2*vn2*vn2*vn2*vn2*vn2;
+    CLHEPdouble vn2 = 1.0/(guess*guess);
+    CLHEPdouble s1 = -13*11*9*7*5*3 * vn2*vn2*vn2*vn2*vn2*vn2*vn2;
     	      s1 +=    11*9*7*5*3 * vn2*vn2*vn2*vn2*vn2*vn2;
     	      s1 +=      -9*7*5*3 * vn2*vn2*vn2*vn2*vn2;
 	      s1 +=         7*5*3 * vn2*vn2*vn2*vn2;

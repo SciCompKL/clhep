@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // CLASSDOC OFF
 // $Id: LorentzVector.h,v 1.2 2003/10/23 21:29:52 garren Exp $
@@ -7,7 +8,7 @@
 // This file is a part of the CLHEP - a Class Library for High Energy Physics.
 //
 // HepLorentzVector is a Lorentz vector consisting of Hep3Vector and
-// double components. Lorentz transformations (rotations and boosts)
+// CLHEPdouble components. Lorentz transformations (rotations and boosts)
 // of these vectors are perfomed by multiplying with objects of
 // the HepLorenzRotation class.
 //
@@ -34,29 +35,29 @@ class HepRotation;
 class HepAxisAngle;
 class HepEulerAngles;
 class Tcomponent;
-HepLorentzVector rotationXOf( const HepLorentzVector & vec, double delta );
-HepLorentzVector rotationYOf( const HepLorentzVector & vec, double delta );
-HepLorentzVector rotationZOf( const HepLorentzVector & vec, double delta );
+HepLorentzVector rotationXOf( const HepLorentzVector & vec, CLHEPdouble delta );
+HepLorentzVector rotationYOf( const HepLorentzVector & vec, CLHEPdouble delta );
+HepLorentzVector rotationZOf( const HepLorentzVector & vec, CLHEPdouble delta );
 HepLorentzVector rotationOf
-    ( const HepLorentzVector & vec, const Hep3Vector & axis, double delta );
+    ( const HepLorentzVector & vec, const Hep3Vector & axis, CLHEPdouble delta );
 HepLorentzVector rotationOf
     ( const HepLorentzVector & vec, const HepAxisAngle & ax );
 HepLorentzVector rotationOf
     ( const HepLorentzVector & vec, const HepEulerAngles & e1 );
 HepLorentzVector rotationOf
-    ( const HepLorentzVector & vec, double phi,
-                                    double theta,
-                                    double psi );
+    ( const HepLorentzVector & vec, CLHEPdouble phi,
+                                    CLHEPdouble theta,
+                                    CLHEPdouble psi );
 inline 
-HepLorentzVector  boostXOf( const HepLorentzVector & vec, double beta );
+HepLorentzVector  boostXOf( const HepLorentzVector & vec, CLHEPdouble beta );
 inline 
-HepLorentzVector  boostYOf( const HepLorentzVector & vec, double beta );
+HepLorentzVector  boostYOf( const HepLorentzVector & vec, CLHEPdouble beta );
 inline 
-HepLorentzVector  boostZOf( const HepLorentzVector & vec, double beta );
+HepLorentzVector  boostZOf( const HepLorentzVector & vec, CLHEPdouble beta );
 inline HepLorentzVector  boostOf
     ( const HepLorentzVector & vec, const Hep3Vector & betaVector );
 inline HepLorentzVector  boostOf
-    ( const HepLorentzVector & vec, const Hep3Vector & axis,  double beta );
+    ( const HepLorentzVector & vec, const Hep3Vector & axis,  CLHEPdouble beta );
 
 enum ZMpvMetric_t { TimePositive, TimeNegative };
 
@@ -73,21 +74,21 @@ public:
   // Safe indexing of the coordinates when using with matrices, arrays, etc.
   // (BaBar)
 
-  inline HepLorentzVector(double x, double y,
-			  double z, double t);
+  inline HepLorentzVector(CLHEPdouble x, CLHEPdouble y,
+			  CLHEPdouble z, CLHEPdouble t);
   // Constructor giving the components x, y, z, t.
 
-  inline HepLorentzVector(double x, double y, double z);
+  inline HepLorentzVector(CLHEPdouble x, CLHEPdouble y, CLHEPdouble z);
   // Constructor giving the components x, y, z with t-component set to 0.0.
 
-  explicit HepLorentzVector(double t);
+  explicit HepLorentzVector(CLHEPdouble t);
   // Constructor giving the t-component with x, y and z set to 0.0.
 
   inline HepLorentzVector();
   // Default constructor with x, y, z and t set to 0.0.
 
-  inline HepLorentzVector(const Hep3Vector & p, double e);
-  inline HepLorentzVector(double e, const Hep3Vector & p);
+  inline HepLorentzVector(const Hep3Vector & p, CLHEPdouble e);
+  inline HepLorentzVector(CLHEPdouble e, const Hep3Vector & p);
   // Constructor giving a 3-Vector and a time component.
 
   inline HepLorentzVector(const HepLorentzVector &);
@@ -101,28 +102,28 @@ public:
   inline operator Hep3Vector & ();
   // Conversion (cast) to Hep3Vector.
 
-  inline double x() const;
-  inline double y() const;
-  inline double z() const;
-  inline double t() const;
+  inline CLHEPdouble x() const;
+  inline CLHEPdouble y() const;
+  inline CLHEPdouble z() const;
+  inline CLHEPdouble t() const;
   // Get position and time.
 
-  inline void setX(double);
-  inline void setY(double);
-  inline void setZ(double);
-  inline void setT(double);
+  inline void setX(CLHEPdouble);
+  inline void setY(CLHEPdouble);
+  inline void setZ(CLHEPdouble);
+  inline void setT(CLHEPdouble);
   // Set position and time.
 
-  inline double px() const;
-  inline double py() const;
-  inline double pz() const;
-  inline double e() const;
+  inline CLHEPdouble px() const;
+  inline CLHEPdouble py() const;
+  inline CLHEPdouble pz() const;
+  inline CLHEPdouble e() const;
   // Get momentum and energy.
 
-  inline void setPx(double);
-  inline void setPy(double);
-  inline void setPz(double);
-  inline void setE(double);
+  inline void setPx(CLHEPdouble);
+  inline void setPy(CLHEPdouble);
+  inline void setPz(CLHEPdouble);
+  inline void setE(CLHEPdouble);
   // Set momentum and energy.
 
   inline Hep3Vector vect() const;
@@ -131,23 +132,23 @@ public:
   inline void setVect(const Hep3Vector &);
   // Set spatial component. 
 
-  inline double theta() const;
-  inline double cosTheta() const;
-  inline double phi() const;
-  inline double rho() const;
+  inline CLHEPdouble theta() const;
+  inline CLHEPdouble cosTheta() const;
+  inline CLHEPdouble phi() const;
+  inline CLHEPdouble rho() const;
   // Get spatial vector components in spherical coordinate system.
 
-  inline void setTheta(double);
-  inline void setPhi(double);
-  inline void setRho(double);
+  inline void setTheta(CLHEPdouble);
+  inline void setPhi(CLHEPdouble);
+  inline void setRho(CLHEPdouble);
   // Set spatial vector components in spherical coordinate system.
 
-  double operator () (int) const;
-  inline double operator [] (int) const;
+  CLHEPdouble operator () (int) const;
+  inline CLHEPdouble operator [] (int) const;
   // Get components by index.
 
-  double & operator () (int);
-  inline double & operator [] (int);
+  CLHEPdouble & operator () (int);
+  inline CLHEPdouble & operator [] (int);
   // Set components by index.
 
   inline HepLorentzVector & operator = (const HepLorentzVector &);
@@ -165,90 +166,90 @@ public:
   inline HepLorentzVector operator - () const;
   // Unary minus.
 
-  inline HepLorentzVector & operator *= (double);
-         HepLorentzVector & operator /= (double);
+  inline HepLorentzVector & operator *= (CLHEPdouble);
+         HepLorentzVector & operator /= (CLHEPdouble);
   // Scaling with real numbers.
 
   inline bool operator == (const HepLorentzVector &) const;
   inline bool operator != (const HepLorentzVector &) const;
   // Comparisons.
 
-  inline double perp2() const;
+  inline CLHEPdouble perp2() const;
   // Transverse component of the spatial vector squared.
 
-  inline double perp() const;
+  inline CLHEPdouble perp() const;
   // Transverse component of the spatial vector (R in cylindrical system).
 
-  inline void setPerp(double);
+  inline void setPerp(CLHEPdouble);
   // Set the transverse component of the spatial vector.
 
-  inline double perp2(const Hep3Vector &) const;
+  inline CLHEPdouble perp2(const Hep3Vector &) const;
   // Transverse component of the spatial vector w.r.t. given axis squared.
 
-  inline double perp(const Hep3Vector &) const;
+  inline CLHEPdouble perp(const Hep3Vector &) const;
   // Transverse component of the spatial vector w.r.t. given axis.
 
-  inline double angle(const Hep3Vector &) const;
+  inline CLHEPdouble angle(const Hep3Vector &) const;
   // Angle wrt. another vector.
 
-  inline double mag2() const;
+  inline CLHEPdouble mag2() const;
   // Dot product of 4-vector with itself. 
   // By default the metric is TimePositive, and mag2() is the same as m2().
 
-  inline double m2() const;
+  inline CLHEPdouble m2() const;
   // Invariant mass squared.
 
-  inline double mag() const;
-  inline double m() const;
+  inline CLHEPdouble mag() const;
+  inline CLHEPdouble m() const;
   // Invariant mass. If m2() is negative then -sqrt(-m2()) is returned.
 
-  inline double mt2() const;
+  inline CLHEPdouble mt2() const;
   // Transverse mass squared.
 
-  inline double mt() const;
+  inline CLHEPdouble mt() const;
   // Transverse mass.
 
-  inline double et2() const;
+  inline CLHEPdouble et2() const;
   // Transverse energy squared.
 
-  inline double et() const;
+  inline CLHEPdouble et() const;
   // Transverse energy.
 
-  inline double dot(const HepLorentzVector &) const;
-  inline double operator * (const HepLorentzVector &) const;
+  inline CLHEPdouble dot(const HepLorentzVector &) const;
+  inline CLHEPdouble operator * (const HepLorentzVector &) const;
   // Scalar product.
 
-  inline double invariantMass2( const HepLorentzVector & w ) const;
+  inline CLHEPdouble invariantMass2( const HepLorentzVector & w ) const;
   // Invariant mass squared of pair of 4-vectors 
 
-  double invariantMass ( const HepLorentzVector & w ) const;
+  CLHEPdouble invariantMass ( const HepLorentzVector & w ) const;
   // Invariant mass of pair of 4-vectors 
 
-  inline void setVectMag(const Hep3Vector & spatial, double magnitude);
-  inline void setVectM(const Hep3Vector & spatial, double mass);
+  inline void setVectMag(const Hep3Vector & spatial, CLHEPdouble magnitude);
+  inline void setVectM(const Hep3Vector & spatial, CLHEPdouble mass);
   // Copy spatial coordinates, and set energy = sqrt(mass^2 + spatial^2)
 
-  inline double plus() const;
-  inline double minus() const;
+  inline CLHEPdouble plus() const;
+  inline CLHEPdouble minus() const;
   // Returns the positive/negative light-cone component t +/- z.
 
   Hep3Vector boostVector() const;
   // Boost needed from rest4Vector in rest frame to form this 4-vector
   // Returns the spatial components divided by the time component.
 
-  HepLorentzVector & boost(double, double, double);
+  HepLorentzVector & boost(CLHEPdouble, CLHEPdouble, CLHEPdouble);
   inline HepLorentzVector & boost(const Hep3Vector &);
   // Lorentz boost.
 
-  HepLorentzVector & boostX( double beta );
-  HepLorentzVector & boostY( double beta );
-  HepLorentzVector & boostZ( double beta );
+  HepLorentzVector & boostX( CLHEPdouble beta );
+  HepLorentzVector & boostY( CLHEPdouble beta );
+  HepLorentzVector & boostZ( CLHEPdouble beta );
   // Boost along an axis, by magnitue beta (fraction of speed of light)
 
-  double rapidity() const;
+  CLHEPdouble rapidity() const;
   // Returns the rapidity, i.e. 0.5*ln((E+pz)/(E-pz))
 
-  inline double pseudoRapidity() const;
+  inline CLHEPdouble pseudoRapidity() const;
   // Returns the pseudo-rapidity, i.e. -ln(tan(theta/2))
 
   inline bool isTimelike() const;
@@ -257,22 +258,22 @@ public:
   inline bool isSpacelike() const;
   // Test if the 4-vector is spacelike
 
-  inline bool isLightlike(double epsilon=tolerance) const;
+  inline bool isLightlike(CLHEPdouble epsilon=tolerance) const;
   // Test for lightlike is within tolerance epsilon
 
-  HepLorentzVector &  rotateX(double);
+  HepLorentzVector &  rotateX(CLHEPdouble);
   // Rotate the spatial component around the x-axis.
 
-  HepLorentzVector &  rotateY(double);
+  HepLorentzVector &  rotateY(CLHEPdouble);
   // Rotate the spatial component around the y-axis.
 
-  HepLorentzVector &  rotateZ(double);
+  HepLorentzVector &  rotateZ(CLHEPdouble);
   // Rotate the spatial component around the z-axis.
 
   HepLorentzVector &  rotateUz(const Hep3Vector &);
   // Rotates the reference frame from Uz to newUz (unit vector).
 
-  HepLorentzVector & rotate(double, const Hep3Vector &);
+  HepLorentzVector & rotate(CLHEPdouble, const Hep3Vector &);
   // Rotate the spatial component around specified axis.
 
   inline HepLorentzVector & operator *= (const HepRotation &);
@@ -307,16 +308,16 @@ public:
 
 // 1 - Construct and set 4-vectors in various ways 
 
-  inline void set        (double x, double y, double z, double  t);
-  inline void set        (double x, double y, double z, Tcomponent t);
-  inline HepLorentzVector(double x, double y, double z, Tcomponent t);
+  inline void set        (CLHEPdouble x, CLHEPdouble y, CLHEPdouble z, CLHEPdouble  t);
+  inline void set        (CLHEPdouble x, CLHEPdouble y, CLHEPdouble z, Tcomponent t);
+  inline HepLorentzVector(CLHEPdouble x, CLHEPdouble y, CLHEPdouble z, Tcomponent t);
   // Form 4-vector by supplying cartesian coordinate components
 
-  inline void set        (Tcomponent t, double x, double y, double z);
-  inline HepLorentzVector(Tcomponent t, double x, double y, double z);
-  // Deprecated because the 4-doubles form uses x,y,z,t, not t,x,y,z.
+  inline void set        (Tcomponent t, CLHEPdouble x, CLHEPdouble y, CLHEPdouble z);
+  inline HepLorentzVector(Tcomponent t, CLHEPdouble x, CLHEPdouble y, CLHEPdouble z);
+  // Deprecated because the 4-CLHEPdoubles form uses x,y,z,t, not t,x,y,z.
 
-  inline void set                 ( double t );
+  inline void set                 ( CLHEPdouble t );
 
   inline void set                 ( Tcomponent t );
   inline explicit HepLorentzVector( Tcomponent t );
@@ -329,16 +330,16 @@ public:
   inline HepLorentzVector & operator=( const Hep3Vector & v );
   // Form 4-vector with zero time component, equal to space 3-vector 
 
-  inline void set ( const Hep3Vector & v, double t );
-  inline void set ( double t, const Hep3Vector & v );
+  inline void set ( const Hep3Vector & v, CLHEPdouble t );
+  inline void set ( CLHEPdouble t, const Hep3Vector & v );
   // Set using specified space vector and time component
 
 // 2 - Synonyms for accessing coordinates and properties
 
-  inline double getX() const;
-  inline double getY() const;
-  inline double getZ() const;
-  inline double getT() const;
+  inline CLHEPdouble getX() const;
+  inline CLHEPdouble getY() const;
+  inline CLHEPdouble getZ() const;
+  inline CLHEPdouble getT() const;
   // Get position and time.
 
   inline Hep3Vector v() const;
@@ -350,11 +351,11 @@ public:
 
 // 2a - Setting space coordinates in different ways 
 
-  inline void setV( double x, double y, double z );
+  inline void setV( CLHEPdouble x, CLHEPdouble y, CLHEPdouble z );
 
-  inline void setRThetaPhi( double r, double theta, double phi);
-  inline void setREtaPhi( double r, double eta, double phi);
-  inline void setRhoPhiZ( double rho, double phi, double z );
+  inline void setRThetaPhi( CLHEPdouble r, CLHEPdouble theta, CLHEPdouble phi);
+  inline void setREtaPhi( CLHEPdouble r, CLHEPdouble eta, CLHEPdouble phi);
+  inline void setRhoPhiZ( CLHEPdouble rho, CLHEPdouble phi, CLHEPdouble z );
 
 // 3 - Comparisions (dictionary, near-ness, and geometric)
 
@@ -366,13 +367,13 @@ public:
   bool operator<=( const HepLorentzVector & w ) const;
 
   bool   isNear ( const HepLorentzVector & w, 
-					double epsilon=tolerance ) const;
-  double howNear( const HepLorentzVector & w ) const;
+					CLHEPdouble epsilon=tolerance ) const;
+  CLHEPdouble howNear( const HepLorentzVector & w ) const;
   // Is near using Euclidean measure t**2 + v**2
 
   bool   isNearCM ( const HepLorentzVector & w, 
-					double epsilon=tolerance ) const;
-  double howNearCM( const HepLorentzVector & w ) const;
+					CLHEPdouble epsilon=tolerance ) const;
+  CLHEPdouble howNearCM( const HepLorentzVector & w ) const;
   // Is near in CM frame:  Applicable only for two timelike HepLorentzVectors
 
         // If w1 and w2 are already in their CM frame, then w1.isNearCM(w2)
@@ -381,27 +382,27 @@ public:
         // equivalent to w1.getV().isNear(w2.v()).  
 
   bool isParallel( const HepLorentzVector & w, 
-					double epsilon=tolerance ) const;
+					CLHEPdouble epsilon=tolerance ) const;
   // Test for isParallel is within tolerance epsilon
-  double howParallel (const HepLorentzVector & w) const;
+  CLHEPdouble howParallel (const HepLorentzVector & w) const;
 
-  static double getTolerance();
-  static double setTolerance( double tol );
+  static CLHEPdouble getTolerance();
+  static CLHEPdouble setTolerance( CLHEPdouble tol );
   // Set the tolerance for HepLorentzVectors to be considered near
   // The same tolerance is used for determining isLightlike, and isParallel
 
-  double deltaR(const HepLorentzVector & v) const;
+  CLHEPdouble deltaR(const HepLorentzVector & v) const;
   // sqrt ( (delta eta)^2 + (delta phi)^2 ) of space part
 
 // 4 - Intrinsic properties 
 
-         double howLightlike() const;
+         CLHEPdouble howLightlike() const;
   // Close to zero for almost lightlike 4-vectors; up to 1.
 
-  inline double euclideanNorm2()  const;
+  inline CLHEPdouble euclideanNorm2()  const;
   // Sum of the squares of time and space components; not Lorentz invariant. 
 
-  inline double euclideanNorm()  const; 
+  inline CLHEPdouble euclideanNorm()  const; 
   // Length considering the metric as (+ + + +); not Lorentz invariant.
 
 
@@ -409,12 +410,12 @@ public:
 
 // All Relativistic kinematic properties are independent of the sense of metric
 
-  inline double restMass2() const;
-  inline double invariantMass2() const; 
+  inline CLHEPdouble restMass2() const;
+  inline CLHEPdouble invariantMass2() const; 
   // Rest mass squared -- same as m2()
 
-  inline double restMass() const;
-  inline double invariantMass() const; 
+  inline CLHEPdouble restMass() const;
+  inline CLHEPdouble invariantMass() const; 
   // Same as m().  If m2() is negative then -sqrt(-m2()) is returned.
 
 // The following properties are rest-frame related, 
@@ -426,22 +427,22 @@ public:
           // w.rest4Vector().boost(w.boostVector()) == w
 
   // Beta and gamma of the boost vector
-  double beta() const;
+  CLHEPdouble beta() const;
   // Relativistic beta of the boost vector
 
-  double gamma() const;
+  CLHEPdouble gamma() const;
   // Relativistic gamma of the boost vector
 
-  inline double eta() const;
+  inline CLHEPdouble eta() const;
   // Pseudorapidity (of the space part)
 
-  inline double eta(const Hep3Vector & ref) const;
+  inline CLHEPdouble eta(const Hep3Vector & ref) const;
   // Pseudorapidity (of the space part) w.r.t. specified direction
 
-  double rapidity(const Hep3Vector & ref) const;
+  CLHEPdouble rapidity(const Hep3Vector & ref) const;
   // Rapidity in specified direction
 
-  double coLinearRapidity() const;
+  CLHEPdouble coLinearRapidity() const;
   // Rapidity, in the relativity textbook sense:  atanh (|P|/E)
 
   Hep3Vector findBoostToCM() const;
@@ -454,79 +455,79 @@ public:
           // w1.findBoostToCM(w2) == w2.findBoostToCM(w1)
           // w.findBoostToCM(w) == w.findBoostToCM()
 
-  inline double et2(const Hep3Vector &) const;
+  inline CLHEPdouble et2(const Hep3Vector &) const;
   // Transverse energy w.r.t. given axis squared.
 
-  inline double et(const Hep3Vector &) const;
+  inline CLHEPdouble et(const Hep3Vector &) const;
   // Transverse energy w.r.t. given axis.
 
 // 4b - Methods combining two 4-vectors
 
-  inline double diff2( const HepLorentzVector & w ) const;
+  inline CLHEPdouble diff2( const HepLorentzVector & w ) const;
   // (this - w).dot(this-w); sign depends on metric choice
 
-  inline double delta2Euclidean ( const HepLorentzVector & w ) const;
+  inline CLHEPdouble delta2Euclidean ( const HepLorentzVector & w ) const;
   // Euclidean norm of differnce:  (delta_T)^2  + (delta_V)^2
 
 // 5 - Properties releative to z axis and to arbitrary directions
 
-  double  plus(  const Hep3Vector & ref ) const;
+  CLHEPdouble  plus(  const Hep3Vector & ref ) const;
   // t + projection in reference direction
 
-  double  minus( const Hep3Vector & ref ) const;
+  CLHEPdouble  minus( const Hep3Vector & ref ) const;
   // t - projection in reference direction
 
 // 7 - Rotations and boosts
 
-  HepLorentzVector & rotate ( const Hep3Vector & axis, double delta );
+  HepLorentzVector & rotate ( const Hep3Vector & axis, CLHEPdouble delta );
   // Same as rotate (delta, axis)
 
   HepLorentzVector & rotate ( const HepAxisAngle & ax );
   HepLorentzVector & rotate ( const HepEulerAngles & e );
-  HepLorentzVector & rotate ( double phi,
-                              double theta,
-                              double psi );
+  HepLorentzVector & rotate ( CLHEPdouble phi,
+                              CLHEPdouble theta,
+                              CLHEPdouble psi );
   // Rotate using these HepEuler angles - see Goldstein page 107 for conventions
 
-  HepLorentzVector & boost ( const Hep3Vector & axis,  double beta );
+  HepLorentzVector & boost ( const Hep3Vector & axis,  CLHEPdouble beta );
   // Normalizes the Hep3Vector to define a direction, and uses beta to
   // define the magnitude of the boost.
 
   friend HepLorentzVector rotationXOf
-    ( const HepLorentzVector & vec, double delta );
+    ( const HepLorentzVector & vec, CLHEPdouble delta );
   friend HepLorentzVector rotationYOf
-    ( const HepLorentzVector & vec, double delta );
+    ( const HepLorentzVector & vec, CLHEPdouble delta );
   friend HepLorentzVector rotationZOf
-    ( const HepLorentzVector & vec, double delta );
+    ( const HepLorentzVector & vec, CLHEPdouble delta );
   friend HepLorentzVector rotationOf
-    ( const HepLorentzVector & vec, const Hep3Vector & axis, double delta );
+    ( const HepLorentzVector & vec, const Hep3Vector & axis, CLHEPdouble delta );
   friend HepLorentzVector rotationOf
     ( const HepLorentzVector & vec, const HepAxisAngle & ax );
   friend HepLorentzVector rotationOf
     ( const HepLorentzVector & vec, const HepEulerAngles & e );
   friend HepLorentzVector rotationOf
-    ( const HepLorentzVector & vec, double phi,
-                                    double theta,
-                                    double psi );
+    ( const HepLorentzVector & vec, CLHEPdouble phi,
+                                    CLHEPdouble theta,
+                                    CLHEPdouble psi );
 
   inline friend HepLorentzVector  boostXOf
-    ( const HepLorentzVector & vec, double beta );
+    ( const HepLorentzVector & vec, CLHEPdouble beta );
   inline friend HepLorentzVector  boostYOf
-    ( const HepLorentzVector & vec, double beta );
+    ( const HepLorentzVector & vec, CLHEPdouble beta );
   inline friend HepLorentzVector  boostZOf
-    ( const HepLorentzVector & vec, double beta );
+    ( const HepLorentzVector & vec, CLHEPdouble beta );
   inline friend HepLorentzVector  boostOf
     ( const HepLorentzVector & vec, const Hep3Vector & betaVector );
   inline friend HepLorentzVector  boostOf
-    ( const HepLorentzVector & vec, const Hep3Vector & axis,  double beta );
+    ( const HepLorentzVector & vec, const Hep3Vector & axis,  CLHEPdouble beta );
  
 private:
 
   Hep3Vector pp;
-  double  ee;
+  CLHEPdouble  ee;
 
-  static double tolerance;
-  static double metric;
+  static CLHEPdouble tolerance;
+  static CLHEPdouble metric;
 
 };  // HepLorentzVector
 
@@ -548,11 +549,11 @@ std::istream & operator >> (std::istream &, HepLorentzVector &);
 typedef HepLorentzVector HepLorentzVectorD;
 typedef HepLorentzVector HepLorentzVectorF;
 
-inline HepLorentzVector operator * (const HepLorentzVector &, double a);
-inline HepLorentzVector operator * (double a, const HepLorentzVector &);
+inline HepLorentzVector operator * (const HepLorentzVector &, CLHEPdouble a);
+inline HepLorentzVector operator * (CLHEPdouble a, const HepLorentzVector &);
 // Scaling LorentzVector with a real number
 
-       HepLorentzVector operator / (const HepLorentzVector &, double a);
+       HepLorentzVector operator / (const HepLorentzVector &, CLHEPdouble a);
 // Dividing LorentzVector by a real number
 
 // Tcomponent definition:
@@ -560,10 +561,10 @@ inline HepLorentzVector operator * (double a, const HepLorentzVector &);
 // Signature protection for 4-vector constructors taking 4 components
 class Tcomponent {
 private:
-  double t_;
+  CLHEPdouble t_;
 public:
-  explicit Tcomponent(double t) : t_(t) {}
-  operator double() const { return t_; }
+  explicit Tcomponent(CLHEPdouble t) : t_(t) {}
+  operator CLHEPdouble() const { return t_; }
 };  // Tcomponent
 
 }  // namespace CLHEP

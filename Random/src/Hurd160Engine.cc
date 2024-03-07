@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: Hurd160Engine.cc,v 1.7 2010/07/20 18:07:17 garren Exp $
 // -*- C++ -*-
 //
@@ -135,7 +136,7 @@ void Hurd160Engine::advance() {
 
 } // advance();
 
-double Hurd160Engine::flat() {
+CLHEPdouble Hurd160Engine::flat() {
 
   if( wordIndex <= 2 ) {        // MF 9/15/98:
                                 // skip word 0 and use two words per flat
@@ -144,13 +145,13 @@ double Hurd160Engine::flat() {
 
   // LG 6/30/2010
   // define the order of execution for --wordIndex
-  double x = words[--wordIndex] * twoToMinus_32() ; // most significant part
-  double y = (words[--wordIndex]>>11) * twoToMinus_53() + // fill in rest of bits
+  CLHEPdouble x = words[--wordIndex] * twoToMinus_32() ; // most significant part
+  CLHEPdouble y = (words[--wordIndex]>>11) * twoToMinus_53() + // fill in rest of bits
              nearlyTwoToMinus_54();        // make sure non-zero
   return  x + y ;
 }
 
-void Hurd160Engine::flatArray( const int size, double* vect ) {
+void Hurd160Engine::flatArray( const int size, CLHEPdouble* vect ) {
     for (int i = 0; i < size; ++i) {
         vect[i] = flat();
     }
@@ -248,11 +249,11 @@ void Hurd160Engine::showStatus() const {
   std::cout.precision(pr);
 }
 
-Hurd160Engine::operator double() {
+Hurd160Engine::operator CLHEPdouble() {
   return flat();
 }
 
-Hurd160Engine::operator float() {
+Hurd160Engine::operator CLHEPfloat() {
   if( wordIndex <= 1 ) {        // MF 9/15/98:  skip word 0
     advance();
   }

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -18,7 +19,7 @@
 
 namespace CLHEP {
 
-static int sign(double x) { return (x>0 ? 1: -1);}
+static int sign(CLHEPdouble x) { return (x>0 ? 1: -1);}
 
 /* -----------------------------------------------------------------------
 
@@ -121,14 +122,14 @@ void back_solve(const HepMatrix &R, HepMatrix *b)
    It replaces A with A*G.
    ----------------------------------------------------------------------- */
 
-void col_givens(HepMatrix *A, double c,double ds,
+void col_givens(HepMatrix *A, CLHEPdouble c,CLHEPdouble ds,
 		int k1, int k2, int row_min, int row_max) {
    if (row_max<=0) row_max = A->num_row();
    int n = A->num_col();
    HepMatrix::mIter Ajk1 = A->m.begin() + (row_min - 1) * n + k1 - 1;
    HepMatrix::mIter Ajk2 = A->m.begin() + (row_min - 1) * n + k2 - 1;
    for (int j=row_min;j<=row_max;j++) {
-      double tau1=(*Ajk1); double tau2=(*Ajk2);
+      CLHEPdouble tau1=(*Ajk1); CLHEPdouble tau2=(*Ajk2);
       (*Ajk1)=c*tau1-ds*tau2;(*Ajk2)=ds*tau1+c*tau2;
       if(j<row_max) {
 	 Ajk1 += n;
@@ -151,9 +152,9 @@ void col_givens(HepMatrix *A, double c,double ds,
    This does a column Householder update.
    ----------------------------------------------------------------------- */
 
-void col_house(HepMatrix *a,const HepMatrix &v,double vnormsq,
+void col_house(HepMatrix *a,const HepMatrix &v,CLHEPdouble vnormsq,
 	       int row, int col, int row_start,int col_start) {
-   double beta=-2/vnormsq;
+   CLHEPdouble beta=-2/vnormsq;
 
    // This is a fast way of calculating w=beta*A.sub(row,n,col,n)*v
 
@@ -198,11 +199,11 @@ void col_house(HepMatrix *a,const HepMatrix &v,double vnormsq,
    This finds the condition number of SymMatrix.
    ----------------------------------------------------------------------- */
 
-double condition(const HepSymMatrix &hm)
+CLHEPdouble condition(const HepSymMatrix &hm)
 {
    HepSymMatrix mcopy=hm;
    diagonalize(&mcopy);
-   double max,min;
+   CLHEPdouble max,min;
    max=min=fabs(mcopy(1,1));
 
    int n = mcopy.num_row();
@@ -226,16 +227,16 @@ double condition(const HepSymMatrix &hm)
 
 void diag_step(HepSymMatrix *t,int begin,int end)
 {
-   double d=(t->fast(end-1,end-1)-t->fast(end,end))/2;
-   double mu=t->fast(end,end)-t->fast(end,end-1)*t->fast(end,end-1)/
+   CLHEPdouble d=(t->fast(end-1,end-1)-t->fast(end,end))/2;
+   CLHEPdouble mu=t->fast(end,end)-t->fast(end,end-1)*t->fast(end,end-1)/
 	 (d+sign(d)*sqrt(d*d+ t->fast(end,end-1)*t->fast(end,end-1)));
-   double x=t->fast(begin,begin)-mu;
-   double z=t->fast(begin+1,begin);
+   CLHEPdouble x=t->fast(begin,begin)-mu;
+   CLHEPdouble z=t->fast(begin+1,begin);
    HepMatrix::mIter tkk = t->m.begin() + (begin+2)*(begin-1)/2;
    HepMatrix::mIter tkp1k = tkk + begin;
    HepMatrix::mIter tkp2k = tkk + 2 * begin + 1;
    for (int k=begin;k<=end-1;k++) {
-      double c,ds;
+      CLHEPdouble c,ds;
       givens(x,z,&c,&ds);
 
       // This is the result of G.T*t*G, making use of the special structure
@@ -247,15 +248,15 @@ void diag_step(HepSymMatrix *t,int begin,int end)
 	 *(tkk-1)= *(tkk-1)*c-(*(tkp1k-1))*ds;
 	 *(tkp1k-1)=0;
       }
-      double ap=(*tkk);
-      double bp=(*tkp1k);
-      double aq=(*tkp1k+1);
+      CLHEPdouble ap=(*tkk);
+      CLHEPdouble bp=(*tkp1k);
+      CLHEPdouble aq=(*tkp1k+1);
       (*tkk)=ap*c*c-2*c*bp*ds+aq*ds*ds;
       (*tkp1k)=c*ap*ds+bp*c*c-bp*ds*ds-ds*aq*c;
       (*(tkp1k+1))=ap*ds*ds+2*c*bp*ds+aq*c*c;
       if (k<end-1)
       {
-	 double bq=(*(tkp2k+1));
+	 CLHEPdouble bq=(*(tkp2k+1));
 	 (*tkp2k)=-bq*ds;
 	 (*(tkp2k+1))=bq*c;
 	 x=(*tkp1k);
@@ -269,16 +270,16 @@ void diag_step(HepSymMatrix *t,int begin,int end)
 
 void diag_step(HepSymMatrix *t,HepMatrix *u,int begin,int end)
 {
-   double d=(t->fast(end-1,end-1)-t->fast(end,end))/2;
-   double mu=t->fast(end,end)-t->fast(end,end-1)*t->fast(end,end-1)/
+   CLHEPdouble d=(t->fast(end-1,end-1)-t->fast(end,end))/2;
+   CLHEPdouble mu=t->fast(end,end)-t->fast(end,end-1)*t->fast(end,end-1)/
 	 (d+sign(d)*sqrt(d*d+ t->fast(end,end-1)*t->fast(end,end-1)));
-   double x=t->fast(begin,begin)-mu;
-   double z=t->fast(begin+1,begin);
+   CLHEPdouble x=t->fast(begin,begin)-mu;
+   CLHEPdouble z=t->fast(begin+1,begin);
    HepMatrix::mIter tkk = t->m.begin() + (begin+2)*(begin-1)/2;
    HepMatrix::mIter tkp1k = tkk + begin;
    HepMatrix::mIter tkp2k = tkk + 2 * begin + 1;
    for (int k=begin;k<=end-1;k++) {
-      double c,ds;
+      CLHEPdouble c,ds;
       givens(x,z,&c,&ds);
       col_givens(u,c,ds,k,k+1);
 
@@ -290,14 +291,14 @@ void diag_step(HepSymMatrix *t,HepMatrix *u,int begin,int end)
 	 *(tkk-1)= (*(tkk-1))*c-(*(tkp1k-1))*ds;
 	 *(tkp1k-1)=0;
       }
-      double ap=(*tkk);
-      double bp=(*tkp1k);
-      double aq=(*(tkp1k+1));
+      CLHEPdouble ap=(*tkk);
+      CLHEPdouble bp=(*tkp1k);
+      CLHEPdouble aq=(*(tkp1k+1));
       (*tkk)=ap*c*c-2*c*bp*ds+aq*ds*ds;
       (*tkp1k)=c*ap*ds+bp*c*c-bp*ds*ds-ds*aq*c;
       (*(tkp1k+1))=ap*ds*ds+2*c*bp*ds+aq*c*c;
       if (k<end-1) {
-	 double bq=(*(tkp2k+1));
+	 CLHEPdouble bq=(*(tkp2k+1));
 	 (*tkp2k)=-bq*ds;
 	 (*(tkp2k+1))=bq*c;
 	 x=(*tkp1k);
@@ -317,7 +318,7 @@ void diag_step(HepSymMatrix *t,HepMatrix *u,int begin,int end)
    ----------------------------------------------------------------------- */
 HepMatrix diagonalize(HepSymMatrix *hms)
 {
-   const double tolerance = 1e-12;
+   const CLHEPdouble tolerance = 1e-12;
    HepMatrix u= tridiagonal(hms);
    int begin=1;
    int end=hms->num_row();
@@ -405,8 +406,8 @@ void house_with_update(HepMatrix *a,int row,int col)
       (*(vp++))=(*arc);
       if(r<a->num_row()) arc += n;
    }
-   double normsq=v.normsq();
-   double norm=sqrt(normsq);
+   CLHEPdouble normsq=v.normsq();
+   CLHEPdouble norm=sqrt(normsq);
    normsq-=v(1)*v(1);
    v(1)+=sign((*a)(row,col))*norm;
    normsq+=v(1)*v(1);
@@ -423,7 +424,7 @@ void house_with_update(HepMatrix *a,int row,int col)
 
 void house_with_update(HepMatrix *a,HepMatrix *v,int row,int col)
 {
-   double normsq=0;
+   CLHEPdouble normsq=0;
    int nv = v->num_col();
    int na = a->num_col();
    HepMatrix::mIter vrc = v->m.begin() + (row-1) * nv + (col-1);
@@ -437,7 +438,7 @@ void house_with_update(HepMatrix *a,HepMatrix *v,int row,int col)
 	 arc += na;
       }
    }
-   double norm=sqrt(normsq);
+   CLHEPdouble norm=sqrt(normsq);
    vrc = v->m.begin() + (row-1) * nv + (col-1);
    normsq-=(*vrc)*(*vrc);
    (*vrc)+=sign((*a)(row,col))*norm;
@@ -461,7 +462,7 @@ void house_with_update(HepMatrix *a,HepMatrix *v,int row,int col)
 
 void house_with_update2(HepSymMatrix *a,HepMatrix *v,int row,int col)
 {
-   double normsq=0;
+   CLHEPdouble normsq=0;
    int nv = v->num_col();
    HepMatrix::mIter vrc = v->m.begin() + (row-1) * nv + (col-1);
    HepMatrix::mIter arc = a->m.begin() + (row-1) * row / 2 + (col-1);
@@ -475,7 +476,7 @@ void house_with_update2(HepSymMatrix *a,HepMatrix *v,int row,int col)
 	 vrc += nv;
       }
    }
-   double norm=sqrt(normsq);
+   CLHEPdouble norm=sqrt(normsq);
    vrc = v->m.begin() + (row-1) * nv + (col-1);
    arc = a->m.begin() + (row-1) * row / 2 + (col-1);
    (*vrc)+=sign(*arc)*norm;
@@ -532,10 +533,10 @@ HepVector min_line_dist(const HepVector *const A, const HepVector *const B,
    // is solved by having 
    // (sum_i k Ai*Ai.T +1) P - (sum_i k dot(Ai,Bi) Ai + Bi) = 0
    // where k=1-2/Ai.normsq
-   const double small = 1e-10;  // Small number
+   const CLHEPdouble small = 1e-10;  // Small number
    HepSymMatrix C(3,0),I(3,1);
    HepVector D(3,0);
-   double t;
+   CLHEPdouble t;
    for (int i=0;i<n;i++)
    {
       if (fabs(t=A[i].normsq())<small) {
@@ -584,7 +585,7 @@ HepMatrix qr_decomp(HepMatrix *A)
    are updated.  This is algorithm 5.1.6 in Golub and Van Loan.
    ----------------------------------------------------------------------- */
 
-void row_givens(HepMatrix *A, double c,double ds,
+void row_givens(HepMatrix *A, CLHEPdouble c,CLHEPdouble ds,
 		int k1, int k2, int col_min, int col_max) {
    /* not tested */
    if (col_max==0) col_max = A->num_col();
@@ -592,7 +593,7 @@ void row_givens(HepMatrix *A, double c,double ds,
    HepMatrix::mIter Ak1j = A->m.begin() + (k1-1) * n + (col_min-1);
    HepMatrix::mIter Ak2j = A->m.begin() + (k2-1) * n + (col_min-1);
    for (int j=col_min;j<=col_max;j++) {
-      double tau1=(*Ak1j); double tau2=(*Ak2j);
+      CLHEPdouble tau1=(*Ak1j); CLHEPdouble tau2=(*Ak2j);
       (*(Ak1j++))=c*tau1-ds*tau2;(*(Ak2j++))=ds*tau1+c*tau2;
    }
 }
@@ -610,9 +611,9 @@ void row_givens(HepMatrix *A, double c,double ds,
    in house, it is passed as a arguement.  Also supplied without vnormsq.
    ----------------------------------------------------------------------- */
 
-void row_house(HepMatrix *a,const HepVector &v,double vnormsq,
+void row_house(HepMatrix *a,const HepVector &v,CLHEPdouble vnormsq,
 	       int row, int col) {
-   double beta=-2/vnormsq;
+   CLHEPdouble beta=-2/vnormsq;
 
    // This is a fast way of calculating w=beta*A.sub(row,n,col,n).T()*v
 
@@ -649,9 +650,9 @@ void row_house(HepMatrix *a,const HepVector &v,double vnormsq,
    }
 }
 
-void row_house(HepMatrix *a,const HepMatrix &v,double vnormsq,
+void row_house(HepMatrix *a,const HepMatrix &v,CLHEPdouble vnormsq,
 	       int row, int col, int row_start, int col_start) {
-   double beta=-2/vnormsq;
+   CLHEPdouble beta=-2/vnormsq;
 
    // This is a fast way of calculating w=beta*A.sub(row,n,col,n).T()*v
    HepVector w(a->num_col()-col+1,0);
@@ -782,7 +783,7 @@ void tridiagonal(HepSymMatrix *a,HepMatrix *hsm)
       // If this row is already in tridiagonal form, we can skip the
       // transformation.
 
-      double scale=0;
+      CLHEPdouble scale=0;
       HepMatrix::mIter ajk = a->m.begin() + k * (k+5) / 2;
       int j;
       for (j=k+2;j<=a->num_row();j++) {
@@ -797,7 +798,7 @@ void tridiagonal(HepSymMatrix *a,HepMatrix *hsm)
 	 }
       } else {
 	 house_with_update2(a,hsm,k+1,k);
-	 double normsq=0;
+	 CLHEPdouble normsq=0;
 	 HepMatrix::mIter hsmrptrkp = hsm->m.begin() + k * (nh+1) - 1;
 	 int rptr;
 	 for (rptr=k+1;rptr<=hsm->num_row();rptr++) {
@@ -823,7 +824,7 @@ void tridiagonal(HepSymMatrix *a,HepMatrix *hsm)
 	    rptr++;
 	    pr++;
 	 }
-	 double pdotv=0;
+	 CLHEPdouble pdotv=0;
 	 pr = p.m.begin();
 	 hsmrptrkp = hsm->m.begin() + k * (nh+1) - 1;
 	 for (r=1;r<=p.num_row();r++) {
@@ -873,22 +874,22 @@ HepMatrix tridiagonal(HepSymMatrix *a)
 void col_house(HepMatrix *a,const HepMatrix &v,int row,int col,
 	       int row_start,int col_start)
 {
-   double normsq=0;
+   CLHEPdouble normsq=0;
    for (int i=row_start;i<=row_start+a->num_row()-row;i++)
       normsq+=v(i,col)*v(i,col);
    col_house(a,v,normsq,row,col,row_start,col_start);
 }
 
-void givens(double a, double b, double *c, double *ds) 
+void givens(CLHEPdouble a, CLHEPdouble b, CLHEPdouble *c, CLHEPdouble *ds) 
 {
    if (b ==0) { *c=1; *ds=0; }
    else {
       if (fabs(b)>fabs(a)) {
-	 double tau=-a/b;
+	 CLHEPdouble tau=-a/b;
 	 *ds=1/sqrt(1+tau*tau);
 	 *c=(*ds)*tau;
       } else {
-	 double tau=-b/a;
+	 CLHEPdouble tau=-b/a;
 	 *c=1/sqrt(1+tau*tau);
 	 *ds=(*c)*tau;
       }
@@ -904,7 +905,7 @@ void qr_decomp(HepMatrix *A,HepMatrix *hsm)
 void row_house(HepMatrix *a,const HepMatrix &v,int row,int col,
 	       int row_start,int col_start)
 {
-   double normsq=0;
+   CLHEPdouble normsq=0;
    int end = row_start+a->num_row()-row;
    for (int i=row_start; i<=end; i++)
       normsq += v(i,col)*v(i,col);

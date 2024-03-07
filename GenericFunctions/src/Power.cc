@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Power.cc,v 1.4 2003/10/10 17:40:39 garren Exp $
 #include "CLHEP/GenericFunctions/Power.hh"
@@ -16,14 +17,14 @@ Power::Power(unsigned int n):
     _asInteger(true)
 {}
 
-Power::Power(double n):
-    _doublePower(n),
+Power::Power(CLHEPdouble n):
+    _CLHEPdoublePower(n),
     _asInteger(false)
 {}
 
 Power::Power(const Power & right)
     : AbsFunction(right),
-      _doublePower(right._doublePower),
+      _CLHEPdoublePower(right._CLHEPdoublePower),
       _intPower(right._intPower),
       _asInteger(right._asInteger)
 {}
@@ -31,20 +32,20 @@ Power::Power(const Power & right)
 Power::~Power() {
 }
 
-double Power::operator() (double x) const {
+CLHEPdouble Power::operator() (CLHEPdouble x) const {
     if (_asInteger) {
 	if (_intPower==0) {
 	    return 1;
 	}
 	else if (_intPower>0) {
-	    double f = 1;
+	    CLHEPdouble f = 1;
 	    for (int i=0;i<_intPower;i++) {
 		f *=x;
 	    }
 	    return f;
 	}
 	else {
-	    double f = 1;
+	    CLHEPdouble f = 1;
 	    for (int i=0;i<-_intPower;i++) {
 		f /=x;
 	    }
@@ -52,7 +53,7 @@ double Power::operator() (double x) const {
 	}	    
     }
     else {
-	return std::pow(x,_doublePower);
+	return std::pow(x,_CLHEPdoublePower);
     }
 
 }
@@ -65,7 +66,7 @@ Derivative Power::partial(unsigned int) const {
     return Derivative(&fPrime);
   }
   else {
-    const AbsFunction & fPrime = _doublePower*Power(_doublePower-1);
+    const AbsFunction & fPrime = _CLHEPdoublePower*Power(_CLHEPdoublePower-1);
     return Derivative(&fPrime);
   }
 

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef _AdaptiveRKStepper_h_
 #define _AdaptiveRKStepper_h_
 #include "CLHEP/GenericFunctions/RKIntegrator.hh"
@@ -40,7 +41,7 @@ namespace Genfun {
     virtual void step (const RKIntegrator::RKData       * data, 
 		       const RKIntegrator::RKData::Data & sdata, 
 		       RKIntegrator::RKData::Data       & ddata, 
-		       double                             timeLimit) const ;
+		       CLHEPdouble                             timeLimit) const ;
     // Clone
     virtual AdaptiveRKStepper *clone() const;
 
@@ -50,25 +51,25 @@ namespace Genfun {
     // stepsize, but rarely should need to touch any of the others.
     
     // The tolerance:
-    double & tolerance();
-    const double & tolerance() const;
+    CLHEPdouble & tolerance();
+    const CLHEPdouble & tolerance() const;
 
     // The starting stepsize:
-    double & startingStepsize();
-    const double & startingStepsize() const;
+    CLHEPdouble & startingStepsize();
+    const CLHEPdouble & startingStepsize() const;
 
     // The safety factor.  Step size increases are moderated by this
     // factor:
-    double & safetyFactor();
-    const double & safetyFactor() const;
+    CLHEPdouble & safetyFactor();
+    const CLHEPdouble & safetyFactor() const;
 
     // The minimum amount by which a step size is decreased:
-    double & rmin();
-    const double & rmin() const;
+    CLHEPdouble & rmin();
+    const CLHEPdouble & rmin() const;
 
     // The maximum amount by which a step size is increased:
-    double & rmax();
-    const double & rmax() const;
+    CLHEPdouble & rmax();
+    const CLHEPdouble & rmax() const;
     
     
   private:
@@ -77,12 +78,12 @@ namespace Genfun {
     AdaptiveRKStepper & operator=(const AdaptiveRKStepper & right);
 
     const        EEStepper   *eeStepper;
-    double       T;
-    double       sStepsize;
-    double       S;
-    double       Rmin;
-    double       Rmax;
-    mutable      double       stepsize;
+    CLHEPdouble       T;
+    CLHEPdouble       sStepsize;
+    CLHEPdouble       S;
+    CLHEPdouble       Rmin;
+    CLHEPdouble       Rmax;
+    mutable      CLHEPdouble       stepsize;
   };
 
 
@@ -97,7 +98,7 @@ namespace Genfun {
     virtual void step   (const RKIntegrator::RKData       * data, 
 			 const RKIntegrator::RKData::Data & sdata, 
 			 RKIntegrator::RKData::Data       & ddata, 
-			 std::vector<double> & errors) const = 0;
+			 std::vector<CLHEPdouble> & errors) const = 0;
     virtual EEStepper *clone() const=0;
     virtual unsigned int order() const=0;
   };

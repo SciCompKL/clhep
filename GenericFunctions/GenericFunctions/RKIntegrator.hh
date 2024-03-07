@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id:
 //---------------------Runge-Kutte Integrator-------------------------------//
@@ -61,17 +62,17 @@ namespace Genfun {
     // can connect it to another parameter so that you may change it. 
     Parameter * addDiffEquation (const AbsFunction  * diffEquation,
 				 const std::string & variableName="anon",
-				 double defStartingValue=0.0,
-				 double startingValueMin=0.0,
-				 double startingValueMax=0.0);
+				 CLHEPdouble defStartingValue=0.0,
+				 CLHEPdouble startingValueMin=0.0,
+				 CLHEPdouble startingValueMax=0.0);
 
 
     // Create a control parameter.  You can then connnect this to some other
     // parameter.
     Parameter *createControlParameter (const std::string & variableName="anon",
-				       double defStartingValue=0.0,
-				       double startingValueMin=0.0,
-				       double startingValueMax=0.0);
+				       CLHEPdouble defStartingValue=0.0,
+				       CLHEPdouble startingValueMin=0.0,
+				       CLHEPdouble startingValueMax=0.0);
 
     // Get back a function. This function will now actually change as parameters
     // are changed; this includes both control parameters and starting value 
@@ -107,9 +108,9 @@ namespace Genfun {
     // Information about solution at each mesh point.
     struct Data{
 
-      std::vector<double>         variable;             // Solution
-      mutable std::vector<double> firstDerivative;      // It's first derivative
-      double time;                                      // time
+      std::vector<CLHEPdouble>         variable;             // Solution
+      mutable std::vector<CLHEPdouble> firstDerivative;      // It's first derivative
+      CLHEPdouble time;                                      // time
  
       Data(int size): variable(size), firstDerivative(size), time(0) {} 
       bool operator <  (const Data & right) const { return time < right.time; }
@@ -121,10 +122,10 @@ namespace Genfun {
     void recache();
 
     std::vector<Parameter *>           _startingValParameter;
-    std::vector<double>                _startingValParameterCache;
+    std::vector<CLHEPdouble>                _startingValParameterCache;
 
     std::vector <Parameter *>          _controlParameter;
-    std::vector <double>               _controlParameterCache;
+    std::vector <CLHEPdouble>               _controlParameterCache;
 
     std::vector<const AbsFunction *>   _diffEqn;
     std::set<Data >                    _fx;
@@ -153,8 +154,8 @@ namespace Genfun {
     RKFunction(const RKFunction &right);
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
 
   private:
 
@@ -176,7 +177,7 @@ namespace Genfun {
     virtual void step (const RKIntegrator::RKData *data, 
 		       const RKIntegrator::RKData::Data & sdata, 
 		       RKIntegrator::RKData::Data       & ddata, 
-		       double timeLimit=0) const =0;
+		       CLHEPdouble timeLimit=0) const =0;
     virtual RKStepper *clone() const=0;
 
   };

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Bessel.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //---------------------Bessel-------------------------------------------------//
@@ -47,8 +48,8 @@ namespace FractionalOrder {
     virtual ~Bessel();
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
   
     // Get the order of the Bessel Function.  Default value, 0.0.  If modified the
     // Bessel function 
@@ -92,8 +93,8 @@ namespace IntegralOrder {
     virtual ~Bessel();
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
   
   private:
 
@@ -104,11 +105,11 @@ namespace IntegralOrder {
     Type                _type;
     unsigned  int       _order; 
 
-    double              _bessel_IJ_taylor(double nu, 
-					  double x,
+    CLHEPdouble              _bessel_IJ_taylor(CLHEPdouble nu, 
+					  CLHEPdouble x,
 					  int sign,
 					  int kmax,
-					  double threshhold) const;
+					  CLHEPdouble threshhold) const;
   
   };
 } // namespace IntegralOrder

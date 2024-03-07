@@ -1,6 +1,7 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*------------------------------------------------------
 //
-// This class is an adaptor from any function (double *f)(double x)
+// This class is an adaptor from any function (CLHEPdouble *f)(CLHEPdouble x)
 // of one real variable, to generic functions. This allows one
 // to plot, differentiate, sum, compose, etc, any standard C or
 // C++ math function by converting it to a Generic Function.
@@ -18,7 +19,7 @@ namespace Genfun {
    */
   class F1D : public AbsFunction  {
     
-    typedef double (*FcnPtr)(double);
+    typedef CLHEPdouble (*FcnPtr)(CLHEPdouble);
 
     FUNCTION_OBJECT_DEF(F1D)
 
@@ -34,11 +35,11 @@ namespace Genfun {
     F1D(const F1D &right):AbsFunction(),p(right.p){};
   
     // Retreive function value
-    virtual double operator ()(double x) const {
+    virtual CLHEPdouble operator ()(CLHEPdouble x) const {
       return (*p)(x);
     }
 
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
 
   private:
 

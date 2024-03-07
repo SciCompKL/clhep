@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef _ClebschGordanCoefficientSet_h_
 #define _ClebschGordanCoefficientSet_h_
 #include <map>
@@ -9,7 +10,7 @@ namespace Genfun {
 
   public:
 
-    double operator () (unsigned int l1, unsigned int l2, int m1, int m2, int L, int M) const; 
+    CLHEPdouble operator () (unsigned int l1, unsigned int l2, int m1, int m2, int L, int M) const; 
     
   private:
 
@@ -47,22 +48,22 @@ namespace Genfun {
     };
     
 
-    mutable std::map<Key, double> coeff;
+    mutable std::map<Key, CLHEPdouble> coeff;
 
-    static double calcCoefficient(int l1, int l2, int L, int m1, int m2, int M);
+    static CLHEPdouble calcCoefficient(int l1, int l2, int L, int m1, int m2, int M);
 
   };
 
 
 
 
-  inline double ClebschGordanCoefficientSet::operator () (unsigned int l1, unsigned int l2, int m1, int m2, int L, int M) const {
+  inline CLHEPdouble ClebschGordanCoefficientSet::operator () (unsigned int l1, unsigned int l2, int m1, int m2, int L, int M) const {
     if ((m1+m2)!=M) return 0;
     
     Key key(l1,l2,m1,m2,L);
-    std::map<Key,double>::iterator i=coeff.find(key),end=coeff.end();
+    std::map<Key,CLHEPdouble>::iterator i=coeff.find(key),end=coeff.end();
     if (i==end) {
-      double c = calcCoefficient(l1, l2, L, m1, m2,M);
+      CLHEPdouble c = calcCoefficient(l1, l2, L, m1, m2,M);
       coeff[key]=c;
       return c;
     }

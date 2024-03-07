@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: Random.icc,v 1.2 2003/07/17 19:20:02 garren Exp $
 // -*- C++ -*-
 // 
@@ -17,13 +18,13 @@
 
 namespace CLHEP {
 
-inline double HepRandom::flat(HepRandomEngine* theNewEngine)
+inline CLHEPdouble HepRandom::flat(HepRandomEngine* theNewEngine)
 {
   return theNewEngine->flat();
 }
 
 inline void HepRandom::flatArray(HepRandomEngine* theNewEngine, 
-                                 const int size, double* vect)
+                                 const int size, CLHEPdouble* vect)
 {
   theNewEngine->flatArray(size,vect);
 }

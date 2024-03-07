@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandGeneral.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -41,15 +42,15 @@ class RandGeneral : public HepRandom {
 
 public:
 
-  RandGeneral ( const double* aProbFunc, 
+  RandGeneral ( const CLHEPdouble* aProbFunc, 
 		int theProbSize, 
 		int IntType=0 );
   RandGeneral ( HepRandomEngine& anEngine,
-                const double* aProbFunc, 
+                const CLHEPdouble* aProbFunc, 
 		int theProbSize, 
 		int IntType=0 );
   RandGeneral ( HepRandomEngine* anEngine, 
-                const double* aProbFunc, 
+                const CLHEPdouble* aProbFunc, 
 		int theProbSize, 
 		int IntType=0 );
   // These constructors should be used to instantiate a RandGeneral
@@ -90,30 +91,30 @@ public:
 	//
 	// The above N.B. is telling users that the shoot() methods in this
 	// class are NOT STATIC.  You cannot do 
-	//	double x = RandGeneral::shoot();
+	//	CLHEPdouble x = RandGeneral::shoot();
 	// It would not make sense to provide a static shoot -- what would 
 	// the default probability function look like?
 
-  inline double shoot();
+  inline CLHEPdouble shoot();
 
-  inline void shootArray ( const int size, double* vect);
+  inline void shootArray ( const int size, CLHEPdouble* vect);
 
   //  Methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  double shoot( HepRandomEngine* anEngine );
+  CLHEPdouble shoot( HepRandomEngine* anEngine );
 
   void shootArray ( HepRandomEngine* anEngine, const int size,
-                    double* vect );
+                    CLHEPdouble* vect );
 			    
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  double fire();
+  CLHEPdouble fire();
 
-  void fireArray ( const int size, double* vect);
+  void fireArray ( const int size, CLHEPdouble* vect);
 
-  double operator()();
+  CLHEPdouble operator()();
 
   // Save and restore to/from streams
   
@@ -130,15 +131,15 @@ public:
 private:
 
   std::shared_ptr<HepRandomEngine> localEngine;
-  std::vector<double> theIntegralPdf;
+  std::vector<CLHEPdouble> theIntegralPdf;
   int nBins;
-  double oneOverNbins;
+  CLHEPdouble oneOverNbins;
   int InterpolationType;
 
   // Private methods to factor out replicated implementation sections
-  void prepareTable(const double* aProbFunc);
+  void prepareTable(const CLHEPdouble* aProbFunc);
   void useFlatDistribution();
-  double mapRandom(double rand) const;
+  CLHEPdouble mapRandom(CLHEPdouble rand) const;
 
 };
 

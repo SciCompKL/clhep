@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 
 #include "CLHEP/Units/SystemOfUnits.h"
 

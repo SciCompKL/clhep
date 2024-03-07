@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ParameterSum.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/ParameterSum.hh"
@@ -28,7 +29,7 @@ ParameterSum::~ParameterSum()
 }
 
 
-double ParameterSum::getValue() const {
+CLHEPdouble ParameterSum::getValue() const {
   return _arg1->getValue()+_arg2->getValue();
 }
 

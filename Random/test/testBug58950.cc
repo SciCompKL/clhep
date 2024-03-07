@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 //
 // testBug58950 -- test problem with RanecuEngine on 64bit machines
@@ -16,7 +17,7 @@
 #include <stdlib.h>
 #include <vector>
 
-bool printCheck( int & i, double & r, std::ofstream & os )
+bool printCheck( int & i, CLHEPdouble & r, std::ofstream & os )
 {
     os << i << " " << r << std::endl; 
     if (r < 0 || r > 1.0 ) {
@@ -34,9 +35,9 @@ int main() {
     output << "int " << sizeof(int) << std::endl; 
     output << "unsigned int " << sizeof(unsigned int) << std::endl; 
     output << "long " << sizeof(long) << std::endl; 
-    output << "float " << sizeof(float) << std::endl; 
-    output << "double " << sizeof(double) << std::endl; 
-    output << "long double " << sizeof(long double) << std::endl << std::endl; 
+    output << "CLHEPfloat " << sizeof(CLHEPfloat) << std::endl; 
+    output << "CLHEPdouble " << sizeof(CLHEPdouble) << std::endl; 
+    output << "long CLHEPdouble " << sizeof(long CLHEPdouble) << std::endl << std::endl; 
 
     CLHEP::RanecuEngine *eng = new CLHEP::RanecuEngine;
     CLHEP::HepRandom::setTheEngine(eng);
@@ -74,11 +75,11 @@ int main() {
     seeds[2]=0;
     if( rvals[0] > 0 ) seeds[0] = -rvals[0];
     
-    double negseq[20] = { 0.154707, 0.587114, 0.702059, 0.566, 0.988325,
+    CLHEPdouble negseq[20] = { 0.154707, 0.587114, 0.702059, 0.566, 0.988325,
                           0.525921, 0.191554, 0.269338, 0.234277, 0.358997,
 			  0.549936, 0.296877, 0.162243, 0.227732, 0.528862,
 			  0.631571, 0.176462, 0.247858, 0.170025, 0.284483 };
-    double eps =  1.0E-6;
+    CLHEPdouble eps =  1.0E-6;
 
     output << std::endl << "********************" << std::endl;
     output << "This is the case that may or may not fail." << std::endl;
@@ -90,7 +91,7 @@ int main() {
     g->setTheSeeds(seeds);
     int rseq = 0;
     for (int i=0; i < nNumbers; ++i) { 
-	double r = g->flat(); 
+	CLHEPdouble r = g->flat(); 
 	if( ! printCheck(i,r,output) ) ++badcount;
 	// before the change, the random number sequence was reliably the same
 	if( std::fabs(r-negseq[i]) < eps ) {
@@ -117,7 +118,7 @@ int main() {
 
     g->setTheSeeds(seeds);
     for (int i=0; i < nNumbers; ++i) { 
-	double r = g->flat(); 
+	CLHEPdouble r = g->flat(); 
 	if( ! printCheck(i,r,output) ) ++badcount;
     }
     pseeds=g->getTheSeeds();
@@ -134,11 +135,11 @@ int main() {
     output << "Check rolling back a random number seed." << std::endl;
     output << "seeds[0] = " << seeds[0] << "\n"
                             << "seeds[1] = " << seeds[1] << std::endl << std::endl;
-    std::vector<double> v;
+    std::vector<CLHEPdouble> v;
     g->setTheSeeds(seeds);
 			    
     for (int i=0; i < nNumbers; ++i) {
-        double r = g->flat();
+        CLHEPdouble r = g->flat();
         if( ! printCheck(i,r,output) ) ++badcount;
     }
     pseeds=g->getTheSeeds();
@@ -147,14 +148,14 @@ int main() {
     output << " pseeds[0] = " << pseeds[0] << "\n"
                             << "pseeds[1] = " << pseeds[1] << std::endl;
     for (int i=0; i < nNumbers; ++i) {
-        double r = g->flat();
+        CLHEPdouble r = g->flat();
         v.push_back(r);
     }
     g->setTheSeeds(seeds);
     for (int i=0; i < nNumbers; ++i) {
-        double r = g->flat();
+        CLHEPdouble r = g->flat();
 //        if(v[i] != r ) {
-        if(std::abs(v[i] - r) >= std::numeric_limits<double>::epsilon()) {
+        if(std::abs(v[i] - r) >= std::numeric_limits<CLHEPdouble>::epsilon()) {
            ++badcount;
            std::cerr << " rollback fails: i, v[i], r "
                      << i << "  " << v[i] << " " << r << std::endl;
@@ -176,7 +177,7 @@ int main() {
 
     g->setTheSeeds(seeds);
     for (int i=0; i < nNumbers; ++i) { 
-	double r = g->flat(); 
+	CLHEPdouble r = g->flat(); 
 	if( ! printCheck(i,r,output) ) ++badcount;
     } 
     pseeds=g->getTheSeeds();
@@ -199,7 +200,7 @@ int main() {
 
     g->setTheSeeds(seeds);
     // Loop as long as the values are bad.
-    double r;
+    CLHEPdouble r;
     unsigned int low = ~0;
     unsigned long mask = (~0u) << 31;
     unsigned long skipcount = 0;
@@ -221,7 +222,7 @@ int main() {
 
     output << "This should be a valid sequence." << std::endl;	
     for (int i=0; i < nNumbers; ++i) { 
-	double r1 = g->flat(); 
+	CLHEPdouble r1 = g->flat(); 
 	if( ! printCheck(i,r1,output) ) ++badcount;
     }
     pseeds=g->getTheSeeds();

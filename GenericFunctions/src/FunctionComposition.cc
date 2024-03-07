@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionComposition.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/FunctionComposition.hh"
@@ -33,7 +34,7 @@ unsigned int FunctionComposition::dimensionality() const {
   return _arg2->dimensionality();
 }
 
-double FunctionComposition::operator ()(double argument) const {
+CLHEPdouble FunctionComposition::operator ()(CLHEPdouble argument) const {
   if (dimensionality()!=1) {
     std::cerr
       << "Warning: LifetimeResolutionConvolution function/argument "
@@ -47,7 +48,7 @@ double FunctionComposition::operator ()(double argument) const {
   }
 }
 
-double FunctionComposition::operator() (const Argument &  v) const {
+CLHEPdouble FunctionComposition::operator() (const Argument &  v) const {
   if (v.dimension()!=_arg2->dimensionality()) {
     std::cerr
       << "Warning: FunctionComposition function/argument dimension mismatch"

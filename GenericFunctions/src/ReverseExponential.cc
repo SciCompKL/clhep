@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ReverseExponential.cc,v 1.4 2003/10/10 17:40:39 garren Exp $
 #include "CLHEP/GenericFunctions/ReverseExponential.hh"
@@ -21,7 +22,7 @@ _decayConstant(right._decayConstant)
 ReverseExponential::~ReverseExponential() {
 }
 
-double ReverseExponential::operator() (double x) const {
+CLHEPdouble ReverseExponential::operator() (CLHEPdouble x) const {
   if (x>0) return 0;
   return exp(x/_decayConstant.getValue())/_decayConstant.getValue();
 }

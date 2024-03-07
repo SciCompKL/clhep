@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // CLASSDOC OFF
 // ---------------------------------------------------------------------------
@@ -52,27 +53,27 @@ public:
    virtual ~HepVector();
    // Destructor.
 
-   inline const double & operator()(int row) const;
-   inline double & operator()(int row);
+   inline const CLHEPdouble & operator()(int row) const;
+   inline CLHEPdouble & operator()(int row);
    // Read or write a matrix element. 
    // ** Note that the indexing starts from (1). **
    
-   inline const double & operator[](int row) const;
-   inline double & operator[](int row);
+   inline const CLHEPdouble & operator[](int row) const;
+   inline CLHEPdouble & operator[](int row);
    // Read and write an element of a Vector.
    // ** Note that the indexing starts from [0]. **
 
-   virtual const double & operator()(int row, int col) const;
-   virtual double & operator()(int row, int col);
+   virtual const CLHEPdouble & operator()(int row, int col) const;
+   virtual CLHEPdouble & operator()(int row, int col);
    // Read or write a matrix element. 
    // ** Note that the indexing starts from (1,1). **
    // Allows accessing Vector using GenMatrix
 
-   HepVector & operator*=(double t);
-   // Multiply a Vector by a floating number. 
+   HepVector & operator*=(CLHEPdouble t);
+   // Multiply a Vector by a CLHEPfloating number. 
 
-   HepVector & operator/=(double t); 
-   // Divide a Vector by a floating number.
+   HepVector & operator/=(CLHEPdouble t); 
+   // Divide a Vector by a CLHEPfloating number.
 
    HepVector & operator+=( const HepMatrix &v2);
    HepVector & operator+=( const HepVector &v2);
@@ -90,7 +91,7 @@ public:
    HepVector operator- () const;
    // unary minus, ie. flip the sign of each element.
 
-   HepVector apply(double (*f)(double, int)) const;
+   HepVector apply(CLHEPdouble (*f)(CLHEPdouble, int)) const;
    // Apply a function to all elements.
 
    HepVector sub(int min_row, int max_row) const;
@@ -102,10 +103,10 @@ public:
    void sub(int row, const HepVector &v1);
    // Replaces a sub vector of a Vector with v1.
 
-   inline double normsq() const;
+   inline CLHEPdouble normsq() const;
    // Returns norm squared.
 
-   inline double norm() const;
+   inline CLHEPdouble norm() const;
    // Returns norm.
 
    virtual int num_row() const;
@@ -134,7 +135,7 @@ private:
    friend class HepMatrix;
    // friend classes
 
-   friend double dot(const HepVector &v1, const HepVector &v2);
+   friend CLHEPdouble dot(const HepVector &v1, const HepVector &v2);
    // f = v1 * v2;
 
    friend HepVector operator+(const HepVector &v1, const HepVector &v2);
@@ -146,11 +147,11 @@ private:
 
    friend HepVector solve(const HepMatrix &a, const HepVector &v);
    friend void tridiagonal(HepSymMatrix *a,HepMatrix *hsm);
-   friend void row_house(HepMatrix *,const HepMatrix &, double, int, int,
+   friend void row_house(HepMatrix *,const HepMatrix &, CLHEPdouble, int, int,
 			 int, int);
-   friend void row_house(HepMatrix *,const HepVector &, double, int, int);
+   friend void row_house(HepMatrix *,const HepVector &, CLHEPdouble, int, int);
    friend void back_solve(const HepMatrix &R, HepVector *b);
-   friend void col_house(HepMatrix *,const HepMatrix &,double, int, int,
+   friend void col_house(HepMatrix *,const HepMatrix &,CLHEPdouble, int, int,
 			 int, int);
    friend HepVector house(const HepSymMatrix &a,int row,int col);
    friend HepVector house(const HepMatrix &a,int row,int col);
@@ -159,9 +160,9 @@ private:
    friend HepVector qr_solve(HepMatrix *, const HepVector &);
 
 #ifdef DISABLE_ALLOC
-   std::vector<double > m;
+   std::vector<CLHEPdouble > m;
 #else
-   std::vector<double,Alloc<double,25> > m;
+   std::vector<CLHEPdouble,Alloc<CLHEPdouble,25> > m;
 #endif
    int nrow;
 };
@@ -174,12 +175,12 @@ std::ostream& operator<<(std::ostream &s, const HepVector &v);
 // Write out Matrix, SymMatrix, DiagMatrix and Vector into ostream.
 
 HepVector operator*(const HepMatrix &hm1, const HepVector &hm2);
-HepVector operator*(double t, const HepVector &v1);
-HepVector operator*(const HepVector &v1, double t);
+HepVector operator*(CLHEPdouble t, const HepVector &v1);
+HepVector operator*(const HepVector &v1, CLHEPdouble t);
 // Multiplication operators.
 // Note that m *= x is always faster than m = m * x.
 
-HepVector operator/(const HepVector &v1, double t);
+HepVector operator/(const HepVector &v1, CLHEPdouble t);
 // Divide by a real number.
 
 HepVector operator+(const HepMatrix &hm1, const HepVector &v2);

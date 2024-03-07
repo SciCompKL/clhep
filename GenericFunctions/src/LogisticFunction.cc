@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "CLHEP/GenericFunctions/LogisticFunction.hh"
@@ -26,7 +27,7 @@ _a(right._a)
 {
 }
 
-double LogisticFunction::operator() (double x) const {
+CLHEPdouble LogisticFunction::operator() (CLHEPdouble x) const {
   int i  = (int) (x+0.5), &back = i, end=back+1;
 
   if (i<0 || i>MAXRANGE) {
@@ -49,7 +50,7 @@ double LogisticFunction::operator() (double x) const {
     if (fx.empty()) fx.push_back(__x0);
 
     while (fx.size()<size_t(end)) {
-      double v = fx.back();
+      CLHEPdouble v = fx.back();
       fx.push_back(__a*v*(1.0-v));
     }
     

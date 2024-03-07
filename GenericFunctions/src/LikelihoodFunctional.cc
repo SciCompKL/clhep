@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: LikelihoodFunctional.cc,v 1.4 2003/10/10 17:40:39 garren Exp $
 #include "CLHEP/GenericFunctions/LikelihoodFunctional.hh"
@@ -17,11 +18,11 @@ _aList(aList)
 LikelihoodFunctional::~LikelihoodFunctional() {
 }
 
-double LikelihoodFunctional::operator [] (const AbsFunction & function) const {
-  double logLikelihood(0);
+CLHEPdouble LikelihoodFunctional::operator [] (const AbsFunction & function) const {
+  CLHEPdouble logLikelihood(0);
   for (unsigned int i=0; i<_aList.size();i++) {
     Argument a = _aList[i];
-    double f = function(a);
+    CLHEPdouble f = function(a);
     if (f<=0.0) {
       std::ostringstream stream;
       stream <<  "Negative likelihood arg[" << i << "]=" << a;

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef _SimpleRKStepper_h_
 #define _SimpleRKStepper_h_
 #include "CLHEP/GenericFunctions/RKIntegrator.hh"
@@ -20,7 +21,7 @@ namespace Genfun {
     
     // Constructor:
     SimpleRKStepper(const ButcherTableau & tableau,
-		    double stepsize);
+		    CLHEPdouble stepsize);
 
     // Destructor:
     virtual ~SimpleRKStepper();
@@ -29,7 +30,7 @@ namespace Genfun {
     virtual void step (const RKIntegrator::RKData       * data,  // functions 
 		       const RKIntegrator::RKData::Data & sdata, // start point
 		       RKIntegrator::RKData::Data       & ddata, // end point
-		       double                         timeLimit  // time limit 
+		       CLHEPdouble                         timeLimit  // time limit 
 		       ) const ;
     // Clone:
     virtual SimpleRKStepper *clone() const;
@@ -37,7 +38,7 @@ namespace Genfun {
 private:
 
   ButcherTableau tableau;
-  double stepsize;
+  CLHEPdouble stepsize;
 
   };
 }

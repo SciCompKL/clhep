@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/Random/DualRand.h"
 #include "CLHEP/Random/Hurd160Engine.h"
 #include "CLHEP/Random/Hurd288Engine.h"
@@ -44,7 +45,7 @@
   #define CLHEP_RUN_THREADED_TESTS 0
 #endif
 
-void testRandGauss(std::vector<double> const& reference, bool& result) {
+void testRandGauss(std::vector<CLHEPdouble> const& reference, bool& result) {
 
   // Check that the fire and two shoot methods all give the same
   // random number sequence. The output of the fire method is passed
@@ -65,7 +66,7 @@ void testRandGauss(std::vector<double> const& reference, bool& result) {
 
   result = true;
 
-  std::vector<double> v;
+  std::vector<CLHEPdouble> v;
   v.push_back(dist.fire());
   v.push_back(dist.fire());
   v.push_back(dist.fire());
@@ -158,7 +159,7 @@ int main() {
   long seedL = 100;
   CLHEP::HepJamesRandom engine(seedL);
   CLHEP::RandGauss dist(engine);
-  std::vector<double> generatedNumbers;
+  std::vector<CLHEPdouble> generatedNumbers;
 
   generatedNumbers.push_back(dist.fire());
   generatedNumbers.push_back(dist.fire());
@@ -200,7 +201,7 @@ int main() {
   // to change nor are the initial random numbers from a sequence.
   // I empirically determined the values before the threading code
   // changes and test that they are still the same.
-  double epsilon = 0.0001;
+  CLHEPdouble epsilon = 0.0001;
   {
     CLHEP::DualRand engine1;
     CLHEP::DualRand engine2;

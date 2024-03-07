@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: AbsParameter.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 #ifndef _AbsParameter_h_
@@ -33,7 +34,7 @@ namespace Genfun {
     virtual ~AbsParameter();
   
     // Parameter value
-    virtual double getValue()  const=0;   
+    virtual CLHEPdouble getValue()  const=0;   
 
     // Every parameter must override this:
     AbsParameter * clone() const;
@@ -54,15 +55,15 @@ namespace Genfun {
 // Now for some additional operations:
 
 
-ConstTimesParameter               operator * (double c, const AbsParameter &op2);
-ConstPlusParameter                operator + (double c, const AbsParameter &op2);
-ConstMinusParameter               operator - (double c, const AbsParameter &op2);
-ConstOverParameter                operator / (double c, const AbsParameter &op2);
+ConstTimesParameter               operator * (CLHEPdouble c, const AbsParameter &op2);
+ConstPlusParameter                operator + (CLHEPdouble c, const AbsParameter &op2);
+ConstMinusParameter               operator - (CLHEPdouble c, const AbsParameter &op2);
+ConstOverParameter                operator / (CLHEPdouble c, const AbsParameter &op2);
 
-ConstTimesParameter               operator * (const AbsParameter &op2, double c);
-ConstPlusParameter                operator + (const AbsParameter &op2, double c);
-ConstPlusParameter                operator - (const AbsParameter &op2, double c);
-ConstTimesParameter               operator / (const AbsParameter &op2, double c);
+ConstTimesParameter               operator * (const AbsParameter &op2, CLHEPdouble c);
+ConstPlusParameter                operator + (const AbsParameter &op2, CLHEPdouble c);
+ConstPlusParameter                operator - (const AbsParameter &op2, CLHEPdouble c);
+ConstTimesParameter               operator / (const AbsParameter &op2, CLHEPdouble c);
 
 
 ParameterProduct                  operator * (const AbsParameter &op1, const AbsParameter &op2);

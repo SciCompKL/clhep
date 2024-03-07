@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: Ranlux64Engine.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -7,7 +8,7 @@
 //                          class header file
 // -----------------------------------------------------------------------
 // The algorithm for this random engine has been taken from the notes of 
-// a double-precision ranlux implementation by Martin Luscher, dated 
+// a CLHEPdouble-precision ranlux implementation by Martin Luscher, dated 
 // November 1997.
 //
 // Like the previous ranlux generator, this one also has "luxury" levels,
@@ -58,11 +59,11 @@ public:
   virtual ~Ranlux64Engine();
   // Constructors and destructor
 
-  double flat();
+  CLHEPdouble flat();
   // It returns a pseudo random number between 0 and 1,
   // excluding the end points.
 
-  void flatArray (const int size, double* vect);
+  void flatArray (const int size, CLHEPdouble* vect);
   // Fills the array "vect" of specified size with flat random values.
 
   void setSeed(long seed, int lux=1);
@@ -109,8 +110,8 @@ private:
   int luxury;
 
   int index;
-  double randoms[12]; // randoms [i] is the x[n-i] of Luscher's note
-  double carry;
+  CLHEPdouble randoms[12]; // randoms [i] is the x[n-i] of Luscher's note
+  CLHEPdouble carry;
 
 }; // Ranlux64Engine
 

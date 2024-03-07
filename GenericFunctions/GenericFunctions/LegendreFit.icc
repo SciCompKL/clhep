@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include <sstream>
@@ -44,22 +45,22 @@ LegendreFit::LegendreFit(const LegendreFit & right):
 }
 
 inline
-double LegendreFit::operator() (double x) const {
+CLHEPdouble LegendreFit::operator() (CLHEPdouble x) const {
   recomputeCoefficients();
-  std::vector<double> Pk(N+1);
+  std::vector<CLHEPdouble> Pk(N+1);
   gsl_sf_legendre_Pl_array(N, x, &Pk[0]);
   unsigned int n=N;
-  std::complex<double> P=0.0;
-  std::complex<double> I(0,1.0);
+  std::complex<CLHEPdouble> P=0.0;
+  std::complex<CLHEPdouble> I(0,1.0);
   while (1) {
     if (n==0) {
-      double Pn=sqrt((2*n+1.0)/2.0)*Pk[n];
+      CLHEPdouble Pn=sqrt((2*n+1.0)/2.0)*Pk[n];
       
       P+=coefA(n)*Pn;
       break;
     }
     else {
-      double Pn=sqrt((2*n+1.0)/2.0)*Pk[n];
+      CLHEPdouble Pn=sqrt((2*n+1.0)/2.0)*Pk[n];
       P+=coefA(n)*Pn;
       n--;
     }
@@ -116,18 +117,18 @@ const LegendreCoefficientSet & LegendreFit::coefficientsASq() const {
 inline 
 void LegendreFit::recomputeCoefficients() const {
   unsigned int n=N;
-  std::complex<double> P=0.0;
-  std::complex<double> I(0,1.0);
-  double f=1.0;
+  std::complex<CLHEPdouble> P=0.0;
+  std::complex<CLHEPdouble> I(0,1.0);
+  CLHEPdouble f=1.0;
   while (1) {
     if (n==0) {
-      double fn=1.0;
+      CLHEPdouble fn=1.0;
       coefA(n)=sqrt(f*fn);
       break;
     }
     else {
-      double fn=getFraction(n-1)->getValue();
-      double px=getPhase(n-1)->getValue();
+      CLHEPdouble fn=getFraction(n-1)->getValue();
+      CLHEPdouble px=getPhase(n-1)->getValue();
       coefA(n)=exp(I*px)*sqrt(f*fn);
       f*=(1-fn);
       n--;

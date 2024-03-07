@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef _EmbeddedRKStepper_hh_
 #define _EmbeddedRKStepper_hh_
 #include "CLHEP/GenericFunctions/AdaptiveRKStepper.hh"
@@ -22,7 +23,7 @@ namespace Genfun {
     virtual void step   (const RKIntegrator::RKData       * data, 
 			 const RKIntegrator::RKData::Data & sdata, 
 			 RKIntegrator::RKData::Data       & ddata, 
-			 std::vector<double>              & errors) const;
+			 std::vector<CLHEPdouble>              & errors) const;
     // Clone self:
     virtual EmbeddedRKStepper *clone() const;
 

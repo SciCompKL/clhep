@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 //
 // ZMerrno.cc -- implementation of the error list mechanism.

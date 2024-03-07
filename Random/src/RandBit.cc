@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandBit.cc,v 1.6 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Exponential.cc,v 1.4 2003/10/10 17:40:39 garren Exp $
 #include "CLHEP/GenericFunctions/Exponential.hh"
@@ -21,7 +22,7 @@ Exponential::Exponential(const Exponential & right):
 Exponential::~Exponential() {
 }
 
-double Exponential::operator() (double x) const {
+CLHEPdouble Exponential::operator() (CLHEPdouble x) const {
   if (x<0) return 0;
   return exp(-x/_decayConstant.getValue())/_decayConstant.getValue();
 }

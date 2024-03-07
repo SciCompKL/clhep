@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ASin.cc,v 1.4 2003/10/10 17:40:39 garren Exp $
 #include "CLHEP/GenericFunctions/AbsFunction.hh"
@@ -20,7 +21,7 @@ ASin::ASin(const ASin & right) : AbsFunction(right)
 {  }
 
 
-double ASin::operator() (double x) const {
+CLHEPdouble ASin::operator() (CLHEPdouble x) const {
   return asin(x);
 }
 

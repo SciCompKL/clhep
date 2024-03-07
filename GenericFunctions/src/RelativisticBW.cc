@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/GenericFunctions/RelativisticBW.hh"
 #include "CLHEP/GenericFunctions/Variable.hh"
 #include <assert.h>
@@ -31,12 +32,12 @@ RelativisticBWDistribution::RelativisticBWDistribution():
 RelativisticBWDistribution::~RelativisticBWDistribution() {
 }
 
-double RelativisticBWDistribution::operator() (double x) const {
-  double M=_mass.getValue();
-  double G=_width.getValue();
-  double g=sqrt(M*M*(M*M+G*G));
-  double k = 2.0*sqrt(2.0)*M*G*g/M_PI/sqrt(M*M+g);
-  double f = k/((x-M)*(x-M)*(x+M)*(x+M)+M*M*G*G);
+CLHEPdouble RelativisticBWDistribution::operator() (CLHEPdouble x) const {
+  CLHEPdouble M=_mass.getValue();
+  CLHEPdouble G=_width.getValue();
+  CLHEPdouble g=sqrt(M*M*(M*M+G*G));
+  CLHEPdouble k = 2.0*sqrt(2.0)*M*G*g/M_PI/sqrt(M*M+g);
+  CLHEPdouble f = k/((x-M)*(x-M)*(x+M)*(x+M)+M*M*G*G);
   return f;
 
 }

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/GenericFunctions/AdaptiveRKStepper.hh"
 #include "CLHEP/GenericFunctions/EmbeddedRKStepper.hh"
 
@@ -34,7 +35,7 @@ namespace Genfun {
   void AdaptiveRKStepper::step(const RKIntegrator::RKData       * data, 
 			      const RKIntegrator::RKData::Data & s, 
 			      RKIntegrator::RKData::Data       & d,
-			      double                             timeLimit) const {
+			      CLHEPdouble                             timeLimit) const {
     //
     // Adaptive stepsize control
     //
@@ -42,9 +43,9 @@ namespace Genfun {
       stepsize=sStepsize;
     }
     const unsigned int p = eeStepper->order();              // Order of the stepper
-    const double deltaMax = T*std::pow(S/Rmax, (int)(p+1)); // Maximum error 4 adjustment.
-    const double TINY   = 1.0E-30;                          // Denominator regularization
-    double hnext;
+    const CLHEPdouble deltaMax = T*std::pow(S/Rmax, (int)(p+1)); // Maximum error 4 adjustment.
+    const CLHEPdouble TINY   = 1.0E-30;                          // Denominator regularization
+    CLHEPdouble hnext;
     //
     // Time limited step ? 
     // 
@@ -53,9 +54,9 @@ namespace Genfun {
     //--------------------------------------//
     // Take one step, from s to d:    //
     //--------------------------------------//
-    double h = d.time-s.time;
+    CLHEPdouble h = d.time-s.time;
     while (1) {
-      std::vector<double> errors;
+      std::vector<CLHEPdouble> errors;
       eeStepper->step(data, s, d, errors);
       if (timeLimit!=0.0) return;
       
@@ -63,13 +64,13 @@ namespace Genfun {
       for (size_t e=0;e<errors.size();e++) errors[e] = fabs(errors[e]);
     
       // Select the largest:
-      double delta = (*std::max_element(errors.begin(),errors.end()));
+      CLHEPdouble delta = (*std::max_element(errors.begin(),errors.end()));
       if (delta > T) {
 	//
 	// Bail out and try a smaller step.
 	//
 	h = std::max(S*h*std::pow(T/(delta + TINY), 1.0/(p+1)),Rmin*h);
-	if  (!(((double) (s.time+h) - (double) s.time) > 0) ) {
+	if  (!(((CLHEPdouble) (s.time+h) - (CLHEPdouble) s.time) > 0) ) {
 	  throw std::runtime_error("Warning, RK Integrator step underflow");
 	}
 	d.time = s.time+h;
@@ -105,40 +106,40 @@ namespace Genfun {
   AdaptiveRKStepper::EEStepper::~EEStepper() {
   }
  
-  double & AdaptiveRKStepper::tolerance(){
+  CLHEPdouble & AdaptiveRKStepper::tolerance(){
     return T;
   }
 
-  const double & AdaptiveRKStepper::tolerance() const{
+  const CLHEPdouble & AdaptiveRKStepper::tolerance() const{
     return T;
   }
   
-  double & AdaptiveRKStepper::startingStepsize(){
+  CLHEPdouble & AdaptiveRKStepper::startingStepsize(){
     return sStepsize;
   }
-  const double & AdaptiveRKStepper::startingStepsize() const{
+  const CLHEPdouble & AdaptiveRKStepper::startingStepsize() const{
     return sStepsize;
   }
   
-  double & AdaptiveRKStepper::safetyFactor(){
+  CLHEPdouble & AdaptiveRKStepper::safetyFactor(){
     return S;
   }
 
-  const double & AdaptiveRKStepper::safetyFactor() const{
+  const CLHEPdouble & AdaptiveRKStepper::safetyFactor() const{
     return S;
   }
   
-  double & AdaptiveRKStepper::rmin(){
+  CLHEPdouble & AdaptiveRKStepper::rmin(){
     return Rmin;
   }
-  const double & AdaptiveRKStepper::rmin() const{
+  const CLHEPdouble & AdaptiveRKStepper::rmin() const{
     return Rmin;
   }
   
-  double & AdaptiveRKStepper::rmax(){
+  CLHEPdouble & AdaptiveRKStepper::rmax(){
     return Rmax;
   }
-  const double & AdaptiveRKStepper::rmax() const{
+  const CLHEPdouble & AdaptiveRKStepper::rmax() const{
     return Rmax;
   }
 

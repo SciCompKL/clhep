@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -28,84 +29,84 @@ HepRandomEngine & RandSkewNormal::engine() {return *localEngine;}
 
 RandSkewNormal::~RandSkewNormal() {}
 
-double RandSkewNormal::operator()() 
+CLHEPdouble RandSkewNormal::operator()() 
 {
   return fire( shapeParameter );
 }
 
-double RandSkewNormal::operator()( double shape ) 
+CLHEPdouble RandSkewNormal::operator()( CLHEPdouble shape ) 
 {
   return fire( shape );
 }
 
 //-------------
 
-double RandSkewNormal::shoot(HepRandomEngine* anEngine)
+CLHEPdouble RandSkewNormal::shoot(HepRandomEngine* anEngine)
 {
   // really dumb use of RandSkewNormal
-  double k = 1;
+  CLHEPdouble k = 1;
   return gaussianSkewNormal( anEngine, k );
 }
 
-double RandSkewNormal::shoot(HepRandomEngine* anEngine, double shape) 
+CLHEPdouble RandSkewNormal::shoot(HepRandomEngine* anEngine, CLHEPdouble shape) 
 {
   return gaussianSkewNormal( anEngine, shape );
 }
 
-double RandSkewNormal::shoot() 
+CLHEPdouble RandSkewNormal::shoot() 
 {
   // really dumb use of RandSkewNormal
   HepRandomEngine* anEngine = HepRandom::getTheEngine();
-  double k = 1;
+  CLHEPdouble k = 1;
   return gaussianSkewNormal( anEngine, k );
 }
 
-double RandSkewNormal::shoot(double shape) 
+CLHEPdouble RandSkewNormal::shoot(CLHEPdouble shape) 
 {
   HepRandomEngine* anEngine = HepRandom::getTheEngine();
   return gaussianSkewNormal( anEngine, shape );
 }
 
-void RandSkewNormal::shootArray( const int size, double* vect,
-                                  double shape )
+void RandSkewNormal::shootArray( const int size, CLHEPdouble* vect,
+                                  CLHEPdouble shape )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = shoot(shape);
 }
 
 void RandSkewNormal::shootArray(HepRandomEngine* anEngine, const int size,
-                                   double* vect, double shape )
+                                   CLHEPdouble* vect, CLHEPdouble shape )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = shoot(anEngine, shape);
 }
 
 //-------------
 
-double RandSkewNormal::fire() {
+CLHEPdouble RandSkewNormal::fire() {
   return gaussianSkewNormal( getLocalEngine(), getShapeParameter() );
 }
 
-double RandSkewNormal::fire(double shape) {
+CLHEPdouble RandSkewNormal::fire(CLHEPdouble shape) {
   return gaussianSkewNormal( getLocalEngine(), shape );
 }
 
-void RandSkewNormal::fireArray( const int size, double* vect)
+void RandSkewNormal::fireArray( const int size, CLHEPdouble* vect)
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = fire( shapeParameter );
 }
 
-void RandSkewNormal::fireArray( const int size, double* vect,
-                                 double shape )
+void RandSkewNormal::fireArray( const int size, CLHEPdouble* vect,
+                                 CLHEPdouble shape )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = fire( shape );
 }
 
 //-------------
 
-double RandSkewNormal::gaussianSkewNormal ( HepRandomEngine* e, double k) 
+CLHEPdouble RandSkewNormal::gaussianSkewNormal ( HepRandomEngine* e, CLHEPdouble k) 
 { 
   // RandSkewNormal is an implementation of Azzalini's SN generator
   // http://azzalini.stat.unipd.it/SN/
@@ -113,11 +114,11 @@ double RandSkewNormal::gaussianSkewNormal ( HepRandomEngine* e, double k)
   // For location parameter m = 0., scale = 1.
   // To get a distribution with scale parameter b and location m:
   //    r = m + b * RandSkewNormal.fire(k);
-  double u[2] = {0.};
+  CLHEPdouble u[2] = {0.};
   RandGaussT::shootArray(e, 2, u, 0, 1);
-  double delta = k/std::sqrt(1. + k*k);
-  double u1 = delta*u[0] + std::sqrt(1 - delta*delta)*u[1];
-  double r = u[0] >= 0 ? u1 : -u1;
+  CLHEPdouble delta = k/std::sqrt(1. + k*k);
+  CLHEPdouble u1 = delta*u[0] + std::sqrt(1 - delta*delta)*u[1];
+  CLHEPdouble r = u[0] >= 0 ? u1 : -u1;
   return r;
 }
 
@@ -147,7 +148,7 @@ std::istream & RandSkewNormal::get ( std::istream & is ) {
   }
   if (possibleKeywordInput(is, "Uvec", shapeParameter)) {
     std::vector<unsigned long> t(2);
-    is >> shapeParameter >> t[0] >> t[1]; shapeParameter = DoubConv::longs2double(t); 
+    is >> shapeParameter >> t[0] >> t[1]; shapeParameter = DoubConv::longs2CLHEPdouble(t); 
     return is;
   }
   // is >> shapeParameter encompassed by possibleKeywordInput

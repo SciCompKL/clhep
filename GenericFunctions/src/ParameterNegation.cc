@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ParameterNegation.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/ParameterNegation.hh"
@@ -24,7 +25,7 @@ ParameterNegation::~ParameterNegation()
 }
 
 
-double ParameterNegation::getValue() const {
+CLHEPdouble ParameterNegation::getValue() const {
   return - _arg1->getValue();
 }
 

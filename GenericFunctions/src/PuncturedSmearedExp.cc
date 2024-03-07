@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: PuncturedSmearedExp.cc,v 1.4 2010/06/16 18:22:01 garren Exp $
 #include "CLHEP/GenericFunctions/PuncturedSmearedExp.hh"
@@ -22,7 +23,7 @@ PuncturedSmearedExp::PuncturedSmearedExp(const PuncturedSmearedExp & right):
 {
 }
 
-void PuncturedSmearedExp::puncture(double xmin, double xmax) {
+void PuncturedSmearedExp::puncture(CLHEPdouble xmin, CLHEPdouble xmax) {
   std::ostringstream mn, mx;
   mn << "Min_" << _punctures.size()/2;
   mx << "Max_" << _punctures.size()/2;
@@ -70,16 +71,16 @@ const Parameter & PuncturedSmearedExp::sigma() const {
 }
 
 
-double PuncturedSmearedExp::operator() (double argument) const {
+CLHEPdouble PuncturedSmearedExp::operator() (CLHEPdouble argument) const {
   // Fetch the paramters.  This operator does not convolve numerically.
-  static const double sqrtTwo = sqrt(2.0);
+  static const CLHEPdouble sqrtTwo = sqrt(2.0);
 
-  double xsigma  = _sigma.getValue();
-  double tau    = _lifetime.getValue();
-  double x      =  argument;
+  CLHEPdouble xsigma  = _sigma.getValue();
+  CLHEPdouble tau    = _lifetime.getValue();
+  CLHEPdouble x      =  argument;
 
   // Copy:
-  std::vector<double> punctures(_punctures.size());
+  std::vector<CLHEPdouble> punctures(_punctures.size());
   for (size_t i=0;i<_punctures.size();i++) punctures[i]=_punctures[i].getValue();
   
   // Overlap elimination:
@@ -91,16 +92,16 @@ double PuncturedSmearedExp::operator() (double argument) const {
 
     for (size_t i=0;i<punctures.size()/2;i++) {
       std::sort(punctures.begin()+2*i, punctures.begin()+2*i+2);
-      double min1=punctures[2*i];
-      double max1=punctures[2*i+1];
+      CLHEPdouble min1=punctures[2*i];
+      CLHEPdouble max1=punctures[2*i+1];
       for (size_t j=i+1;j<punctures.size()/2;j++) {
 	std::sort(punctures.begin()+2*j, punctures.begin()+2*j+2);
-	double min2=punctures[2*j];
-	double max2=punctures[2*j+1];
+	CLHEPdouble min2=punctures[2*j];
+	CLHEPdouble max2=punctures[2*j+1];
 	if ((min2>min1 && max1>min2) || (min1>min2 && max2<min1)) {
 	  punctures[2*i]  =std::min(min1,min2);
 	  punctures[2*i+1]=std::max(max1,max2);
-	  std::vector<double>::iterator t0=punctures.begin()+2*j, t1=t0+2;
+	  std::vector<CLHEPdouble>::iterator t0=punctures.begin()+2*j, t1=t0+2;
 	  punctures.erase(t0,t1);
 	  overlap=true;
 	  break;
@@ -110,15 +111,15 @@ double PuncturedSmearedExp::operator() (double argument) const {
     }
   } 
 
-  double expG=0,norm=0;
+  CLHEPdouble expG=0,norm=0;
   for (size_t i=0;i<punctures.size()/2;i++) {
     
-    double a = punctures[2*i];
-    double b = punctures[2*i+1];
+    CLHEPdouble a = punctures[2*i];
+    CLHEPdouble b = punctures[2*i+1];
 
-    double alpha = (a/xsigma + xsigma/tau)/sqrtTwo;
-    double beta  = (b/xsigma + xsigma/tau)/sqrtTwo;
-    double delta = 1/sqrtTwo/xsigma;
+    CLHEPdouble alpha = (a/xsigma + xsigma/tau)/sqrtTwo;
+    CLHEPdouble beta  = (b/xsigma + xsigma/tau)/sqrtTwo;
+    CLHEPdouble delta = 1/sqrtTwo/xsigma;
 
        
     norm += 2*tau*exp(1/(4*delta*delta*tau*tau))*(exp(-alpha/(delta*tau)) - exp(-beta/(delta*tau)));
@@ -134,10 +135,10 @@ double PuncturedSmearedExp::operator() (double argument) const {
   return expG/norm;
 }
 
-double PuncturedSmearedExp::erfc(double x) const {
+CLHEPdouble PuncturedSmearedExp::erfc(CLHEPdouble x) const {
   // This is accurate to 7 places.
   // See Numerical Recipes P 221
-  double t, z, ans;
+  CLHEPdouble t, z, ans;
   z = (x < 0) ? -x : x;
   t = 1.0/(1.0+.5*z);
   ans = t*exp(-z*z-1.26551223+t*(1.00002368+t*(0.37409196+t*(0.09678418+
@@ -147,8 +148,8 @@ double PuncturedSmearedExp::erfc(double x) const {
   return ans;
 }
 
-double PuncturedSmearedExp::pow(double x,int n) const {
-  double val=1;
+CLHEPdouble PuncturedSmearedExp::pow(CLHEPdouble x,int n) const {
+  CLHEPdouble val=1;
   for(int i=0;i<n;i++){
     val=val*x;
   }

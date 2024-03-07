@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: RotationInterfaces.cc,v 1.2 2003/08/13 20:00:14 garren Exp $
 // ---------------------------------------------------------------------------
@@ -19,12 +20,12 @@ namespace CLHEP  {
 //
 //-******************************
 
-double Hep4RotationInterface::getTolerance() {return tolerance;} 
-double Hep4RotationInterface::setTolerance( double tol ) {
-  double t = tolerance; tolerance = tol; return t;
+CLHEPdouble Hep4RotationInterface::getTolerance() {return tolerance;} 
+CLHEPdouble Hep4RotationInterface::setTolerance( CLHEPdouble tol ) {
+  CLHEPdouble t = tolerance; tolerance = tol; return t;
 }
 
-double Hep4RotationInterface::tolerance = 
+CLHEPdouble Hep4RotationInterface::tolerance = 
 			Hep4RotationInterface::ToleranceTicks * 1.0e-08;
 
 

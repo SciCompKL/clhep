@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -36,7 +37,7 @@ inline const HepMatrix::HepMatrix_row_const HepMatrix::operator[] (int r) const
   return b;
 }
 
-inline double &HepMatrix::HepMatrix_row::operator[](int c) {
+inline CLHEPdouble &HepMatrix::HepMatrix_row::operator[](int c) {
 #ifdef MATRIX_BOUND_CHECK
   if (_r<0 || _r>=_a.num_row() || c<0 || c>=_a.num_col())
     HepGenMatrix::error("Range error in HepMatrix::operator[][]");
@@ -44,7 +45,7 @@ inline double &HepMatrix::HepMatrix_row::operator[](int c) {
   return *(_a.m.begin()+_r*_a.ncol+c);
 }
 
-inline const double &HepMatrix::HepMatrix_row_const::operator[](int c) const
+inline const CLHEPdouble &HepMatrix::HepMatrix_row_const::operator[](int c) const
 {
 #ifdef MATRIX_BOUND_CHECK
   if (_r<0 || _r>=_a.num_row() || c<0 || c>=_a.num_col())

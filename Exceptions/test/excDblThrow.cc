@@ -1,4 +1,5 @@
-// Explore single- and double-throwing techniques
+#include "CLHEPTypes.hpp"
+// Explore single- and CLHEPdouble-throwing techniques
 
 
 #include <iostream>
@@ -29,8 +30,8 @@ struct D : public B  {
   throw ref;
 
 
-#define double( obj )               \
-  cerr << "\ndouble( " #obj " )\n"; \
+#define CLHEPdouble( obj )               \
+  cerr << "\nCLHEPdouble( " #obj " )\n"; \
   try  { throw obj; }               \
   catch ( const B & x )  { throw; }
 
@@ -44,15 +45,15 @@ void  f( void g() )  {
 }
 
 
-void  test1()  { double( B() ); }
-void  test2()  { double( D() ); }
+void  test1()  { CLHEPdouble( B() ); }
+void  test2()  { CLHEPdouble( D() ); }
 void  test3()  { single( B() ); }
 void  test4()  { single( D() ); }
 
 
 int  main()  {
 
-  cerr << "\nTesting double throws:\n";
+  cerr << "\nTesting CLHEPdouble throws:\n";
   f( test1 );
   f( test2 );
 

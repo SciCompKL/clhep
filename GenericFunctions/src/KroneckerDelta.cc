@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: KroneckerDelta.cc,v 1.1 2007/01/21 20:54:34 boudreau Exp $
 #include "CLHEP/GenericFunctions/KroneckerDelta.hh"
@@ -17,7 +18,7 @@ KroneckerDelta::KroneckerDelta(const KroneckerDelta & right) : AbsFunction(right
 KroneckerDelta::~KroneckerDelta() {
 }
 
-double KroneckerDelta::operator() (double x) const {
+CLHEPdouble KroneckerDelta::operator() (CLHEPdouble x) const {
   if (x < 0.5 && x > -0.5) return 1;
   return 0;
 }

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandSkewNormal.h,v 1.1 2011/05/27 20:36:28 garren Exp $
 // -*- C++ -*-
 //
@@ -35,8 +36,8 @@ class RandSkewNormal : public HepRandom {
 
 public:
 
-  inline RandSkewNormal ( HepRandomEngine& anEngine, double shape=0. );
-  inline RandSkewNormal ( HepRandomEngine* anEngine, double shape=0. );
+  inline RandSkewNormal ( HepRandomEngine& anEngine, CLHEPdouble shape=0. );
+  inline RandSkewNormal ( HepRandomEngine* anEngine, CLHEPdouble shape=0. );
   // These constructors should be used to instantiate a RandSkewNormal
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -51,35 +52,35 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  double shoot();
+  static  CLHEPdouble shoot();
 
-  static  double shoot( double shape );
+  static  CLHEPdouble shoot( CLHEPdouble shape );
 
-  static  void shootArray ( const int size, double* vect,
-                            double shape=0. );
+  static  void shootArray ( const int size, CLHEPdouble* vect,
+                            CLHEPdouble shape=0. );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  double shoot( HepRandomEngine* anEngine );
+  static  CLHEPdouble shoot( HepRandomEngine* anEngine );
 
-  static  double shoot( HepRandomEngine* anEngine, double shape );
+  static  CLHEPdouble shoot( HepRandomEngine* anEngine, CLHEPdouble shape );
 
   static  void shootArray ( HepRandomEngine* anEngine, const int size,
-                            double* vect, double shape=0. );
+                            CLHEPdouble* vect, CLHEPdouble shape=0. );
 
   //  Methods using the localEngine to shoot random values, by-passing
   //  the static generator.
 
-  double fire();
+  CLHEPdouble fire();
 
-  double fire( double shape );
+  CLHEPdouble fire( CLHEPdouble shape );
 
-  void fireArray ( const int size, double* vect );
-  void fireArray ( const int size, double* vect, double shape );
+  void fireArray ( const int size, CLHEPdouble* vect );
+  void fireArray ( const int size, CLHEPdouble* vect, CLHEPdouble shape );
   
-  double operator()();
-  double operator()( double shape );
+  CLHEPdouble operator()();
+  CLHEPdouble operator()( CLHEPdouble shape );
 
   // Save and restore to/from streams
   
@@ -94,15 +95,15 @@ public:
   
 protected:
 
-  static double gaussianSkewNormal ( HepRandomEngine *e, double k);
-  double getShapeParameter() { return shapeParameter; }
+  static CLHEPdouble gaussianSkewNormal ( HepRandomEngine *e, CLHEPdouble k);
+  CLHEPdouble getShapeParameter() { return shapeParameter; }
 
   inline HepRandomEngine* getLocalEngine();
 
 private:
 
   shared_ptr<HepRandomEngine> localEngine;
-  double shapeParameter;
+  CLHEPdouble shapeParameter;
 
 };
 

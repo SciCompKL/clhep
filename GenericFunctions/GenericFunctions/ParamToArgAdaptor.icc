@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ParamToArgAdaptor.icc,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 #include "CLHEP/GenericFunctions/ParamToArgAdaptor.hh"
@@ -56,7 +57,7 @@ ParamToArgAdaptor<F>::ParamToArgAdaptor(const ParamToArgAdaptor & right):
 
 
 template <class F>
-double ParamToArgAdaptor<F>::operator ()(double x) const
+CLHEPdouble ParamToArgAdaptor<F>::operator ()(CLHEPdouble x) const
 {
   std::cerr
     << "Warning.  ParamToArgAdaptor called with scalar argument"
@@ -81,7 +82,7 @@ unsigned int ParamToArgAdaptor<F>::dimensionality() const {
 }
 
 template <class F> 
-double ParamToArgAdaptor<F>::operator() (const Argument & a) const {
+CLHEPdouble ParamToArgAdaptor<F>::operator() (const Argument & a) const {
   if (dimensionality()!= a.dimension()) {
     std::cerr
       << "Warning: ParamToArgAdaptor function/argument dimension mismatch"

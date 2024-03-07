@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Erf.cc,v 1.6 2010/06/16 18:22:01 garren Exp $
 
@@ -22,7 +23,7 @@ Erf::Erf(const Erf & right):
 Erf::~Erf() {
 }
 
-double Erf::operator() (double x) const {
+CLHEPdouble Erf::operator() (CLHEPdouble x) const {
   return x<0 ? -_incompleteGamma(x*x): _incompleteGamma(x*x);
 }
 

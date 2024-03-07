@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // test Bug #90848 in CLHEP::Evaluator
 // Author: Tom Roberts
 
@@ -11,17 +12,17 @@ class MyEvaluator : public HepTool::Evaluator {
 public:
 	MyEvaluator() : HepTool::Evaluator() { setStdMath(); }
 	bool isOK() { return status() == OK; }
-	double evaluate(const char *e) {
-		double v = HepTool::Evaluator::evaluate(e);
-		if(status() != OK) v = std::numeric_limits<double>::quiet_NaN();
+	CLHEPdouble evaluate(const char *e) {
+		CLHEPdouble v = HepTool::Evaluator::evaluate(e);
+		if(status() != OK) v = std::numeric_limits<CLHEPdouble>::quiet_NaN();
 		return v;
 	}
 };
 
 struct Test { 
 	const char *expr;
-	double value1;		// x=1, y=2, z=3
-	double value2;		// x=10, y=-20 z=-30
+	CLHEPdouble value1;		// x=1, y=2, z=3
+	CLHEPdouble value2;		// x=10, y=-20 z=-30
 };
 
 Test tests[] = {
@@ -61,7 +62,7 @@ int main() {
 //printf("x=1.0 y=2.0 z=3.0\n");
 	int err=0;
 	for(unsigned i=0; i<sizeof(tests)/sizeof(Test); ++i) {
-		double v=e.evaluate(tests[i].expr);
+		CLHEPdouble v=e.evaluate(tests[i].expr);
 		if(std::isnan(v) || std::fabs(v-tests[i].value1) > 1E-12 || !e.isOK()) {
 			printf("%s = %.6f should be %.6f\n",tests[i].expr,
 				e.evaluate(tests[i].expr),tests[i].value1);
@@ -74,7 +75,7 @@ int main() {
 	e.setVariable("z",-30.0);
 //printf("x=10.0 y=-20.0 z=-30.0\n");
 	for(unsigned i=0; i<sizeof(tests)/sizeof(Test); ++i) {
-		double v=e.evaluate(tests[i].expr);
+		CLHEPdouble v=e.evaluate(tests[i].expr);
 		if(std::isnan(v) || std::fabs(v-tests[i].value2) > 1E-12 || !e.isOK()) {
 			printf("%s = %.6f should be %.6f\n",tests[i].expr,
 				e.evaluate(tests[i].expr),tests[i].value2);
@@ -82,7 +83,7 @@ int main() {
 		}
 	}
 
-	double v=e.evaluate("unknown(0.0)");
+	CLHEPdouble v=e.evaluate("unknown(0.0)");
 	if(!std::isnan(v) || e.isOK()) {
 		printf("%s succeeded\n","unknown(0.0)");
 		err=1;

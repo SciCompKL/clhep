@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Tan.cc,v 1.4 2003/10/10 17:40:39 garren Exp $
 // ---------------------------------------------------------------------------
@@ -20,7 +21,7 @@ Tan::Tan(const Tan & right) : AbsFunction(right)
 {  }
 
 
-double Tan::operator() (double x) const {
+CLHEPdouble Tan::operator() (CLHEPdouble x) const {
   return tan(x);
 }
 

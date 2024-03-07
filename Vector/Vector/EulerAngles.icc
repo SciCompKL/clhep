@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef EULERANGLES_ICC
 #error "EulerAngles.icc included without EulerAngles.h"
 #endif
@@ -25,51 +26,51 @@ inline HepEulerAngles::HepEulerAngles()
 {}  // HepEulerAngles::HepEulerAngles()
 
 inline HepEulerAngles::HepEulerAngles ( 
-				double phi1, double ttheta, double psi1 )
+				CLHEPdouble phi1, CLHEPdouble ttheta, CLHEPdouble psi1 )
 				: phi_( phi1 ), theta_( ttheta ), psi_( psi1 )
 {}  // HepEulerAngles::HepEulerAngles()
 
-inline double HepEulerAngles::getPhi() const {
+inline CLHEPdouble HepEulerAngles::getPhi() const {
   return  phi_;
 }  // HepEulerAngles::getPhi()
 
-inline double HepEulerAngles::phi() const {
+inline CLHEPdouble HepEulerAngles::phi() const {
   return  phi_;
 }  // HepEulerAngles::phi()
 
-inline HepEulerAngles & HepEulerAngles::setPhi( double phi1 ) {
+inline HepEulerAngles & HepEulerAngles::setPhi( CLHEPdouble phi1 ) {
   phi_ = phi1;
   return  *this;
 }  // HepEulerAngles::setPhi()
 
-inline double HepEulerAngles::getTheta() const {
+inline CLHEPdouble HepEulerAngles::getTheta() const {
   return  theta_;
 }  // HepEulerAngles::getTheta()
 
-inline double HepEulerAngles::theta() const {
+inline CLHEPdouble HepEulerAngles::theta() const {
   return  theta_;
 }  // HepEulerAngles::theta()
 
-inline HepEulerAngles & HepEulerAngles::setTheta( double ttheta ) {
+inline HepEulerAngles & HepEulerAngles::setTheta( CLHEPdouble ttheta ) {
   theta_ = ttheta;
   return  *this;
 }  // HepEulerAngles::setTheta()
 
-inline double HepEulerAngles::getPsi() const {
+inline CLHEPdouble HepEulerAngles::getPsi() const {
   return  psi_;
 }  // HepEulerAngles::getPsi()
 
-inline double HepEulerAngles::psi() const {
+inline CLHEPdouble HepEulerAngles::psi() const {
   return  psi_;
 }  // HepEulerAngles::psi()
 
-inline HepEulerAngles & HepEulerAngles::setPsi( double psi1 ) {
+inline HepEulerAngles & HepEulerAngles::setPsi( CLHEPdouble psi1 ) {
   psi_ = psi1;
   return  *this;
 }  // HepEulerAngles::setPsi()
 
 inline HepEulerAngles & 
-	HepEulerAngles::set( double phi1, double ttheta, double psi1 ) {
+	HepEulerAngles::set( CLHEPdouble phi1, CLHEPdouble ttheta, CLHEPdouble psi1 ) {
   phi_ = phi1, theta_ = ttheta, psi_ = psi1;
   return *this;
 }  // HepEulerAngles::set()
@@ -112,12 +113,12 @@ inline bool HepEulerAngles::operator>=( const HepEulerAngles & ea ) const {
   return  ( compare( ea ) >= 0 );
 }  // HepEulerAngles::operator>=()
 
-inline double HepEulerAngles::getTolerance() {
+inline CLHEPdouble HepEulerAngles::getTolerance() {
   return  tolerance;
 }  // HepEulerAngles::getTolerance()
 
-inline double HepEulerAngles::setTolerance( double tol ) {
-  double oldTolerance( tolerance );
+inline CLHEPdouble HepEulerAngles::setTolerance( CLHEPdouble tol ) {
+  CLHEPdouble oldTolerance( tolerance );
   tolerance = tol;
   return  oldTolerance;
 }  // HepEulerAngles::setTolerance()

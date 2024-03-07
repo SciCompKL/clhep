@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // testBug7328.cc
 //
 // The bug reported a memory leak in inverting symmetric matrices (of size
@@ -65,10 +66,10 @@ int test_inversion (int N) {
   }
 #define DET_ALSO
 #ifdef  DET_ALSO
-  double detS  =  S.determinant();
+  CLHEPdouble detS  =  S.determinant();
 //    std::cout<<"Determinant   N = " << N << 
 //    	"  =  " << detS <<std::endl;   
-  double detSS = SS.determinant();
+  CLHEPdouble detSS = SS.determinant();
 //    std::cout<<"Determinant Inverse  N = " << N << 
 //    	"  =  " << detSS <<std::endl; 
   if (fabs((detS-1.0/detSS)/detS) > 1.0e-6) {
@@ -80,14 +81,14 @@ int test_inversion (int N) {
   return 0;
 }
 
-void heapAddresses ( double * &hNew, 
-		     double * &hMalloc, 
-		     double * &hNew10000, 
-		     double * &hMalloc80000 ) {
-  hNew = new double;
-  hMalloc =  (double*) malloc(sizeof(double));		    
-  hNew10000 = new double[10000];
-  hMalloc80000 =  (double*) malloc(10000*sizeof(double));
+void heapAddresses ( CLHEPdouble * &hNew, 
+		     CLHEPdouble * &hMalloc, 
+		     CLHEPdouble * &hNew10000, 
+		     CLHEPdouble * &hMalloc80000 ) {
+  hNew = new CLHEPdouble;
+  hMalloc =  (CLHEPdouble*) malloc(sizeof(CLHEPdouble));		    
+  hNew10000 = new CLHEPdouble[10000];
+  hMalloc80000 =  (CLHEPdouble*) malloc(10000*sizeof(CLHEPdouble));
 //  std::cout << std::hex << hNew << " " << hMalloc<< " " 
 //            << hNew10000 << " " << hMalloc80000 << std::endl;
   free (hMalloc80000);
@@ -96,14 +97,14 @@ void heapAddresses ( double * &hNew,
   delete hNew;
 }
 
-int checkHeap (	double * &hNew, 
-		double * &hMalloc, 
-		double * &hNew10000, 
-		double * &hMalloc80000,
-		double * &xhNew, 
-		double * &xhMalloc, 
-		double * &xhNew10000, 
-  		double * &xhMalloc80000 ) {
+int checkHeap (	CLHEPdouble * &hNew, 
+		CLHEPdouble * &hMalloc, 
+		CLHEPdouble * &hNew10000, 
+		CLHEPdouble * &hMalloc80000,
+		CLHEPdouble * &xhNew, 
+		CLHEPdouble * &xhMalloc, 
+		CLHEPdouble * &xhNew10000, 
+  		CLHEPdouble * &xhMalloc80000 ) {
   int ret = 0;
   if (hNew != xhNew) {
     std::cout<< "Leak:\n"
@@ -137,8 +138,8 @@ int main(int, char **) {
     ret = test_inversion(i);
     if (ret) return ret;
   }
-  double *hNew, *hMalloc, *hNew10000, *hMalloc80000;
-  double *xhNew, *xhMalloc, *xhNew10000, *xhMalloc80000;
+  CLHEPdouble *hNew, *hMalloc, *hNew10000, *hMalloc80000;
+  CLHEPdouble *xhNew, *xhMalloc, *xhNew10000, *xhMalloc80000;
   
   for (int count=0; count < 2; ++count) {
 

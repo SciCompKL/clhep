@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionQuotient.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/FunctionQuotient.hh"
@@ -35,12 +36,12 @@ unsigned int FunctionQuotient::dimensionality() const {
 }
 
 
-double FunctionQuotient::operator ()(double x) const
+CLHEPdouble FunctionQuotient::operator ()(CLHEPdouble x) const
 {
   return (*_arg1)(x)/(*_arg2)(x);
 }
 
-double FunctionQuotient::operator ()(const Argument & x) const
+CLHEPdouble FunctionQuotient::operator ()(const Argument & x) const
 {
   return (*_arg1)(x)/(*_arg2)(x);
 }

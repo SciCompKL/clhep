@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef _LEGENDRECOEFFICIENTSET_H_
 #define _LEGENDRECOEFFICIENTSET_H_
 #include <complex>
@@ -22,10 +23,10 @@ namespace Genfun {
     unsigned int getLMax() const;
     
     // Readonly access to a specific coefficient:
-    const std::complex<double> & operator () (unsigned int l) const;
+    const std::complex<CLHEPdouble> & operator () (unsigned int l) const;
     
     // Read/write access to a specific coefficient:
-    std::complex<double> & operator () (unsigned int l);
+    std::complex<CLHEPdouble> & operator () (unsigned int l);
     
     LegendreCoefficientSet & operator= (const LegendreCoefficientSet & );
 

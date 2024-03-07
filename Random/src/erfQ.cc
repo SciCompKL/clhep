@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: erfQ.cc,v 1.3 2003/08/13 20:00:12 garren Exp $
 // -*- C++ -*-
 //
@@ -9,7 +10,7 @@
 
 // Contains methods that do not depend on large tables.
 //
-// erfQ		  (double x)
+// erfQ		  (CLHEPdouble x)
 
 // =======================================================================
 // M Fischler	  - Created 1/26/00.
@@ -22,13 +23,13 @@
 
 namespace CLHEP {
 
-double HepStat::erfQ (double x) {
+CLHEPdouble HepStat::erfQ (CLHEPdouble x) {
 //
 // erfQ is accurate to 7 places.
 // See Numerical Recipes P 221
 //
 
-  double t, z, erfc; 
+  CLHEPdouble t, z, erfc; 
 
   z = std::abs(x);
   t = 1.0/(1.0+.5*z);

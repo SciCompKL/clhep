@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionTimesParameter.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/FunctionTimesParameter.hh"
@@ -32,13 +33,13 @@ FunctionTimesParameter::~FunctionTimesParameter()
 }
 
 
-double FunctionTimesParameter::operator ()(double x) const
+CLHEPdouble FunctionTimesParameter::operator ()(CLHEPdouble x) const
 {
   return _parameter->getValue() * (*_function)(x);
 }
 
 
-double FunctionTimesParameter::operator ()(const Argument & x) const
+CLHEPdouble FunctionTimesParameter::operator ()(const Argument & x) const
 {
   return _parameter->getValue() * (*_function)(x);
 }

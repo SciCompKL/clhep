@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: Randomize.h,v 1.4 2011/05/31 20:57:00 garren Exp $
 // -*- C++ -*-
 //

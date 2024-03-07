@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandSkewNormal.icc,v 1.1 2011/05/27 20:36:28 garren Exp $
 // -*- C++ -*-
 // 
@@ -13,11 +14,11 @@
 
 namespace CLHEP {
 
-RandSkewNormal::RandSkewNormal(HepRandomEngine & anEngine, double shape )
+RandSkewNormal::RandSkewNormal(HepRandomEngine & anEngine, CLHEPdouble shape )
 : HepRandom(), localEngine(&anEngine, do_nothing_deleter()), 
   shapeParameter(shape) {}
 
-RandSkewNormal::RandSkewNormal(HepRandomEngine * anEngine, double shape )
+RandSkewNormal::RandSkewNormal(HepRandomEngine * anEngine, CLHEPdouble shape )
 : HepRandom(), localEngine(anEngine), shapeParameter(shape) {}
 
 HepRandomEngine * RandSkewNormal::getLocalEngine() 

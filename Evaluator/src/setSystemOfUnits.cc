@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id:$
 // ----------------------------------------------------------------------
@@ -7,26 +8,26 @@
 
 namespace HepTool {
 
-void Evaluator::setSystemOfUnits(double meter,
-				 double kilogram,
-				 double second,
-				 double ampere,
-				 double kelvin,
-				 double mole,
-				 double candela)
+void Evaluator::setSystemOfUnits(CLHEPdouble meter,
+				 CLHEPdouble kilogram,
+				 CLHEPdouble second,
+				 CLHEPdouble ampere,
+				 CLHEPdouble kelvin,
+				 CLHEPdouble mole,
+				 CLHEPdouble candela)
 {			    
-  const double kilo_  = 1.e+03; // chilioi (Greek) "thousand"
-  const double mega_  = 1.e+06; // megas (Greek) "large"
-  const double giga_  = 1.e+09; // gigas (Greek) "giant"
-  const double tera_  = 1.e+12; // teras (Greek) "monster"
-  const double peta_  = 1.e+15; // pente (Greek) "five"
+  const CLHEPdouble kilo_  = 1.e+03; // chilioi (Greek) "thousand"
+  const CLHEPdouble mega_  = 1.e+06; // megas (Greek) "large"
+  const CLHEPdouble giga_  = 1.e+09; // gigas (Greek) "giant"
+  const CLHEPdouble tera_  = 1.e+12; // teras (Greek) "monster"
+  const CLHEPdouble peta_  = 1.e+15; // pente (Greek) "five"
 
-  const double deci_  = 1.e-01; // decimus (Latin) "tenth"
-  const double centi_ = 1.e-02; // centum  (Latin) "hundred"
-  const double milli_ = 1.e-03; // mille   (Latin) "thousand"
-  const double micro_ = 1.e-06; // micro (Latin) or mikros (Greek) "small"
-  const double nano_  = 1.e-09; // nanus (Latin) or nanos  (Greek) "dwarf"
-  const double pico_  = 1.e-12; // pico (Spanish) "bit"
+  const CLHEPdouble deci_  = 1.e-01; // decimus (Latin) "tenth"
+  const CLHEPdouble centi_ = 1.e-02; // centum  (Latin) "hundred"
+  const CLHEPdouble milli_ = 1.e-03; // mille   (Latin) "thousand"
+  const CLHEPdouble micro_ = 1.e-06; // micro (Latin) or mikros (Greek) "small"
+  const CLHEPdouble nano_  = 1.e-09; // nanus (Latin) or nanos  (Greek) "dwarf"
+  const CLHEPdouble pico_  = 1.e-12; // pico (Spanish) "bit"
 
   // ======================================================================
   //
@@ -37,42 +38,42 @@ void Evaluator::setSystemOfUnits(double meter,
   
   // Length
   // metrum (Latin) and metron (Greek) "measure"
-  const double m = meter;
+  const CLHEPdouble m = meter;
   setVariable("meter", m);
   setVariable("metre", m);
   setVariable("m",     m);
   
   // Mass
-  const double kg = kilogram;
+  const CLHEPdouble kg = kilogram;
   setVariable("kilogram", kg);
   setVariable("kg",       kg);
   
   // Time
   // minuta secundam (Latin) "second small one"
-  const double s = second;
+  const CLHEPdouble s = second;
   setVariable("second", s);
   setVariable("s",      s);
   
   // Current
   // ---  honors Andre-Marie Ampere (1775-1836) of France
-  const double A = ampere;
+  const CLHEPdouble A = ampere;
   setVariable("ampere", A);
   setVariable("amp",    A);
   setVariable("A",      A);
   
   // Temperature
   // ---  honors William Thomson, 1st Baron Lord Kelvin (1824-1907) of England
-  const double K = kelvin;
+  const CLHEPdouble K = kelvin;
   setVariable("kelvin", K);
   setVariable("K",      K);
   
   // Amount of substance
-  const double mol = mole;
+  const CLHEPdouble mol = mole;
   setVariable("mole", mol);
   setVariable("mol",  mol);
   
   // Luminous intensity
-  const double cd  = candela;
+  const CLHEPdouble cd  = candela;
   setVariable("candela", cd);
   setVariable("cd",      cd);
 
@@ -83,19 +84,19 @@ void Evaluator::setSystemOfUnits(double meter,
   // ======================================================================
 
   // Plane angle 
-  const double rad = 1.;
+  const CLHEPdouble rad = 1.;
   setVariable("radian", rad);
   setVariable("rad",    rad);
   setVariable("milliradian", milli_ * rad);
   setVariable("mrad",        milli_ * rad);
 
-  const double pi  = 3.14159265358979323846;
-  const double deg = rad*pi/180.;
+  const CLHEPdouble pi  = 3.14159265358979323846;
+  const CLHEPdouble deg = rad*pi/180.;
   setVariable("degree", deg);
   setVariable("deg",    deg);
 
   // Solid angle
-  const double sr  = 1.;
+  const CLHEPdouble sr  = 1.;
   setVariable("steradian", sr);
   setVariable("sr",        sr);
 
@@ -107,108 +108,108 @@ void Evaluator::setSystemOfUnits(double meter,
 
   // Frequency
   // ---  honors Heinrich Rudolf Hertz (1857-1894) of Germany
-  const double Hz = 1./s;
+  const CLHEPdouble Hz = 1./s;
   setVariable("hertz", Hz);
   setVariable("Hz",    Hz);
 
   // Force
   // ---  honors Sir Isaac Newton (1642-1727) of England
-  const double N = m * kg / (s*s);
+  const CLHEPdouble N = m * kg / (s*s);
   setVariable("newton", N);
   setVariable("N",      N);
 
   // Pressure
   // ---  honors Blaise Pascal (1623-1662) of France
-  const double Pa = N / (m*m);
+  const CLHEPdouble Pa = N / (m*m);
   setVariable("pascal", Pa);
   setVariable("Pa",     Pa);
 
-  const double atm = 101325. * Pa;
+  const CLHEPdouble atm = 101325. * Pa;
   setVariable("atmosphere", atm);
   setVariable("atm",        atm);
 
-  const double bar = 100000*Pa;
+  const CLHEPdouble bar = 100000*Pa;
   setVariable("bar", bar);
 
   // Energy
   // ---  honors James Prescott Joule (1818-1889) of England
-  const double J = N * m;
+  const CLHEPdouble J = N * m;
   setVariable("joule", J);
   setVariable("J",     J);
 
   // Power
   // ---  honors James Watt (1736-1819) of Scotland
-  const double W = J / s;
+  const CLHEPdouble W = J / s;
   setVariable("watt", W);
   setVariable("W",    W);
 
   // Electric charge
   // ---  honors Charles-Augustin de Coulomb (1736-1806) of France
-  const double C = A * s;
+  const CLHEPdouble C = A * s;
   setVariable("coulomb", C);
   setVariable("C",       C);
 
   // Electric potential  
   // ---  honors Count Alessandro Volta (1745-1827) of Italy
-  const double V = J / C;
+  const CLHEPdouble V = J / C;
   setVariable("volt", V);
   setVariable("V",    V);
 
   // Electric resistance
   // ---  honors Georg Simon Ohm (1787-1854) of Germany
-  const double ohm = V / A;
+  const CLHEPdouble ohm = V / A;
   setVariable("ohm", ohm);
 
   // Electric conductance
   // ---  honors Ernst Werner von Siemens (1816-1892) or
   //      his brother Sir William (Karl Wilhelm von) Siemens (1823-1883)
   //      of Germany (England)
-  const double S = 1./ ohm;
+  const CLHEPdouble S = 1./ ohm;
   setVariable("siemens", S);
   setVariable("S",       S);
 
   // Electric capacitance
   // ---  honors Michael Faraday (1791-1867) of England
-  const double F = C / V;
+  const CLHEPdouble F = C / V;
   setVariable("farad", F);
   setVariable("F",     F);
 
   // Magnetic flux density
   // ---  honors Nikola Tesla (1856-1943) of Croatia (United States)
-  const double T = V * s / (m*m);
+  const CLHEPdouble T = V * s / (m*m);
   setVariable("tesla", T);
   setVariable("T",     T);
 
   // ---  honors Karl Friedrich Gauss (1777-1855) of Germany
-  const double Gs = 1.e-4*T;
+  const CLHEPdouble Gs = 1.e-4*T;
   setVariable("gauss", Gs);
   setVariable("Gs",    Gs);
 
   // Magnetic flux
   // ---  honors Wilhelm Eduard Weber (1804-1891) of Germany
-  const double Wb = V * s;
+  const CLHEPdouble Wb = V * s;
   setVariable("weber", Wb);
   setVariable("Wb",    Wb);
 
   // Inductance
   // ---  honors Joseph Henry (1797-1878) of the United States
-  const double H = Wb / A;
+  const CLHEPdouble H = Wb / A;
   setVariable("henry", H);
   setVariable("H",     H);
 
   // Luminous flux
-  const double lm = cd * sr;
+  const CLHEPdouble lm = cd * sr;
   setVariable("lumen", lm);
   setVariable("lm",    lm);
 
   // Illuminace
-  const double lx = lm / (m*m);
+  const CLHEPdouble lx = lm / (m*m);
   setVariable("lux", lx);
   setVariable("lx",  lx);
 
   // Radioactivity
   // ---  honors Antoine-Henri Becquerel (1852-1908) of France
-  const double Bq = 1./s;
+  const CLHEPdouble Bq = 1./s;
   setVariable("becquerel", Bq);
   setVariable("Bq",        Bq);
   setVariable("kilobecquerel",  kilo_ * Bq);
@@ -229,7 +230,7 @@ void Evaluator::setSystemOfUnits(double meter,
 
   // Specific energy
   // ---  honors Louis Harold Gray, F.R.S. (1905-1965) of England
-  const double Gy = J / kg;
+  const CLHEPdouble Gy = J / kg;
   setVariable("gray", Gy);
   setVariable("Gy",   Gy);
   setVariable("kilogray",   kilo_ * Gy);
@@ -237,7 +238,7 @@ void Evaluator::setSystemOfUnits(double meter,
   setVariable("microgray", micro_ * Gy);
 
   // Dose equivalent
-  const double Sv = J / kg;
+  const CLHEPdouble Sv = J / kg;
   setVariable("sievert", Sv);
   setVariable("Sv",      Sv);
 
@@ -249,17 +250,17 @@ void Evaluator::setSystemOfUnits(double meter,
 
   // Length
 
-  const double mm = milli_ * m;
+  const CLHEPdouble mm = milli_ * m;
   setVariable("millimeter", mm);
   setVariable("mm",         mm);
 
-  const double cm = centi_ * m;
+  const CLHEPdouble cm = centi_ * m;
   setVariable("centimeter", cm);
   setVariable("cm",         cm);
 
   setVariable("decimeter",  deci_ * m);
 
-  const double km = kilo_ * m; 
+  const CLHEPdouble km = kilo_ * m; 
   setVariable("kilometer",  km);
   setVariable("km",         km);
 
@@ -280,7 +281,7 @@ void Evaluator::setSystemOfUnits(double meter,
   setVariable("cm2", cm*cm);
   setVariable("km2", km*km);
 
-  const double barn = 1.e-28 * m*m; 
+  const CLHEPdouble barn = 1.e-28 * m*m; 
   setVariable("barn",      barn);
   setVariable("millibarn", milli_ * barn);
   setVariable("mbarn",     milli_ * barn);
@@ -296,7 +297,7 @@ void Evaluator::setSystemOfUnits(double meter,
   setVariable("cc",  cm*cm*cm);
   setVariable("km3", km*km*km);
 
-  const double L = 1.e-3*m*m*m;
+  const CLHEPdouble L = 1.e-3*m*m*m;
   setVariable("liter", L);  
   setVariable("litre", L);  
   setVariable("L",     L);  
@@ -307,14 +308,14 @@ void Evaluator::setSystemOfUnits(double meter,
 
   // Length^-1
 
-  const double dpt = 1./m;
+  const CLHEPdouble dpt = 1./m;
   setVariable("diopter", dpt);
   setVariable("dioptre", dpt);
   setVariable("dpt",     dpt);
 
   // Mass
 
-  const double g = 0.001*kg;
+  const CLHEPdouble g = 0.001*kg;
   setVariable("gram", g);
   setVariable("g",    g);
   setVariable("milligram",   milli_ * g);
@@ -363,9 +364,9 @@ void Evaluator::setSystemOfUnits(double meter,
   setVariable("gigajoule",   giga_ * J);
   setVariable("GJ",          giga_ * J);
 
-  const double e_SI  = 1.60217733e-19;  // positron charge in coulomb
-  const double ePlus = e_SI * C;        // positron charge
-  const double eV    = ePlus * V;
+  const CLHEPdouble e_SI  = 1.60217733e-19;  // positron charge in coulomb
+  const CLHEPdouble ePlus = e_SI * C;        // positron charge
+  const CLHEPdouble eV    = ePlus * V;
   setVariable("electronvolt", eV);
   setVariable("eV",           eV);
   setVariable("kiloelectronvolt", kilo_ * eV);

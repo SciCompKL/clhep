@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // CLASSDOC OFF
 // ---------------------------------------------------------------------------
@@ -90,7 +91,7 @@
 //
 //  The user would normally use "Matrix" class whose precision is the same
 //  as the other classes of CLHEP (ThreeVec, for example). However, he/she
-//  can explicitly choose Matrix (double) or MatrixF (float) if he/she wishes.
+//  can explicitly choose Matrix (CLHEPdouble) or MatrixF (CLHEPfloat) if he/she wishes.
 //  In the former case, include "Matrix.h." In the latter case, include either
 //  "Matrix.h," or "MatrixF.h," or both. The only operators that can talk
 //  to each other are the copy constructor and assignment operator.
@@ -235,16 +236,16 @@ public:
    virtual int num_col() const;
    // Returns the number of columns.
 
-   virtual const double & operator()(int row, int col) const;
-   virtual double & operator()(int row, int col);
+   virtual const CLHEPdouble & operator()(int row, int col) const;
+   virtual CLHEPdouble & operator()(int row, int col);
    // Read or write a matrix element. 
    // ** Note that the indexing starts from (1,1). **
 
-   HepMatrix & operator *= (double t);
-   // Multiply a Matrix by a floating number.
+   HepMatrix & operator *= (CLHEPdouble t);
+   // Multiply a Matrix by a CLHEPfloating number.
 
-   HepMatrix & operator /= (double t); 
-   // Divide a Matrix by a floating number.
+   HepMatrix & operator /= (CLHEPdouble t); 
+   // Divide a Matrix by a CLHEPfloating number.
 
    HepMatrix & operator += ( const HepMatrix &);
    HepMatrix & operator += ( const HepSymMatrix &);
@@ -267,7 +268,7 @@ public:
    HepMatrix operator- () const;
    // unary minus, ie. flip the sign of each element.
 
-   HepMatrix apply(double (*f)(double, int, int)) const;
+   HepMatrix apply(CLHEPdouble (*f)(CLHEPdouble, int, int)) const;
    // Apply a function to all elements of the matrix.
 
    HepMatrix T() const;
@@ -300,16 +301,16 @@ public:
    // Invert a matrix. Throw std::runtime_error on failure. 
 
 
-   double determinant() const;
+   CLHEPdouble determinant() const;
    // calculate the determinant of the matrix.
 
-   double trace() const;
+   CLHEPdouble trace() const;
    // calculate the trace of the matrix (sum of diagonal elements).
 
    class HepMatrix_row {
    public:
       inline HepMatrix_row(HepMatrix&,int);
-      double & operator[](int);
+      CLHEPdouble & operator[](int);
    private:
       HepMatrix& _a;
       int _r;
@@ -317,7 +318,7 @@ public:
    class HepMatrix_row_const {
    public:
       inline HepMatrix_row_const (const HepMatrix&,int);
-      const double & operator[](int) const;
+      const CLHEPdouble & operator[](int) const;
    private:
       const HepMatrix& _a;
       int _r;
@@ -362,20 +363,20 @@ private:
    friend HepVector qr_solve(HepMatrix *, const HepVector &);
    friend HepMatrix qr_solve(HepMatrix *, const HepMatrix &b);
    friend void tridiagonal(HepSymMatrix *a,HepMatrix *hsm);
-   friend void row_house(HepMatrix *,const HepMatrix &, double,
+   friend void row_house(HepMatrix *,const HepMatrix &, CLHEPdouble,
 			 int, int, int, int);
-   friend void row_house(HepMatrix *,const HepVector &, double,
+   friend void row_house(HepMatrix *,const HepVector &, CLHEPdouble,
 			 int, int);
    friend void back_solve(const HepMatrix &R, HepVector *b);
    friend void back_solve(const HepMatrix &R, HepMatrix *b);
-   friend void col_givens(HepMatrix *A, double c,
-			  double s, int k1, int k2, 
+   friend void col_givens(HepMatrix *A, CLHEPdouble c,
+			  CLHEPdouble s, int k1, int k2, 
 			  int rowmin, int rowmax);
    //    Does a column Givens update.
-   friend void row_givens(HepMatrix *A, double c,
-			  double s, int k1, int k2, 
+   friend void row_givens(HepMatrix *A, CLHEPdouble c,
+			  CLHEPdouble s, int k1, int k2, 
 			  int colmin, int colmax);
-   friend void col_house(HepMatrix *,const HepMatrix &, double,
+   friend void col_house(HepMatrix *,const HepMatrix &, CLHEPdouble,
 			 int, int, int, int);
    friend HepVector house(const HepMatrix &a,int row,int col);
    friend void house_with_update(HepMatrix *a,int row,int col);
@@ -383,7 +384,7 @@ private:
    friend void house_with_update2(HepSymMatrix *a,HepMatrix *v,
 				  int row,int col); 
 
-   int dfact_matrix(double &det, int *ir);
+   int dfact_matrix(CLHEPdouble &det, int *ir);
    // factorize the matrix. If successful, the return code is 0. On
    // return, det is the determinant and ir[] is row-interchange
    // matrix. See CERNLIB's DFACT routine.
@@ -392,9 +393,9 @@ private:
    // invert the matrix. See CERNLIB DFINV.
 
 #ifdef DISABLE_ALLOC
-   std::vector<double > m;
+   std::vector<CLHEPdouble > m;
 #else
-   std::vector<double,Alloc<double,25> > m;
+   std::vector<CLHEPdouble,Alloc<CLHEPdouble,25> > m;
 #endif
    int nrow, ncol;
    int size_;
@@ -404,12 +405,12 @@ private:
 // implemented in Matrix.cc and Matrix.icc (inline).
 
 HepMatrix operator*(const HepMatrix &, const HepMatrix &);
-HepMatrix operator*(double t, const HepMatrix &);
-HepMatrix operator*(const HepMatrix &, double );
+HepMatrix operator*(CLHEPdouble t, const HepMatrix &);
+HepMatrix operator*(const HepMatrix &, CLHEPdouble );
 // Multiplication operators
 // Note that m *= hm1 is always faster than m = m * hm1.
 
-HepMatrix operator/(const HepMatrix &, double );
+HepMatrix operator/(const HepMatrix &, CLHEPdouble );
 // m = hm1 / t. (m /= t is faster if you can use it.)
 
 HepMatrix operator+(const HepMatrix &hm1, const HepMatrix &hm2);
@@ -459,21 +460,21 @@ void back_solve(const HepMatrix &R, HepMatrix *b);
 // solves a number of equations of this form in one step, where b is a matrix
 // with each column a different vector. See also solve.
 
-void col_house(HepMatrix *a, const HepMatrix &v, double vnormsq,
+void col_house(HepMatrix *a, const HepMatrix &v, CLHEPdouble vnormsq,
 	       int row, int col, int row_start, int col_start);
 void col_house(HepMatrix *a, const HepMatrix &v, int row, int col,
 	       int row_start, int col_start);
 // Does a column Householder update.
 
-void col_givens(HepMatrix *A, double c, double s,
+void col_givens(HepMatrix *A, CLHEPdouble c, CLHEPdouble s,
 		int k1, int k2, int row_min=1, int row_max=0);
 // do a column Givens update
 
-void row_givens(HepMatrix *A, double c, double s,
+void row_givens(HepMatrix *A, CLHEPdouble c, CLHEPdouble s,
 		int k1, int k2, int col_min=1, int col_max=0);
 // do a row Givens update
 
-void givens(double a, double b, double *c, double *s);
+void givens(CLHEPdouble a, CLHEPdouble b, CLHEPdouble *c, CLHEPdouble *s);
 // algorithm 5.1.5 in Golub and Van Loan
 
 HepVector house(const HepMatrix &a, int row=1, int col=1);
@@ -483,9 +484,9 @@ void house_with_update(HepMatrix *a, int row=1, int col=1);
 void house_with_update(HepMatrix *a, HepMatrix *v, int row=1, int col=1);
 // Finds and does Householder reflection on matrix.
 
-void row_house(HepMatrix *a, const HepVector &v, double vnormsq,
+void row_house(HepMatrix *a, const HepVector &v, CLHEPdouble vnormsq,
 	       int row=1, int col=1);
-void row_house(HepMatrix *a, const HepMatrix &v, double vnormsq,
+void row_house(HepMatrix *a, const HepMatrix &v, CLHEPdouble vnormsq,
 	       int row, int col, int row_start, int col_start);
 void row_house(HepMatrix *a, const HepMatrix &v, int row, int col,
 	       int row_start, int col_start);

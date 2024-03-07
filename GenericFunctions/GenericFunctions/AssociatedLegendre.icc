@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "CLHEP/GenericFunctions/Variable.hh"
@@ -13,7 +14,7 @@ namespace Genfun {
 FUNCTION_OBJECT_IMP(AssociatedLegendre)
 
 // This is the product n (n-2) (n-4)... 
-inline double dfactorial (int n) {
+inline CLHEPdouble dfactorial (int n) {
   if (n<=1) return 1.0;
   else return n*dfactorial(n-2);
 }
@@ -51,7 +52,7 @@ unsigned int AssociatedLegendre::m() const {
 
 
 inline
-double AssociatedLegendre::operator() (double x) const {
+CLHEPdouble AssociatedLegendre::operator() (CLHEPdouble x) const {
   gsl_sf_result result;
   int status = gsl_sf_legendre_Plm_e (_l, _m, x, &result);
   

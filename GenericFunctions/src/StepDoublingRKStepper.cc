@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/GenericFunctions/StepDoublingRKStepper.hh"
 #include <stdexcept>
 #include <cmath>
@@ -14,12 +15,12 @@ namespace Genfun {
   void StepDoublingRKStepper::step   (const RKIntegrator::RKData       * data, 
 				      const RKIntegrator::RKData::Data & s, 
 				      RKIntegrator::RKData::Data       & d, 
-				      std::vector<double>              & errors) const {
+				      std::vector<CLHEPdouble>              & errors) const {
     const unsigned int nvar = s.variable.size();
     RKIntegrator::RKData::Data d1(nvar),d2(nvar);
 
     doStep(data,s,d);
-    double dt = (d.time - s.time);
+    CLHEPdouble dt = (d.time - s.time);
     d1.time = s.time + dt/2.0;
     d2.time = d.time;
 
@@ -31,7 +32,7 @@ namespace Genfun {
     for (size_t v=0;v<nvar;v++) errors[v]=fabs(d2.variable[v]-d.variable[v]);
 
     // Final correction:
-    for (size_t v=0;v<nvar;v++) d.variable[v] = d2.variable[v] + ((d2.variable[v]-d.variable[v])/double(std::pow(2.,(int)(tableau.order())-1)));
+    for (size_t v=0;v<nvar;v++) d.variable[v] = d2.variable[v] + ((d2.variable[v]-d.variable[v])/CLHEPdouble(std::pow(2.,(int)(tableau.order())-1)));
 
   }
   
@@ -39,14 +40,14 @@ namespace Genfun {
 				     const RKIntegrator::RKData::Data & s, 
 				     RKIntegrator::RKData::Data       & d) const {
     // First step:
-    double h = (d.time - s.time);
+    CLHEPdouble h = (d.time - s.time);
     
     
     if (h<=0) throw std::runtime_error ("SimpleRKStepper:  negative stepsize");
     const unsigned int nvar = s.variable.size();
     // Compute all of the k's..:
     //
-    std::vector<std::vector<double> >k(tableau.nSteps());
+    std::vector<std::vector<CLHEPdouble> >k(tableau.nSteps());
     for (unsigned int i=0;i<tableau.nSteps();i++) {
       k[i].resize(nvar,0);
       Argument arg(nvar);

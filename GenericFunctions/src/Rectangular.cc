@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Rectangular.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/Rectangular.hh"
@@ -27,7 +28,7 @@ _height(right._height)
 Rectangular::~Rectangular() {
 }
 
-double Rectangular::operator() (double x) const {
+CLHEPdouble Rectangular::operator() (CLHEPdouble x) const {
   if (x<_x0.getValue()) {
     return _baseline.getValue();
   }

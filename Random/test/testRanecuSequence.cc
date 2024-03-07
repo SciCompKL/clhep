@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 //
 // testRanecuSequence 
@@ -13,11 +14,11 @@
 
 struct Sample {
     int seed;
-    std::vector<double> case1;
-    std::vector<double> case2;
-    std::vector<double> case3;
-    std::vector<double> case4;
-    std::vector<double> case5;
+    std::vector<CLHEPdouble> case1;
+    std::vector<CLHEPdouble> case2;
+    std::vector<CLHEPdouble> case3;
+    std::vector<CLHEPdouble> case4;
+    std::vector<CLHEPdouble> case5;
 };
 
 void useSeed( int, std::vector<Sample>& );

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: PeriodicRectangular.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //---------------------Rectangular------------------------------------------//
@@ -33,8 +34,8 @@ namespace Genfun {
     virtual ~PeriodicRectangular();
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & arg) const override {return operator() (arg[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & arg) const override {return operator() (arg[0]);}
   
     // Get the position of the first discontinuity
     Parameter & a(); 

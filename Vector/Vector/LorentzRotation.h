@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // CLASSDOC OFF
 // $Id: LorentzRotation.h,v 1.3 2003/10/23 21:29:52 garren Exp $
@@ -79,7 +80,7 @@ public:
   inline HepLorentzRotation & operator = (const HepBoost           & m);
   // Assignment.
 
-         HepLorentzRotation & set (double bx, double by, double bz);
+         HepLorentzRotation & set (CLHEPdouble bx, CLHEPdouble by, CLHEPdouble bz);
   inline HepLorentzRotation & set (const Hep3Vector & p);
   inline HepLorentzRotation & set (const HepRotation  & r);
   inline HepLorentzRotation & set (const HepRotationX & r);
@@ -89,7 +90,7 @@ public:
   inline HepLorentzRotation & set (const HepBoostX & boost);
   inline HepLorentzRotation & set (const HepBoostY & boost);
   inline HepLorentzRotation & set (const HepBoostZ & boost);
-  inline HepLorentzRotation (double bx, double by, double bz);
+  inline HepLorentzRotation (CLHEPdouble bx, CLHEPdouble by, CLHEPdouble bz);
   inline HepLorentzRotation (const Hep3Vector & p);
   // Other Constructors giving a Lorentz-boost.
 
@@ -140,22 +141,22 @@ public:
 
   // ----------  Accessors:
 
-  inline double xx() const;
-  inline double xy() const;
-  inline double xz() const;
-  inline double xt() const;
-  inline double yx() const;
-  inline double yy() const;
-  inline double yz() const;
-  inline double yt() const;
-  inline double zx() const;
-  inline double zy() const;
-  inline double zz() const;
-  inline double zt() const;
-  inline double tx() const;
-  inline double ty() const;
-  inline double tz() const;
-  inline double tt() const;
+  inline CLHEPdouble xx() const;
+  inline CLHEPdouble xy() const;
+  inline CLHEPdouble xz() const;
+  inline CLHEPdouble xt() const;
+  inline CLHEPdouble yx() const;
+  inline CLHEPdouble yy() const;
+  inline CLHEPdouble yz() const;
+  inline CLHEPdouble yt() const;
+  inline CLHEPdouble zx() const;
+  inline CLHEPdouble zy() const;
+  inline CLHEPdouble zz() const;
+  inline CLHEPdouble zt() const;
+  inline CLHEPdouble tx() const;
+  inline CLHEPdouble ty() const;
+  inline CLHEPdouble tz() const;
+  inline CLHEPdouble tt() const;
   // Elements of the matrix.
 
   inline HepLorentzVector col1() const;
@@ -178,7 +179,7 @@ public:
   class HepLorentzRotation_row {
   public:
     inline HepLorentzRotation_row(const HepLorentzRotation &, int);
-    inline double operator [] (int) const;
+    inline CLHEPdouble operator [] (int) const;
   private:
     const HepLorentzRotation & rr;
     int ii;
@@ -188,7 +189,7 @@ public:
   inline const HepLorentzRotation_row operator [] (int) const; 
   // Returns object of the helper class for C-style subscripting r[i][j]
 
-  double operator () (int, int) const;
+  CLHEPdouble operator () (int, int) const;
   // Fortran-style subscripting: returns (i,j) element of the matrix.
 
   // ----------  Decomposition:
@@ -217,25 +218,25 @@ public:
   inline bool isIdentity() const;
   // Returns true if the Identity matrix.
 
-  double distance2( const HepBoost & b  ) const;
-  double distance2( const HepRotation & r  ) const;
-  double distance2( const HepLorentzRotation & lt  ) const;
+  CLHEPdouble distance2( const HepBoost & b  ) const;
+  CLHEPdouble distance2( const HepRotation & r  ) const;
+  CLHEPdouble distance2( const HepLorentzRotation & lt  ) const;
   // Decomposes L = B*R, returns the sum of distance2 for B and R.
 
-  double howNear(   const HepBoost & b ) const;
-  double howNear(   const HepRotation & r) const;
-  double howNear(   const HepLorentzRotation & lt ) const;
+  CLHEPdouble howNear(   const HepBoost & b ) const;
+  CLHEPdouble howNear(   const HepRotation & r) const;
+  CLHEPdouble howNear(   const HepLorentzRotation & lt ) const;
 
   bool isNear(const HepBoost & b,
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             CLHEPdouble epsilon=Hep4RotationInterface::tolerance) const;
   bool isNear(const HepRotation & r,
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             CLHEPdouble epsilon=Hep4RotationInterface::tolerance) const;
   bool isNear(const HepLorentzRotation & lt,
-             double epsilon=Hep4RotationInterface::tolerance) const;
+             CLHEPdouble epsilon=Hep4RotationInterface::tolerance) const;
 
   // ----------  Properties:
 
-  double norm2() const;
+  CLHEPdouble norm2() const;
   // distance2 (IDENTITY), which involves decomposing into B and R and summing 
   // norm2 for the individual B and R parts. 
 
@@ -278,29 +279,29 @@ public:
   // of lt * r and lt * b where r is a RotationX Y or Z or b is a BoostX Y or Z
   // These are, in fact, provided below for the transform() methods.
 
-  HepLorentzRotation & rotateX(double delta);
+  HepLorentzRotation & rotateX(CLHEPdouble delta);
   // Rotation around the x-axis; equivalent to LT = RotationX(delta) * LT
 
-  HepLorentzRotation & rotateY(double delta);
+  HepLorentzRotation & rotateY(CLHEPdouble delta);
   // Rotation around the y-axis; equivalent to LT = RotationY(delta) * LT
 
-  HepLorentzRotation & rotateZ(double delta);
+  HepLorentzRotation & rotateZ(CLHEPdouble delta);
   // Rotation around the z-axis; equivalent to LT = RotationZ(delta) * LT
 
-  inline HepLorentzRotation & rotate(double delta, const Hep3Vector& axis);
-  inline HepLorentzRotation & rotate(double delta, const Hep3Vector *axis);
+  inline HepLorentzRotation & rotate(CLHEPdouble delta, const Hep3Vector& axis);
+  inline HepLorentzRotation & rotate(CLHEPdouble delta, const Hep3Vector *axis);
   // Rotation around specified vector - LT = Rotation(delta,axis)*LT
 
-  HepLorentzRotation & boostX(double beta);
+  HepLorentzRotation & boostX(CLHEPdouble beta);
   // Pure boost along the x-axis; equivalent to LT = BoostX(beta) * LT
 
-  HepLorentzRotation & boostY(double beta);
+  HepLorentzRotation & boostY(CLHEPdouble beta);
   // Pure boost along the y-axis; equivalent to LT = BoostX(beta) * LT
 
-  HepLorentzRotation & boostZ(double beta);
+  HepLorentzRotation & boostZ(CLHEPdouble beta);
   // Pure boost along the z-axis; equivalent to LT = BoostX(beta) * LT
 
-  inline HepLorentzRotation & boost(double, double, double);
+  inline HepLorentzRotation & boost(CLHEPdouble, CLHEPdouble, CLHEPdouble);
   inline HepLorentzRotation & boost(const Hep3Vector &);
   // Lorenz boost.
 
@@ -317,25 +318,25 @@ public:
 
   // ---------- Tolerance
 
-  static inline double getTolerance();
-  static inline double setTolerance(double tol); 
+  static inline CLHEPdouble getTolerance();
+  static inline CLHEPdouble setTolerance(CLHEPdouble tol); 
 
   friend HepLorentzRotation inverseOf ( const HepLorentzRotation & lt );
 
 protected:
 
   inline HepLorentzRotation
-       (double mxx, double mxy, double mxz, double mxt,
-	double myx, double myy, double myz, double myt,
-	double mzx, double mzy, double mzz, double mzt,
-	double mtx, double mty, double mtz, double mtt);
+       (CLHEPdouble mxx, CLHEPdouble mxy, CLHEPdouble mxz, CLHEPdouble mxt,
+	CLHEPdouble myx, CLHEPdouble myy, CLHEPdouble myz, CLHEPdouble myt,
+	CLHEPdouble mzx, CLHEPdouble mzy, CLHEPdouble mzz, CLHEPdouble mzt,
+	CLHEPdouble mtx, CLHEPdouble mty, CLHEPdouble mtz, CLHEPdouble mtt);
   // Protected constructor.
   // DOES NOT CHECK FOR VALIDITY AS A LORENTZ TRANSFORMATION.
 
-  inline void setBoost(double, double, double);
+  inline void setBoost(CLHEPdouble, CLHEPdouble, CLHEPdouble);
   // Set elements according to a boost vector.
 
-  double mxx, mxy, mxz, mxt,
+  CLHEPdouble mxx, mxy, mxz, mxt,
             myx, myy, myz, myt,
             mzx, mzy, mzz, mzt,
             mtx, mty, mtz, mtt;

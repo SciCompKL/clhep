@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Variable.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //----------------------X------------ --------------------------------------//
@@ -33,8 +34,8 @@ namespace Genfun {
     virtual ~Variable();
   
     // Retrieve function value
-    virtual double operator ()(double argument) const override; 
-    virtual double operator ()(const Argument & a) const override;
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override; 
+    virtual CLHEPdouble operator ()(const Argument & a) const override;
 
     // Get the dimensionality, as specified in the constructor:
     virtual unsigned int dimensionality() const override ;  

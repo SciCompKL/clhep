@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ConstTimesFunction.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/ConstTimesFunction.hh"
@@ -5,7 +6,7 @@
 namespace Genfun {
 FUNCTION_OBJECT_IMP(ConstTimesFunction)
 
-ConstTimesFunction::ConstTimesFunction(double constant, const AbsFunction *arg):
+ConstTimesFunction::ConstTimesFunction(CLHEPdouble constant, const AbsFunction *arg):
   _constant(constant),
   _arg(arg->clone())
 {
@@ -28,13 +29,13 @@ ConstTimesFunction::~ConstTimesFunction()
 
 
 
-double ConstTimesFunction::operator ()(double x) const
+CLHEPdouble ConstTimesFunction::operator ()(CLHEPdouble x) const
 {
   return _constant * (*_arg)(x);
 }
 
 
-double ConstTimesFunction::operator ()(const Argument & x) const
+CLHEPdouble ConstTimesFunction::operator ()(const Argument & x) const
 {
   return _constant * (*_arg)(x);
 }

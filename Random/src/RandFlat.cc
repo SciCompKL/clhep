@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -23,7 +24,7 @@
 // M Fischler     - put and get to/from streams 12/10/04
 // M Fischler     - save and restore dist to streams 12/20/04
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing CLHEPdoubles avoid problems with precision 
 //			4/14/05
 // =======================================================================
 
@@ -48,28 +49,28 @@ HepRandomEngine & RandFlat::engine() {return *localEngine;}
 RandFlat::~RandFlat() {
 }
 
-double RandFlat::operator()() {
+CLHEPdouble RandFlat::operator()() {
   return fire( defaultA, defaultB );
 }
 
-double RandFlat::operator()( double w ) {
+CLHEPdouble RandFlat::operator()( CLHEPdouble w ) {
   return fire( w );
 }
 
-double RandFlat::operator()( double a, double b ) {
+CLHEPdouble RandFlat::operator()( CLHEPdouble a, CLHEPdouble b ) {
   return fire( a, b );
 }
 
-double RandFlat::shoot() {
+CLHEPdouble RandFlat::shoot() {
   return HepRandom::getTheEngine()->flat();
 }
 
-void RandFlat::shootArray(const int size, double* vect) {
+void RandFlat::shootArray(const int size, CLHEPdouble* vect) {
   HepRandom::getTheEngine()->flatArray(size,vect);
 }
 
-void RandFlat::shootArray( const int size, double* vect,
-                           double lx, double dx  )
+void RandFlat::shootArray( const int size, CLHEPdouble* vect,
+                           CLHEPdouble lx, CLHEPdouble dx  )
 {
    int i;
 
@@ -78,8 +79,8 @@ void RandFlat::shootArray( const int size, double* vect,
 }
 
 void RandFlat::shootArray( HepRandomEngine* anEngine,
-                           const int size, double* vect,
-                           double lx, double dx  )
+                           const int size, CLHEPdouble* vect,
+                           CLHEPdouble lx, CLHEPdouble dx  )
 {
    int i;
 
@@ -87,7 +88,7 @@ void RandFlat::shootArray( HepRandomEngine* anEngine,
      vect[i] = shoot(anEngine,lx,dx);
 }
 
-void RandFlat::fireArray( const int size, double* vect)
+void RandFlat::fireArray( const int size, CLHEPdouble* vect)
 {
    int i;
 
@@ -95,8 +96,8 @@ void RandFlat::fireArray( const int size, double* vect)
      vect[i] = fire( defaultA, defaultB );
 }
 
-void RandFlat::fireArray( const int size, double* vect,
-                          double lx, double dx  )
+void RandFlat::fireArray( const int size, CLHEPdouble* vect,
+                          CLHEPdouble lx, CLHEPdouble dx  )
 {
    int i;
 
@@ -201,9 +202,9 @@ std::istream & RandFlat::get ( std::istream & is ) {
   if (possibleKeywordInput(is, "Uvec", randomInt)) {
     std::vector<unsigned long> t(2);
     is >> randomInt >> firstUnusedBit;
-    is >> defaultWidth >>t[0]>>t[1]; defaultWidth = DoubConv::longs2double(t); 
-    is >> defaultA >> t[0] >> t[1]; defaultA = DoubConv::longs2double(t); 
-    is >> defaultB >> t[0] >> t[1]; defaultB = DoubConv::longs2double(t); 
+    is >> defaultWidth >>t[0]>>t[1]; defaultWidth = DoubConv::longs2CLHEPdouble(t); 
+    is >> defaultA >> t[0] >> t[1]; defaultA = DoubConv::longs2CLHEPdouble(t); 
+    is >> defaultB >> t[0] >> t[1]; defaultB = DoubConv::longs2CLHEPdouble(t); 
 		#ifdef TRACE_IO
 		std::cout << "RandFlat::get(): randomInt = " << randomInt
 			  << " firstUnusedBit = " << firstUnusedBit 

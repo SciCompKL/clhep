@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -11,7 +12,7 @@
 // John Marraffino - Created: 12th May 1998
 // M Fischler     - put and get to/from streams 12/10/04
 // M Fischler	      - put/get to/from streams uses pairs of ulongs when
-//			+ storing doubles avoid problems with precision 
+//			+ storing CLHEPdoubles avoid problems with precision 
 //			4/14/05
 // =======================================================================
 
@@ -32,46 +33,46 @@ HepRandomEngine & RandChiSquare::engine() {return *localEngine;}
 RandChiSquare::~RandChiSquare() {
 }
 
-double RandChiSquare::shoot( HepRandomEngine *anEngine,  double a ) {
+CLHEPdouble RandChiSquare::shoot( HepRandomEngine *anEngine,  CLHEPdouble a ) {
   return genChiSquare( anEngine, a );
 }
 
-double RandChiSquare::shoot( double a ) {
+CLHEPdouble RandChiSquare::shoot( CLHEPdouble a ) {
   HepRandomEngine *anEngine = HepRandom::getTheEngine();
   return genChiSquare( anEngine, a );
 }
 
-double RandChiSquare::fire( double a ) {
+CLHEPdouble RandChiSquare::fire( CLHEPdouble a ) {
   return genChiSquare( localEngine.get(), a );
 }
 
-void RandChiSquare::shootArray( const int size, double* vect,
-                            double a ) {
-  for( double* v = vect; v != vect+size; ++v )
+void RandChiSquare::shootArray( const int size, CLHEPdouble* vect,
+                            CLHEPdouble a ) {
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = shoot(a);
 }
 
 void RandChiSquare::shootArray( HepRandomEngine* anEngine,
-                            const int size, double* vect,
-                            double a )
+                            const int size, CLHEPdouble* vect,
+                            CLHEPdouble a )
 {
-  for( double* v = vect; v != vect+size; ++v )
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = shoot(anEngine,a);
 }
 
-void RandChiSquare::fireArray( const int size, double* vect) {
-  for( double* v = vect; v != vect+size; ++v )
+void RandChiSquare::fireArray( const int size, CLHEPdouble* vect) {
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = fire(defaultA);
 }
 
-void RandChiSquare::fireArray( const int size, double* vect,
-                           double a ) {
-  for( double* v = vect; v != vect+size; ++v )
+void RandChiSquare::fireArray( const int size, CLHEPdouble* vect,
+                           CLHEPdouble a ) {
+  for( CLHEPdouble* v = vect; v != vect+size; ++v )
     *v = fire(a);
 }
 
-double RandChiSquare::genChiSquare( HepRandomEngine *anEngine,
-                                       double a ) {
+CLHEPdouble RandChiSquare::genChiSquare( HepRandomEngine *anEngine,
+                                       CLHEPdouble a ) {
 /******************************************************************
  *                                                                *
  *        Chi Distribution - Ratio of Uniforms  with shift        *
@@ -89,8 +90,8 @@ double RandChiSquare::genChiSquare( HepRandomEngine *anEngine,
  * Implemented by R. Kremer, 1990                                 *
  ******************************************************************/
 
- static CLHEP_THREAD_LOCAL double a_in = -1.0,b,vm,vp,vd;
- double u,v,z,zz,r;
+ static CLHEP_THREAD_LOCAL CLHEPdouble a_in = -1.0,b,vm,vp,vd;
+ CLHEPdouble u,v,z,zz,r;
 
 // Check for invalid input value
 
@@ -170,7 +171,7 @@ std::istream & RandChiSquare::get ( std::istream & is ) {
   }
   if (possibleKeywordInput(is, "Uvec", defaultA)) {
     std::vector<unsigned long> t(2);
-    is >> defaultA >> t[0] >> t[1]; defaultA = DoubConv::longs2double(t); 
+    is >> defaultA >> t[0] >> t[1]; defaultA = DoubConv::longs2CLHEPdouble(t); 
     return is;
   }
   // is >> defaultA encompassed by possibleKeywordInput

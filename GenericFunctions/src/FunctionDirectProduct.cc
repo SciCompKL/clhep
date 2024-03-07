@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionDirectProduct.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/FunctionDirectProduct.hh"
@@ -32,7 +33,7 @@ FunctionDirectProduct::~FunctionDirectProduct()
 }
 
 
-double FunctionDirectProduct::operator() (const Argument & a) const {
+CLHEPdouble FunctionDirectProduct::operator() (const Argument & a) const {
   unsigned int P = a.dimension();
   Argument x1(_m);
   Argument x2(_n);
@@ -56,7 +57,7 @@ unsigned int FunctionDirectProduct::dimensionality() const {
   return _m+_n;
 }
 
-double FunctionDirectProduct::operator ()(double) const
+CLHEPdouble FunctionDirectProduct::operator ()(CLHEPdouble) const
 {
   std::cerr
     << "Warning.  direct product called with scalar argument"

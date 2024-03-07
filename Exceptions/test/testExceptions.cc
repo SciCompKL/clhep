@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ----------------------------------------------------------------------
 //
 // testExceptions.cc - test the DEFECT_NO_EXCEPTIONS version of the Exceptions package

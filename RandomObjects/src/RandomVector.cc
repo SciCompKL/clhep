@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandomVector.cc,v 1.3 2003/08/13 20:00:13 garren Exp $
 // -*- C++ -*-
 //

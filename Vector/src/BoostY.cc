@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -20,8 +21,8 @@ namespace CLHEP  {
 
 // ----------  Constructors and Assignment:
 
-HepBoostY & HepBoostY::set (double bbeta) {
-  double b2 = bbeta*bbeta;
+HepBoostY & HepBoostY::set (CLHEPdouble bbeta) {
+  CLHEPdouble b2 = bbeta*bbeta;
   if (b2 >= 1) {
     ZMthrowA (ZMxpvTachyonic(
     "Beta supplied to set HepBoostY represents speed >= c."));
@@ -37,7 +38,7 @@ HepBoostY & HepBoostY::set (double bbeta) {
 // ----------  Accessors:
 
 HepRep4x4 HepBoostY::rep4x4() const {
-  double bg = beta_*gamma_;
+  CLHEPdouble bg = beta_*gamma_;
   return HepRep4x4(   1,      0,    0,    0, 
 		      0,    gamma_, 0,    bg,
                       0,      0,    1,    0,
@@ -45,7 +46,7 @@ HepRep4x4 HepBoostY::rep4x4() const {
 }
 
 HepRep4x4Symmetric HepBoostY::rep4x4Symmetric() const {
-  double bg = beta_*gamma_;
+  CLHEPdouble bg = beta_*gamma_;
   return HepRep4x4Symmetric (   1,      0,    0,    0, 
 		                      gamma_, 0,    bg,
                       		 	      1,    0,
@@ -80,40 +81,40 @@ void HepBoostY::decompose (Hep3Vector & boost, HepAxisAngle & rotation) const {
 
 // ----------  Comparisons:
 
-double HepBoostY::distance2( const HepBoost & b ) const {
+CLHEPdouble HepBoostY::distance2( const HepBoost & b ) const {
   return b.distance2(*this);
 }
 
-double HepBoostY::distance2( const HepRotation & r ) const {
-  double db2 = norm2();
-  double dr2  = r.norm2();
+CLHEPdouble HepBoostY::distance2( const HepRotation & r ) const {
+  CLHEPdouble db2 = norm2();
+  CLHEPdouble dr2  = r.norm2();
   return (db2 + dr2);
 }
 
-double HepBoostY::distance2( const HepLorentzRotation & lt ) const {
+CLHEPdouble HepBoostY::distance2( const HepLorentzRotation & lt ) const {
   HepBoost b1;
   HepRotation r1;
   lt.decompose(b1,r1);
-  double db2 = distance2(b1);
-  double dr2  = r1.norm2();
+  CLHEPdouble db2 = distance2(b1);
+  CLHEPdouble dr2  = r1.norm2();
   return (db2 + dr2);
 }
 
-bool HepBoostY::isNear (const HepRotation & r, double epsilon) const {
-  double db2 = norm2();
+bool HepBoostY::isNear (const HepRotation & r, CLHEPdouble epsilon) const {
+  CLHEPdouble db2 = norm2();
   if (db2 > epsilon*epsilon) return false;
-  double dr2  = r.norm2();
+  CLHEPdouble dr2  = r.norm2();
   return (db2+dr2 <= epsilon*epsilon);
 }
 
 bool HepBoostY::isNear ( const HepLorentzRotation & lt, 
-					double epsilon  ) const {
+					CLHEPdouble epsilon  ) const {
   HepBoost b1;
   HepRotation r1;
-  double db2 = distance2(b1);
+  CLHEPdouble db2 = distance2(b1);
   lt.decompose(b1,r1);
   if (db2 > epsilon*epsilon) return false;
-  double dr2  = r1.norm2();
+  CLHEPdouble dr2  = r1.norm2();
   return (db2 + dr2);
 }
 
@@ -124,7 +125,7 @@ void HepBoostY::rectify() {
   // but may have drifted due to round-off error from many operations,
   // this forms an "exact" pure BoostY matrix for again.
   
-  double b2 = beta_*beta_;
+  CLHEPdouble b2 = beta_*beta_;
   if (b2 >= 1) {
     beta_ = 1.0 - 1.0e-8;		// Nan-proofing
     b2 = beta_*beta_;

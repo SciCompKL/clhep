@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #include "CLHEP/GenericFunctions/Mod.hh"
@@ -6,7 +7,7 @@
 namespace Genfun {
 FUNCTION_OBJECT_IMP(Mod)
 
-Mod::Mod(double y):
+Mod::Mod(CLHEPdouble y):
     _y(y)
 {}
 
@@ -19,11 +20,11 @@ Mod::~Mod() {
 
 
 // HAD BEEN:
-// double Mod::operator() (double x) const {
+// CLHEPdouble Mod::operator() (CLHEPdouble x) const {
 //  return drem_local(x-_y/2.0,_y) + _y/2.0;
 //}
 
-double Mod::operator() (double x) const {
+CLHEPdouble Mod::operator() (CLHEPdouble x) const {
   return (x - _y*floor(x/_y));
 }
 

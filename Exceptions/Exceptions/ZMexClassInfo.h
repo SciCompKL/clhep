@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef ZMEXCLASSINFO_H
 #define ZMEXCLASSINFO_H
 

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef ZMTHROW_H
 #define ZMTHROW_H
 

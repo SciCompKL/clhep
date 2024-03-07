@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include <iostream>
 using std::cerr;
 using std::endl;

@@ -1,10 +1,11 @@
+#include "CLHEPTypes.hpp"
 #include "CLHEP/GenericFunctions/SimpleRKStepper.hh"
 #include <cmath>
 #include <stdexcept>
 #include <vector>
 
 namespace Genfun {
-  SimpleRKStepper::SimpleRKStepper(const ButcherTableau & mtableau,double xstepsize):
+  SimpleRKStepper::SimpleRKStepper(const ButcherTableau & mtableau,CLHEPdouble xstepsize):
     tableau(mtableau),
     stepsize(xstepsize) 
   {
@@ -13,13 +14,13 @@ namespace Genfun {
   void SimpleRKStepper::step(const RKIntegrator::RKData       * data, 
 			     const RKIntegrator::RKData::Data & s, 
 			     RKIntegrator::RKData::Data       & d, 
-			     double                             timeLimit ) const {
-    const double h = timeLimit==0 ? stepsize : timeLimit - s.time;
+			     CLHEPdouble                             timeLimit ) const {
+    const CLHEPdouble h = timeLimit==0 ? stepsize : timeLimit - s.time;
     if (h<=0) throw std::runtime_error ("SimpleRKStepper:  negative stepsize");
     const unsigned int nvar = s.variable.size();
     // Compute all of the k's..:
     //
-    std::vector<std::vector<double> >k(tableau.nSteps());
+    std::vector<std::vector<CLHEPdouble> >k(tableau.nSteps());
     for (unsigned int i=0;i<tableau.nSteps();i++) {
       k[i].resize(nvar,0);
       Argument arg(nvar);

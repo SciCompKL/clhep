@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionSum.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/FunctionSum.hh"
@@ -37,13 +38,13 @@ FunctionSum::~FunctionSum()
 
 
 
-double FunctionSum::operator ()(double x) const
+CLHEPdouble FunctionSum::operator ()(CLHEPdouble x) const
 {
   return (*_arg1)(x)+(*_arg2)(x);
 }
 
 
-double FunctionSum::operator ()(const Argument & x) const
+CLHEPdouble FunctionSum::operator ()(const Argument & x) const
 {
   return (*_arg1)(x)+(*_arg2)(x);
 }

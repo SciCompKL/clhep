@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: AbsFunction.cc,v 1.4 2007/01/21 20:20:41 boudreau Exp $
 #include "CLHEP/GenericFunctions/AbsFunction.hh"
@@ -68,7 +69,7 @@ FunctionQuotient operator / (const AbsFunction & a, const AbsFunction & b) {
   return FunctionQuotient(&a,&b);
 }
 
-FunctionConvolution convolve (const AbsFunction & a, const AbsFunction & b, double x0, double x1) {
+FunctionConvolution convolve (const AbsFunction & a, const AbsFunction & b, CLHEPdouble x0, CLHEPdouble x1) {
   return FunctionConvolution(&a,&b, x0, x1);
 }
 
@@ -84,36 +85,36 @@ FunctionDirectProduct operator % (const AbsFunction & a, const AbsFunction & b) 
   return FunctionDirectProduct(&a,&b);
 }
 
-ConstTimesFunction operator * (const AbsFunction &op2, double c) {
+ConstTimesFunction operator * (const AbsFunction &op2, CLHEPdouble c) {
   return ConstTimesFunction(c, &op2);
 }
 
-ConstPlusFunction  operator + (const AbsFunction &op2, double c) {
+ConstPlusFunction  operator + (const AbsFunction &op2, CLHEPdouble c) {
   return ConstPlusFunction(c,&op2);
 }
 
-ConstPlusFunction  operator - (const AbsFunction &op2, double c) {
+ConstPlusFunction  operator - (const AbsFunction &op2, CLHEPdouble c) {
   return ConstPlusFunction(-c, &op2);
 }
 
-ConstTimesFunction operator / (const AbsFunction &op2, double c) {
+ConstTimesFunction operator / (const AbsFunction &op2, CLHEPdouble c) {
   return ConstTimesFunction(1/c,&op2);
 }
 
 
-ConstTimesFunction           operator * (double c, const AbsFunction &op2) {
+ConstTimesFunction           operator * (CLHEPdouble c, const AbsFunction &op2) {
   return ConstTimesFunction(c,&op2);
 }
 
-ConstPlusFunction               operator + (double c, const AbsFunction &op2) {
+ConstPlusFunction               operator + (CLHEPdouble c, const AbsFunction &op2) {
   return ConstPlusFunction(c,&op2);
 }
 
-ConstMinusFunction        operator - (double c, const AbsFunction &op2) {
+ConstMinusFunction        operator - (CLHEPdouble c, const AbsFunction &op2) {
   return ConstMinusFunction(c,&op2);
 }
 
-ConstOverFunction          operator / (double c, const AbsFunction &op2) {
+ConstOverFunction          operator / (CLHEPdouble c, const AbsFunction &op2) {
   return ConstOverFunction(c,&op2);
 }
 

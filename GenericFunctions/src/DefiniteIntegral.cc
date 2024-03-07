@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: DefiniteIntegral.cc,v 1.6 2010/06/16 18:22:01 garren Exp $
 
@@ -32,9 +33,9 @@ namespace Genfun {
       virtual ~QuadratureRule() {};
       
       // Integrate at the j^th level of refinement:
-      virtual double integrate(const AbsFunction & function, 
-			       double a,
-			       double b,
+      virtual CLHEPdouble integrate(const AbsFunction & function, 
+			       CLHEPdouble a,
+			       CLHEPdouble b,
 			       unsigned int j) const=0;
       
       // Return the step multiplier:
@@ -56,12 +57,12 @@ namespace Genfun {
       ~TrapezoidQuadratureRule() {};
       
       // Integrate at the j^th level of refinement:
-      virtual double integrate(const AbsFunction & function, 
-			       double a,
-			       double b,
+      virtual CLHEPdouble integrate(const AbsFunction & function, 
+			       CLHEPdouble a,
+			       CLHEPdouble b,
 			       unsigned int j) const;
       
-      // The step is doubled at each level of refinement:
+      // The step is CLHEPdoubled at each level of refinement:
       virtual unsigned int stepMultiplier () const {return 2;}
 
       // Returns number of function calls:
@@ -69,7 +70,7 @@ namespace Genfun {
       
     private:
 
-      mutable double retVal;
+      mutable CLHEPdouble retVal;
       mutable unsigned int nFunctionCalls;
 
     };
@@ -85,9 +86,9 @@ namespace Genfun {
       ~XtMidpointQuadratureRule() {};
       
       // Integrate at the j^th level of refinement:
-      virtual double integrate(const AbsFunction & function, 
-			       double a,
-			       double b,
+      virtual CLHEPdouble integrate(const AbsFunction & function, 
+			       CLHEPdouble a,
+			       CLHEPdouble b,
 			       unsigned int j) const;
       
       // The step is tripled at each level of refinement:
@@ -98,25 +99,25 @@ namespace Genfun {
       
     private:
 
-      mutable double retVal;
+      mutable CLHEPdouble retVal;
       mutable unsigned int nFunctionCalls;
     };
     
-    double                              a;              // lower limit of integration
-    double                              b;              // upper limit of integration
+    CLHEPdouble                              a;              // lower limit of integration
+    CLHEPdouble                              b;              // upper limit of integration
     DefiniteIntegral::Type              type;           // open or closed
     mutable unsigned int                nFunctionCalls; // bookkeeping
     unsigned int                        MAXITER;        // Max no of step doubling, tripling, etc.
-    double                              EPS;            // Target precision
+    CLHEPdouble                              EPS;            // Target precision
     unsigned int                        K;              // Minimum order =2*5=10
 
     // Polynomial interpolation with Neville's method:
-    void polint(std::vector<double>::iterator xArray, std::vector<double>::iterator yArray, double x, double & y, double & deltay) const;
+    void polint(std::vector<CLHEPdouble>::iterator xArray, std::vector<CLHEPdouble>::iterator yArray, CLHEPdouble x, CLHEPdouble & y, CLHEPdouble & deltay) const;
     
   };
 
   
-  DefiniteIntegral::DefiniteIntegral(double a, double b, Type type):
+  DefiniteIntegral::DefiniteIntegral(CLHEPdouble a, CLHEPdouble b, Type type):
     c(new Clockwork()) {
     c->a              = a;
     c->b              = b;
@@ -143,7 +144,7 @@ namespace Genfun {
     return *this;
   }
   
-  void DefiniteIntegral::setEpsilon(double eps) {
+  void DefiniteIntegral::setEpsilon(CLHEPdouble eps) {
     c->EPS=eps;
   }
 
@@ -155,21 +156,21 @@ namespace Genfun {
     c->K=(minOrder+1)/2;
   }
 
-  double DefiniteIntegral::operator [] (const AbsFunction & function) const {
+  CLHEPdouble DefiniteIntegral::operator [] (const AbsFunction & function) const {
 
     const Clockwork::QuadratureRule * rule = c->type==OPEN ? 
       (Clockwork::QuadratureRule *) new Clockwork::XtMidpointQuadratureRule() : 
       (Clockwork::QuadratureRule *) new Clockwork::TrapezoidQuadratureRule();
-    double xMult=rule->stepMultiplier();
+    CLHEPdouble xMult=rule->stepMultiplier();
 
     c->nFunctionCalls=0;
-    std::vector<double> s(c->MAXITER+2),h(c->MAXITER+2);
+    std::vector<CLHEPdouble> s(c->MAXITER+2),h(c->MAXITER+2);
     h[1]=1.0;
     for (unsigned int j=1;j<=c->MAXITER;j++) {
       s[j]=rule->integrate(function, c->a, c->b, j);
       c->nFunctionCalls=rule->numFunctionCalls();
       if (j>=c->K) {
-	double ss(0.), dss(0.);
+	CLHEPdouble ss(0.), dss(0.);
 	c->polint(h.begin()+j-c->K,s.begin()+j-c->K,0.0,ss, dss);
 	if (fabs(dss) <= c->EPS*fabs(ss)) {
 	  delete rule;
@@ -184,9 +185,9 @@ namespace Genfun {
     return 0.0;                   // Never get here.
   }
   
-  void DefiniteIntegral::Clockwork::polint(std::vector<double>::iterator xArray, std::vector<double>::iterator yArray, double x, double & y, double & deltay) const {
-    double dif = fabs(x-xArray[1]),dift;
-    std::vector<double> cc(K+1),d(K+1);
+  void DefiniteIntegral::Clockwork::polint(std::vector<CLHEPdouble>::iterator xArray, std::vector<CLHEPdouble>::iterator yArray, CLHEPdouble x, CLHEPdouble & y, CLHEPdouble & deltay) const {
+    CLHEPdouble dif = fabs(x-xArray[1]),dift;
+    std::vector<CLHEPdouble> cc(K+1),d(K+1);
     unsigned int ns=1;
     for (unsigned int i=1;i<=K;i++) {
       dift=fabs(x-xArray[i]);
@@ -199,10 +200,10 @@ namespace Genfun {
     y = yArray[ns--];
     for (unsigned int m=1;m<K;m++) {
       for (unsigned int i=1;i<=K-m;i++) {
-	double ho = xArray[i]-x;
-	double hp=  xArray[i+m]-x;
-	double w=cc[i+1]-d[i];
-	double den=ho-hp;
+	CLHEPdouble ho = xArray[i]-x;
+	CLHEPdouble hp=  xArray[i+m]-x;
+	CLHEPdouble w=cc[i+1]-d[i];
+	CLHEPdouble den=ho-hp;
 	if (den==0)
 	  std::cerr
 	    << "Error in polynomial extrapolation"
@@ -221,7 +222,7 @@ namespace Genfun {
   }
 
   // Quadrature rules:
-  double DefiniteIntegral::Clockwork::TrapezoidQuadratureRule::integrate(const AbsFunction & function, double aa, double bb, unsigned int n) const {
+  CLHEPdouble DefiniteIntegral::Clockwork::TrapezoidQuadratureRule::integrate(const AbsFunction & function, CLHEPdouble aa, CLHEPdouble bb, unsigned int n) const {
     unsigned int it, j;
     if (n==1) {
       retVal = 0.5*(bb-aa)*(function(aa)+function(bb));
@@ -229,10 +230,10 @@ namespace Genfun {
     }
     else { 
       for (it=1,j=1;j<n-1;j++)  it <<=1;
-      double tnm=it;
-      double del = (bb-aa)/tnm;
-      double x=aa+0.5*del;
-      double sum;
+      CLHEPdouble tnm=it;
+      CLHEPdouble del = (bb-aa)/tnm;
+      CLHEPdouble x=aa+0.5*del;
+      CLHEPdouble sum;
       for (sum=0.0,j=1;j<=it;j++,x+=del) {
 	sum +=function(x);
 	nFunctionCalls++;
@@ -243,7 +244,7 @@ namespace Genfun {
   }
 
   // Quadrature rules:
-  double DefiniteIntegral::Clockwork::XtMidpointQuadratureRule::integrate(const AbsFunction & function, double aa, double bb, unsigned int n) const {
+  CLHEPdouble DefiniteIntegral::Clockwork::XtMidpointQuadratureRule::integrate(const AbsFunction & function, CLHEPdouble aa, CLHEPdouble bb, unsigned int n) const {
     unsigned int it, j;
     if (n==1) {
       retVal = (bb-aa)*(function((aa+bb)/2.0));
@@ -251,11 +252,11 @@ namespace Genfun {
     }
     else { 
       for (it=1,j=1;j<n-1;j++)  it *=3;
-      double tnm=it;
-      double del  = (bb-aa)/(3.0*tnm);
-      double ddel = del+del;
-      double x=aa+0.5*del;
-      double sum=0;
+      CLHEPdouble tnm=it;
+      CLHEPdouble del  = (bb-aa)/(3.0*tnm);
+      CLHEPdouble ddel = del+del;
+      CLHEPdouble x=aa+0.5*del;
+      CLHEPdouble sum=0;
       for (j=1;j<=it;j++) {
 	sum +=function(x);
 	x+=ddel;

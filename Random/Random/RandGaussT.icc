@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandGaussT.icc,v 1.4 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -20,46 +21,46 @@
 
 namespace CLHEP {
 
-RandGaussT::RandGaussT(HepRandomEngine & anEngine, double mean,
-                                                        double stdDev )
+RandGaussT::RandGaussT(HepRandomEngine & anEngine, CLHEPdouble mean,
+                                                        CLHEPdouble stdDev )
 : RandGauss(anEngine, mean, stdDev) {}
 
-RandGaussT::RandGaussT(HepRandomEngine * anEngine, double mean,
-                                                        double stdDev )
+RandGaussT::RandGaussT(HepRandomEngine * anEngine, CLHEPdouble mean,
+                                                        CLHEPdouble stdDev )
 : RandGauss(anEngine, mean, stdDev) {}
 
 // Getting a Gaussian deviate - static methods
 // -------------------------------------------
 
-double RandGaussT::shoot()
+CLHEPdouble RandGaussT::shoot()
 {
   HepRandomEngine* anEngine = HepRandom::getTheEngine();
   return HepStat::flatToGaussian (anEngine->flat());
 }
 
-double RandGaussT::shoot( HepRandomEngine* anotherEngine )
+CLHEPdouble RandGaussT::shoot( HepRandomEngine* anotherEngine )
 { 
   return HepStat::flatToGaussian  (anotherEngine->flat());
 }
 
-double RandGaussT::shoot(double mean, double stdDev) {
+CLHEPdouble RandGaussT::shoot(CLHEPdouble mean, CLHEPdouble stdDev) {
   return shoot()*stdDev + mean;
 }
 
-double RandGaussT::shoot(HepRandomEngine* anotherEngine,
-                                  double mean, double stdDev) {
+CLHEPdouble RandGaussT::shoot(HepRandomEngine* anotherEngine,
+                                  CLHEPdouble mean, CLHEPdouble stdDev) {
   return shoot(anotherEngine)*stdDev + mean;
 }
 
 // Getting a Gaussian deviate - instance methods
 // ---------------------------------------------
 
-double RandGaussT::fire() {
+CLHEPdouble RandGaussT::fire() {
   return HepStat::flatToGaussian(localEngine->flat()) * defaultStdDev 
 								+ defaultMean;
 }
 
-double RandGaussT::fire(double mean, double stdDev) {
+CLHEPdouble RandGaussT::fire(CLHEPdouble mean, CLHEPdouble stdDev) {
   return HepStat::flatToGaussian(localEngine->flat()) * stdDev + mean;
 }
 

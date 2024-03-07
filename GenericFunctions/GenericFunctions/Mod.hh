@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 //----------------------Mod-----------------------------------------------//
@@ -23,7 +24,7 @@ namespace Genfun {
       public:
 
     // Constructor
-    Mod(double y);
+    Mod(CLHEPdouble y);
   
     // Copy constructor
     Mod(const Mod &right);
@@ -33,15 +34,15 @@ namespace Genfun {
   
     // Retrieve function value
 
-    virtual double operator ()(double argument) const override; 
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override; 
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
   
   private:
 
     // It is illegal to assign a fixed constant
     const Mod & operator=(const Mod &right);
 
-    double _y; // mod (as a double)
+    CLHEPdouble _y; // mod (as a CLHEPdouble)
 
   };
 } // namespace Genfun

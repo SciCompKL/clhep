@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id:
 #include "SymToArgAdaptor.hh"
@@ -76,7 +77,7 @@ SymToArgAdaptor<F>::SymToArgAdaptor(const SymToArgAdaptor & right):
 
 template <class F>
 inline
-double SymToArgAdaptor<F>::operator ()(double x) const
+CLHEPdouble SymToArgAdaptor<F>::operator ()(CLHEPdouble x) const
 {
   std::cerr
     << "Warning.  SymToArgAdaptor called with scalar argument"
@@ -93,7 +94,7 @@ unsigned int SymToArgAdaptor<F>::dimensionality() const {
 
 template <class F> 
 inline
-double SymToArgAdaptor<F>::operator() (const Argument & a) const {
+CLHEPdouble SymToArgAdaptor<F>::operator() (const Argument & a) const {
   if (dimensionality()!= a.dimension()) {
     std::cerr
       << "Warning: SymToArgAdaptor function/argument dimension mismatch"
@@ -103,7 +104,7 @@ double SymToArgAdaptor<F>::operator() (const Argument & a) const {
   }
 
   // First evaluate the sumbol.
-  double pVal= (*_p_expression)(a);
+  CLHEPdouble pVal= (*_p_expression)(a);
   
   // Then set the associated parameter:
   (_parameterFetchMethod(*_function)).setValue(pVal);

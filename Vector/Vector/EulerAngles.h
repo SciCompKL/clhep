@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef HEP_EULERANGLES_H
 #define HEP_EULERANGLES_H
 
@@ -33,13 +34,13 @@ class HepEulerAngles {
 
 protected:
   typedef HepEulerAngles EA;       // just an abbreviation
-  static double tolerance;      // to determine relative nearness
+  static CLHEPdouble tolerance;      // to determine relative nearness
 
 public:
 
   // ----------  Constructors:
   inline HepEulerAngles();
-  inline HepEulerAngles( double phi, double theta, double psi );
+  inline HepEulerAngles( CLHEPdouble phi, CLHEPdouble theta, CLHEPdouble psi );
 
   // ----------  Destructor, copy constructor, assignment:
   // use C++ defaults
@@ -47,19 +48,19 @@ public:
   // ----------  Accessors:
 
 public:
-  inline  double  getPhi() const;
-  inline  double  phi()    const;
-  inline  EA &       setPhi( double phi );
+  inline  CLHEPdouble  getPhi() const;
+  inline  CLHEPdouble  phi()    const;
+  inline  EA &       setPhi( CLHEPdouble phi );
 
-  inline  double  getTheta() const;
-  inline  double  theta()    const;
-  inline  EA &       setTheta( double theta );
+  inline  CLHEPdouble  getTheta() const;
+  inline  CLHEPdouble  theta()    const;
+  inline  EA &       setTheta( CLHEPdouble theta );
 
-  inline  double  getPsi() const;
-  inline  double  psi()    const;
-  inline  EA &       setPsi( double psi );
+  inline  CLHEPdouble  getPsi() const;
+  inline  CLHEPdouble  psi()    const;
+  inline  EA &       setPsi( CLHEPdouble psi );
 
-  inline EA & set( double phi, double theta, double psi );
+  inline EA & set( CLHEPdouble phi, CLHEPdouble theta, CLHEPdouble psi );
 
   // ----------  Operations:
 
@@ -74,11 +75,11 @@ public:
   inline bool operator>=( const EA & ea ) const;
 
   //   relative comparison:
-  inline static double getTolerance();
-  inline static double setTolerance( double tol );
+  inline static CLHEPdouble getTolerance();
+  inline static CLHEPdouble setTolerance( CLHEPdouble tol );
 
-  bool isNear ( const EA & ea, double epsilon = tolerance ) const;
-  double  howNear( const EA & ea ) const;
+  bool isNear ( const EA & ea, CLHEPdouble epsilon = tolerance ) const;
+  CLHEPdouble  howNear( const EA & ea ) const;
 
   // ----------  I/O:
 
@@ -88,13 +89,13 @@ public:
   // ---------- Helper methods:
 
 protected:
-    double distance( const HepEulerAngles & ex ) const;
+    CLHEPdouble distance( const HepEulerAngles & ex ) const;
 
   // ----------  Data members:
 protected:
-  double phi_;
-  double theta_;
-  double psi_;
+  CLHEPdouble phi_;
+  CLHEPdouble theta_;
+  CLHEPdouble psi_;
 
 };  // HepEulerAngles
 

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ConstMinusParameter.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/ConstMinusParameter.hh"
@@ -7,7 +8,7 @@ namespace Genfun {
 PARAMETER_OBJECT_IMP(ConstMinusParameter)
 
 
-ConstMinusParameter::ConstMinusParameter(double xconstant, const AbsParameter *aparm):
+ConstMinusParameter::ConstMinusParameter(CLHEPdouble xconstant, const AbsParameter *aparm):
   _constant(xconstant),
   _parameter(aparm->clone())
 {
@@ -27,7 +28,7 @@ ConstMinusParameter::~ConstMinusParameter()
 }
 
 
-double ConstMinusParameter::getValue() const {
+CLHEPdouble ConstMinusParameter::getValue() const {
   return _constant - _parameter->getValue();
 }
 

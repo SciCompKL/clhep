@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FunctionConvolution.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //------------------------------FunctionConvolution-------------------------//
@@ -29,7 +30,7 @@ namespace Genfun {
       public:
 
     // Constructor
-    FunctionConvolution(const AbsFunction *arg1, const AbsFunction *arg2, double x0, double x1);
+    FunctionConvolution(const AbsFunction *arg1, const AbsFunction *arg2, CLHEPdouble x0, CLHEPdouble x1);
   
     // Copy Constructor
     FunctionConvolution(const FunctionConvolution &right);
@@ -38,8 +39,8 @@ namespace Genfun {
     virtual ~FunctionConvolution();
   
     // Retrieve function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & argument) const override {return operator() (argument[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & argument) const override {return operator() (argument[0]);}
   
   private:
 
@@ -49,8 +50,8 @@ namespace Genfun {
     // Input functions to convolution
     const AbsFunction *_arg1;
     const AbsFunction *_arg2;
-    double _x0;
-    double _x1;
+    CLHEPdouble _x0;
+    CLHEPdouble _x1;
 
   };
 } // namespace Genfun

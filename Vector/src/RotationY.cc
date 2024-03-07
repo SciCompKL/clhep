@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -20,23 +21,23 @@
 
 namespace CLHEP  {
 
-static inline double safe_acos (double x) {
+static inline CLHEPdouble safe_acos (CLHEPdouble x) {
   if (std::abs(x) <= 1.0) return std::acos(x);
   return ( (x>0) ? 0 : CLHEP::pi );
 }
 
-HepRotationY::HepRotationY(double ddelta) : 
+HepRotationY::HepRotationY(CLHEPdouble ddelta) : 
 		its_d(proper(ddelta)), its_s(std::sin(ddelta)), its_c(std::cos(ddelta))
 {}
 
-HepRotationY & HepRotationY::set ( double ddelta ) {
+HepRotationY & HepRotationY::set ( CLHEPdouble ddelta ) {
   its_d = proper(ddelta);
   its_s = std::sin(its_d);
   its_c = std::cos(its_d);
   return *this;
 }
 
-double  HepRotationY::phi() const {
+CLHEPdouble  HepRotationY::phi() const {
   if ( its_d == 0 ) {
     return 0;
   } else if ( (its_d < 0) || (its_d == CLHEP::pi) )  {
@@ -46,11 +47,11 @@ double  HepRotationY::phi() const {
   }
 }  // HepRotationY::phi()
 
-double  HepRotationY::theta() const {
+CLHEPdouble  HepRotationY::theta() const {
   return  std::fabs( its_d );
 }  // HepRotationY::theta()
 
-double  HepRotationY::psi() const {
+CLHEPdouble  HepRotationY::psi() const {
   if ( its_d == 0 ) {
     return 0;
   } else if ( (its_d < 0) || (its_d == CLHEP::pi) )  {
@@ -72,36 +73,36 @@ HepEulerAngles HepRotationY::eulerAngles() const {
 // This code is taken directly from the original CLHEP. However, there are as
 // shown opportunities for significant speed improvement.
 
-double HepRotationY::phiX() const {
+CLHEPdouble HepRotationY::phiX() const {
   return (yx() == 0.0 && xx() == 0.0) ? 0.0 : std::atan2(yx(),xx());
   		// or ---- return 0;
 }
 
-double HepRotationY::phiY() const {
+CLHEPdouble HepRotationY::phiY() const {
   return (yy() == 0.0 && xy() == 0.0) ? 0.0 : std::atan2(yy(),xy());
 		// or ----  return CLHEP::halfpi;
 }
 
-double HepRotationY::phiZ() const {
+CLHEPdouble HepRotationY::phiZ() const {
   return (yz() == 0.0 && xz() == 0.0) ? 0.0 : std::atan2(yz(),xz());
 		// or ----  return 0;
 }
 
-double HepRotationY::thetaX() const {
+CLHEPdouble HepRotationY::thetaX() const {
   return safe_acos(zx());
 }
 
-double HepRotationY::thetaY() const {
+CLHEPdouble HepRotationY::thetaY() const {
   return safe_acos(zy());
 		// or ----  return CLHEP::halfpi;
 }
 
-double HepRotationY::thetaZ() const {
+CLHEPdouble HepRotationY::thetaZ() const {
   return safe_acos(zz());  
 		// or ---- return d;
 }
 
-void HepRotationY::setDelta ( double ddelta ) {
+void HepRotationY::setDelta ( CLHEPdouble ddelta ) {
   set(ddelta);
 }
 
@@ -129,60 +130,60 @@ void HepRotationY::decompose
   rotation = HepRotation(*this);
 }
 
-double HepRotationY::distance2( const HepRotationY & r  ) const {
-  double answer = 2.0 * ( 1.0 - ( its_s * r.its_s + its_c * r.its_c ) ) ;
+CLHEPdouble HepRotationY::distance2( const HepRotationY & r  ) const {
+  CLHEPdouble answer = 2.0 * ( 1.0 - ( its_s * r.its_s + its_c * r.its_c ) ) ;
   return (answer >= 0) ? answer : 0;
 }
 
-double HepRotationY::distance2( const HepRotation & r  ) const {
-  double sum =        xx() * r.xx()          +  xz() * r.xz()
+CLHEPdouble HepRotationY::distance2( const HepRotation & r  ) const {
+  CLHEPdouble sum =        xx() * r.xx()          +  xz() * r.xz()
 		   		       + r.yy() 
                        + zx() * r.zx()          + zz() * r.zz();
-  double answer = 3.0 - sum;
+  CLHEPdouble answer = 3.0 - sum;
   return (answer >= 0 ) ? answer : 0;
 }
 
-double HepRotationY::distance2( const HepLorentzRotation & lt  ) const {
+CLHEPdouble HepRotationY::distance2( const HepLorentzRotation & lt  ) const {
   HepAxisAngle a; 
   Hep3Vector   b;
   lt.decompose(b, a);
-  double bet = b.beta();
-  double bet2 = bet*bet;
+  CLHEPdouble bet = b.beta();
+  CLHEPdouble bet2 = bet*bet;
   HepRotation r(a);
   return bet2/(1-bet2) + distance2(r);
 }
 
-double HepRotationY::distance2( const HepBoost & lt ) const {
+CLHEPdouble HepRotationY::distance2( const HepBoost & lt ) const {
   return distance2( HepLorentzRotation(lt));
 }
 
-double HepRotationY::howNear( const HepRotationY & r ) const {
+CLHEPdouble HepRotationY::howNear( const HepRotationY & r ) const {
   return std::sqrt(distance2(r));
 }
-double HepRotationY::howNear( const HepRotation & r ) const {
+CLHEPdouble HepRotationY::howNear( const HepRotation & r ) const {
   return std::sqrt(distance2(r));
 }
-double HepRotationY::howNear( const HepBoost & lt ) const {
+CLHEPdouble HepRotationY::howNear( const HepBoost & lt ) const {
   return std::sqrt(distance2(lt));
 }
-double HepRotationY::howNear( const HepLorentzRotation & lt ) const {
+CLHEPdouble HepRotationY::howNear( const HepLorentzRotation & lt ) const {
   return std::sqrt(distance2(lt));
 }
-bool HepRotationY::isNear(const HepRotationY & r,double epsilon)const{
+bool HepRotationY::isNear(const HepRotationY & r,CLHEPdouble epsilon)const{
   return (distance2(r) <= epsilon*epsilon);
 }
-bool HepRotationY::isNear(const HepRotation & r,double epsilon)const {
+bool HepRotationY::isNear(const HepRotation & r,CLHEPdouble epsilon)const {
   return (distance2(r) <= epsilon*epsilon);
 }
-bool HepRotationY::isNear( const HepBoost & lt,double epsilon) const {
+bool HepRotationY::isNear( const HepBoost & lt,CLHEPdouble epsilon) const {
   return (distance2(lt) <= epsilon*epsilon);
 }
 bool HepRotationY::isNear( const HepLorentzRotation & lt,
-                                     double epsilon) const {
+                                     CLHEPdouble epsilon) const {
   return (distance2(lt) <= epsilon*epsilon);
 }
 
-double HepRotationY::norm2() const {
+CLHEPdouble HepRotationY::norm2() const {
   return 2.0 - 2.0 * its_c;
 }
 

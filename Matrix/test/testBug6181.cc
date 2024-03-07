@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // testBug6181.cc
 //
 // The bug reported an erroneous result in inverting a 7x7 matrix.

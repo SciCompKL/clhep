@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ConstTimesParameter.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/ConstTimesParameter.hh"
@@ -6,7 +7,7 @@
 namespace Genfun {
 PARAMETER_OBJECT_IMP(ConstTimesParameter)
 
-ConstTimesParameter::ConstTimesParameter(double xconstant, const AbsParameter *aparm):
+ConstTimesParameter::ConstTimesParameter(CLHEPdouble xconstant, const AbsParameter *aparm):
   _constant(xconstant),
   _parameter(aparm->clone())
 {
@@ -26,7 +27,7 @@ ConstTimesParameter::~ConstTimesParameter()
 }
 
 
-double ConstTimesParameter::getValue() const {
+CLHEPdouble ConstTimesParameter::getValue() const {
   return _constant * _parameter->getValue();
 }
 

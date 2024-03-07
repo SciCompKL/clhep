@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -17,16 +18,16 @@
 
 namespace CLHEP  {
 
-double Hep2Vector::tolerance = Hep2Vector::ZMpvToleranceTicks * 2.22045e-16;
+CLHEPdouble Hep2Vector::tolerance = Hep2Vector::ZMpvToleranceTicks * 2.22045e-16;
 
-double Hep2Vector::setTolerance (double tol) {
+CLHEPdouble Hep2Vector::setTolerance (CLHEPdouble tol) {
 // Set the tolerance for Hep2Vectors to be considered near one another
-  double oldTolerance (tolerance);
+  CLHEPdouble oldTolerance (tolerance);
   tolerance = tol;
   return oldTolerance;
 }
 
-double Hep2Vector::operator () (int i) const {
+CLHEPdouble Hep2Vector::operator () (int i) const {
   if (i == 0) {
     return x();
   }else if (i == 1) {
@@ -38,8 +39,8 @@ double Hep2Vector::operator () (int i) const {
   }
 }
 
-double & Hep2Vector::operator () (int i) {
-  static double dummy;
+CLHEPdouble & Hep2Vector::operator () (int i) {
+  static CLHEPdouble dummy;
   switch(i) {
   case X:
     return dx;
@@ -52,15 +53,15 @@ double & Hep2Vector::operator () (int i) {
   }
 }
 
-void Hep2Vector::rotate(double angler) {
-  double s1 = std::sin(angler);
-  double c = std::cos(angler);
-  double xx = dx;
+void Hep2Vector::rotate(CLHEPdouble angler) {
+  CLHEPdouble s1 = std::sin(angler);
+  CLHEPdouble c = std::cos(angler);
+  CLHEPdouble xx = dx;
   dx = c*xx - s1*dy;
   dy = s1*xx + c*dy;
 }
 
-Hep2Vector operator/ (const Hep2Vector & p, double a) {
+Hep2Vector operator/ (const Hep2Vector & p, CLHEPdouble a) {
   if (a==0) {
     ZMthrowA(ZMxpvInfiniteVector( "Division of Hep2Vector by zero"));
   }
@@ -72,12 +73,12 @@ std::ostream & operator << (std::ostream & os, const Hep2Vector & q) {
   return os;
 }
 
-void ZMinput2doubles ( std::istream & is, const char * type,
-                       double & x, double & y );
+void ZMinput2CLHEPdoubles ( std::istream & is, const char * type,
+                       CLHEPdouble & x, CLHEPdouble & y );
 
 std::istream & operator>>(std::istream & is, Hep2Vector & p) {
-  double x, y;
-  ZMinput2doubles ( is, "Hep2Vector", x, y );
+  CLHEPdouble x, y;
+  ZMinput2CLHEPdoubles ( is, "Hep2Vector", x, y );
   p.set(x, y);
   return  is;
 }  // operator>>()
@@ -114,14 +115,14 @@ bool Hep2Vector::operator<= (const Hep2Vector & v) const {
 	return (compare(v) <= 0);
 }
 
-bool Hep2Vector::isNear(const Hep2Vector & p, double epsilon) const {
-  double limit = dot(p)*epsilon*epsilon;
+bool Hep2Vector::isNear(const Hep2Vector & p, CLHEPdouble epsilon) const {
+  CLHEPdouble limit = dot(p)*epsilon*epsilon;
   return ( (*this - p).mag2() <= limit );
 } /* isNear() */
 
-double Hep2Vector::howNear(const Hep2Vector & p ) const {
-  double d   = (*this - p).mag2();
-  double pdp = dot(p);
+CLHEPdouble Hep2Vector::howNear(const Hep2Vector & p ) const {
+  CLHEPdouble d   = (*this - p).mag2();
+  CLHEPdouble pdp = dot(p);
   if ( (pdp > 0) && (d < pdp)  ) {
     return std::sqrt (d/pdp);
   } else if ( (pdp == 0) && (d == 0) ) {
@@ -131,15 +132,15 @@ double Hep2Vector::howNear(const Hep2Vector & p ) const {
   }
 } /* howNear */
 
-double Hep2Vector::howParallel (const Hep2Vector & v) const {
+CLHEPdouble Hep2Vector::howParallel (const Hep2Vector & v) const {
   // | V1 x V2 | / | V1 dot V2 |
   // Of course, the "cross product" is fictitious but the math is valid
-  double v1v2 = std::fabs(dot(v));
+  CLHEPdouble v1v2 = std::fabs(dot(v));
   if ( v1v2 == 0 ) {
     // Zero is parallel to no other vector except for zero.
     return ( (mag2() == 0) && (v.mag2() == 0) ) ? 0 : 1;
   }
-  double abscross = std::fabs ( dx * v.y() - dy - v.x() );
+  CLHEPdouble abscross = std::fabs ( dx * v.y() - dy - v.x() );
   if ( abscross >= v1v2 ) {
     return 1;
   } else {
@@ -148,26 +149,26 @@ double Hep2Vector::howParallel (const Hep2Vector & v) const {
 } /* howParallel() */
 
 bool Hep2Vector::isParallel (const Hep2Vector & v,
-			     double epsilon) const {
+			     CLHEPdouble epsilon) const {
   // | V1 x V2 | <= epsilon * | V1 dot V2 | 
   // Of course, the "cross product" is fictitious but the math is valid
-  double v1v2 = std::fabs(dot(v));
+  CLHEPdouble v1v2 = std::fabs(dot(v));
   if ( v1v2 == 0 ) {
     // Zero is parallel to no other vector except for zero.
     return ( (mag2() == 0) && (v.mag2() == 0) );
   }
-  double abscross = std::fabs ( dx * v.y() - dy - v.x() );
+  CLHEPdouble abscross = std::fabs ( dx * v.y() - dy - v.x() );
   return ( abscross <= epsilon * v1v2 );
 } /* isParallel() */
 
-double Hep2Vector::howOrthogonal (const Hep2Vector & v) const {
+CLHEPdouble Hep2Vector::howOrthogonal (const Hep2Vector & v) const {
   // | V1 dot V2 | / | V1 x V2 | 
   // Of course, the "cross product" is fictitious but the math is valid
-  double v1v2 = std::fabs(dot(v));
+  CLHEPdouble v1v2 = std::fabs(dot(v));
   if ( v1v2 == 0 ) {
     return 0;	// Even if one or both are 0, they are considered orthogonal
   }
-  double abscross = std::fabs ( dx * v.y() - dy - v.x() );
+  CLHEPdouble abscross = std::fabs ( dx * v.y() - dy - v.x() );
   if ( v1v2 >= abscross ) {
     return 1;
   } else {
@@ -176,11 +177,11 @@ double Hep2Vector::howOrthogonal (const Hep2Vector & v) const {
 } /* howOrthogonal() */
 
 bool Hep2Vector::isOrthogonal (const Hep2Vector & v,
-			     double epsilon) const {
+			     CLHEPdouble epsilon) const {
   // | V1 dot V2 | <= epsilon * | V1 x V2 | 
   // Of course, the "cross product" is fictitious but the math is valid
-  double v1v2 = std::fabs(dot(v));
-  double abscross = std::fabs ( dx * v.y() - dy - v.x() );
+  CLHEPdouble v1v2 = std::fabs(dot(v));
+  CLHEPdouble abscross = std::fabs ( dx * v.y() - dy - v.x() );
   return ( v1v2 <= epsilon * abscross );
 } /* isOrthogonal() */
 

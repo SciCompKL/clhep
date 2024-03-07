@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 //
 // This file is a part of the CLHEP - a Class Library for High Energy Physics.
@@ -115,63 +116,63 @@ void HepMatrix::invertHaywood4  (int & ifail) {
 
   // Find all NECESSARY 2x2 dets:  (18 of them)
 
-  double Det2_12_01 = m[F10]*m[F21] - m[F11]*m[F20];
-  double Det2_12_02 = m[F10]*m[F22] - m[F12]*m[F20];
-  double Det2_12_03 = m[F10]*m[F23] - m[F13]*m[F20];			//
-  double Det2_12_13 = m[F11]*m[F23] - m[F13]*m[F21];			//
-  double Det2_12_23 = m[F12]*m[F23] - m[F13]*m[F22];			//
-  double Det2_12_12 = m[F11]*m[F22] - m[F12]*m[F21];
-  double Det2_13_01 = m[F10]*m[F31] - m[F11]*m[F30];
-  double Det2_13_02 = m[F10]*m[F32] - m[F12]*m[F30];
-  double Det2_13_03 = m[F10]*m[F33] - m[F13]*m[F30];
-  double Det2_13_12 = m[F11]*m[F32] - m[F12]*m[F31];
-  double Det2_13_13 = m[F11]*m[F33] - m[F13]*m[F31];
-  double Det2_13_23 = m[F12]*m[F33] - m[F13]*m[F32];			//
-  double Det2_23_01 = m[F20]*m[F31] - m[F21]*m[F30];
-  double Det2_23_02 = m[F20]*m[F32] - m[F22]*m[F30];
-  double Det2_23_03 = m[F20]*m[F33] - m[F23]*m[F30];
-  double Det2_23_12 = m[F21]*m[F32] - m[F22]*m[F31];
-  double Det2_23_13 = m[F21]*m[F33] - m[F23]*m[F31];
-  double Det2_23_23 = m[F22]*m[F33] - m[F23]*m[F32];
+  CLHEPdouble Det2_12_01 = m[F10]*m[F21] - m[F11]*m[F20];
+  CLHEPdouble Det2_12_02 = m[F10]*m[F22] - m[F12]*m[F20];
+  CLHEPdouble Det2_12_03 = m[F10]*m[F23] - m[F13]*m[F20];			//
+  CLHEPdouble Det2_12_13 = m[F11]*m[F23] - m[F13]*m[F21];			//
+  CLHEPdouble Det2_12_23 = m[F12]*m[F23] - m[F13]*m[F22];			//
+  CLHEPdouble Det2_12_12 = m[F11]*m[F22] - m[F12]*m[F21];
+  CLHEPdouble Det2_13_01 = m[F10]*m[F31] - m[F11]*m[F30];
+  CLHEPdouble Det2_13_02 = m[F10]*m[F32] - m[F12]*m[F30];
+  CLHEPdouble Det2_13_03 = m[F10]*m[F33] - m[F13]*m[F30];
+  CLHEPdouble Det2_13_12 = m[F11]*m[F32] - m[F12]*m[F31];
+  CLHEPdouble Det2_13_13 = m[F11]*m[F33] - m[F13]*m[F31];
+  CLHEPdouble Det2_13_23 = m[F12]*m[F33] - m[F13]*m[F32];			//
+  CLHEPdouble Det2_23_01 = m[F20]*m[F31] - m[F21]*m[F30];
+  CLHEPdouble Det2_23_02 = m[F20]*m[F32] - m[F22]*m[F30];
+  CLHEPdouble Det2_23_03 = m[F20]*m[F33] - m[F23]*m[F30];
+  CLHEPdouble Det2_23_12 = m[F21]*m[F32] - m[F22]*m[F31];
+  CLHEPdouble Det2_23_13 = m[F21]*m[F33] - m[F23]*m[F31];
+  CLHEPdouble Det2_23_23 = m[F22]*m[F33] - m[F23]*m[F32];
 
   // Find all NECESSARY 3x3 dets:   (16 of them)
 
-  double Det3_012_012 = m[F00]*Det2_12_12 - m[F01]*Det2_12_02 
+  CLHEPdouble Det3_012_012 = m[F00]*Det2_12_12 - m[F01]*Det2_12_02 
 				+ m[F02]*Det2_12_01;
-  double Det3_012_013 = m[F00]*Det2_12_13 - m[F01]*Det2_12_03 
+  CLHEPdouble Det3_012_013 = m[F00]*Det2_12_13 - m[F01]*Det2_12_03 
 				+ m[F03]*Det2_12_01;			//
-  double Det3_012_023 = m[F00]*Det2_12_23 - m[F02]*Det2_12_03 
+  CLHEPdouble Det3_012_023 = m[F00]*Det2_12_23 - m[F02]*Det2_12_03 
 				+ m[F03]*Det2_12_02;			//
-  double Det3_012_123 = m[F01]*Det2_12_23 - m[F02]*Det2_12_13 
+  CLHEPdouble Det3_012_123 = m[F01]*Det2_12_23 - m[F02]*Det2_12_13 
 				+ m[F03]*Det2_12_12;			//
-  double Det3_013_012 = m[F00]*Det2_13_12 - m[F01]*Det2_13_02 
+  CLHEPdouble Det3_013_012 = m[F00]*Det2_13_12 - m[F01]*Det2_13_02 
 				+ m[F02]*Det2_13_01;
-  double Det3_013_013 = m[F00]*Det2_13_13 - m[F01]*Det2_13_03
+  CLHEPdouble Det3_013_013 = m[F00]*Det2_13_13 - m[F01]*Det2_13_03
 				+ m[F03]*Det2_13_01;
-  double Det3_013_023 = m[F00]*Det2_13_23 - m[F02]*Det2_13_03
+  CLHEPdouble Det3_013_023 = m[F00]*Det2_13_23 - m[F02]*Det2_13_03
 				+ m[F03]*Det2_13_02;			//
-  double Det3_013_123 = m[F01]*Det2_13_23 - m[F02]*Det2_13_13
+  CLHEPdouble Det3_013_123 = m[F01]*Det2_13_23 - m[F02]*Det2_13_13
 				+ m[F03]*Det2_13_12;			//
-  double Det3_023_012 = m[F00]*Det2_23_12 - m[F01]*Det2_23_02 
+  CLHEPdouble Det3_023_012 = m[F00]*Det2_23_12 - m[F01]*Det2_23_02 
 				+ m[F02]*Det2_23_01;
-  double Det3_023_013 = m[F00]*Det2_23_13 - m[F01]*Det2_23_03
+  CLHEPdouble Det3_023_013 = m[F00]*Det2_23_13 - m[F01]*Det2_23_03
 				+ m[F03]*Det2_23_01;
-  double Det3_023_023 = m[F00]*Det2_23_23 - m[F02]*Det2_23_03
+  CLHEPdouble Det3_023_023 = m[F00]*Det2_23_23 - m[F02]*Det2_23_03
 				+ m[F03]*Det2_23_02;
-  double Det3_023_123 = m[F01]*Det2_23_23 - m[F02]*Det2_23_13
+  CLHEPdouble Det3_023_123 = m[F01]*Det2_23_23 - m[F02]*Det2_23_13
 				+ m[F03]*Det2_23_12;			//
-  double Det3_123_012 = m[F10]*Det2_23_12 - m[F11]*Det2_23_02 
+  CLHEPdouble Det3_123_012 = m[F10]*Det2_23_12 - m[F11]*Det2_23_02 
 				+ m[F12]*Det2_23_01;
-  double Det3_123_013 = m[F10]*Det2_23_13 - m[F11]*Det2_23_03 
+  CLHEPdouble Det3_123_013 = m[F10]*Det2_23_13 - m[F11]*Det2_23_03 
 				+ m[F13]*Det2_23_01;
-  double Det3_123_023 = m[F10]*Det2_23_23 - m[F12]*Det2_23_03 
+  CLHEPdouble Det3_123_023 = m[F10]*Det2_23_23 - m[F12]*Det2_23_03 
 				+ m[F13]*Det2_23_02;
-  double Det3_123_123 = m[F11]*Det2_23_23 - m[F12]*Det2_23_13 
+  CLHEPdouble Det3_123_123 = m[F11]*Det2_23_23 - m[F12]*Det2_23_13 
 				+ m[F13]*Det2_23_12;
 
   // Find the 4x4 det:
 
-  double det =    m[F00]*Det3_123_123 
+  CLHEPdouble det =    m[F00]*Det3_123_123 
 		- m[F01]*Det3_123_023 
 		+ m[F02]*Det3_123_013 
 		- m[F03]*Det3_123_012;
@@ -185,8 +186,8 @@ void HepMatrix::invertHaywood4  (int & ifail) {
     return;
   } 
 
-  double oneOverDet = 1.0/det;
-  double mn1OverDet = - oneOverDet;
+  CLHEPdouble oneOverDet = 1.0/det;
+  CLHEPdouble mn1OverDet = - oneOverDet;
 
   m[F00] =  Det3_123_123 * oneOverDet;
   m[F01] =  Det3_023_123 * mn1OverDet;
@@ -219,176 +220,176 @@ void HepMatrix::invertHaywood5  (int & ifail) {
 
   // Find all NECESSARY 2x2 dets:  (30 of them)
 
-  double Det2_23_01 = m[M20]*m[M31] - m[M21]*m[M30];
-  double Det2_23_02 = m[M20]*m[M32] - m[M22]*m[M30];
-  double Det2_23_03 = m[M20]*m[M33] - m[M23]*m[M30];
-  double Det2_23_04 = m[M20]*m[M34] - m[M24]*m[M30];
-  double Det2_23_12 = m[M21]*m[M32] - m[M22]*m[M31];	//
-  double Det2_23_13 = m[M21]*m[M33] - m[M23]*m[M31];
-  double Det2_23_14 = m[M21]*m[M34] - m[M24]*m[M31];	//
-  double Det2_23_23 = m[M22]*m[M33] - m[M23]*m[M32];
-  double Det2_23_24 = m[M22]*m[M34] - m[M24]*m[M32];	//
-  double Det2_23_34 = m[M23]*m[M34] - m[M24]*m[M33];	//
-  double Det2_24_01 = m[M20]*m[M41] - m[M21]*m[M40];
-  double Det2_24_02 = m[M20]*m[M42] - m[M22]*m[M40];
-  double Det2_24_03 = m[M20]*m[M43] - m[M23]*m[M40];
-  double Det2_24_04 = m[M20]*m[M44] - m[M24]*m[M40];
-  double Det2_24_12 = m[M21]*m[M42] - m[M22]*m[M41];
-  double Det2_24_13 = m[M21]*m[M43] - m[M23]*m[M41];
-  double Det2_24_14 = m[M21]*m[M44] - m[M24]*m[M41];
-  double Det2_24_23 = m[M22]*m[M43] - m[M23]*m[M42];
-  double Det2_24_24 = m[M22]*m[M44] - m[M24]*m[M42];
-  double Det2_24_34 = m[M23]*m[M44] - m[M24]*m[M43];	//
-  double Det2_34_01 = m[M30]*m[M41] - m[M31]*m[M40];
-  double Det2_34_02 = m[M30]*m[M42] - m[M32]*m[M40];
-  double Det2_34_03 = m[M30]*m[M43] - m[M33]*m[M40];
-  double Det2_34_04 = m[M30]*m[M44] - m[M34]*m[M40];
-  double Det2_34_12 = m[M31]*m[M42] - m[M32]*m[M41];
-  double Det2_34_13 = m[M31]*m[M43] - m[M33]*m[M41];
-  double Det2_34_14 = m[M31]*m[M44] - m[M34]*m[M41];
-  double Det2_34_23 = m[M32]*m[M43] - m[M33]*m[M42];
-  double Det2_34_24 = m[M32]*m[M44] - m[M34]*m[M42];
-  double Det2_34_34 = m[M33]*m[M44] - m[M34]*m[M43];
+  CLHEPdouble Det2_23_01 = m[M20]*m[M31] - m[M21]*m[M30];
+  CLHEPdouble Det2_23_02 = m[M20]*m[M32] - m[M22]*m[M30];
+  CLHEPdouble Det2_23_03 = m[M20]*m[M33] - m[M23]*m[M30];
+  CLHEPdouble Det2_23_04 = m[M20]*m[M34] - m[M24]*m[M30];
+  CLHEPdouble Det2_23_12 = m[M21]*m[M32] - m[M22]*m[M31];	//
+  CLHEPdouble Det2_23_13 = m[M21]*m[M33] - m[M23]*m[M31];
+  CLHEPdouble Det2_23_14 = m[M21]*m[M34] - m[M24]*m[M31];	//
+  CLHEPdouble Det2_23_23 = m[M22]*m[M33] - m[M23]*m[M32];
+  CLHEPdouble Det2_23_24 = m[M22]*m[M34] - m[M24]*m[M32];	//
+  CLHEPdouble Det2_23_34 = m[M23]*m[M34] - m[M24]*m[M33];	//
+  CLHEPdouble Det2_24_01 = m[M20]*m[M41] - m[M21]*m[M40];
+  CLHEPdouble Det2_24_02 = m[M20]*m[M42] - m[M22]*m[M40];
+  CLHEPdouble Det2_24_03 = m[M20]*m[M43] - m[M23]*m[M40];
+  CLHEPdouble Det2_24_04 = m[M20]*m[M44] - m[M24]*m[M40];
+  CLHEPdouble Det2_24_12 = m[M21]*m[M42] - m[M22]*m[M41];
+  CLHEPdouble Det2_24_13 = m[M21]*m[M43] - m[M23]*m[M41];
+  CLHEPdouble Det2_24_14 = m[M21]*m[M44] - m[M24]*m[M41];
+  CLHEPdouble Det2_24_23 = m[M22]*m[M43] - m[M23]*m[M42];
+  CLHEPdouble Det2_24_24 = m[M22]*m[M44] - m[M24]*m[M42];
+  CLHEPdouble Det2_24_34 = m[M23]*m[M44] - m[M24]*m[M43];	//
+  CLHEPdouble Det2_34_01 = m[M30]*m[M41] - m[M31]*m[M40];
+  CLHEPdouble Det2_34_02 = m[M30]*m[M42] - m[M32]*m[M40];
+  CLHEPdouble Det2_34_03 = m[M30]*m[M43] - m[M33]*m[M40];
+  CLHEPdouble Det2_34_04 = m[M30]*m[M44] - m[M34]*m[M40];
+  CLHEPdouble Det2_34_12 = m[M31]*m[M42] - m[M32]*m[M41];
+  CLHEPdouble Det2_34_13 = m[M31]*m[M43] - m[M33]*m[M41];
+  CLHEPdouble Det2_34_14 = m[M31]*m[M44] - m[M34]*m[M41];
+  CLHEPdouble Det2_34_23 = m[M32]*m[M43] - m[M33]*m[M42];
+  CLHEPdouble Det2_34_24 = m[M32]*m[M44] - m[M34]*m[M42];
+  CLHEPdouble Det2_34_34 = m[M33]*m[M44] - m[M34]*m[M43];
 
   // Find all NECESSARY 3x3 dets:   (40 of them)
 
-  double Det3_123_012 = m[M10]*Det2_23_12 - m[M11]*Det2_23_02 
+  CLHEPdouble Det3_123_012 = m[M10]*Det2_23_12 - m[M11]*Det2_23_02 
 				+ m[M12]*Det2_23_01;
-  double Det3_123_013 = m[M10]*Det2_23_13 - m[M11]*Det2_23_03 
+  CLHEPdouble Det3_123_013 = m[M10]*Det2_23_13 - m[M11]*Det2_23_03 
 				+ m[M13]*Det2_23_01;
-  double Det3_123_014 = m[M10]*Det2_23_14 - m[M11]*Det2_23_04 
+  CLHEPdouble Det3_123_014 = m[M10]*Det2_23_14 - m[M11]*Det2_23_04 
 				+ m[M14]*Det2_23_01;		//
-  double Det3_123_023 = m[M10]*Det2_23_23 - m[M12]*Det2_23_03 
+  CLHEPdouble Det3_123_023 = m[M10]*Det2_23_23 - m[M12]*Det2_23_03 
 				+ m[M13]*Det2_23_02;
-  double Det3_123_024 = m[M10]*Det2_23_24 - m[M12]*Det2_23_04 
+  CLHEPdouble Det3_123_024 = m[M10]*Det2_23_24 - m[M12]*Det2_23_04 
 				+ m[M14]*Det2_23_02;		//
-  double Det3_123_034 = m[M10]*Det2_23_34 - m[M13]*Det2_23_04 
+  CLHEPdouble Det3_123_034 = m[M10]*Det2_23_34 - m[M13]*Det2_23_04 
 				+ m[M14]*Det2_23_03;		//
-  double Det3_123_123 = m[M11]*Det2_23_23 - m[M12]*Det2_23_13 
+  CLHEPdouble Det3_123_123 = m[M11]*Det2_23_23 - m[M12]*Det2_23_13 
 				+ m[M13]*Det2_23_12;
-  double Det3_123_124 = m[M11]*Det2_23_24 - m[M12]*Det2_23_14 
+  CLHEPdouble Det3_123_124 = m[M11]*Det2_23_24 - m[M12]*Det2_23_14 
 				+ m[M14]*Det2_23_12;		//
-  double Det3_123_134 = m[M11]*Det2_23_34 - m[M13]*Det2_23_14 
+  CLHEPdouble Det3_123_134 = m[M11]*Det2_23_34 - m[M13]*Det2_23_14 
 				+ m[M14]*Det2_23_13;		//
-  double Det3_123_234 = m[M12]*Det2_23_34 - m[M13]*Det2_23_24 
+  CLHEPdouble Det3_123_234 = m[M12]*Det2_23_34 - m[M13]*Det2_23_24 
 				+ m[M14]*Det2_23_23;		//
-  double Det3_124_012 = m[M10]*Det2_24_12 - m[M11]*Det2_24_02 
+  CLHEPdouble Det3_124_012 = m[M10]*Det2_24_12 - m[M11]*Det2_24_02 
 				+ m[M12]*Det2_24_01;
-  double Det3_124_013 = m[M10]*Det2_24_13 - m[M11]*Det2_24_03 
+  CLHEPdouble Det3_124_013 = m[M10]*Det2_24_13 - m[M11]*Det2_24_03 
 				+ m[M13]*Det2_24_01;
-  double Det3_124_014 = m[M10]*Det2_24_14 - m[M11]*Det2_24_04 
+  CLHEPdouble Det3_124_014 = m[M10]*Det2_24_14 - m[M11]*Det2_24_04 
 				+ m[M14]*Det2_24_01;
-  double Det3_124_023 = m[M10]*Det2_24_23 - m[M12]*Det2_24_03 
+  CLHEPdouble Det3_124_023 = m[M10]*Det2_24_23 - m[M12]*Det2_24_03 
 				+ m[M13]*Det2_24_02;
-  double Det3_124_024 = m[M10]*Det2_24_24 - m[M12]*Det2_24_04 
+  CLHEPdouble Det3_124_024 = m[M10]*Det2_24_24 - m[M12]*Det2_24_04 
 				+ m[M14]*Det2_24_02;
-  double Det3_124_034 = m[M10]*Det2_24_34 - m[M13]*Det2_24_04 
+  CLHEPdouble Det3_124_034 = m[M10]*Det2_24_34 - m[M13]*Det2_24_04 
 				+ m[M14]*Det2_24_03;		//
-  double Det3_124_123 = m[M11]*Det2_24_23 - m[M12]*Det2_24_13 
+  CLHEPdouble Det3_124_123 = m[M11]*Det2_24_23 - m[M12]*Det2_24_13 
 				+ m[M13]*Det2_24_12;
-  double Det3_124_124 = m[M11]*Det2_24_24 - m[M12]*Det2_24_14 
+  CLHEPdouble Det3_124_124 = m[M11]*Det2_24_24 - m[M12]*Det2_24_14 
 				+ m[M14]*Det2_24_12;
-  double Det3_124_134 = m[M11]*Det2_24_34 - m[M13]*Det2_24_14 
+  CLHEPdouble Det3_124_134 = m[M11]*Det2_24_34 - m[M13]*Det2_24_14 
 				+ m[M14]*Det2_24_13;		//
-  double Det3_124_234 = m[M12]*Det2_24_34 - m[M13]*Det2_24_24 
+  CLHEPdouble Det3_124_234 = m[M12]*Det2_24_34 - m[M13]*Det2_24_24 
 				+ m[M14]*Det2_24_23;		//
-  double Det3_134_012 = m[M10]*Det2_34_12 - m[M11]*Det2_34_02 
+  CLHEPdouble Det3_134_012 = m[M10]*Det2_34_12 - m[M11]*Det2_34_02 
 				+ m[M12]*Det2_34_01;
-  double Det3_134_013 = m[M10]*Det2_34_13 - m[M11]*Det2_34_03 
+  CLHEPdouble Det3_134_013 = m[M10]*Det2_34_13 - m[M11]*Det2_34_03 
 				+ m[M13]*Det2_34_01;
-  double Det3_134_014 = m[M10]*Det2_34_14 - m[M11]*Det2_34_04 
+  CLHEPdouble Det3_134_014 = m[M10]*Det2_34_14 - m[M11]*Det2_34_04 
 				+ m[M14]*Det2_34_01;
-  double Det3_134_023 = m[M10]*Det2_34_23 - m[M12]*Det2_34_03 
+  CLHEPdouble Det3_134_023 = m[M10]*Det2_34_23 - m[M12]*Det2_34_03 
 				+ m[M13]*Det2_34_02;
-  double Det3_134_024 = m[M10]*Det2_34_24 - m[M12]*Det2_34_04 
+  CLHEPdouble Det3_134_024 = m[M10]*Det2_34_24 - m[M12]*Det2_34_04 
 				+ m[M14]*Det2_34_02;
-  double Det3_134_034 = m[M10]*Det2_34_34 - m[M13]*Det2_34_04 
+  CLHEPdouble Det3_134_034 = m[M10]*Det2_34_34 - m[M13]*Det2_34_04 
 				+ m[M14]*Det2_34_03;
-  double Det3_134_123 = m[M11]*Det2_34_23 - m[M12]*Det2_34_13 
+  CLHEPdouble Det3_134_123 = m[M11]*Det2_34_23 - m[M12]*Det2_34_13 
 				+ m[M13]*Det2_34_12;
-  double Det3_134_124 = m[M11]*Det2_34_24 - m[M12]*Det2_34_14 
+  CLHEPdouble Det3_134_124 = m[M11]*Det2_34_24 - m[M12]*Det2_34_14 
 				+ m[M14]*Det2_34_12;
-  double Det3_134_134 = m[M11]*Det2_34_34 - m[M13]*Det2_34_14 
+  CLHEPdouble Det3_134_134 = m[M11]*Det2_34_34 - m[M13]*Det2_34_14 
 				+ m[M14]*Det2_34_13;
-  double Det3_134_234 = m[M12]*Det2_34_34 - m[M13]*Det2_34_24 
+  CLHEPdouble Det3_134_234 = m[M12]*Det2_34_34 - m[M13]*Det2_34_24 
 				+ m[M14]*Det2_34_23;		//
-  double Det3_234_012 = m[M20]*Det2_34_12 - m[M21]*Det2_34_02 
+  CLHEPdouble Det3_234_012 = m[M20]*Det2_34_12 - m[M21]*Det2_34_02 
 				+ m[M22]*Det2_34_01;
-  double Det3_234_013 = m[M20]*Det2_34_13 - m[M21]*Det2_34_03 
+  CLHEPdouble Det3_234_013 = m[M20]*Det2_34_13 - m[M21]*Det2_34_03 
 				+ m[M23]*Det2_34_01;
-  double Det3_234_014 = m[M20]*Det2_34_14 - m[M21]*Det2_34_04 
+  CLHEPdouble Det3_234_014 = m[M20]*Det2_34_14 - m[M21]*Det2_34_04 
 				+ m[M24]*Det2_34_01;
-  double Det3_234_023 = m[M20]*Det2_34_23 - m[M22]*Det2_34_03 
+  CLHEPdouble Det3_234_023 = m[M20]*Det2_34_23 - m[M22]*Det2_34_03 
 				+ m[M23]*Det2_34_02;
-  double Det3_234_024 = m[M20]*Det2_34_24 - m[M22]*Det2_34_04 
+  CLHEPdouble Det3_234_024 = m[M20]*Det2_34_24 - m[M22]*Det2_34_04 
 				+ m[M24]*Det2_34_02;
-  double Det3_234_034 = m[M20]*Det2_34_34 - m[M23]*Det2_34_04 
+  CLHEPdouble Det3_234_034 = m[M20]*Det2_34_34 - m[M23]*Det2_34_04 
 				+ m[M24]*Det2_34_03;
-  double Det3_234_123 = m[M21]*Det2_34_23 - m[M22]*Det2_34_13 
+  CLHEPdouble Det3_234_123 = m[M21]*Det2_34_23 - m[M22]*Det2_34_13 
 				+ m[M23]*Det2_34_12;
-  double Det3_234_124 = m[M21]*Det2_34_24 - m[M22]*Det2_34_14 
+  CLHEPdouble Det3_234_124 = m[M21]*Det2_34_24 - m[M22]*Det2_34_14 
 				+ m[M24]*Det2_34_12;
-  double Det3_234_134 = m[M21]*Det2_34_34 - m[M23]*Det2_34_14 
+  CLHEPdouble Det3_234_134 = m[M21]*Det2_34_34 - m[M23]*Det2_34_14 
 				+ m[M24]*Det2_34_13;
-  double Det3_234_234 = m[M22]*Det2_34_34 - m[M23]*Det2_34_24 
+  CLHEPdouble Det3_234_234 = m[M22]*Det2_34_34 - m[M23]*Det2_34_24 
 				+ m[M24]*Det2_34_23;
 
   // Find all NECESSARY 4x4 dets:   (25 of them)
 
-  double Det4_0123_0123 = m[M00]*Det3_123_123 - m[M01]*Det3_123_023 
+  CLHEPdouble Det4_0123_0123 = m[M00]*Det3_123_123 - m[M01]*Det3_123_023 
 				+ m[M02]*Det3_123_013 - m[M03]*Det3_123_012;
-  double Det4_0123_0124 = m[M00]*Det3_123_124 - m[M01]*Det3_123_024 
+  CLHEPdouble Det4_0123_0124 = m[M00]*Det3_123_124 - m[M01]*Det3_123_024 
 				+ m[M02]*Det3_123_014 - m[M04]*Det3_123_012; //
-  double Det4_0123_0134 = m[M00]*Det3_123_134 - m[M01]*Det3_123_034 
+  CLHEPdouble Det4_0123_0134 = m[M00]*Det3_123_134 - m[M01]*Det3_123_034 
 				+ m[M03]*Det3_123_014 - m[M04]*Det3_123_013; //
-  double Det4_0123_0234 = m[M00]*Det3_123_234 - m[M02]*Det3_123_034 
+  CLHEPdouble Det4_0123_0234 = m[M00]*Det3_123_234 - m[M02]*Det3_123_034 
 				+ m[M03]*Det3_123_024 - m[M04]*Det3_123_023; //
-  double Det4_0123_1234 = m[M01]*Det3_123_234 - m[M02]*Det3_123_134 
+  CLHEPdouble Det4_0123_1234 = m[M01]*Det3_123_234 - m[M02]*Det3_123_134 
 				+ m[M03]*Det3_123_124 - m[M04]*Det3_123_123; //
-  double Det4_0124_0123 = m[M00]*Det3_124_123 - m[M01]*Det3_124_023 
+  CLHEPdouble Det4_0124_0123 = m[M00]*Det3_124_123 - m[M01]*Det3_124_023 
 				+ m[M02]*Det3_124_013 - m[M03]*Det3_124_012;
-  double Det4_0124_0124 = m[M00]*Det3_124_124 - m[M01]*Det3_124_024 
+  CLHEPdouble Det4_0124_0124 = m[M00]*Det3_124_124 - m[M01]*Det3_124_024 
 				+ m[M02]*Det3_124_014 - m[M04]*Det3_124_012;
-  double Det4_0124_0134 = m[M00]*Det3_124_134 - m[M01]*Det3_124_034 
+  CLHEPdouble Det4_0124_0134 = m[M00]*Det3_124_134 - m[M01]*Det3_124_034 
 				+ m[M03]*Det3_124_014 - m[M04]*Det3_124_013; //
-  double Det4_0124_0234 = m[M00]*Det3_124_234 - m[M02]*Det3_124_034 
+  CLHEPdouble Det4_0124_0234 = m[M00]*Det3_124_234 - m[M02]*Det3_124_034 
 				+ m[M03]*Det3_124_024 - m[M04]*Det3_124_023; //
-  double Det4_0124_1234 = m[M01]*Det3_124_234 - m[M02]*Det3_124_134 
+  CLHEPdouble Det4_0124_1234 = m[M01]*Det3_124_234 - m[M02]*Det3_124_134 
 				+ m[M03]*Det3_124_124 - m[M04]*Det3_124_123; //
-  double Det4_0134_0123 = m[M00]*Det3_134_123 - m[M01]*Det3_134_023 
+  CLHEPdouble Det4_0134_0123 = m[M00]*Det3_134_123 - m[M01]*Det3_134_023 
 				+ m[M02]*Det3_134_013 - m[M03]*Det3_134_012;
-  double Det4_0134_0124 = m[M00]*Det3_134_124 - m[M01]*Det3_134_024 
+  CLHEPdouble Det4_0134_0124 = m[M00]*Det3_134_124 - m[M01]*Det3_134_024 
 				+ m[M02]*Det3_134_014 - m[M04]*Det3_134_012;
-  double Det4_0134_0134 = m[M00]*Det3_134_134 - m[M01]*Det3_134_034 
+  CLHEPdouble Det4_0134_0134 = m[M00]*Det3_134_134 - m[M01]*Det3_134_034 
 				+ m[M03]*Det3_134_014 - m[M04]*Det3_134_013;
-  double Det4_0134_0234 = m[M00]*Det3_134_234 - m[M02]*Det3_134_034 
+  CLHEPdouble Det4_0134_0234 = m[M00]*Det3_134_234 - m[M02]*Det3_134_034 
 				+ m[M03]*Det3_134_024 - m[M04]*Det3_134_023; //
-  double Det4_0134_1234 = m[M01]*Det3_134_234 - m[M02]*Det3_134_134 
+  CLHEPdouble Det4_0134_1234 = m[M01]*Det3_134_234 - m[M02]*Det3_134_134 
 				+ m[M03]*Det3_134_124 - m[M04]*Det3_134_123; //
-  double Det4_0234_0123 = m[M00]*Det3_234_123 - m[M01]*Det3_234_023 
+  CLHEPdouble Det4_0234_0123 = m[M00]*Det3_234_123 - m[M01]*Det3_234_023 
 				+ m[M02]*Det3_234_013 - m[M03]*Det3_234_012;
-  double Det4_0234_0124 = m[M00]*Det3_234_124 - m[M01]*Det3_234_024 
+  CLHEPdouble Det4_0234_0124 = m[M00]*Det3_234_124 - m[M01]*Det3_234_024 
 				+ m[M02]*Det3_234_014 - m[M04]*Det3_234_012;
-  double Det4_0234_0134 = m[M00]*Det3_234_134 - m[M01]*Det3_234_034 
+  CLHEPdouble Det4_0234_0134 = m[M00]*Det3_234_134 - m[M01]*Det3_234_034 
 				+ m[M03]*Det3_234_014 - m[M04]*Det3_234_013;
-  double Det4_0234_0234 = m[M00]*Det3_234_234 - m[M02]*Det3_234_034 
+  CLHEPdouble Det4_0234_0234 = m[M00]*Det3_234_234 - m[M02]*Det3_234_034 
 				+ m[M03]*Det3_234_024 - m[M04]*Det3_234_023;
-  double Det4_0234_1234 = m[M01]*Det3_234_234 - m[M02]*Det3_234_134 
+  CLHEPdouble Det4_0234_1234 = m[M01]*Det3_234_234 - m[M02]*Det3_234_134 
 				+ m[M03]*Det3_234_124 - m[M04]*Det3_234_123; //
-  double Det4_1234_0123 = m[M10]*Det3_234_123 - m[M11]*Det3_234_023 
+  CLHEPdouble Det4_1234_0123 = m[M10]*Det3_234_123 - m[M11]*Det3_234_023 
 				+ m[M12]*Det3_234_013 - m[M13]*Det3_234_012;
-  double Det4_1234_0124 = m[M10]*Det3_234_124 - m[M11]*Det3_234_024 
+  CLHEPdouble Det4_1234_0124 = m[M10]*Det3_234_124 - m[M11]*Det3_234_024 
 				+ m[M12]*Det3_234_014 - m[M14]*Det3_234_012;
-  double Det4_1234_0134 = m[M10]*Det3_234_134 - m[M11]*Det3_234_034 
+  CLHEPdouble Det4_1234_0134 = m[M10]*Det3_234_134 - m[M11]*Det3_234_034 
 				+ m[M13]*Det3_234_014 - m[M14]*Det3_234_013;
-  double Det4_1234_0234 = m[M10]*Det3_234_234 - m[M12]*Det3_234_034 
+  CLHEPdouble Det4_1234_0234 = m[M10]*Det3_234_234 - m[M12]*Det3_234_034 
 				+ m[M13]*Det3_234_024 - m[M14]*Det3_234_023;
-  double Det4_1234_1234 = m[M11]*Det3_234_234 - m[M12]*Det3_234_134 
+  CLHEPdouble Det4_1234_1234 = m[M11]*Det3_234_234 - m[M12]*Det3_234_134 
 				+ m[M13]*Det3_234_124 - m[M14]*Det3_234_123;
 
   // Find the 5x5 det:
 
-  double det =    m[M00]*Det4_1234_1234 
+  CLHEPdouble det =    m[M00]*Det4_1234_1234 
 	 	- m[M01]*Det4_1234_0234 
 		+ m[M02]*Det4_1234_0134 
 		- m[M03]*Det4_1234_0124 
@@ -403,8 +404,8 @@ void HepMatrix::invertHaywood5  (int & ifail) {
     return;
   } 
 
-  double oneOverDet = 1.0/det;
-  double mn1OverDet = - oneOverDet;
+  CLHEPdouble oneOverDet = 1.0/det;
+  CLHEPdouble mn1OverDet = - oneOverDet;
 
   m[M00] =  Det4_1234_1234 * oneOverDet;
   m[M01] =  Det4_0234_1234 * mn1OverDet;
@@ -445,446 +446,446 @@ void HepMatrix::invertHaywood6  (int & ifail) {
 
   // Find all NECESSARY 2x2 dets:  (45 of them)
 
-  double Det2_34_01 = m[A30]*m[A41] - m[A31]*m[A40];
-  double Det2_34_02 = m[A30]*m[A42] - m[A32]*m[A40];
-  double Det2_34_03 = m[A30]*m[A43] - m[A33]*m[A40];
-  double Det2_34_04 = m[A30]*m[A44] - m[A34]*m[A40];
-  double Det2_34_05 = m[A30]*m[A45] - m[A35]*m[A40];		//
-  double Det2_34_12 = m[A31]*m[A42] - m[A32]*m[A41];
-  double Det2_34_13 = m[A31]*m[A43] - m[A33]*m[A41];
-  double Det2_34_14 = m[A31]*m[A44] - m[A34]*m[A41];
-  double Det2_34_15 = m[A31]*m[A45] - m[A35]*m[A41];		//
-  double Det2_34_23 = m[A32]*m[A43] - m[A33]*m[A42];
-  double Det2_34_24 = m[A32]*m[A44] - m[A34]*m[A42];
-  double Det2_34_25 = m[A32]*m[A45] - m[A35]*m[A42];		//
-  double Det2_34_34 = m[A33]*m[A44] - m[A34]*m[A43];
-  double Det2_34_35 = m[A33]*m[A45] - m[A35]*m[A43];		//
-  double Det2_34_45 = m[A34]*m[A45] - m[A35]*m[A44];		//
-  double Det2_35_01 = m[A30]*m[A51] - m[A31]*m[A50];
-  double Det2_35_02 = m[A30]*m[A52] - m[A32]*m[A50];
-  double Det2_35_03 = m[A30]*m[A53] - m[A33]*m[A50];
-  double Det2_35_04 = m[A30]*m[A54] - m[A34]*m[A50];
-  double Det2_35_05 = m[A30]*m[A55] - m[A35]*m[A50];
-  double Det2_35_12 = m[A31]*m[A52] - m[A32]*m[A51];
-  double Det2_35_13 = m[A31]*m[A53] - m[A33]*m[A51];
-  double Det2_35_14 = m[A31]*m[A54] - m[A34]*m[A51];
-  double Det2_35_15 = m[A31]*m[A55] - m[A35]*m[A51];
-  double Det2_35_23 = m[A32]*m[A53] - m[A33]*m[A52];
-  double Det2_35_24 = m[A32]*m[A54] - m[A34]*m[A52];
-  double Det2_35_25 = m[A32]*m[A55] - m[A35]*m[A52];
-  double Det2_35_34 = m[A33]*m[A54] - m[A34]*m[A53];
-  double Det2_35_35 = m[A33]*m[A55] - m[A35]*m[A53];
-  double Det2_35_45 = m[A34]*m[A55] - m[A35]*m[A54];		//
-  double Det2_45_01 = m[A40]*m[A51] - m[A41]*m[A50];
-  double Det2_45_02 = m[A40]*m[A52] - m[A42]*m[A50];
-  double Det2_45_03 = m[A40]*m[A53] - m[A43]*m[A50];
-  double Det2_45_04 = m[A40]*m[A54] - m[A44]*m[A50];
-  double Det2_45_05 = m[A40]*m[A55] - m[A45]*m[A50];
-  double Det2_45_12 = m[A41]*m[A52] - m[A42]*m[A51];
-  double Det2_45_13 = m[A41]*m[A53] - m[A43]*m[A51];
-  double Det2_45_14 = m[A41]*m[A54] - m[A44]*m[A51];
-  double Det2_45_15 = m[A41]*m[A55] - m[A45]*m[A51];
-  double Det2_45_23 = m[A42]*m[A53] - m[A43]*m[A52];
-  double Det2_45_24 = m[A42]*m[A54] - m[A44]*m[A52];
-  double Det2_45_25 = m[A42]*m[A55] - m[A45]*m[A52];
-  double Det2_45_34 = m[A43]*m[A54] - m[A44]*m[A53];
-  double Det2_45_35 = m[A43]*m[A55] - m[A45]*m[A53];
-  double Det2_45_45 = m[A44]*m[A55] - m[A45]*m[A54];
+  CLHEPdouble Det2_34_01 = m[A30]*m[A41] - m[A31]*m[A40];
+  CLHEPdouble Det2_34_02 = m[A30]*m[A42] - m[A32]*m[A40];
+  CLHEPdouble Det2_34_03 = m[A30]*m[A43] - m[A33]*m[A40];
+  CLHEPdouble Det2_34_04 = m[A30]*m[A44] - m[A34]*m[A40];
+  CLHEPdouble Det2_34_05 = m[A30]*m[A45] - m[A35]*m[A40];		//
+  CLHEPdouble Det2_34_12 = m[A31]*m[A42] - m[A32]*m[A41];
+  CLHEPdouble Det2_34_13 = m[A31]*m[A43] - m[A33]*m[A41];
+  CLHEPdouble Det2_34_14 = m[A31]*m[A44] - m[A34]*m[A41];
+  CLHEPdouble Det2_34_15 = m[A31]*m[A45] - m[A35]*m[A41];		//
+  CLHEPdouble Det2_34_23 = m[A32]*m[A43] - m[A33]*m[A42];
+  CLHEPdouble Det2_34_24 = m[A32]*m[A44] - m[A34]*m[A42];
+  CLHEPdouble Det2_34_25 = m[A32]*m[A45] - m[A35]*m[A42];		//
+  CLHEPdouble Det2_34_34 = m[A33]*m[A44] - m[A34]*m[A43];
+  CLHEPdouble Det2_34_35 = m[A33]*m[A45] - m[A35]*m[A43];		//
+  CLHEPdouble Det2_34_45 = m[A34]*m[A45] - m[A35]*m[A44];		//
+  CLHEPdouble Det2_35_01 = m[A30]*m[A51] - m[A31]*m[A50];
+  CLHEPdouble Det2_35_02 = m[A30]*m[A52] - m[A32]*m[A50];
+  CLHEPdouble Det2_35_03 = m[A30]*m[A53] - m[A33]*m[A50];
+  CLHEPdouble Det2_35_04 = m[A30]*m[A54] - m[A34]*m[A50];
+  CLHEPdouble Det2_35_05 = m[A30]*m[A55] - m[A35]*m[A50];
+  CLHEPdouble Det2_35_12 = m[A31]*m[A52] - m[A32]*m[A51];
+  CLHEPdouble Det2_35_13 = m[A31]*m[A53] - m[A33]*m[A51];
+  CLHEPdouble Det2_35_14 = m[A31]*m[A54] - m[A34]*m[A51];
+  CLHEPdouble Det2_35_15 = m[A31]*m[A55] - m[A35]*m[A51];
+  CLHEPdouble Det2_35_23 = m[A32]*m[A53] - m[A33]*m[A52];
+  CLHEPdouble Det2_35_24 = m[A32]*m[A54] - m[A34]*m[A52];
+  CLHEPdouble Det2_35_25 = m[A32]*m[A55] - m[A35]*m[A52];
+  CLHEPdouble Det2_35_34 = m[A33]*m[A54] - m[A34]*m[A53];
+  CLHEPdouble Det2_35_35 = m[A33]*m[A55] - m[A35]*m[A53];
+  CLHEPdouble Det2_35_45 = m[A34]*m[A55] - m[A35]*m[A54];		//
+  CLHEPdouble Det2_45_01 = m[A40]*m[A51] - m[A41]*m[A50];
+  CLHEPdouble Det2_45_02 = m[A40]*m[A52] - m[A42]*m[A50];
+  CLHEPdouble Det2_45_03 = m[A40]*m[A53] - m[A43]*m[A50];
+  CLHEPdouble Det2_45_04 = m[A40]*m[A54] - m[A44]*m[A50];
+  CLHEPdouble Det2_45_05 = m[A40]*m[A55] - m[A45]*m[A50];
+  CLHEPdouble Det2_45_12 = m[A41]*m[A52] - m[A42]*m[A51];
+  CLHEPdouble Det2_45_13 = m[A41]*m[A53] - m[A43]*m[A51];
+  CLHEPdouble Det2_45_14 = m[A41]*m[A54] - m[A44]*m[A51];
+  CLHEPdouble Det2_45_15 = m[A41]*m[A55] - m[A45]*m[A51];
+  CLHEPdouble Det2_45_23 = m[A42]*m[A53] - m[A43]*m[A52];
+  CLHEPdouble Det2_45_24 = m[A42]*m[A54] - m[A44]*m[A52];
+  CLHEPdouble Det2_45_25 = m[A42]*m[A55] - m[A45]*m[A52];
+  CLHEPdouble Det2_45_34 = m[A43]*m[A54] - m[A44]*m[A53];
+  CLHEPdouble Det2_45_35 = m[A43]*m[A55] - m[A45]*m[A53];
+  CLHEPdouble Det2_45_45 = m[A44]*m[A55] - m[A45]*m[A54];
 
   // Find all NECESSARY 3x3 dets:  (80 of them)
 
-  double Det3_234_012 = m[A20]*Det2_34_12 - m[A21]*Det2_34_02 
+  CLHEPdouble Det3_234_012 = m[A20]*Det2_34_12 - m[A21]*Det2_34_02 
 						+ m[A22]*Det2_34_01;
-  double Det3_234_013 = m[A20]*Det2_34_13 - m[A21]*Det2_34_03 
+  CLHEPdouble Det3_234_013 = m[A20]*Det2_34_13 - m[A21]*Det2_34_03 
 						+ m[A23]*Det2_34_01;
-  double Det3_234_014 = m[A20]*Det2_34_14 - m[A21]*Det2_34_04 
+  CLHEPdouble Det3_234_014 = m[A20]*Det2_34_14 - m[A21]*Det2_34_04 
 						+ m[A24]*Det2_34_01;
-  double Det3_234_015 = m[A20]*Det2_34_15 - m[A21]*Det2_34_05
+  CLHEPdouble Det3_234_015 = m[A20]*Det2_34_15 - m[A21]*Det2_34_05
 						+ m[A25]*Det2_34_01;	//
-  double Det3_234_023 = m[A20]*Det2_34_23 - m[A22]*Det2_34_03 
+  CLHEPdouble Det3_234_023 = m[A20]*Det2_34_23 - m[A22]*Det2_34_03 
 						+ m[A23]*Det2_34_02;
-  double Det3_234_024 = m[A20]*Det2_34_24 - m[A22]*Det2_34_04 
+  CLHEPdouble Det3_234_024 = m[A20]*Det2_34_24 - m[A22]*Det2_34_04 
 						+ m[A24]*Det2_34_02;
-  double Det3_234_025 = m[A20]*Det2_34_25 - m[A22]*Det2_34_05 
+  CLHEPdouble Det3_234_025 = m[A20]*Det2_34_25 - m[A22]*Det2_34_05 
 						+ m[A25]*Det2_34_02;	//
-  double Det3_234_034 = m[A20]*Det2_34_34 - m[A23]*Det2_34_04 
+  CLHEPdouble Det3_234_034 = m[A20]*Det2_34_34 - m[A23]*Det2_34_04 
 						+ m[A24]*Det2_34_03;
-  double Det3_234_035 = m[A20]*Det2_34_35 - m[A23]*Det2_34_05 		
+  CLHEPdouble Det3_234_035 = m[A20]*Det2_34_35 - m[A23]*Det2_34_05 		
 						+ m[A25]*Det2_34_03;	//
-  double Det3_234_045 = m[A20]*Det2_34_45 - m[A24]*Det2_34_05 
+  CLHEPdouble Det3_234_045 = m[A20]*Det2_34_45 - m[A24]*Det2_34_05 
 						+ m[A25]*Det2_34_04;	//
-  double Det3_234_123 = m[A21]*Det2_34_23 - m[A22]*Det2_34_13 
+  CLHEPdouble Det3_234_123 = m[A21]*Det2_34_23 - m[A22]*Det2_34_13 
 						+ m[A23]*Det2_34_12;
-  double Det3_234_124 = m[A21]*Det2_34_24 - m[A22]*Det2_34_14 
+  CLHEPdouble Det3_234_124 = m[A21]*Det2_34_24 - m[A22]*Det2_34_14 
 						+ m[A24]*Det2_34_12;
-  double Det3_234_125 = m[A21]*Det2_34_25 - m[A22]*Det2_34_15 
+  CLHEPdouble Det3_234_125 = m[A21]*Det2_34_25 - m[A22]*Det2_34_15 
 						+ m[A25]*Det2_34_12;	//
-  double Det3_234_134 = m[A21]*Det2_34_34 - m[A23]*Det2_34_14 
+  CLHEPdouble Det3_234_134 = m[A21]*Det2_34_34 - m[A23]*Det2_34_14 
 						+ m[A24]*Det2_34_13;
-  double Det3_234_135 = m[A21]*Det2_34_35 - m[A23]*Det2_34_15 
+  CLHEPdouble Det3_234_135 = m[A21]*Det2_34_35 - m[A23]*Det2_34_15 
 						+ m[A25]*Det2_34_13;	//
-  double Det3_234_145 = m[A21]*Det2_34_45 - m[A24]*Det2_34_15 
+  CLHEPdouble Det3_234_145 = m[A21]*Det2_34_45 - m[A24]*Det2_34_15 
 						+ m[A25]*Det2_34_14;	//
-  double Det3_234_234 = m[A22]*Det2_34_34 - m[A23]*Det2_34_24 
+  CLHEPdouble Det3_234_234 = m[A22]*Det2_34_34 - m[A23]*Det2_34_24 
 						+ m[A24]*Det2_34_23;
-  double Det3_234_235 = m[A22]*Det2_34_35 - m[A23]*Det2_34_25
+  CLHEPdouble Det3_234_235 = m[A22]*Det2_34_35 - m[A23]*Det2_34_25
 						+ m[A25]*Det2_34_23;	//
-  double Det3_234_245 = m[A22]*Det2_34_45 - m[A24]*Det2_34_25
+  CLHEPdouble Det3_234_245 = m[A22]*Det2_34_45 - m[A24]*Det2_34_25
 						+ m[A25]*Det2_34_24;	//
-  double Det3_234_345 = m[A23]*Det2_34_45 - m[A24]*Det2_34_35
+  CLHEPdouble Det3_234_345 = m[A23]*Det2_34_45 - m[A24]*Det2_34_35
 						+ m[A25]*Det2_34_34;	//
-  double Det3_235_012 = m[A20]*Det2_35_12 - m[A21]*Det2_35_02 
+  CLHEPdouble Det3_235_012 = m[A20]*Det2_35_12 - m[A21]*Det2_35_02 
 						+ m[A22]*Det2_35_01;
-  double Det3_235_013 = m[A20]*Det2_35_13 - m[A21]*Det2_35_03 
+  CLHEPdouble Det3_235_013 = m[A20]*Det2_35_13 - m[A21]*Det2_35_03 
 						+ m[A23]*Det2_35_01;
-  double Det3_235_014 = m[A20]*Det2_35_14 - m[A21]*Det2_35_04 
+  CLHEPdouble Det3_235_014 = m[A20]*Det2_35_14 - m[A21]*Det2_35_04 
 						+ m[A24]*Det2_35_01;
-  double Det3_235_015 = m[A20]*Det2_35_15 - m[A21]*Det2_35_05 
+  CLHEPdouble Det3_235_015 = m[A20]*Det2_35_15 - m[A21]*Det2_35_05 
 						+ m[A25]*Det2_35_01;
-  double Det3_235_023 = m[A20]*Det2_35_23 - m[A22]*Det2_35_03 
+  CLHEPdouble Det3_235_023 = m[A20]*Det2_35_23 - m[A22]*Det2_35_03 
 						+ m[A23]*Det2_35_02;
-  double Det3_235_024 = m[A20]*Det2_35_24 - m[A22]*Det2_35_04 
+  CLHEPdouble Det3_235_024 = m[A20]*Det2_35_24 - m[A22]*Det2_35_04 
 						+ m[A24]*Det2_35_02;
-  double Det3_235_025 = m[A20]*Det2_35_25 - m[A22]*Det2_35_05 
+  CLHEPdouble Det3_235_025 = m[A20]*Det2_35_25 - m[A22]*Det2_35_05 
 						+ m[A25]*Det2_35_02;
-  double Det3_235_034 = m[A20]*Det2_35_34 - m[A23]*Det2_35_04 
+  CLHEPdouble Det3_235_034 = m[A20]*Det2_35_34 - m[A23]*Det2_35_04 
 						+ m[A24]*Det2_35_03;
-  double Det3_235_035 = m[A20]*Det2_35_35 - m[A23]*Det2_35_05 
+  CLHEPdouble Det3_235_035 = m[A20]*Det2_35_35 - m[A23]*Det2_35_05 
 						+ m[A25]*Det2_35_03;
-  double Det3_235_045 = m[A20]*Det2_35_45 - m[A24]*Det2_35_05 
+  CLHEPdouble Det3_235_045 = m[A20]*Det2_35_45 - m[A24]*Det2_35_05 
 						+ m[A25]*Det2_35_04;	//
-  double Det3_235_123 = m[A21]*Det2_35_23 - m[A22]*Det2_35_13 
+  CLHEPdouble Det3_235_123 = m[A21]*Det2_35_23 - m[A22]*Det2_35_13 
 						+ m[A23]*Det2_35_12;
-  double Det3_235_124 = m[A21]*Det2_35_24 - m[A22]*Det2_35_14 
+  CLHEPdouble Det3_235_124 = m[A21]*Det2_35_24 - m[A22]*Det2_35_14 
 						+ m[A24]*Det2_35_12;
-  double Det3_235_125 = m[A21]*Det2_35_25 - m[A22]*Det2_35_15 
+  CLHEPdouble Det3_235_125 = m[A21]*Det2_35_25 - m[A22]*Det2_35_15 
 						+ m[A25]*Det2_35_12;
-  double Det3_235_134 = m[A21]*Det2_35_34 - m[A23]*Det2_35_14 
+  CLHEPdouble Det3_235_134 = m[A21]*Det2_35_34 - m[A23]*Det2_35_14 
 						+ m[A24]*Det2_35_13;
-  double Det3_235_135 = m[A21]*Det2_35_35 - m[A23]*Det2_35_15 
+  CLHEPdouble Det3_235_135 = m[A21]*Det2_35_35 - m[A23]*Det2_35_15 
 						+ m[A25]*Det2_35_13;
-  double Det3_235_145 = m[A21]*Det2_35_45 - m[A24]*Det2_35_15 
+  CLHEPdouble Det3_235_145 = m[A21]*Det2_35_45 - m[A24]*Det2_35_15 
 						+ m[A25]*Det2_35_14;	//
-  double Det3_235_234 = m[A22]*Det2_35_34 - m[A23]*Det2_35_24 
+  CLHEPdouble Det3_235_234 = m[A22]*Det2_35_34 - m[A23]*Det2_35_24 
 						+ m[A24]*Det2_35_23;
-  double Det3_235_235 = m[A22]*Det2_35_35 - m[A23]*Det2_35_25 
+  CLHEPdouble Det3_235_235 = m[A22]*Det2_35_35 - m[A23]*Det2_35_25 
 						+ m[A25]*Det2_35_23;
-  double Det3_235_245 = m[A22]*Det2_35_45 - m[A24]*Det2_35_25 
+  CLHEPdouble Det3_235_245 = m[A22]*Det2_35_45 - m[A24]*Det2_35_25 
 						+ m[A25]*Det2_35_24;	//
-  double Det3_235_345 = m[A23]*Det2_35_45 - m[A24]*Det2_35_35 
+  CLHEPdouble Det3_235_345 = m[A23]*Det2_35_45 - m[A24]*Det2_35_35 
 						+ m[A25]*Det2_35_34;	//
-  double Det3_245_012 = m[A20]*Det2_45_12 - m[A21]*Det2_45_02 
+  CLHEPdouble Det3_245_012 = m[A20]*Det2_45_12 - m[A21]*Det2_45_02 
 						+ m[A22]*Det2_45_01;
-  double Det3_245_013 = m[A20]*Det2_45_13 - m[A21]*Det2_45_03 
+  CLHEPdouble Det3_245_013 = m[A20]*Det2_45_13 - m[A21]*Det2_45_03 
 						+ m[A23]*Det2_45_01;
-  double Det3_245_014 = m[A20]*Det2_45_14 - m[A21]*Det2_45_04 
+  CLHEPdouble Det3_245_014 = m[A20]*Det2_45_14 - m[A21]*Det2_45_04 
 						+ m[A24]*Det2_45_01;
-  double Det3_245_015 = m[A20]*Det2_45_15 - m[A21]*Det2_45_05 
+  CLHEPdouble Det3_245_015 = m[A20]*Det2_45_15 - m[A21]*Det2_45_05 
 						+ m[A25]*Det2_45_01;
-  double Det3_245_023 = m[A20]*Det2_45_23 - m[A22]*Det2_45_03 
+  CLHEPdouble Det3_245_023 = m[A20]*Det2_45_23 - m[A22]*Det2_45_03 
 						+ m[A23]*Det2_45_02;
-  double Det3_245_024 = m[A20]*Det2_45_24 - m[A22]*Det2_45_04 
+  CLHEPdouble Det3_245_024 = m[A20]*Det2_45_24 - m[A22]*Det2_45_04 
 						+ m[A24]*Det2_45_02;
-  double Det3_245_025 = m[A20]*Det2_45_25 - m[A22]*Det2_45_05 
+  CLHEPdouble Det3_245_025 = m[A20]*Det2_45_25 - m[A22]*Det2_45_05 
 						+ m[A25]*Det2_45_02;
-  double Det3_245_034 = m[A20]*Det2_45_34 - m[A23]*Det2_45_04 
+  CLHEPdouble Det3_245_034 = m[A20]*Det2_45_34 - m[A23]*Det2_45_04 
 						+ m[A24]*Det2_45_03;
-  double Det3_245_035 = m[A20]*Det2_45_35 - m[A23]*Det2_45_05 
+  CLHEPdouble Det3_245_035 = m[A20]*Det2_45_35 - m[A23]*Det2_45_05 
 						+ m[A25]*Det2_45_03;
-  double Det3_245_045 = m[A20]*Det2_45_45 - m[A24]*Det2_45_05 
+  CLHEPdouble Det3_245_045 = m[A20]*Det2_45_45 - m[A24]*Det2_45_05 
 						+ m[A25]*Det2_45_04;
-  double Det3_245_123 = m[A21]*Det2_45_23 - m[A22]*Det2_45_13 
+  CLHEPdouble Det3_245_123 = m[A21]*Det2_45_23 - m[A22]*Det2_45_13 
 						+ m[A23]*Det2_45_12;
-  double Det3_245_124 = m[A21]*Det2_45_24 - m[A22]*Det2_45_14 
+  CLHEPdouble Det3_245_124 = m[A21]*Det2_45_24 - m[A22]*Det2_45_14 
 						+ m[A24]*Det2_45_12;
-  double Det3_245_125 = m[A21]*Det2_45_25 - m[A22]*Det2_45_15 
+  CLHEPdouble Det3_245_125 = m[A21]*Det2_45_25 - m[A22]*Det2_45_15 
 						+ m[A25]*Det2_45_12;
-  double Det3_245_134 = m[A21]*Det2_45_34 - m[A23]*Det2_45_14 
+  CLHEPdouble Det3_245_134 = m[A21]*Det2_45_34 - m[A23]*Det2_45_14 
 						+ m[A24]*Det2_45_13;
-  double Det3_245_135 = m[A21]*Det2_45_35 - m[A23]*Det2_45_15 
+  CLHEPdouble Det3_245_135 = m[A21]*Det2_45_35 - m[A23]*Det2_45_15 
 						+ m[A25]*Det2_45_13;
-  double Det3_245_145 = m[A21]*Det2_45_45 - m[A24]*Det2_45_15 
+  CLHEPdouble Det3_245_145 = m[A21]*Det2_45_45 - m[A24]*Det2_45_15 
 						+ m[A25]*Det2_45_14;
-  double Det3_245_234 = m[A22]*Det2_45_34 - m[A23]*Det2_45_24 
+  CLHEPdouble Det3_245_234 = m[A22]*Det2_45_34 - m[A23]*Det2_45_24 
 						+ m[A24]*Det2_45_23;
-  double Det3_245_235 = m[A22]*Det2_45_35 - m[A23]*Det2_45_25 
+  CLHEPdouble Det3_245_235 = m[A22]*Det2_45_35 - m[A23]*Det2_45_25 
 						+ m[A25]*Det2_45_23;
-  double Det3_245_245 = m[A22]*Det2_45_45 - m[A24]*Det2_45_25 
+  CLHEPdouble Det3_245_245 = m[A22]*Det2_45_45 - m[A24]*Det2_45_25 
 						+ m[A25]*Det2_45_24;
-  double Det3_245_345 = m[A23]*Det2_45_45 - m[A24]*Det2_45_35 
+  CLHEPdouble Det3_245_345 = m[A23]*Det2_45_45 - m[A24]*Det2_45_35 
 						+ m[A25]*Det2_45_34;	//
-  double Det3_345_012 = m[A30]*Det2_45_12 - m[A31]*Det2_45_02 
+  CLHEPdouble Det3_345_012 = m[A30]*Det2_45_12 - m[A31]*Det2_45_02 
 						+ m[A32]*Det2_45_01;
-  double Det3_345_013 = m[A30]*Det2_45_13 - m[A31]*Det2_45_03 
+  CLHEPdouble Det3_345_013 = m[A30]*Det2_45_13 - m[A31]*Det2_45_03 
 						+ m[A33]*Det2_45_01;
-  double Det3_345_014 = m[A30]*Det2_45_14 - m[A31]*Det2_45_04 
+  CLHEPdouble Det3_345_014 = m[A30]*Det2_45_14 - m[A31]*Det2_45_04 
 						+ m[A34]*Det2_45_01;
-  double Det3_345_015 = m[A30]*Det2_45_15 - m[A31]*Det2_45_05 
+  CLHEPdouble Det3_345_015 = m[A30]*Det2_45_15 - m[A31]*Det2_45_05 
 						+ m[A35]*Det2_45_01;
-  double Det3_345_023 = m[A30]*Det2_45_23 - m[A32]*Det2_45_03 
+  CLHEPdouble Det3_345_023 = m[A30]*Det2_45_23 - m[A32]*Det2_45_03 
 						+ m[A33]*Det2_45_02;
-  double Det3_345_024 = m[A30]*Det2_45_24 - m[A32]*Det2_45_04 
+  CLHEPdouble Det3_345_024 = m[A30]*Det2_45_24 - m[A32]*Det2_45_04 
 						+ m[A34]*Det2_45_02;
-  double Det3_345_025 = m[A30]*Det2_45_25 - m[A32]*Det2_45_05 
+  CLHEPdouble Det3_345_025 = m[A30]*Det2_45_25 - m[A32]*Det2_45_05 
 						+ m[A35]*Det2_45_02;
-  double Det3_345_034 = m[A30]*Det2_45_34 - m[A33]*Det2_45_04 
+  CLHEPdouble Det3_345_034 = m[A30]*Det2_45_34 - m[A33]*Det2_45_04 
 						+ m[A34]*Det2_45_03;
-  double Det3_345_035 = m[A30]*Det2_45_35 - m[A33]*Det2_45_05 
+  CLHEPdouble Det3_345_035 = m[A30]*Det2_45_35 - m[A33]*Det2_45_05 
 						+ m[A35]*Det2_45_03;
-  double Det3_345_045 = m[A30]*Det2_45_45 - m[A34]*Det2_45_05 
+  CLHEPdouble Det3_345_045 = m[A30]*Det2_45_45 - m[A34]*Det2_45_05 
 						+ m[A35]*Det2_45_04;
-  double Det3_345_123 = m[A31]*Det2_45_23 - m[A32]*Det2_45_13 
+  CLHEPdouble Det3_345_123 = m[A31]*Det2_45_23 - m[A32]*Det2_45_13 
 						+ m[A33]*Det2_45_12;
-  double Det3_345_124 = m[A31]*Det2_45_24 - m[A32]*Det2_45_14 
+  CLHEPdouble Det3_345_124 = m[A31]*Det2_45_24 - m[A32]*Det2_45_14 
 						+ m[A34]*Det2_45_12;
-  double Det3_345_125 = m[A31]*Det2_45_25 - m[A32]*Det2_45_15 
+  CLHEPdouble Det3_345_125 = m[A31]*Det2_45_25 - m[A32]*Det2_45_15 
 						+ m[A35]*Det2_45_12;
-  double Det3_345_134 = m[A31]*Det2_45_34 - m[A33]*Det2_45_14 
+  CLHEPdouble Det3_345_134 = m[A31]*Det2_45_34 - m[A33]*Det2_45_14 
 						+ m[A34]*Det2_45_13;
-  double Det3_345_135 = m[A31]*Det2_45_35 - m[A33]*Det2_45_15 
+  CLHEPdouble Det3_345_135 = m[A31]*Det2_45_35 - m[A33]*Det2_45_15 
 						+ m[A35]*Det2_45_13;
-  double Det3_345_145 = m[A31]*Det2_45_45 - m[A34]*Det2_45_15 
+  CLHEPdouble Det3_345_145 = m[A31]*Det2_45_45 - m[A34]*Det2_45_15 
 						+ m[A35]*Det2_45_14;
-  double Det3_345_234 = m[A32]*Det2_45_34 - m[A33]*Det2_45_24 
+  CLHEPdouble Det3_345_234 = m[A32]*Det2_45_34 - m[A33]*Det2_45_24 
 						+ m[A34]*Det2_45_23;
-  double Det3_345_235 = m[A32]*Det2_45_35 - m[A33]*Det2_45_25 
+  CLHEPdouble Det3_345_235 = m[A32]*Det2_45_35 - m[A33]*Det2_45_25 
 						+ m[A35]*Det2_45_23;
-  double Det3_345_245 = m[A32]*Det2_45_45 - m[A34]*Det2_45_25 
+  CLHEPdouble Det3_345_245 = m[A32]*Det2_45_45 - m[A34]*Det2_45_25 
 						+ m[A35]*Det2_45_24;
-  double Det3_345_345 = m[A33]*Det2_45_45 - m[A34]*Det2_45_35 
+  CLHEPdouble Det3_345_345 = m[A33]*Det2_45_45 - m[A34]*Det2_45_35 
 						+ m[A35]*Det2_45_34;
 
   // Find all NECESSARY 4x4 dets:  (75 of them)
 
-  double Det4_1234_0123 = m[A10]*Det3_234_123 - m[A11]*Det3_234_023 
+  CLHEPdouble Det4_1234_0123 = m[A10]*Det3_234_123 - m[A11]*Det3_234_023 
 			+ m[A12]*Det3_234_013 - m[A13]*Det3_234_012;
-  double Det4_1234_0124 = m[A10]*Det3_234_124 - m[A11]*Det3_234_024 
+  CLHEPdouble Det4_1234_0124 = m[A10]*Det3_234_124 - m[A11]*Det3_234_024 
 			+ m[A12]*Det3_234_014 - m[A14]*Det3_234_012;
-  double Det4_1234_0125 = m[A10]*Det3_234_125 - m[A11]*Det3_234_025 
+  CLHEPdouble Det4_1234_0125 = m[A10]*Det3_234_125 - m[A11]*Det3_234_025 
 			+ m[A12]*Det3_234_015 - m[A15]*Det3_234_012;	//
-  double Det4_1234_0134 = m[A10]*Det3_234_134 - m[A11]*Det3_234_034 
+  CLHEPdouble Det4_1234_0134 = m[A10]*Det3_234_134 - m[A11]*Det3_234_034 
 			+ m[A13]*Det3_234_014 - m[A14]*Det3_234_013;
-  double Det4_1234_0135 = m[A10]*Det3_234_135 - m[A11]*Det3_234_035
+  CLHEPdouble Det4_1234_0135 = m[A10]*Det3_234_135 - m[A11]*Det3_234_035
 			+ m[A13]*Det3_234_015 - m[A15]*Det3_234_013;	//
-  double Det4_1234_0145 = m[A10]*Det3_234_145 - m[A11]*Det3_234_045
+  CLHEPdouble Det4_1234_0145 = m[A10]*Det3_234_145 - m[A11]*Det3_234_045
 			+ m[A14]*Det3_234_015 - m[A15]*Det3_234_014;	//
-  double Det4_1234_0234 = m[A10]*Det3_234_234 - m[A12]*Det3_234_034 
+  CLHEPdouble Det4_1234_0234 = m[A10]*Det3_234_234 - m[A12]*Det3_234_034 
 			+ m[A13]*Det3_234_024 - m[A14]*Det3_234_023;
-  double Det4_1234_0235 = m[A10]*Det3_234_235 - m[A12]*Det3_234_035 
+  CLHEPdouble Det4_1234_0235 = m[A10]*Det3_234_235 - m[A12]*Det3_234_035 
 			+ m[A13]*Det3_234_025 - m[A15]*Det3_234_023;	//
-  double Det4_1234_0245 = m[A10]*Det3_234_245 - m[A12]*Det3_234_045 
+  CLHEPdouble Det4_1234_0245 = m[A10]*Det3_234_245 - m[A12]*Det3_234_045 
 			+ m[A14]*Det3_234_025 - m[A15]*Det3_234_024;	//
-  double Det4_1234_0345 = m[A10]*Det3_234_345 - m[A13]*Det3_234_045 
+  CLHEPdouble Det4_1234_0345 = m[A10]*Det3_234_345 - m[A13]*Det3_234_045 
 			+ m[A14]*Det3_234_035 - m[A15]*Det3_234_034;	//
-  double Det4_1234_1234 = m[A11]*Det3_234_234 - m[A12]*Det3_234_134 
+  CLHEPdouble Det4_1234_1234 = m[A11]*Det3_234_234 - m[A12]*Det3_234_134 
 			+ m[A13]*Det3_234_124 - m[A14]*Det3_234_123;
-  double Det4_1234_1235 = m[A11]*Det3_234_235 - m[A12]*Det3_234_135 
+  CLHEPdouble Det4_1234_1235 = m[A11]*Det3_234_235 - m[A12]*Det3_234_135 
 			+ m[A13]*Det3_234_125 - m[A15]*Det3_234_123;	//
-  double Det4_1234_1245 = m[A11]*Det3_234_245 - m[A12]*Det3_234_145 
+  CLHEPdouble Det4_1234_1245 = m[A11]*Det3_234_245 - m[A12]*Det3_234_145 
 			+ m[A14]*Det3_234_125 - m[A15]*Det3_234_124;	//
-  double Det4_1234_1345 = m[A11]*Det3_234_345 - m[A13]*Det3_234_145 
+  CLHEPdouble Det4_1234_1345 = m[A11]*Det3_234_345 - m[A13]*Det3_234_145 
 			+ m[A14]*Det3_234_135 - m[A15]*Det3_234_134;	//
-  double Det4_1234_2345 = m[A12]*Det3_234_345 - m[A13]*Det3_234_245 
+  CLHEPdouble Det4_1234_2345 = m[A12]*Det3_234_345 - m[A13]*Det3_234_245 
 			+ m[A14]*Det3_234_235 - m[A15]*Det3_234_234;	//
-  double Det4_1235_0123 = m[A10]*Det3_235_123 - m[A11]*Det3_235_023 
+  CLHEPdouble Det4_1235_0123 = m[A10]*Det3_235_123 - m[A11]*Det3_235_023 
 			+ m[A12]*Det3_235_013 - m[A13]*Det3_235_012;
-  double Det4_1235_0124 = m[A10]*Det3_235_124 - m[A11]*Det3_235_024 
+  CLHEPdouble Det4_1235_0124 = m[A10]*Det3_235_124 - m[A11]*Det3_235_024 
 			+ m[A12]*Det3_235_014 - m[A14]*Det3_235_012;
-  double Det4_1235_0125 = m[A10]*Det3_235_125 - m[A11]*Det3_235_025 
+  CLHEPdouble Det4_1235_0125 = m[A10]*Det3_235_125 - m[A11]*Det3_235_025 
 			+ m[A12]*Det3_235_015 - m[A15]*Det3_235_012;
-  double Det4_1235_0134 = m[A10]*Det3_235_134 - m[A11]*Det3_235_034 
+  CLHEPdouble Det4_1235_0134 = m[A10]*Det3_235_134 - m[A11]*Det3_235_034 
 			+ m[A13]*Det3_235_014 - m[A14]*Det3_235_013;
-  double Det4_1235_0135 = m[A10]*Det3_235_135 - m[A11]*Det3_235_035 
+  CLHEPdouble Det4_1235_0135 = m[A10]*Det3_235_135 - m[A11]*Det3_235_035 
 			+ m[A13]*Det3_235_015 - m[A15]*Det3_235_013;
-  double Det4_1235_0145 = m[A10]*Det3_235_145 - m[A11]*Det3_235_045 
+  CLHEPdouble Det4_1235_0145 = m[A10]*Det3_235_145 - m[A11]*Det3_235_045 
 			+ m[A14]*Det3_235_015 - m[A15]*Det3_235_014;	//
-  double Det4_1235_0234 = m[A10]*Det3_235_234 - m[A12]*Det3_235_034 
+  CLHEPdouble Det4_1235_0234 = m[A10]*Det3_235_234 - m[A12]*Det3_235_034 
 			+ m[A13]*Det3_235_024 - m[A14]*Det3_235_023;
-  double Det4_1235_0235 = m[A10]*Det3_235_235 - m[A12]*Det3_235_035 
+  CLHEPdouble Det4_1235_0235 = m[A10]*Det3_235_235 - m[A12]*Det3_235_035 
 			+ m[A13]*Det3_235_025 - m[A15]*Det3_235_023;
-  double Det4_1235_0245 = m[A10]*Det3_235_245 - m[A12]*Det3_235_045 
+  CLHEPdouble Det4_1235_0245 = m[A10]*Det3_235_245 - m[A12]*Det3_235_045 
 			+ m[A14]*Det3_235_025 - m[A15]*Det3_235_024;	//
-  double Det4_1235_0345 = m[A10]*Det3_235_345 - m[A13]*Det3_235_045 
+  CLHEPdouble Det4_1235_0345 = m[A10]*Det3_235_345 - m[A13]*Det3_235_045 
 			+ m[A14]*Det3_235_035 - m[A15]*Det3_235_034;	//
-  double Det4_1235_1234 = m[A11]*Det3_235_234 - m[A12]*Det3_235_134 
+  CLHEPdouble Det4_1235_1234 = m[A11]*Det3_235_234 - m[A12]*Det3_235_134 
 			+ m[A13]*Det3_235_124 - m[A14]*Det3_235_123;
-  double Det4_1235_1235 = m[A11]*Det3_235_235 - m[A12]*Det3_235_135 
+  CLHEPdouble Det4_1235_1235 = m[A11]*Det3_235_235 - m[A12]*Det3_235_135 
 			+ m[A13]*Det3_235_125 - m[A15]*Det3_235_123;
-  double Det4_1235_1245 = m[A11]*Det3_235_245 - m[A12]*Det3_235_145 
+  CLHEPdouble Det4_1235_1245 = m[A11]*Det3_235_245 - m[A12]*Det3_235_145 
 			+ m[A14]*Det3_235_125 - m[A15]*Det3_235_124;	//
-  double Det4_1235_1345 = m[A11]*Det3_235_345 - m[A13]*Det3_235_145 
+  CLHEPdouble Det4_1235_1345 = m[A11]*Det3_235_345 - m[A13]*Det3_235_145 
 			+ m[A14]*Det3_235_135 - m[A15]*Det3_235_134;	//
-  double Det4_1235_2345 = m[A12]*Det3_235_345 - m[A13]*Det3_235_245 
+  CLHEPdouble Det4_1235_2345 = m[A12]*Det3_235_345 - m[A13]*Det3_235_245 
 			+ m[A14]*Det3_235_235 - m[A15]*Det3_235_234;	//
-  double Det4_1245_0123 = m[A10]*Det3_245_123 - m[A11]*Det3_245_023 
+  CLHEPdouble Det4_1245_0123 = m[A10]*Det3_245_123 - m[A11]*Det3_245_023 
 			+ m[A12]*Det3_245_013 - m[A13]*Det3_245_012;
-  double Det4_1245_0124 = m[A10]*Det3_245_124 - m[A11]*Det3_245_024 
+  CLHEPdouble Det4_1245_0124 = m[A10]*Det3_245_124 - m[A11]*Det3_245_024 
 			+ m[A12]*Det3_245_014 - m[A14]*Det3_245_012;
-  double Det4_1245_0125 = m[A10]*Det3_245_125 - m[A11]*Det3_245_025 
+  CLHEPdouble Det4_1245_0125 = m[A10]*Det3_245_125 - m[A11]*Det3_245_025 
 			+ m[A12]*Det3_245_015 - m[A15]*Det3_245_012;
-  double Det4_1245_0134 = m[A10]*Det3_245_134 - m[A11]*Det3_245_034 
+  CLHEPdouble Det4_1245_0134 = m[A10]*Det3_245_134 - m[A11]*Det3_245_034 
 			+ m[A13]*Det3_245_014 - m[A14]*Det3_245_013;
-  double Det4_1245_0135 = m[A10]*Det3_245_135 - m[A11]*Det3_245_035 
+  CLHEPdouble Det4_1245_0135 = m[A10]*Det3_245_135 - m[A11]*Det3_245_035 
 			+ m[A13]*Det3_245_015 - m[A15]*Det3_245_013;
-  double Det4_1245_0145 = m[A10]*Det3_245_145 - m[A11]*Det3_245_045 
+  CLHEPdouble Det4_1245_0145 = m[A10]*Det3_245_145 - m[A11]*Det3_245_045 
 			+ m[A14]*Det3_245_015 - m[A15]*Det3_245_014;
-  double Det4_1245_0234 = m[A10]*Det3_245_234 - m[A12]*Det3_245_034 
+  CLHEPdouble Det4_1245_0234 = m[A10]*Det3_245_234 - m[A12]*Det3_245_034 
 			+ m[A13]*Det3_245_024 - m[A14]*Det3_245_023;
-  double Det4_1245_0235 = m[A10]*Det3_245_235 - m[A12]*Det3_245_035 
+  CLHEPdouble Det4_1245_0235 = m[A10]*Det3_245_235 - m[A12]*Det3_245_035 
 			+ m[A13]*Det3_245_025 - m[A15]*Det3_245_023;
-  double Det4_1245_0245 = m[A10]*Det3_245_245 - m[A12]*Det3_245_045 
+  CLHEPdouble Det4_1245_0245 = m[A10]*Det3_245_245 - m[A12]*Det3_245_045 
 			+ m[A14]*Det3_245_025 - m[A15]*Det3_245_024;
-  double Det4_1245_0345 = m[A10]*Det3_245_345 - m[A13]*Det3_245_045 
+  CLHEPdouble Det4_1245_0345 = m[A10]*Det3_245_345 - m[A13]*Det3_245_045 
 			+ m[A14]*Det3_245_035 - m[A15]*Det3_245_034;	//
-  double Det4_1245_1234 = m[A11]*Det3_245_234 - m[A12]*Det3_245_134 
+  CLHEPdouble Det4_1245_1234 = m[A11]*Det3_245_234 - m[A12]*Det3_245_134 
 			+ m[A13]*Det3_245_124 - m[A14]*Det3_245_123;
-  double Det4_1245_1235 = m[A11]*Det3_245_235 - m[A12]*Det3_245_135 
+  CLHEPdouble Det4_1245_1235 = m[A11]*Det3_245_235 - m[A12]*Det3_245_135 
 			+ m[A13]*Det3_245_125 - m[A15]*Det3_245_123;
-  double Det4_1245_1245 = m[A11]*Det3_245_245 - m[A12]*Det3_245_145 
+  CLHEPdouble Det4_1245_1245 = m[A11]*Det3_245_245 - m[A12]*Det3_245_145 
 			+ m[A14]*Det3_245_125 - m[A15]*Det3_245_124;
-  double Det4_1245_1345 = m[A11]*Det3_245_345 - m[A13]*Det3_245_145 
+  CLHEPdouble Det4_1245_1345 = m[A11]*Det3_245_345 - m[A13]*Det3_245_145 
 			+ m[A14]*Det3_245_135 - m[A15]*Det3_245_134;	//
-  double Det4_1245_2345 = m[A12]*Det3_245_345 - m[A13]*Det3_245_245 
+  CLHEPdouble Det4_1245_2345 = m[A12]*Det3_245_345 - m[A13]*Det3_245_245 
 			+ m[A14]*Det3_245_235 - m[A15]*Det3_245_234;	//
-  double Det4_1345_0123 = m[A10]*Det3_345_123 - m[A11]*Det3_345_023 
+  CLHEPdouble Det4_1345_0123 = m[A10]*Det3_345_123 - m[A11]*Det3_345_023 
 			+ m[A12]*Det3_345_013 - m[A13]*Det3_345_012;
-  double Det4_1345_0124 = m[A10]*Det3_345_124 - m[A11]*Det3_345_024 
+  CLHEPdouble Det4_1345_0124 = m[A10]*Det3_345_124 - m[A11]*Det3_345_024 
 			+ m[A12]*Det3_345_014 - m[A14]*Det3_345_012;
-  double Det4_1345_0125 = m[A10]*Det3_345_125 - m[A11]*Det3_345_025 
+  CLHEPdouble Det4_1345_0125 = m[A10]*Det3_345_125 - m[A11]*Det3_345_025 
 			+ m[A12]*Det3_345_015 - m[A15]*Det3_345_012;
-  double Det4_1345_0134 = m[A10]*Det3_345_134 - m[A11]*Det3_345_034 
+  CLHEPdouble Det4_1345_0134 = m[A10]*Det3_345_134 - m[A11]*Det3_345_034 
 			+ m[A13]*Det3_345_014 - m[A14]*Det3_345_013;
-  double Det4_1345_0135 = m[A10]*Det3_345_135 - m[A11]*Det3_345_035 
+  CLHEPdouble Det4_1345_0135 = m[A10]*Det3_345_135 - m[A11]*Det3_345_035 
 			+ m[A13]*Det3_345_015 - m[A15]*Det3_345_013;
-  double Det4_1345_0145 = m[A10]*Det3_345_145 - m[A11]*Det3_345_045 
+  CLHEPdouble Det4_1345_0145 = m[A10]*Det3_345_145 - m[A11]*Det3_345_045 
 			+ m[A14]*Det3_345_015 - m[A15]*Det3_345_014;
-  double Det4_1345_0234 = m[A10]*Det3_345_234 - m[A12]*Det3_345_034 
+  CLHEPdouble Det4_1345_0234 = m[A10]*Det3_345_234 - m[A12]*Det3_345_034 
 			+ m[A13]*Det3_345_024 - m[A14]*Det3_345_023;
-  double Det4_1345_0235 = m[A10]*Det3_345_235 - m[A12]*Det3_345_035 
+  CLHEPdouble Det4_1345_0235 = m[A10]*Det3_345_235 - m[A12]*Det3_345_035 
 			+ m[A13]*Det3_345_025 - m[A15]*Det3_345_023;
-  double Det4_1345_0245 = m[A10]*Det3_345_245 - m[A12]*Det3_345_045 
+  CLHEPdouble Det4_1345_0245 = m[A10]*Det3_345_245 - m[A12]*Det3_345_045 
 			+ m[A14]*Det3_345_025 - m[A15]*Det3_345_024;
-  double Det4_1345_0345 = m[A10]*Det3_345_345 - m[A13]*Det3_345_045 
+  CLHEPdouble Det4_1345_0345 = m[A10]*Det3_345_345 - m[A13]*Det3_345_045 
 			+ m[A14]*Det3_345_035 - m[A15]*Det3_345_034;
-  double Det4_1345_1234 = m[A11]*Det3_345_234 - m[A12]*Det3_345_134 
+  CLHEPdouble Det4_1345_1234 = m[A11]*Det3_345_234 - m[A12]*Det3_345_134 
 			+ m[A13]*Det3_345_124 - m[A14]*Det3_345_123;
-  double Det4_1345_1235 = m[A11]*Det3_345_235 - m[A12]*Det3_345_135 
+  CLHEPdouble Det4_1345_1235 = m[A11]*Det3_345_235 - m[A12]*Det3_345_135 
 			+ m[A13]*Det3_345_125 - m[A15]*Det3_345_123;
-  double Det4_1345_1245 = m[A11]*Det3_345_245 - m[A12]*Det3_345_145 
+  CLHEPdouble Det4_1345_1245 = m[A11]*Det3_345_245 - m[A12]*Det3_345_145 
 			+ m[A14]*Det3_345_125 - m[A15]*Det3_345_124;
-  double Det4_1345_1345 = m[A11]*Det3_345_345 - m[A13]*Det3_345_145 
+  CLHEPdouble Det4_1345_1345 = m[A11]*Det3_345_345 - m[A13]*Det3_345_145 
 			+ m[A14]*Det3_345_135 - m[A15]*Det3_345_134;
-  double Det4_1345_2345 = m[A12]*Det3_345_345 - m[A13]*Det3_345_245 
+  CLHEPdouble Det4_1345_2345 = m[A12]*Det3_345_345 - m[A13]*Det3_345_245 
 			+ m[A14]*Det3_345_235 - m[A15]*Det3_345_234;	//
-  double Det4_2345_0123 = m[A20]*Det3_345_123 - m[A21]*Det3_345_023 
+  CLHEPdouble Det4_2345_0123 = m[A20]*Det3_345_123 - m[A21]*Det3_345_023 
 			+ m[A22]*Det3_345_013 - m[A23]*Det3_345_012;
-  double Det4_2345_0124 = m[A20]*Det3_345_124 - m[A21]*Det3_345_024 
+  CLHEPdouble Det4_2345_0124 = m[A20]*Det3_345_124 - m[A21]*Det3_345_024 
 			+ m[A22]*Det3_345_014 - m[A24]*Det3_345_012;
-  double Det4_2345_0125 = m[A20]*Det3_345_125 - m[A21]*Det3_345_025 
+  CLHEPdouble Det4_2345_0125 = m[A20]*Det3_345_125 - m[A21]*Det3_345_025 
 			+ m[A22]*Det3_345_015 - m[A25]*Det3_345_012;
-  double Det4_2345_0134 = m[A20]*Det3_345_134 - m[A21]*Det3_345_034 
+  CLHEPdouble Det4_2345_0134 = m[A20]*Det3_345_134 - m[A21]*Det3_345_034 
 			+ m[A23]*Det3_345_014 - m[A24]*Det3_345_013;
-  double Det4_2345_0135 = m[A20]*Det3_345_135 - m[A21]*Det3_345_035 
+  CLHEPdouble Det4_2345_0135 = m[A20]*Det3_345_135 - m[A21]*Det3_345_035 
 			+ m[A23]*Det3_345_015 - m[A25]*Det3_345_013;
-  double Det4_2345_0145 = m[A20]*Det3_345_145 - m[A21]*Det3_345_045 
+  CLHEPdouble Det4_2345_0145 = m[A20]*Det3_345_145 - m[A21]*Det3_345_045 
 			+ m[A24]*Det3_345_015 - m[A25]*Det3_345_014;
-  double Det4_2345_0234 = m[A20]*Det3_345_234 - m[A22]*Det3_345_034 
+  CLHEPdouble Det4_2345_0234 = m[A20]*Det3_345_234 - m[A22]*Det3_345_034 
 			+ m[A23]*Det3_345_024 - m[A24]*Det3_345_023;
-  double Det4_2345_0235 = m[A20]*Det3_345_235 - m[A22]*Det3_345_035 
+  CLHEPdouble Det4_2345_0235 = m[A20]*Det3_345_235 - m[A22]*Det3_345_035 
 			+ m[A23]*Det3_345_025 - m[A25]*Det3_345_023;
-  double Det4_2345_0245 = m[A20]*Det3_345_245 - m[A22]*Det3_345_045 
+  CLHEPdouble Det4_2345_0245 = m[A20]*Det3_345_245 - m[A22]*Det3_345_045 
 			+ m[A24]*Det3_345_025 - m[A25]*Det3_345_024;
-  double Det4_2345_0345 = m[A20]*Det3_345_345 - m[A23]*Det3_345_045 
+  CLHEPdouble Det4_2345_0345 = m[A20]*Det3_345_345 - m[A23]*Det3_345_045 
 			+ m[A24]*Det3_345_035 - m[A25]*Det3_345_034;
-  double Det4_2345_1234 = m[A21]*Det3_345_234 - m[A22]*Det3_345_134 
+  CLHEPdouble Det4_2345_1234 = m[A21]*Det3_345_234 - m[A22]*Det3_345_134 
 			+ m[A23]*Det3_345_124 - m[A24]*Det3_345_123;
-  double Det4_2345_1235 = m[A21]*Det3_345_235 - m[A22]*Det3_345_135 
+  CLHEPdouble Det4_2345_1235 = m[A21]*Det3_345_235 - m[A22]*Det3_345_135 
 			+ m[A23]*Det3_345_125 - m[A25]*Det3_345_123;
-  double Det4_2345_1245 = m[A21]*Det3_345_245 - m[A22]*Det3_345_145 
+  CLHEPdouble Det4_2345_1245 = m[A21]*Det3_345_245 - m[A22]*Det3_345_145 
 			+ m[A24]*Det3_345_125 - m[A25]*Det3_345_124;
-  double Det4_2345_1345 = m[A21]*Det3_345_345 - m[A23]*Det3_345_145 
+  CLHEPdouble Det4_2345_1345 = m[A21]*Det3_345_345 - m[A23]*Det3_345_145 
 			+ m[A24]*Det3_345_135 - m[A25]*Det3_345_134;
-  double Det4_2345_2345 = m[A22]*Det3_345_345 - m[A23]*Det3_345_245 
+  CLHEPdouble Det4_2345_2345 = m[A22]*Det3_345_345 - m[A23]*Det3_345_245 
 			+ m[A24]*Det3_345_235 - m[A25]*Det3_345_234;
 
   // Find all NECESSARY 5x5 dets:  (36 of them)
 
-  double Det5_01234_01234 = m[A00]*Det4_1234_1234 - m[A01]*Det4_1234_0234 
+  CLHEPdouble Det5_01234_01234 = m[A00]*Det4_1234_1234 - m[A01]*Det4_1234_0234 
     + m[A02]*Det4_1234_0134 - m[A03]*Det4_1234_0124 + m[A04]*Det4_1234_0123;
-  double Det5_01234_01235 = m[A00]*Det4_1234_1235 - m[A01]*Det4_1234_0235
+  CLHEPdouble Det5_01234_01235 = m[A00]*Det4_1234_1235 - m[A01]*Det4_1234_0235
     + m[A02]*Det4_1234_0135 - m[A03]*Det4_1234_0125 + m[A05]*Det4_1234_0123; //
-  double Det5_01234_01245 = m[A00]*Det4_1234_1245 - m[A01]*Det4_1234_0245
+  CLHEPdouble Det5_01234_01245 = m[A00]*Det4_1234_1245 - m[A01]*Det4_1234_0245
     + m[A02]*Det4_1234_0145 - m[A04]*Det4_1234_0125 + m[A05]*Det4_1234_0124; //
-  double Det5_01234_01345 = m[A00]*Det4_1234_1345 - m[A01]*Det4_1234_0345
+  CLHEPdouble Det5_01234_01345 = m[A00]*Det4_1234_1345 - m[A01]*Det4_1234_0345
     + m[A03]*Det4_1234_0145 - m[A04]*Det4_1234_0135 + m[A05]*Det4_1234_0134; //
-  double Det5_01234_02345 = m[A00]*Det4_1234_2345 - m[A02]*Det4_1234_0345
+  CLHEPdouble Det5_01234_02345 = m[A00]*Det4_1234_2345 - m[A02]*Det4_1234_0345
     + m[A03]*Det4_1234_0245 - m[A04]*Det4_1234_0235 + m[A05]*Det4_1234_0234; //
-  double Det5_01234_12345 = m[A01]*Det4_1234_2345 - m[A02]*Det4_1234_1345
+  CLHEPdouble Det5_01234_12345 = m[A01]*Det4_1234_2345 - m[A02]*Det4_1234_1345
     + m[A03]*Det4_1234_1245 - m[A04]*Det4_1234_1235 + m[A05]*Det4_1234_1234; //
-  double Det5_01235_01234 = m[A00]*Det4_1235_1234 - m[A01]*Det4_1235_0234 
+  CLHEPdouble Det5_01235_01234 = m[A00]*Det4_1235_1234 - m[A01]*Det4_1235_0234 
     + m[A02]*Det4_1235_0134 - m[A03]*Det4_1235_0124 + m[A04]*Det4_1235_0123;
-  double Det5_01235_01235 = m[A00]*Det4_1235_1235 - m[A01]*Det4_1235_0235 
+  CLHEPdouble Det5_01235_01235 = m[A00]*Det4_1235_1235 - m[A01]*Det4_1235_0235 
     + m[A02]*Det4_1235_0135 - m[A03]*Det4_1235_0125 + m[A05]*Det4_1235_0123;
-  double Det5_01235_01245 = m[A00]*Det4_1235_1245 - m[A01]*Det4_1235_0245 
+  CLHEPdouble Det5_01235_01245 = m[A00]*Det4_1235_1245 - m[A01]*Det4_1235_0245 
     + m[A02]*Det4_1235_0145 - m[A04]*Det4_1235_0125 + m[A05]*Det4_1235_0124; //
-  double Det5_01235_01345 = m[A00]*Det4_1235_1345 - m[A01]*Det4_1235_0345 
+  CLHEPdouble Det5_01235_01345 = m[A00]*Det4_1235_1345 - m[A01]*Det4_1235_0345 
     + m[A03]*Det4_1235_0145 - m[A04]*Det4_1235_0135 + m[A05]*Det4_1235_0134; //
-  double Det5_01235_02345 = m[A00]*Det4_1235_2345 - m[A02]*Det4_1235_0345 
+  CLHEPdouble Det5_01235_02345 = m[A00]*Det4_1235_2345 - m[A02]*Det4_1235_0345 
     + m[A03]*Det4_1235_0245 - m[A04]*Det4_1235_0235 + m[A05]*Det4_1235_0234; //
-  double Det5_01235_12345 = m[A01]*Det4_1235_2345 - m[A02]*Det4_1235_1345 
+  CLHEPdouble Det5_01235_12345 = m[A01]*Det4_1235_2345 - m[A02]*Det4_1235_1345 
     + m[A03]*Det4_1235_1245 - m[A04]*Det4_1235_1235 + m[A05]*Det4_1235_1234; //
-  double Det5_01245_01234 = m[A00]*Det4_1245_1234 - m[A01]*Det4_1245_0234 
+  CLHEPdouble Det5_01245_01234 = m[A00]*Det4_1245_1234 - m[A01]*Det4_1245_0234 
     + m[A02]*Det4_1245_0134 - m[A03]*Det4_1245_0124 + m[A04]*Det4_1245_0123;
-  double Det5_01245_01235 = m[A00]*Det4_1245_1235 - m[A01]*Det4_1245_0235 
+  CLHEPdouble Det5_01245_01235 = m[A00]*Det4_1245_1235 - m[A01]*Det4_1245_0235 
     + m[A02]*Det4_1245_0135 - m[A03]*Det4_1245_0125 + m[A05]*Det4_1245_0123;
-  double Det5_01245_01245 = m[A00]*Det4_1245_1245 - m[A01]*Det4_1245_0245 
+  CLHEPdouble Det5_01245_01245 = m[A00]*Det4_1245_1245 - m[A01]*Det4_1245_0245 
     + m[A02]*Det4_1245_0145 - m[A04]*Det4_1245_0125 + m[A05]*Det4_1245_0124;
-  double Det5_01245_01345 = m[A00]*Det4_1245_1345 - m[A01]*Det4_1245_0345 
+  CLHEPdouble Det5_01245_01345 = m[A00]*Det4_1245_1345 - m[A01]*Det4_1245_0345 
     + m[A03]*Det4_1245_0145 - m[A04]*Det4_1245_0135 + m[A05]*Det4_1245_0134; //
-  double Det5_01245_02345 = m[A00]*Det4_1245_2345 - m[A02]*Det4_1245_0345 
+  CLHEPdouble Det5_01245_02345 = m[A00]*Det4_1245_2345 - m[A02]*Det4_1245_0345 
     + m[A03]*Det4_1245_0245 - m[A04]*Det4_1245_0235 + m[A05]*Det4_1245_0234; //
-  double Det5_01245_12345 = m[A01]*Det4_1245_2345 - m[A02]*Det4_1245_1345 
+  CLHEPdouble Det5_01245_12345 = m[A01]*Det4_1245_2345 - m[A02]*Det4_1245_1345 
     + m[A03]*Det4_1245_1245 - m[A04]*Det4_1245_1235 + m[A05]*Det4_1245_1234; //
-  double Det5_01345_01234 = m[A00]*Det4_1345_1234 - m[A01]*Det4_1345_0234 
+  CLHEPdouble Det5_01345_01234 = m[A00]*Det4_1345_1234 - m[A01]*Det4_1345_0234 
     + m[A02]*Det4_1345_0134 - m[A03]*Det4_1345_0124 + m[A04]*Det4_1345_0123;
-  double Det5_01345_01235 = m[A00]*Det4_1345_1235 - m[A01]*Det4_1345_0235 
+  CLHEPdouble Det5_01345_01235 = m[A00]*Det4_1345_1235 - m[A01]*Det4_1345_0235 
     + m[A02]*Det4_1345_0135 - m[A03]*Det4_1345_0125 + m[A05]*Det4_1345_0123;
-  double Det5_01345_01245 = m[A00]*Det4_1345_1245 - m[A01]*Det4_1345_0245 
+  CLHEPdouble Det5_01345_01245 = m[A00]*Det4_1345_1245 - m[A01]*Det4_1345_0245 
     + m[A02]*Det4_1345_0145 - m[A04]*Det4_1345_0125 + m[A05]*Det4_1345_0124;
-  double Det5_01345_01345 = m[A00]*Det4_1345_1345 - m[A01]*Det4_1345_0345 
+  CLHEPdouble Det5_01345_01345 = m[A00]*Det4_1345_1345 - m[A01]*Det4_1345_0345 
     + m[A03]*Det4_1345_0145 - m[A04]*Det4_1345_0135 + m[A05]*Det4_1345_0134;
-  double Det5_01345_02345 = m[A00]*Det4_1345_2345 - m[A02]*Det4_1345_0345 
+  CLHEPdouble Det5_01345_02345 = m[A00]*Det4_1345_2345 - m[A02]*Det4_1345_0345 
     + m[A03]*Det4_1345_0245 - m[A04]*Det4_1345_0235 + m[A05]*Det4_1345_0234; //
-  double Det5_01345_12345 = m[A01]*Det4_1345_2345 - m[A02]*Det4_1345_1345 
+  CLHEPdouble Det5_01345_12345 = m[A01]*Det4_1345_2345 - m[A02]*Det4_1345_1345 
     + m[A03]*Det4_1345_1245 - m[A04]*Det4_1345_1235 + m[A05]*Det4_1345_1234; //
-  double Det5_02345_01234 = m[A00]*Det4_2345_1234 - m[A01]*Det4_2345_0234 
+  CLHEPdouble Det5_02345_01234 = m[A00]*Det4_2345_1234 - m[A01]*Det4_2345_0234 
     + m[A02]*Det4_2345_0134 - m[A03]*Det4_2345_0124 + m[A04]*Det4_2345_0123;
-  double Det5_02345_01235 = m[A00]*Det4_2345_1235 - m[A01]*Det4_2345_0235 
+  CLHEPdouble Det5_02345_01235 = m[A00]*Det4_2345_1235 - m[A01]*Det4_2345_0235 
     + m[A02]*Det4_2345_0135 - m[A03]*Det4_2345_0125 + m[A05]*Det4_2345_0123;
-  double Det5_02345_01245 = m[A00]*Det4_2345_1245 - m[A01]*Det4_2345_0245 
+  CLHEPdouble Det5_02345_01245 = m[A00]*Det4_2345_1245 - m[A01]*Det4_2345_0245 
     + m[A02]*Det4_2345_0145 - m[A04]*Det4_2345_0125 + m[A05]*Det4_2345_0124;
-  double Det5_02345_01345 = m[A00]*Det4_2345_1345 - m[A01]*Det4_2345_0345 
+  CLHEPdouble Det5_02345_01345 = m[A00]*Det4_2345_1345 - m[A01]*Det4_2345_0345 
     + m[A03]*Det4_2345_0145 - m[A04]*Det4_2345_0135 + m[A05]*Det4_2345_0134;
-  double Det5_02345_02345 = m[A00]*Det4_2345_2345 - m[A02]*Det4_2345_0345 
+  CLHEPdouble Det5_02345_02345 = m[A00]*Det4_2345_2345 - m[A02]*Det4_2345_0345 
     + m[A03]*Det4_2345_0245 - m[A04]*Det4_2345_0235 + m[A05]*Det4_2345_0234;
-  double Det5_02345_12345 = m[A01]*Det4_2345_2345 - m[A02]*Det4_2345_1345 
+  CLHEPdouble Det5_02345_12345 = m[A01]*Det4_2345_2345 - m[A02]*Det4_2345_1345 
     + m[A03]*Det4_2345_1245 - m[A04]*Det4_2345_1235 + m[A05]*Det4_2345_1234; //
-  double Det5_12345_01234 = m[A10]*Det4_2345_1234 - m[A11]*Det4_2345_0234 
+  CLHEPdouble Det5_12345_01234 = m[A10]*Det4_2345_1234 - m[A11]*Det4_2345_0234 
     + m[A12]*Det4_2345_0134 - m[A13]*Det4_2345_0124 + m[A14]*Det4_2345_0123;
-  double Det5_12345_01235 = m[A10]*Det4_2345_1235 - m[A11]*Det4_2345_0235 
+  CLHEPdouble Det5_12345_01235 = m[A10]*Det4_2345_1235 - m[A11]*Det4_2345_0235 
     + m[A12]*Det4_2345_0135 - m[A13]*Det4_2345_0125 + m[A15]*Det4_2345_0123;
-  double Det5_12345_01245 = m[A10]*Det4_2345_1245 - m[A11]*Det4_2345_0245 
+  CLHEPdouble Det5_12345_01245 = m[A10]*Det4_2345_1245 - m[A11]*Det4_2345_0245 
     + m[A12]*Det4_2345_0145 - m[A14]*Det4_2345_0125 + m[A15]*Det4_2345_0124;
-  double Det5_12345_01345 = m[A10]*Det4_2345_1345 - m[A11]*Det4_2345_0345 
+  CLHEPdouble Det5_12345_01345 = m[A10]*Det4_2345_1345 - m[A11]*Det4_2345_0345 
     + m[A13]*Det4_2345_0145 - m[A14]*Det4_2345_0135 + m[A15]*Det4_2345_0134;
-  double Det5_12345_02345 = m[A10]*Det4_2345_2345 - m[A12]*Det4_2345_0345 
+  CLHEPdouble Det5_12345_02345 = m[A10]*Det4_2345_2345 - m[A12]*Det4_2345_0345 
     + m[A13]*Det4_2345_0245 - m[A14]*Det4_2345_0235 + m[A15]*Det4_2345_0234;
-  double Det5_12345_12345 = m[A11]*Det4_2345_2345 - m[A12]*Det4_2345_1345 
+  CLHEPdouble Det5_12345_12345 = m[A11]*Det4_2345_2345 - m[A12]*Det4_2345_1345 
     + m[A13]*Det4_2345_1245 - m[A14]*Det4_2345_1235 + m[A15]*Det4_2345_1234;
 
   // Find the determinant 
 
-  double det =    m[A00]*Det5_12345_12345 
+  CLHEPdouble det =    m[A00]*Det5_12345_12345 
 	     	- m[A01]*Det5_12345_02345 
 	     	+ m[A02]*Det5_12345_01345 
 		- m[A03]*Det5_12345_01245 
@@ -900,8 +901,8 @@ void HepMatrix::invertHaywood6  (int & ifail) {
     return;
   } 
 
-  double oneOverDet = 1.0/det;
-  double mn1OverDet = - oneOverDet;
+  CLHEPdouble oneOverDet = 1.0/det;
+  CLHEPdouble mn1OverDet = - oneOverDet;
 
   m[A00] =  Det5_12345_12345*oneOverDet;
   m[A01] =  Det5_02345_12345*mn1OverDet;

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: testThreeVector.cc,v 1.3 2003/08/08 13:47:09 garren Exp $
 // ---------------------------------------------------------------------------
@@ -24,19 +25,19 @@ using namespace CLHEP;
 #define DEPS 1.0e-14
 #define FEPS 1.0e-6
 
-bool approx(double a, double b, double eps) {
+bool approx(CLHEPdouble a, CLHEPdouble b, CLHEPdouble eps) {
   return bool( std::abs(a-b) < eps );
 }
 
 bool
-test(const Hep3Vector & p, double x, double y, double z,
-     double eps) {
+test(const Hep3Vector & p, CLHEPdouble x, CLHEPdouble y, CLHEPdouble z,
+     CLHEPdouble eps) {
   return bool( approx(p.x(), x, eps) && approx(p.y(), y, eps) &&
 		     approx(p.z(), z, eps) );
 }
 
 bool
-test2(const Hep2Vector & p, double x, double y, double eps) {
+test2(const Hep2Vector & p, CLHEPdouble x, CLHEPdouble y, CLHEPdouble eps) {
   return bool( approx(p.x(), x, eps) && approx(p.y(), y, eps) );
 }
 

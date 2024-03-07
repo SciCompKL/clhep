@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // ======================================================================
 //
 // Test compilability and basic functionality of Utility/memory.h
@@ -62,9 +63,9 @@ int g( shared_ptr<incomplete> )
 
 int main()
 {
-  shared_ptr<double>  p1;
+  shared_ptr<CLHEPdouble>  p1;
   assert( 1 == f( p1 ) );
-  assert( 1 == f( shared_ptr<double>() ) );
+  assert( 1 == f( shared_ptr<CLHEPdouble>() ) );
 
   shared_ptr<Z>  p2;
   assert( 4 == g( p2 ) );

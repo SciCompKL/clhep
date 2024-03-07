@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: BasicVector3D.cc,v 1.3 2003/08/13 20:00:11 garren Exp $
 // ---------------------------------------------------------------------------
@@ -11,8 +12,8 @@
 namespace HepGeom {
   //--------------------------------------------------------------------------
   template<>
-  float BasicVector3D<float>::pseudoRapidity() const {
-    float ma = mag(), dz = z();
+  CLHEPfloat BasicVector3D<CLHEPfloat>::pseudoRapidity() const {
+    CLHEPfloat ma = mag(), dz = z();
     if (ma ==  0)  return  0;
     if (ma ==  dz) return  FLT_MAX;
     if (ma == -dz) return -FLT_MAX;
@@ -21,22 +22,22 @@ namespace HepGeom {
 
   //--------------------------------------------------------------------------
   template<>
-  void BasicVector3D<float>::setEta(float a) {
-    double ma = mag();
+  void BasicVector3D<CLHEPfloat>::setEta(CLHEPfloat a) {
+    CLHEPdouble ma = mag();
     if (ma == 0) return;
-    double tanHalfTheta  = std::exp(-a);
-    double tanHalfTheta2 = tanHalfTheta * tanHalfTheta;
-    double cosTheta1      = (1 - tanHalfTheta2) / (1 + tanHalfTheta2);
-    double rh            = ma * std::sqrt(1 - cosTheta1*cosTheta1);
-    double ph            = phi();
+    CLHEPdouble tanHalfTheta  = std::exp(-a);
+    CLHEPdouble tanHalfTheta2 = tanHalfTheta * tanHalfTheta;
+    CLHEPdouble cosTheta1      = (1 - tanHalfTheta2) / (1 + tanHalfTheta2);
+    CLHEPdouble rh            = ma * std::sqrt(1 - cosTheta1*cosTheta1);
+    CLHEPdouble ph            = phi();
     set(rh*std::cos(ph), rh*std::sin(ph), ma*cosTheta1);
   }
 
   //--------------------------------------------------------------------------
   template<>
-  float BasicVector3D<float>::angle(const BasicVector3D<float> & v) const {
-    double cosa = 0;
-    double ptot = mag()*v.mag();
+  CLHEPfloat BasicVector3D<CLHEPfloat>::angle(const BasicVector3D<CLHEPfloat> & v) const {
+    CLHEPdouble cosa = 0;
+    CLHEPdouble ptot = mag()*v.mag();
     if(ptot > 0) {
       cosa = dot(v)/ptot;
       if(cosa >  1) cosa =  1;
@@ -47,8 +48,8 @@ namespace HepGeom {
 
   //--------------------------------------------------------------------------
   template<>
-  BasicVector3D<float> & BasicVector3D<float>::rotateX(float a) {
-    double sina = std::sin(a), cosa = std::cos(a), dy = y(), dz = z();
+  BasicVector3D<CLHEPfloat> & BasicVector3D<CLHEPfloat>::rotateX(CLHEPfloat a) {
+    CLHEPdouble sina = std::sin(a), cosa = std::cos(a), dy = y(), dz = z();
     setY(dy*cosa-dz*sina);
     setZ(dz*cosa+dy*sina);
     return *this;
@@ -56,8 +57,8 @@ namespace HepGeom {
 
   //--------------------------------------------------------------------------
   template<>
-  BasicVector3D<float> & BasicVector3D<float>::rotateY(float a) {
-    double sina = std::sin(a), cosa = std::cos(a), dz = z(), dx = x();
+  BasicVector3D<CLHEPfloat> & BasicVector3D<CLHEPfloat>::rotateY(CLHEPfloat a) {
+    CLHEPdouble sina = std::sin(a), cosa = std::cos(a), dz = z(), dx = x();
     setZ(dz*cosa-dx*sina);
     setX(dx*cosa+dz*sina);
     return *this;
@@ -65,8 +66,8 @@ namespace HepGeom {
 
   //--------------------------------------------------------------------------
   template<>
-  BasicVector3D<float> & BasicVector3D<float>::rotateZ(float a) {
-    double sina = std::sin(a), cosa = std::cos(a), dx = x(), dy = y();
+  BasicVector3D<CLHEPfloat> & BasicVector3D<CLHEPfloat>::rotateZ(CLHEPfloat a) {
+    CLHEPdouble sina = std::sin(a), cosa = std::cos(a), dx = x(), dy = y();
     setX(dx*cosa-dy*sina);
     setY(dy*cosa+dx*sina);
     return *this;
@@ -74,29 +75,29 @@ namespace HepGeom {
 
   //--------------------------------------------------------------------------
   template<>
-  BasicVector3D<float> &
-  BasicVector3D<float>::rotate(float a, const BasicVector3D<float> & v) {
+  BasicVector3D<CLHEPfloat> &
+  BasicVector3D<CLHEPfloat>::rotate(CLHEPfloat a, const BasicVector3D<CLHEPfloat> & v) {
     if (a  == 0) return *this;
-    double cx = v.x(), cy = v.y(), cz = v.z();
-    double ll = std::sqrt(cx*cx + cy*cy + cz*cz);
+    CLHEPdouble cx = v.x(), cy = v.y(), cz = v.z();
+    CLHEPdouble ll = std::sqrt(cx*cx + cy*cy + cz*cz);
     if (ll == 0) {
-      std::cerr << "BasicVector<float>::rotate() : zero axis" << std::endl;
+      std::cerr << "BasicVector<CLHEPfloat>::rotate() : zero axis" << std::endl;
       return *this;
     }
-    double cosa = std::cos(a), sina = std::sin(a);
+    CLHEPdouble cosa = std::cos(a), sina = std::sin(a);
     cx /= ll; cy /= ll; cz /= ll;   
 
-    double xx = cosa + (1-cosa)*cx*cx;
-    double xy =        (1-cosa)*cx*cy - sina*cz;
-    double xz =        (1-cosa)*cx*cz + sina*cy;
+    CLHEPdouble xx = cosa + (1-cosa)*cx*cx;
+    CLHEPdouble xy =        (1-cosa)*cx*cy - sina*cz;
+    CLHEPdouble xz =        (1-cosa)*cx*cz + sina*cy;
     
-    double yx =        (1-cosa)*cy*cx + sina*cz;
-    double yy = cosa + (1-cosa)*cy*cy; 
-    double yz =        (1-cosa)*cy*cz - sina*cx;
+    CLHEPdouble yx =        (1-cosa)*cy*cx + sina*cz;
+    CLHEPdouble yy = cosa + (1-cosa)*cy*cy; 
+    CLHEPdouble yz =        (1-cosa)*cy*cz - sina*cx;
     
-    double zx =        (1-cosa)*cz*cx - sina*cy;
-    double zy =        (1-cosa)*cz*cy + sina*cx;
-    double zz = cosa + (1-cosa)*cz*cz;
+    CLHEPdouble zx =        (1-cosa)*cz*cx - sina*cy;
+    CLHEPdouble zy =        (1-cosa)*cz*cy + sina*cx;
+    CLHEPdouble zz = cosa + (1-cosa)*cz*cz;
 
     cx = x(); cy = y(); cz = z();   
     set(xx*cx+xy*cy+xz*cz, yx*cx+yy*cy+yz*cz, zx*cx+zy*cy+zz*cz);
@@ -105,20 +106,20 @@ namespace HepGeom {
 
   //--------------------------------------------------------------------------
   std::ostream &
-  operator<<(std::ostream & os, const BasicVector3D<float> & a)
+  operator<<(std::ostream & os, const BasicVector3D<CLHEPfloat> & a)
   {
     return os << "(" << a.x() << "," << a.y() << "," << a.z() << ")";
   }
 
   //--------------------------------------------------------------------------
   std::istream &
-  operator>> (std::istream & is, BasicVector3D<float> & a)
+  operator>> (std::istream & is, BasicVector3D<CLHEPfloat> & a)
   {
     // Required format is ( a, b, c ) that is, three numbers, preceded by
     // (, followed by ), and separated by commas.  The three numbers are
     // taken as x, y, z.
 
-    float x, y, z;
+    CLHEPfloat x, y, z;
     char c;
 
     is >> std::ws >> c;
@@ -127,7 +128,7 @@ namespace HepGeom {
     if (is.fail() || c != '(' ) {
       std::cerr
 	<< "Could not find required opening parenthesis "
-	<< "in input of a BasicVector3D<float>"
+	<< "in input of a BasicVector3D<CLHEPfloat>"
 	<< std::endl;
       return is;
     }
@@ -136,7 +137,7 @@ namespace HepGeom {
     if (is.fail() || c != ',' ) {
       std::cerr
 	<< "Could not find x value and required trailing comma "
-	<< "in input of a BasicVector3D<float>"
+	<< "in input of a BasicVector3D<CLHEPfloat>"
 	<< std::endl; 
       return is;
     }
@@ -145,7 +146,7 @@ namespace HepGeom {
     if (is.fail() || c != ',' ) {
       std::cerr
 	<< "Could not find y value and required trailing comma "
-	<<  "in input of a BasicVector3D<float>"
+	<<  "in input of a BasicVector3D<CLHEPfloat>"
 	<< std::endl;
       return is;
     }
@@ -154,7 +155,7 @@ namespace HepGeom {
     if (is.fail() || c != ')' ) {
       std::cerr
 	<< "Could not find z value and required close parenthesis "
-	<< "in input of a BasicVector3D<float>"
+	<< "in input of a BasicVector3D<CLHEPfloat>"
 	<< std::endl;
       return is;
     }
@@ -167,8 +168,8 @@ namespace HepGeom {
   
   //--------------------------------------------------------------------------
   template<>
-  double BasicVector3D<double>::pseudoRapidity() const {
-    double ma = mag(), dz = z();
+  CLHEPdouble BasicVector3D<CLHEPdouble>::pseudoRapidity() const {
+    CLHEPdouble ma = mag(), dz = z();
     if (ma ==  0)  return  0;
     if (ma ==  dz) return  DBL_MAX;
     if (ma == -dz) return -DBL_MAX;
@@ -177,22 +178,22 @@ namespace HepGeom {
 
   //--------------------------------------------------------------------------
   template<>
-  void BasicVector3D<double>::setEta(double a) {
-    double ma = mag();
+  void BasicVector3D<CLHEPdouble>::setEta(CLHEPdouble a) {
+    CLHEPdouble ma = mag();
     if (ma == 0) return;
-    double tanHalfTheta  = std::exp(-a);
-    double tanHalfTheta2 = tanHalfTheta * tanHalfTheta;
-    double cosTheta1      = (1 - tanHalfTheta2) / (1 + tanHalfTheta2);
-    double rh            = ma * std::sqrt(1 - cosTheta1*cosTheta1);
-    double ph            = phi();
+    CLHEPdouble tanHalfTheta  = std::exp(-a);
+    CLHEPdouble tanHalfTheta2 = tanHalfTheta * tanHalfTheta;
+    CLHEPdouble cosTheta1      = (1 - tanHalfTheta2) / (1 + tanHalfTheta2);
+    CLHEPdouble rh            = ma * std::sqrt(1 - cosTheta1*cosTheta1);
+    CLHEPdouble ph            = phi();
     set(rh*std::cos(ph), rh*std::sin(ph), ma*cosTheta1);
   }
 
   //--------------------------------------------------------------------------
   template<>
-  double BasicVector3D<double>::angle(const BasicVector3D<double> & v) const {
-    double cosa = 0;
-    double ptot = mag()*v.mag();
+  CLHEPdouble BasicVector3D<CLHEPdouble>::angle(const BasicVector3D<CLHEPdouble> & v) const {
+    CLHEPdouble cosa = 0;
+    CLHEPdouble ptot = mag()*v.mag();
     if(ptot > 0) {
       cosa = dot(v)/ptot;
       if(cosa >  1) cosa =  1;
@@ -203,8 +204,8 @@ namespace HepGeom {
 
   //--------------------------------------------------------------------------
   template<>
-  BasicVector3D<double> & BasicVector3D<double>::rotateX(double a) {
-    double sina = std::sin(a), cosa = std::cos(a), dy = y(), dz = z();
+  BasicVector3D<CLHEPdouble> & BasicVector3D<CLHEPdouble>::rotateX(CLHEPdouble a) {
+    CLHEPdouble sina = std::sin(a), cosa = std::cos(a), dy = y(), dz = z();
     setY(dy*cosa-dz*sina);
     setZ(dz*cosa+dy*sina);
     return *this;
@@ -212,8 +213,8 @@ namespace HepGeom {
 
   //--------------------------------------------------------------------------
   template<>
-  BasicVector3D<double> & BasicVector3D<double>::rotateY(double a) {
-    double sina = std::sin(a), cosa = std::cos(a), dz = z(), dx = x();
+  BasicVector3D<CLHEPdouble> & BasicVector3D<CLHEPdouble>::rotateY(CLHEPdouble a) {
+    CLHEPdouble sina = std::sin(a), cosa = std::cos(a), dz = z(), dx = x();
     setZ(dz*cosa-dx*sina);
     setX(dx*cosa+dz*sina);
     return *this;
@@ -221,8 +222,8 @@ namespace HepGeom {
 
   //--------------------------------------------------------------------------
   template<>
-  BasicVector3D<double> & BasicVector3D<double>::rotateZ(double a) {
-    double sina = std::sin(a), cosa = std::cos(a), dx = x(), dy = y();
+  BasicVector3D<CLHEPdouble> & BasicVector3D<CLHEPdouble>::rotateZ(CLHEPdouble a) {
+    CLHEPdouble sina = std::sin(a), cosa = std::cos(a), dx = x(), dy = y();
     setX(dx*cosa-dy*sina);
     setY(dy*cosa+dx*sina);
     return *this;
@@ -230,29 +231,29 @@ namespace HepGeom {
 
   //--------------------------------------------------------------------------
   template<>
-  BasicVector3D<double> &
-  BasicVector3D<double>::rotate(double a, const BasicVector3D<double> & v) {
+  BasicVector3D<CLHEPdouble> &
+  BasicVector3D<CLHEPdouble>::rotate(CLHEPdouble a, const BasicVector3D<CLHEPdouble> & v) {
     if (a  == 0) return *this;
-    double cx = v.x(), cy = v.y(), cz = v.z();
-    double ll = std::sqrt(cx*cx + cy*cy + cz*cz);
+    CLHEPdouble cx = v.x(), cy = v.y(), cz = v.z();
+    CLHEPdouble ll = std::sqrt(cx*cx + cy*cy + cz*cz);
     if (ll == 0) {
-      std::cerr << "BasicVector<double>::rotate() : zero axis" << std::endl;
+      std::cerr << "BasicVector<CLHEPdouble>::rotate() : zero axis" << std::endl;
       return *this;
     }
-    double cosa = std::cos(a), sina = std::sin(a);
+    CLHEPdouble cosa = std::cos(a), sina = std::sin(a);
     cx /= ll; cy /= ll; cz /= ll;   
 
-    double xx = cosa + (1-cosa)*cx*cx;
-    double xy =        (1-cosa)*cx*cy - sina*cz;
-    double xz =        (1-cosa)*cx*cz + sina*cy;
+    CLHEPdouble xx = cosa + (1-cosa)*cx*cx;
+    CLHEPdouble xy =        (1-cosa)*cx*cy - sina*cz;
+    CLHEPdouble xz =        (1-cosa)*cx*cz + sina*cy;
     
-    double yx =        (1-cosa)*cy*cx + sina*cz;
-    double yy = cosa + (1-cosa)*cy*cy; 
-    double yz =        (1-cosa)*cy*cz - sina*cx;
+    CLHEPdouble yx =        (1-cosa)*cy*cx + sina*cz;
+    CLHEPdouble yy = cosa + (1-cosa)*cy*cy; 
+    CLHEPdouble yz =        (1-cosa)*cy*cz - sina*cx;
     
-    double zx =        (1-cosa)*cz*cx - sina*cy;
-    double zy =        (1-cosa)*cz*cy + sina*cx;
-    double zz = cosa + (1-cosa)*cz*cz;
+    CLHEPdouble zx =        (1-cosa)*cz*cx - sina*cy;
+    CLHEPdouble zy =        (1-cosa)*cz*cy + sina*cx;
+    CLHEPdouble zz = cosa + (1-cosa)*cz*cz;
 
     cx = x(); cy = y(); cz = z();   
     set(xx*cx+xy*cy+xz*cz, yx*cx+yy*cy+yz*cz, zx*cx+zy*cy+zz*cz);
@@ -261,20 +262,20 @@ namespace HepGeom {
 
   //--------------------------------------------------------------------------
   std::ostream &
-  operator<< (std::ostream & os, const BasicVector3D<double> & a)
+  operator<< (std::ostream & os, const BasicVector3D<CLHEPdouble> & a)
   {
     return os << "(" << a.x() << "," << a.y() << "," << a.z() << ")";
   }
   
   //--------------------------------------------------------------------------
   std::istream &
-  operator>> (std::istream & is, BasicVector3D<double> & a)
+  operator>> (std::istream & is, BasicVector3D<CLHEPdouble> & a)
   {
     // Required format is ( a, b, c ) that is, three numbers, preceded by
     // (, followed by ), and separated by commas.  The three numbers are
     // taken as x, y, z.
     
-    double x, y, z;
+    CLHEPdouble x, y, z;
     char c;
     
     is >> std::ws >> c;
@@ -283,7 +284,7 @@ namespace HepGeom {
     if (is.fail() || c != '(' ) {
       std::cerr
 	<< "Could not find required opening parenthesis "
-	<< "in input of a BasicVector3D<double>"
+	<< "in input of a BasicVector3D<CLHEPdouble>"
 	<< std::endl;
       return is;
     }
@@ -292,7 +293,7 @@ namespace HepGeom {
     if (is.fail() || c != ',' ) {
       std::cerr
 	<< "Could not find x value and required trailing comma "
-	<< "in input of a BasicVector3D<double>"
+	<< "in input of a BasicVector3D<CLHEPdouble>"
 	<< std::endl; 
       return is;
     }
@@ -301,7 +302,7 @@ namespace HepGeom {
     if (is.fail() || c != ',' ) {
       std::cerr
 	<< "Could not find y value and required trailing comma "
-	<<  "in input of a BasicVector3D<double>"
+	<<  "in input of a BasicVector3D<CLHEPdouble>"
 	<< std::endl;
       return is;
     }
@@ -310,7 +311,7 @@ namespace HepGeom {
     if (is.fail() || c != ')' ) {
       std::cerr
 	<< "Could not find z value and required close parenthesis "
-	<< "in input of a BasicVector3D<double>"
+	<< "in input of a BasicVector3D<CLHEPdouble>"
 	<< std::endl;
       return is;
     }

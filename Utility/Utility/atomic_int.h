@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef CLHEP_ATOMIC_INT_H
 #define CLHEP_ATOMIC_INT_H
 

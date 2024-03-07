@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef CLHEP_NONCOPYABLE_H
 #define CLHEP_NONCOPYABLE_H
 

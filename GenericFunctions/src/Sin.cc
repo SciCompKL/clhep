@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: Sin.cc,v 1.5 2003/10/10 17:40:39 garren Exp $
 #include "CLHEP/GenericFunctions/Sin.hh"
@@ -18,7 +19,7 @@ Sin::Sin(const Sin & right) : AbsFunction(right)
 {  }
 
 
-double Sin::operator() (double x) const {
+CLHEPdouble Sin::operator() (CLHEPdouble x) const {
   return sin(x);
 }
 

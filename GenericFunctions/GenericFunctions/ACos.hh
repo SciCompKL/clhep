@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: ACos.hh,v 1.2 2003/09/06 14:04:13 boudreau Exp $
 //---------------------ACos-------------------------------------------------//
@@ -28,8 +29,8 @@ namespace Genfun {
     ACos(const ACos &right);
   
     // Retreive function value
-    virtual double operator ()(double argument) const override;
-    virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+    virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+    virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
 
     // Derivative.  
     Derivative partial (unsigned int) const override;

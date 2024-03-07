@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: RandGaussT.h,v 1.5 2010/06/16 17:24:53 garren Exp $
 // -*- C++ -*-
 //
@@ -42,10 +43,10 @@ class RandGaussT : public RandGauss {
 
 public:
 
-  inline RandGaussT ( HepRandomEngine& anEngine, double mean=0.0,
-                                                double stdDev=1.0 );
-  inline RandGaussT ( HepRandomEngine* anEngine, double mean=0.0,
-                                                double stdDev=1.0 );
+  inline RandGaussT ( HepRandomEngine& anEngine, CLHEPdouble mean=0.0,
+                                                CLHEPdouble stdDev=1.0 );
+  inline RandGaussT ( HepRandomEngine* anEngine, CLHEPdouble mean=0.0,
+                                                CLHEPdouble stdDev=1.0 );
   // These constructors should be used to instantiate a RandGaussT
   // distribution object defining a local engine for it.
   // The static generator will be skipped using the non-static methods
@@ -67,40 +68,40 @@ public:
 
   // Static methods to shoot random values using the static generator
 
-  static  inline double shoot();
+  static  inline CLHEPdouble shoot();
 
-  static  inline double shoot( double mean, double stdDev );
+  static  inline CLHEPdouble shoot( CLHEPdouble mean, CLHEPdouble stdDev );
 
-  static  void shootArray ( const int size, double* vect,
-                            double mean=0.0, double stdDev=1.0 );
+  static  void shootArray ( const int size, CLHEPdouble* vect,
+                            CLHEPdouble mean=0.0, CLHEPdouble stdDev=1.0 );
 
   //  Static methods to shoot random values using a given engine
   //  by-passing the static generator.
 
-  static  inline double shoot( HepRandomEngine* anotherEngine );
+  static  inline CLHEPdouble shoot( HepRandomEngine* anotherEngine );
 
-  static  inline double shoot( HepRandomEngine* anotherEngine, 
-                                  double mean, double stdDev );
+  static  inline CLHEPdouble shoot( HepRandomEngine* anotherEngine, 
+                                  CLHEPdouble mean, CLHEPdouble stdDev );
 
 
   static  void shootArray ( HepRandomEngine* anotherEngine, 
 			    const int size,
-                            double* vect, double mean=0.0,
-                            double stdDev=1.0 );
+                            CLHEPdouble* vect, CLHEPdouble mean=0.0,
+                            CLHEPdouble stdDev=1.0 );
 
   //  Instance methods using the localEngine to instead of the static 
   //  generator, and the default mean and stdDev established at construction
 
-  inline double fire();
+  inline CLHEPdouble fire();
 
-  inline double fire ( double mean, double stdDev );
+  inline CLHEPdouble fire ( CLHEPdouble mean, CLHEPdouble stdDev );
   
-  void fireArray  ( const int size, double* vect);
-  void fireArray  ( const int size, double* vect,
-                    double mean, double stdDev );
+  void fireArray  ( const int size, CLHEPdouble* vect);
+  void fireArray  ( const int size, CLHEPdouble* vect,
+                    CLHEPdouble mean, CLHEPdouble stdDev );
 
-  virtual double operator()();
-  virtual double operator()( double mean, double stdDev );
+  virtual CLHEPdouble operator()();
+  virtual CLHEPdouble operator()( CLHEPdouble mean, CLHEPdouble stdDev );
 
   // Save and restore to/from streams
   

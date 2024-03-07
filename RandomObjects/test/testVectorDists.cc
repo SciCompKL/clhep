@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: testVectorDists.cc,v 1.2 2003/08/13 20:00:13 garren Exp $
 // -*- C++ -*-
 // ----------------------------------------------------------------------
@@ -56,7 +57,7 @@ int testRandMultiGauss( ) {
   int nvectors;
   cout << "How many vectors should we generate: ";
   cin >> nvectors;
-  double rootn = sqrt((double)nvectors);
+  CLHEPdouble rootn = sqrt((CLHEPdouble)nvectors);
 
   int nMu;
   int nS;
@@ -75,7 +76,7 @@ int testRandMultiGauss( ) {
 
   cout << "Enter mu, one component at a time: \n";
   int imu;
-  double muElement;
+  CLHEPdouble muElement;
   for (imu = 1; imu <= nMu; imu++) {
     cout << imu << ": ";
     cin >> muElement;
@@ -87,7 +88,7 @@ int testRandMultiGauss( ) {
   cout << 
 	"The diagonal elements of S will be the first numbers on each line:\n";
   int row, col;
-  double sij;
+  CLHEPdouble sij;
   for (row = 1; row <= nS; row++) {
     cout << row << " {" << nS - row + 1 << " numbers}: ";
     for (col = row; col <= nS; col++) {
@@ -163,16 +164,16 @@ int testRandMultiGauss( ) {
   int in2 = 0;
   int in3 = 0;
   int nentries = 0;
-  float binno;
+  CLHEPfloat binno;
   int nbin;
   int bins[30];
   int ix, iy;
-//  double root2 = sqrt(2.0);
-  double sumDelta = 0.0;
-  double sumDelta2 = 0.0;
+//  CLHEPdouble root2 = sqrt(2.0);
+  CLHEPdouble sumDelta = 0.0;
+  CLHEPdouble sumDelta2 = 0.0;
   int nunder = 0;
   int nover = 0;
-  double worstDeviation=0;
+  CLHEPdouble worstDeviation=0;
 
   int k;
   for(k=0; k<30; ++k) {
@@ -288,16 +289,16 @@ int testRandMultiGauss( ) {
     }
   } 
 
-  float ndf = ntrials*dim*(dim+1)/2.0;
+  CLHEPfloat ndf = ntrials*dim*(dim+1)/2.0;
   cout << "\nOut of a total of " << ndf << " entries" << endl;
   cout << "There are " << in1 << " within 1 sigma or " 
-       << 100.0*(float)in1/ndf << "%" << endl;
+       << 100.0*(CLHEPfloat)in1/ndf << "%" << endl;
   cout << "There are " << in2 << " within 2 sigma or "
-       << 100.0*(float)in2/ndf << "%" << endl;
+       << 100.0*(CLHEPfloat)in2/ndf << "%" << endl;
   cout << "There are " << in3 << " within 3 sigma or "
-       << 100.0*(float)in3/ndf << "%" << endl;
-  double aveDelta = sumDelta/(double)ndf;
-  double rmsDelta = sumDelta2/(double)ndf - aveDelta*aveDelta;
+       << 100.0*(CLHEPfloat)in3/ndf << "%" << endl;
+  CLHEPdouble aveDelta = sumDelta/(CLHEPdouble)ndf;
+  CLHEPdouble rmsDelta = sumDelta2/(CLHEPdouble)ndf - aveDelta*aveDelta;
   cout << "\nFor dim = " << dim << " Average(Delta) = " << aveDelta << "    RMS(Delta) = " << rmsDelta << endl;
   cout << "\nPoor man's histogram of deviations in 30 bins from -3.0 to 3.0" << endl;
   cout << "This should be a standard unit Gaussian.\n" << endl;

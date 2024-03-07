@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // $Id: 
 // -*- C++ -*-
 //
@@ -18,7 +19,7 @@ Abs::Abs(const Abs & right) : AbsFunction(right)
 Abs::~Abs() {
 }
 
-double Abs::operator() (double x) const {
+CLHEPdouble Abs::operator() (CLHEPdouble x) const {
   return std::abs(x);
 }
 

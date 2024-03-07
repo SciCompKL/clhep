@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef CLHEP_KEYWORDS_H
 #define CLHEP_KEYWORDS_H
 

@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // CLASSDOC OFF
 // ---------------------------------------------------------------------------
@@ -110,13 +111,13 @@ public:
    inline int num_col() const;
    // Returns number of rows/columns.
 
-   const double & operator()(int row, int col) const; 
-   double & operator()(int row, int col);
+   const CLHEPdouble & operator()(int row, int col) const; 
+   CLHEPdouble & operator()(int row, int col);
    // Read and write a SymMatrix element.
    // ** Note that indexing starts from (1,1). **
 
-   const double & fast(int row, int col) const;
-   double & fast(int row, int col);
+   const CLHEPdouble & fast(int row, int col) const;
+   CLHEPdouble & fast(int row, int col);
    // fast element access.
    // Must be row>=col;
    // ** Note that indexing starts from (1,1). **
@@ -127,11 +128,11 @@ public:
    void assign(const HepSymMatrix &hm2);
    // Another form of assignment. For consistency.
 
-   HepSymMatrix & operator*=(double t);
-   // Multiply a SymMatrix by a floating number.
+   HepSymMatrix & operator*=(CLHEPdouble t);
+   // Multiply a SymMatrix by a CLHEPfloating number.
 
-   HepSymMatrix & operator/=(double t); 
-   // Divide a SymMatrix by a floating number.
+   HepSymMatrix & operator/=(CLHEPdouble t); 
+   // Divide a SymMatrix by a CLHEPfloating number.
 
    HepSymMatrix & operator+=( const HepSymMatrix &hm2);
    HepSymMatrix & operator+=( const HepDiagMatrix &hm2);
@@ -149,7 +150,7 @@ public:
    HepSymMatrix T() const;
    // Returns the transpose of a SymMatrix (which is itself).
 
-   HepSymMatrix apply(double (*f)(double, int, int)) const;
+   HepSymMatrix apply(CLHEPdouble (*f)(CLHEPdouble, int, int)) const;
    // Apply a function to all elements of the matrix.
 
    HepSymMatrix similarity(const HepMatrix &hm1) const;
@@ -160,7 +161,7 @@ public:
    // temporary. test of new similarity.
    // Returns hm1.T()*s*hm1.
 
-   double similarity(const HepVector &v) const;
+   CLHEPdouble similarity(const HepVector &v) const;
    // Returns v.T()*s*v (This is a scaler).
 
    HepSymMatrix sub(int min_row, int max_row) const;
@@ -187,16 +188,16 @@ public:
    inline HepSymMatrix inverse() const;
    // Invert a matrix. Throw std::runtime_error on failure. 
 
-   double determinant() const;
+   CLHEPdouble determinant() const;
    // calculate the determinant of the matrix.
 
-   double trace() const;
+   CLHEPdouble trace() const;
    // calculate the trace of the matrix (sum of diagonal elements).
 
    class HepSymMatrix_row {
    public:
       inline HepSymMatrix_row(HepSymMatrix&,int);
-      inline double & operator[](int);
+      inline CLHEPdouble & operator[](int);
    private:
       HepSymMatrix& _a;
       int _r;
@@ -204,7 +205,7 @@ public:
    class HepSymMatrix_row_const {
    public:
       inline HepSymMatrix_row_const(const HepSymMatrix&,int);
-      inline const double & operator[](int) const;
+      inline const CLHEPdouble & operator[](int) const;
    private:
       const HepSymMatrix& _a;
       int _r;
@@ -241,7 +242,7 @@ private:
    friend class HepDiagMatrix;
 
    friend void tridiagonal(HepSymMatrix *a,HepMatrix *hsm);
-   friend double condition(const HepSymMatrix &m);
+   friend CLHEPdouble condition(const HepSymMatrix &m);
    friend void diag_step(HepSymMatrix *t,int begin,int end);
    friend void diag_step(HepSymMatrix *t,HepMatrix *u,int begin,int end);
    friend HepMatrix diagonalize(HepSymMatrix *s);
@@ -262,22 +263,22 @@ private:
    // Returns v * v.T();
 
 #ifdef DISABLE_ALLOC
-   std::vector<double > m;
+   std::vector<CLHEPdouble > m;
 #else
-   std::vector<double,Alloc<double,25> > m;
+   std::vector<CLHEPdouble,Alloc<CLHEPdouble,25> > m;
 #endif
    int nrow;
    int size_;				     // total number of elements
 
-   static CLHEP_THREAD_LOCAL double posDefFraction5x5;
-   static CLHEP_THREAD_LOCAL double adjustment5x5;
-   static const  double CHOLESKY_THRESHOLD_5x5;
-   static const  double CHOLESKY_CREEP_5x5;
+   static CLHEP_THREAD_LOCAL CLHEPdouble posDefFraction5x5;
+   static CLHEP_THREAD_LOCAL CLHEPdouble adjustment5x5;
+   static const  CLHEPdouble CHOLESKY_THRESHOLD_5x5;
+   static const  CLHEPdouble CHOLESKY_CREEP_5x5;
 
-   static CLHEP_THREAD_LOCAL double posDefFraction6x6;
-   static CLHEP_THREAD_LOCAL double adjustment6x6;
-   static const double CHOLESKY_THRESHOLD_6x6;
-   static const double CHOLESKY_CREEP_6x6;
+   static CLHEP_THREAD_LOCAL CLHEPdouble posDefFraction6x6;
+   static CLHEP_THREAD_LOCAL CLHEPdouble adjustment6x6;
+   static const CLHEPdouble CHOLESKY_THRESHOLD_6x6;
+   static const CLHEPdouble CHOLESKY_CREEP_6x6;
 
    void invert4  (int & ifail);
    void invert5  (int & ifail);
@@ -296,12 +297,12 @@ std::ostream& operator<<(std::ostream &s, const HepSymMatrix &q);
 HepMatrix operator*(const HepMatrix &hm1, const HepSymMatrix &hm2);
 HepMatrix operator*(const HepSymMatrix &hm1, const HepMatrix &hm2);
 HepMatrix operator*(const HepSymMatrix &hm1, const HepSymMatrix &hm2);
-HepSymMatrix operator*(double t, const HepSymMatrix &s1);
-HepSymMatrix operator*(const HepSymMatrix &s1, double t);
+HepSymMatrix operator*(CLHEPdouble t, const HepSymMatrix &s1);
+HepSymMatrix operator*(const HepSymMatrix &s1, CLHEPdouble t);
 // Multiplication operators.
 // Note that m *= hm1 is always faster than m = m * hm1
 
-HepSymMatrix operator/(const HepSymMatrix &hm1, double t);
+HepSymMatrix operator/(const HepSymMatrix &hm1, CLHEPdouble t);
 // s = s1 / t. (s /= t is faster if you can use it.)
 
 HepMatrix operator+(const HepMatrix &hm1, const HepSymMatrix &s2);
@@ -317,7 +318,7 @@ HepSymMatrix operator-(const HepSymMatrix &s1, const HepSymMatrix &s2);
 HepSymMatrix dsum(const HepSymMatrix &s1, const HepSymMatrix &s2);
 // Direct sum of two symmetric matrices;
 
-double condition(const HepSymMatrix &m);
+CLHEPdouble condition(const HepSymMatrix &m);
 // Find the conditon number of a symmetric matrix.
 
 void diag_step(HepSymMatrix *t, int begin, int end);

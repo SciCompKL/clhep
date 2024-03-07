@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: AnalyticConvolution.cc,v 1.8 2010/07/22 21:55:10 garren Exp $
 #include "CLHEP/GenericFunctions/AbsFunction.hh"
@@ -66,17 +67,17 @@ Parameter & AnalyticConvolution::offset() {
 const Parameter & AnalyticConvolution::offset() const {
   return _offset;
 }
-double AnalyticConvolution::operator() (double argument) const {
+CLHEPdouble AnalyticConvolution::operator() (CLHEPdouble argument) const {
   // Fetch the paramters.  This operator does not convolve numerically.
-  static const double sqrtTwo = sqrt(2.0);
-  double xsigma  = _sigma.getValue();
-  double tau    = _lifetime.getValue();
-  double xoffset = _offset.getValue();
-  double x      =  argument-xoffset;
-  double freq   = _frequency.getValue();
+  static const CLHEPdouble sqrtTwo = sqrt(2.0);
+  CLHEPdouble xsigma  = _sigma.getValue();
+  CLHEPdouble tau    = _lifetime.getValue();
+  CLHEPdouble xoffset = _offset.getValue();
+  CLHEPdouble x      =  argument-xoffset;
+  CLHEPdouble freq   = _frequency.getValue();
  
   // smeared exponential an its asymmetry.
-  double expG=0.0, asymm=0.0;  
+  CLHEPdouble expG=0.0, asymm=0.0;  
   
   if (_type==SMEARED_NEG_EXP) {
     expG = exp((xsigma*xsigma +2*tau*(/*xoffset*/x))/(2.0*tau*tau)) * 
@@ -129,7 +130,7 @@ double AnalyticConvolution::operator() (double argument) const {
     } 
   }
   else {
-    std::complex<double> z(freq*xsigma/sqrtTwo, (xsigma/tau-x/xsigma)/sqrtTwo);
+    std::complex<CLHEPdouble> z(freq*xsigma/sqrtTwo, (xsigma/tau-x/xsigma)/sqrtTwo);
     if (x<0) {
       if (_type==SMEARED_COS_EXP|| _type==MIXED || _type==UNMIXED ) {
 	asymm= 2.0*nwwerf(z).real()/tau/4.0*exp(-x*x/2.0/xsigma/xsigma);
@@ -152,7 +153,7 @@ double AnalyticConvolution::operator() (double argument) const {
   
   // Return either MIXED, UNMIXED, or ASYMMETRY function.
   if (_type==UNMIXED) {
-    double retVal = (expG+asymm)/2.0;
+    CLHEPdouble retVal = (expG+asymm)/2.0;
     if (retVal<0)
       std::cerr
 	<< "Warning in AnalyticConvolution:  negative probablity"
@@ -167,7 +168,7 @@ double AnalyticConvolution::operator() (double argument) const {
     return retVal;
   }
   else if (_type==MIXED) {
-    double retVal = (expG-asymm)/2.0;
+    CLHEPdouble retVal = (expG-asymm)/2.0;
     if (retVal<0)
       std::cerr
 	<< "Warning in AnalyticConvolution:  negative probablity"
@@ -194,10 +195,10 @@ double AnalyticConvolution::operator() (double argument) const {
 
 }
 
-double AnalyticConvolution::erfc(double x) const {
+CLHEPdouble AnalyticConvolution::erfc(CLHEPdouble x) const {
 // This is accurate to 7 places.
 // See Numerical Recipes P 221
-  double t, z, ans;
+  CLHEPdouble t, z, ans;
   z = (x < 0) ? -x : x;
   t = 1.0/(1.0+.5*z);
   ans = t*exp(-z*z-1.26551223+t*(1.00002368+t*(0.37409196+t*(0.09678418+
@@ -207,41 +208,41 @@ double AnalyticConvolution::erfc(double x) const {
   return ans;
 }
 
-double AnalyticConvolution::pow(double x,int n) const {
-  double val=1;
+CLHEPdouble AnalyticConvolution::pow(CLHEPdouble x,int n) const {
+  CLHEPdouble val=1;
   for(int i=0;i<n;i++){
     val=val*x;
   }
   return val;
 }
 
-std::complex<double> AnalyticConvolution::nwwerf(std::complex<double> z) const {
-  std::complex<double>  zh,r[38],s,t,v;
+std::complex<CLHEPdouble> AnalyticConvolution::nwwerf(std::complex<CLHEPdouble> z) const {
+  std::complex<CLHEPdouble>  zh,r[38],s,t,v;
 
-  const double z1 = 1;
-  const double hf = z1/2;
-  const double z10 = 10;
-  const double c1 = 74/z10;
-  const double c2 = 83/z10;
-  const double c3 = z10/32;
-  const double c4 = 16/z10;
-  const double c = 1.12837916709551257;
-  const double p = pow(2.0*c4,33);
+  const CLHEPdouble z1 = 1;
+  const CLHEPdouble hf = z1/2;
+  const CLHEPdouble z10 = 10;
+  const CLHEPdouble c1 = 74/z10;
+  const CLHEPdouble c2 = 83/z10;
+  const CLHEPdouble c3 = z10/32;
+  const CLHEPdouble c4 = 16/z10;
+  const CLHEPdouble c = 1.12837916709551257;
+  const CLHEPdouble p = pow(2.0*c4,33);
 
-  double x=z.real();
-  double y=z.imag();
-  double xa=(x >= 0) ? x : -x;
-  double ya=(y >= 0) ? y : -y;
+  CLHEPdouble x=z.real();
+  CLHEPdouble y=z.imag();
+  CLHEPdouble xa=(x >= 0) ? x : -x;
+  CLHEPdouble ya=(y >= 0) ? y : -y;
   if(ya < c1 && xa < c2){
-    zh = std::complex<double>(ya+c4,xa);
-    r[37]= std::complex<double>(0,0);
+    zh = std::complex<CLHEPdouble>(ya+c4,xa);
+    r[37]= std::complex<CLHEPdouble>(0,0);
     //       do 1 n = 36,1,-1
     for(int n = 36; n>0; n--){   
-      t=zh+double(n)*std::conj(r[n+1]);
+      t=zh+CLHEPdouble(n)*std::conj(r[n+1]);
       r[n]=hf*t/std::norm(t);
     }
-    double xl=p;
-    s=std::complex<double>(0,0);
+    CLHEPdouble xl=p;
+    s=std::complex<CLHEPdouble>(0,0);
     //    do 2 n = 33,1,-1
     for(int k=33; k>0; k--){
       xl=c3*xl;
@@ -250,18 +251,18 @@ std::complex<double> AnalyticConvolution::nwwerf(std::complex<double> z) const {
     v=c*s;
   }
   else{
-      zh=std::complex<double>(ya,xa);
-      r[1]=std::complex<double>(0,0);
+      zh=std::complex<CLHEPdouble>(ya,xa);
+      r[1]=std::complex<CLHEPdouble>(0,0);
        //       do 3 n = 9,1,-1
        for(int n=9;n>0;n--){
-	 t=zh+double(n)*std::conj(r[1]);
+	 t=zh+CLHEPdouble(n)*std::conj(r[1]);
 	 r[1]=hf*t/std::norm(t);
        }
        v=c*r[1];
   }
-  if(ya == 0) v= std::complex<double>(exp(-xa*xa),v.imag());
+  if(ya == 0) v= std::complex<CLHEPdouble>(exp(-xa*xa),v.imag());
   if(y < 0) {
-    v=2.0*std::exp(std::complex<double>(-xa,-ya)*std::complex<double>(xa,ya))-v;
+    v=2.0*std::exp(std::complex<CLHEPdouble>(-xa,-ya)*std::complex<CLHEPdouble>(xa,ya))-v;
     if(x > 0) v=std::conj(v);
   }
   else{

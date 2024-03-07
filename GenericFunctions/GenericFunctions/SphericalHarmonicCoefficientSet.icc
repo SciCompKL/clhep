@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #include <vector>
 #include "CLHEP/GenericFunctions/ClebschGordanCoefficientSet.hh"
 #include <stdexcept>
@@ -7,16 +8,16 @@ namespace Genfun {
     
   public:
     
-    std::vector<std::vector<std::complex<double> > > data;
+    std::vector<std::vector<std::complex<CLHEPdouble> > > data;
     
   };
   
   inline
   SphericalHarmonicCoefficientSet::SphericalHarmonicCoefficientSet(unsigned int LMAX):c(new Clockwork()){
     for (unsigned int l=0;l<=LMAX;l++) {
-      std::vector<std::complex<double> > theMs;
+      std::vector<std::complex<CLHEPdouble> > theMs;
       for (int m=-l; m<=int(l);m++) {
-	theMs.push_back(std::complex<double> (0.0));
+	theMs.push_back(std::complex<CLHEPdouble> (0.0));
       }
       c->data.push_back(theMs);
     }
@@ -39,12 +40,12 @@ namespace Genfun {
   }
   
   inline
-  const std::complex<double> &SphericalHarmonicCoefficientSet:: operator () (unsigned int l, int m) const {
+  const std::complex<CLHEPdouble> &SphericalHarmonicCoefficientSet:: operator () (unsigned int l, int m) const {
     return c->data[l][m+l];
   }
   
   inline
-  std::complex<double> & SphericalHarmonicCoefficientSet::operator () (unsigned int l, int m) {
+  std::complex<CLHEPdouble> & SphericalHarmonicCoefficientSet::operator () (unsigned int l, int m) {
     return c->data[l][m+l];
   }
   
@@ -76,7 +77,7 @@ namespace Genfun {
 
 
   inline
-  SphericalHarmonicCoefficientSet & SphericalHarmonicCoefficientSet::operator*= (const std::complex<double> & s ){
+  SphericalHarmonicCoefficientSet & SphericalHarmonicCoefficientSet::operator*= (const std::complex<CLHEPdouble> & s ){
     unsigned int LMAX=getLMax();
     for (unsigned int l=0;l<=LMAX;l++) {
       for (int m=-l;m<=int(l);m++) {
@@ -113,10 +114,10 @@ namespace Genfun {
 
 
   inline
-  std::complex<double> dot(const SphericalHarmonicCoefficientSet &a, 
+  std::complex<CLHEPdouble> dot(const SphericalHarmonicCoefficientSet &a, 
 			   const SphericalHarmonicCoefficientSet &b) {
 
-    std::complex<double> result=0.0;
+    std::complex<CLHEPdouble> result=0.0;
     if (a.getLMax()!=b.getLMax()) throw std::runtime_error ("function dot:  SphericalHarmonicCoefficientSets of different dimension");
     
     for (unsigned int l=0;l<=a.getLMax();l++) {

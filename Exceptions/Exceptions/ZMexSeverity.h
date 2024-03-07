@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 #ifndef ZMEXSEVERITY_H
 #define ZMEXSEVERITY_H
 

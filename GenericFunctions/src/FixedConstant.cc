@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: FixedConstant.cc,v 1.3 2003/09/06 14:04:14 boudreau Exp $
 #include "CLHEP/GenericFunctions/FixedConstant.hh"
@@ -6,7 +7,7 @@
 namespace Genfun {
 FUNCTION_OBJECT_IMP(FixedConstant)
 
-FixedConstant::FixedConstant(double value):
+FixedConstant::FixedConstant(CLHEPdouble value):
 _value(value)
 {
 }
@@ -19,7 +20,7 @@ FixedConstant::~FixedConstant()
 {
 }
 
-double FixedConstant::operator ()(double) const
+CLHEPdouble FixedConstant::operator ()(CLHEPdouble) const
 {
   return _value;
 }

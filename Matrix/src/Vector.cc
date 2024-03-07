@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // ---------------------------------------------------------------------------
 //
@@ -120,12 +121,12 @@ int HepVector::num_col() const { return 1; }
 // operator()
 
 #ifdef MATRIX_BOUND_CHECK
-double & HepVector::operator()(int row, int col)
+CLHEPdouble & HepVector::operator()(int row, int col)
 {
   if( col!=1 || row<1 || row>nrow)
      error("Range error in HepVector::operator(i,j)");
 #else
-double & HepVector::operator()(int row, int)
+CLHEPdouble & HepVector::operator()(int row, int)
 {
 #endif
 
@@ -133,12 +134,12 @@ double & HepVector::operator()(int row, int)
 }
 
 #ifdef MATRIX_BOUND_CHECK
-const double & HepVector::operator()(int row, int col) const 
+const CLHEPdouble & HepVector::operator()(int row, int col) const 
 {
   if( col!=1 || row<1 || row>nrow)
      error("Range error in HepVector::operator(i,j)");
 #else
-const double & HepVector::operator()(int row, int) const 
+const CLHEPdouble & HepVector::operator()(int row, int) const 
 {
 #endif
 
@@ -315,7 +316,7 @@ HepVector operator-(const HepVector &hm1,const HepVector &hm2)
    ----------------------------------------------------------------------- */
 
 HepVector operator/(
-const HepVector &hm1,double t)
+const HepVector &hm1,CLHEPdouble t)
 #ifdef HEP_GNU_OPTIMIZED_RETURN
      return mret(hm1);
 {
@@ -327,7 +328,7 @@ const HepVector &hm1,double t)
   return mret;
 }
 
-HepVector operator*(const HepVector &hm1,double t)
+HepVector operator*(const HepVector &hm1,CLHEPdouble t)
 #ifdef HEP_GNU_OPTIMIZED_RETURN
      return mret(hm1);
 {
@@ -339,7 +340,7 @@ HepVector operator*(const HepVector &hm1,double t)
   return mret;
 }
 
-HepVector operator*(double t,const HepVector &hm1)
+HepVector operator*(CLHEPdouble t,const HepVector &hm1)
 #ifdef HEP_GNU_OPTIMIZED_RETURN
      return mret(hm1);
 {
@@ -362,7 +363,7 @@ HepVector operator*(const HepMatrix &hm1,const HepVector &hm2)
   CHK_DIM_1(hm1.num_col(),hm2.num_row(),*);
   HepGenMatrix::mcIter hm1p,hm2p,vp;
   HepGenMatrix::mIter m3p;
-  double temp;
+  CLHEPdouble temp;
   m3p=mret.m.begin();
   for(hm1p=hm1.m.begin();hm1p<hm1.m.begin()+hm1.num_row()*hm1.num_col();hm1p=hm2p)
     {
@@ -440,13 +441,13 @@ HepVector & HepVector::operator-=(const HepVector &hm2)
   return (*this);
 }
 
-HepVector & HepVector::operator/=(double t)
+HepVector & HepVector::operator/=(CLHEPdouble t)
 {
   SIMPLE_UOP(/=)
   return (*this);
 }
 
-HepVector & HepVector::operator*=(double t)
+HepVector & HepVector::operator*=(CLHEPdouble t)
 {
   SIMPLE_UOP(*=)
   return (*this);
@@ -539,11 +540,11 @@ return mret(1,num_row());
   return mret;
 }
 
-double dot(const HepVector &v1,const HepVector &v2)
+CLHEPdouble dot(const HepVector &v1,const HepVector &v2)
 {
   if(v1.num_row()!=v2.num_row())
      HepGenMatrix::error("v1 and v2 need to be the same size in dot(HepVector, HepVector)");
-  double d= 0;
+  CLHEPdouble d= 0;
   HepGenMatrix::mcIter a = v1.m.begin();
   HepGenMatrix::mcIter b = v2.m.begin();
   HepGenMatrix::mcIter e = a + v1.num_size();
@@ -552,7 +553,7 @@ double dot(const HepVector &v1,const HepVector &v2)
 }
 
 HepVector HepVector::
-apply(double (*f)(double, int)) const
+apply(CLHEPdouble (*f)(CLHEPdouble, int)) const
 #ifdef HEP_GNU_OPTIMIZED_RETURN
 return mret(num_row());
 {
@@ -594,21 +595,21 @@ HepVector solve(const HepMatrix &a, const HepVector &v)
     max_array = n;
     ir = new int [max_array+1];
   }
-  double det;
+  CLHEPdouble det;
   HepMatrix mt(a);
   int i = mt.dfact_matrix(det, ir);
   if (i!=0) {
     for (i=1;i<=n;i++) vret(i) = 0;
     return vret;
   }
-  double s21, s22;
+  CLHEPdouble s21, s22;
   int nxch = ir[n];
   if (nxch!=0) {
     for (int hmm=1;hmm<=nxch;hmm++) {
       int ij = ir[hmm];
       i = ij >> 12;
       int j = ij%4096;
-      double te = vret(i);
+      CLHEPdouble te = vret(i);
       vret(i) = vret(j);
       vret(j) = te;
     }

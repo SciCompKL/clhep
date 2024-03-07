@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 //
 // -*- C++ -*-
 //
@@ -6,7 +7,7 @@
 //                       --- Ranlux64Engine ---
 //                      class implementation file
 // -----------------------------------------------------------------------
-// A double-precision implementation of the RanluxEngine generator as 
+// A CLHEPdouble-precision implementation of the RanluxEngine generator as 
 // decsribed by the notes of the original ranlux author (Martin Luscher)
 //
 // See the note by Martin Luscher, December 1997, entitiled
@@ -158,7 +159,7 @@ Ranlux64Engine::Ranlux64Engine( std::istream& is )
 
 Ranlux64Engine::~Ranlux64Engine() {}
 
-double Ranlux64Engine::flat() {
+CLHEPdouble Ranlux64Engine::flat() {
   // Luscher improves the speed by computing several numbers in a shot,
   // in a manner similar to that of the Tausworth in DualRand or the Hurd
   // engines.  Thus, the real work is done in update().  Here we merely ensure
@@ -195,7 +196,7 @@ void Ranlux64Engine::update() {
   // but we can treat the special case of endIters = 1 separately for superior
   // efficiency in the cases of levels 0 and 2.
 
-  double  y1;
+  CLHEPdouble  y1;
 
   if ( endIters == 1 ) {  	// Luxury levels 0 and 2 will go here
     y1 = randoms[ 4] - randoms[11] - carry;
@@ -236,7 +237,7 @@ void Ranlux64Engine::update() {
       }
     } // loop on m
 
-    double temp[12];
+    CLHEPdouble temp[12];
     for (m=0; m<12; m++) {
       temp[m]=randoms[m];
     }
@@ -260,10 +261,10 @@ void Ranlux64Engine::update() {
 
 void Ranlux64Engine::advance(int dozens) {
 
-  double  y1, y2, y3;
-  double  cValue = twoToMinus_48();
-  double  zero = 0.0;
-  double  one  = 1.0;
+  CLHEPdouble  y1, y2, y3;
+  CLHEPdouble  cValue = twoToMinus_48();
+  CLHEPdouble  zero = 0.0;
+  CLHEPdouble  one  = 1.0;
 
 		// Technical note:  We use Luscher's trick to only do the
 		// carry subtraction when we really have to.  Like him, we use 
@@ -375,7 +376,7 @@ void Ranlux64Engine::advance(int dozens) {
 
 } // advance(dozens)
 
-void Ranlux64Engine::flatArray(const int size, double* vect) {
+void Ranlux64Engine::flatArray(const int size, CLHEPdouble* vect) {
   for( int i=0; i < size; ++i ) {
     vect[i] = flat(); 
   }
@@ -741,10 +742,10 @@ bool Ranlux64Engine::getState (const std::vector<unsigned long> & v) {
   std::vector<unsigned long> t(2);
   for (int i=0; i<12; ++i) {
     t[0] = v[2*i+1]; t[1] = v[2*i+2];
-    randoms[i] = DoubConv::longs2double(t);
+    randoms[i] = DoubConv::longs2CLHEPdouble(t);
   }
   t[0] = v[25]; t[1] = v[26];
-  carry    = DoubConv::longs2double(t);
+  carry    = DoubConv::longs2CLHEPdouble(t);
   index    = v[27];
   luxury   = v[28];
   pDiscard = v[29]; 

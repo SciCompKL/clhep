@@ -1,3 +1,4 @@
+#include "CLHEPTypes.hpp"
 // -*- C++ -*-
 // $Id: 
 #ifndef _ArrayFunction_h_
@@ -18,7 +19,7 @@ class ArrayFunction : public AbsFunction  {
     public:
   
   // Constructor
-  ArrayFunction(const double *begin, const double *end);
+  ArrayFunction(const CLHEPdouble *begin, const CLHEPdouble *end);
   
   // Destructor
   virtual ~ArrayFunction();
@@ -27,15 +28,15 @@ class ArrayFunction : public AbsFunction  {
   ArrayFunction(const ArrayFunction &right);
   
   // Retreive function value
-  virtual double operator ()(double argument) const override;
-  virtual double operator ()(const Argument & a) const override {return operator() (a[0]);}
+  virtual CLHEPdouble operator ()(CLHEPdouble argument) const override;
+  virtual CLHEPdouble operator ()(const Argument & a) const override {return operator() (a[0]);}
   
  private:
   
   // It is illegal to assign a ArrayFunction
   const ArrayFunction & operator=(const ArrayFunction &right);
 
-  std::vector<double> _values;
+  std::vector<CLHEPdouble> _values;
 };
 }
 #endif
