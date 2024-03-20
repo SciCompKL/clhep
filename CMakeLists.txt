@@ -35,6 +35,8 @@ project(CLHEP VERSION 2.4.5.1)
 # - needed for (temporary) back compatibility
 set(VERSION ${PROJECT_VERSION})
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
 set(CMAKE_MODULE_PATH 
       ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules 
       ${CMAKE_MODULE_PATH}
