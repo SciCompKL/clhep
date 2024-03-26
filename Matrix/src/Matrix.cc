@@ -719,7 +719,7 @@ void HepMatrix::invert(int &ierr) {
   CLHEPdouble det, temp, sd;
   int ifail;
   switch(nrow) {
-  case 3:
+  case 3: {
     CLHEPdouble c11,c12,c13,c21,c22,c23,c31,c32,c33;
     ifail = 0;
     c11 = (*(m.begin()+4)) * (*(m.begin()+8)) - (*(m.begin()+5)) * (*(m.begin()+7));
@@ -767,6 +767,7 @@ void HepMatrix::invert(int &ierr) {
       *(hmm) = s1*c33;
     }
     break;
+  }
   case 2:
     ifail = 0;
     det = (*m.begin())*(*(m.begin()+3)) - (*(m.begin()+1))*(*(m.begin()+2));

@@ -286,7 +286,7 @@ CLHEPdouble Hep3Vector::negativeInfinity() const {
   // A byte-order-independent way to return -Infinity
   struct Dib {
     union {
-      CLHEPdouble d;
+      CLHEPpassivedouble d;
       unsigned char i[8];
     } u;
   };

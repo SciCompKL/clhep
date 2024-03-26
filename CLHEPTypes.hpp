@@ -8,3 +8,4 @@ struct CLHEPfloat : public Forward {
   CLHEPfloat() = default;
   CLHEPfloat(double val): Forward(val) {}*/
 };
+using CLHEPpassivedouble = double;

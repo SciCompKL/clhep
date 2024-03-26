@@ -54,7 +54,7 @@ public:
 private:
   union DB8 {
     unsigned char b[8];
-    CLHEPdouble d;
+    CLHEPpassivedouble d;
   };
   static void fill_byte_order ();
   static CLHEP_THREAD_LOCAL bool byte_order_known;

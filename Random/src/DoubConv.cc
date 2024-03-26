@@ -33,7 +33,7 @@ void DoubConv::fill_byte_order () {
   }
   // x, in IEEE format, would now be 0x4330060504030201
   DB8 xb;
-  xb.d = x;
+  xb.d = (CLHEPpassivedouble)x;
   int n;
   static const int UNSET = -1; 
   for (n=0; n<8; n++) {
@@ -83,7 +83,7 @@ void DoubConv::fill_byte_order () {
 std::string DoubConv::d2x(CLHEPdouble d) {
   if ( !byte_order_known ) fill_byte_order ();
   DB8 db;
-  db.d = d;
+  db.d = (CLHEPpassivedouble)d;
   std::ostringstream ss;
   for (int i=0; i<8; ++i) {
     int k = byte_order[i];
@@ -96,7 +96,7 @@ std::vector<unsigned long> DoubConv::dto2longs(CLHEPdouble d) {
   std::vector<unsigned long> v(2);
   if ( !byte_order_known ) fill_byte_order ();
   DB8 db;
-  db.d = d;
+  db.d = (CLHEPpassivedouble)d;
   v[0] =   ((static_cast<unsigned long>(db.b[byte_order[0]])) << 24)
          | ((static_cast<unsigned long>(db.b[byte_order[1]])) << 16)
          | ((static_cast<unsigned long>(db.b[byte_order[2]])) <<  8)
