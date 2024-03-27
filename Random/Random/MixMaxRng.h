@@ -150,11 +150,11 @@ private:
 #endif
   inline CLHEPdouble convert1CLHEPdouble(myuint_t u)
   {
-    const CLHEPdouble one = 1;
+    const CLHEPpassivedouble one = 1;
     const myuint_t onemask = *(myuint_t*)&one;
     myuint_t tmp = (u>>9) | onemask; // bits between 52 and 62 dont affect the result!
-    CLHEPdouble d = *(CLHEPdouble*)&tmp;
-    return d-1.0;
+    CLHEPpassivedouble d = *(CLHEPpassivedouble*)&tmp;
+    return CLHEPdouble(d)-1.0;
   }
 #if defined __GNUC__
 #pragma GCC diagnostic pop
