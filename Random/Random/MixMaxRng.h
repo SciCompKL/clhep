@@ -37,6 +37,7 @@
 #include <array>
 #include "CLHEP/Random/defs.h"
 #include "CLHEP/Random/RandomEngine.h"
+#include <cstdint>
 
 namespace CLHEP {
     
