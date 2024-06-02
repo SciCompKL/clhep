@@ -1,11 +1,6 @@
 #pragma once
 #include "easyAD.hpp"
+#include "easyAD_geant4extensions.hpp"
 using CLHEPdouble  = Forward;
-struct CLHEPfloat : public Forward {
-  template<typename...Args>
-  CLHEPfloat(Args&&...args): Forward(std::forward<Args>(args)...) {}
-  /*CLHEPfloat(Forward f): Forward(f) {}
-  CLHEPfloat() = default;
-  CLHEPfloat(double val): Forward(val) {}*/
-};
+using CLHEPfloat = ForwardFloat;
 using CLHEPpassivedouble = double;
